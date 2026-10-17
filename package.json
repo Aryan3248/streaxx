@@ -1,0 +1,14 @@
+{
+  "name": "streax",
+  "version": "1.4.0",
+  "private": true,
+  "description": "Streax: crypto casino data platform with an on-chain casino monitor, the Streax Score, public complaints with on-chain proof, player tools, an article Studio, and free member accounts",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}
