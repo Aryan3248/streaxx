@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>On-chain monitor</title>
+<link rel="icon" type="image/png" href="assets/streax-icon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:#F6F8FD}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #2F54EB;outline-offset:2px}
+input::placeholder,textarea::placeholder{color:#66728F}
+.hv{transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+.hv:hover{background-color:#EEF3FF !important}
+.nav{transition:background-color .15s ease,color .15s ease}
+.nav:hover{background-color:#EEF3FF !important;color:#0B1533 !important}
+.rh{transition:background-color .15s ease}
+.rh:hover{background-color:rgba(47,84,235,0.035) !important}
+.lift{transition:transform .18s ease,border-color .18s ease}
+.lift:hover{transform:translateY(-2px);border-color:#BFD0F5 !important}
+.pb{transition:filter .15s ease,transform .15s ease}
+.pb:hover{filter:brightness(1.08)}
+.pb:active{transform:translateY(1px)}
+.ul{transition:color .15s ease}
+.ul:hover{color:#2442D6 !important}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(225,29,72,.6)}70%{box-shadow:0 0 0 7px rgba(225,29,72,0)}100%{box-shadow:0 0 0 0 rgba(225,29,72,0)}}
+.pulse{animation:pulse 1.8s infinite}
+@keyframes pulseSky{0%{box-shadow:0 0 0 0 rgba(14,124,102,.55)}70%{box-shadow:0 0 0 7px rgba(14,124,102,0)}100%{box-shadow:0 0 0 0 rgba(14,124,102,0)}}
+.pulseSky{animation:pulseSky 1.8s infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fu{animation:fadeUp .22s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fi{animation:fadeIn .18s ease-out}
+@keyframes nA{from{background-color:rgba(47,84,235,0.12)}to{background-color:rgba(47,84,235,0)}}
+@keyframes nB{from{background-color:rgba(47,84,235,0.12)}to{background-color:rgba(47,84,235,0)}}
+.nA{animation:nA 1.6s ease-out}
+.nB{animation:nB 1.6s ease-out}
+input[type=range]{accent-color:#2F54EB}
+.sx-banner{background:#1F3AD6 url(assets/streax-banner.webp) center/cover no-repeat}
+.sx-hero{background:#1F3AD6 url(assets/streax-hero.webp) center/cover no-repeat}
+.sx-card{background:#1F3AD6 url(assets/streax-card.webp) center/cover no-repeat}
+.sx-wash{background:#FFFFFF url(assets/streax-wash.webp) center/cover no-repeat}
+.glass:hover{background-color:rgba(255,255,255,0.3) !important}
+.wbtn:hover{background-color:#F0F4FF !important}
+@media (max-width: 1080px){
+[data-m~="side"]{flex-basis:100% !important;max-width:none !important;min-width:0;width:100%;box-sizing:border-box;padding:12px 16px 0 !important}
+[data-m~="main"]{min-width:0}
+[data-m~="sidecard"]{min-width:0;border-radius:18px !important;padding:10px 10px 8px !important;gap:6px !important}
+[data-m~="slogo"]{border-bottom:0 !important;margin:0 !important;padding:2px 4px 4px !important}
+[data-m~="snav"]{flex-direction:row !important;overflow-x:auto;gap:6px !important;scrollbar-width:none;padding:0 0 2px}
+[data-m~="snav"]::-webkit-scrollbar{display:none}
+[data-m~="snav"] > a{flex:0 0 auto;min-height:38px !important;padding:0 12px !important;gap:8px !important;font-size:13.5px !important;white-space:nowrap}
+[data-m~="snav"] > a:not([aria-current]){background-color:#F4F7FD}
+[data-m~="slab"],[data-m~="mhide"]{display:none !important}
+[data-m~="main"]{padding:0 16px !important}
+[data-m~="srchw"]{flex:1 1 0;min-width:0}
+[data-m~="srch"]{width:100% !important}
+[data-m~="drop"]{width:auto !important;left:0;right:0 !important}
+[data-m~="hdr"]{display:none !important}
+[data-m~="rk"]{display:flex !important;flex-wrap:wrap;gap:12px !important;padding:14px !important}
+[data-m~="rk"] > :nth-child(1){order:1;flex:0 0 40px}
+[data-m~="rk"] > :nth-child(2){order:2;flex:1 1 calc(100% - 166px);min-width:0}
+[data-m~="rk"] > :nth-child(3){display:none !important}
+[data-m~="rk"] > :nth-child(4){order:3}
+[data-m~="rk"] > :nth-child(9){order:4;align-self:center}
+[data-m~="rk"] > :nth-child(5){order:5;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(6){order:6;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(7){order:7;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(8){order:8;flex:1 1 100%}
+[data-m~="bf"]{grid-template-columns:minmax(0,1.2fr) minmax(0,0.9fr) 64px 76px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13px !important}
+[data-m~="bf"] > :nth-child(1){min-width:0;overflow:hidden}
+[data-m~="bf"] > :nth-child(1) > span:last-child{overflow:hidden;text-overflow:ellipsis}
+[data-m~="bf"] > :nth-child(4){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-m~="bf"] > :nth-child(2),[data-m~="bf"] > :nth-child(3),[data-m~="bf"] > :nth-child(6){display:none !important}
+[data-m~="kc"]{grid-template-columns:minmax(0,1fr) auto auto !important;grid-template-areas:"cas val red" "code code when";row-gap:8px !important;padding:12px 14px !important}
+[data-m~="kc"] > :nth-child(1){grid-area:cas;min-width:0}
+[data-m~="kc"] > :nth-child(2){grid-area:code;justify-self:start}
+[data-m~="kc"] > :nth-child(3){grid-area:val}
+[data-m~="kc"] > :nth-child(4){grid-area:when}
+[data-m~="kc"] > :nth-child(5),[data-m~="kc"] > :nth-child(6),[data-m~="kc"] > :nth-child(7){display:none !important}
+[data-m~="kc"] > :nth-child(8){grid-area:red}
+[data-m~="cp"]{grid-template-columns:minmax(0,1fr) auto auto !important;grid-template-areas:"cat cat st" "cas amt tog";row-gap:8px !important;padding:12px 14px !important}
+[data-m~="cp"] > :nth-child(1),[data-m~="cp"] > :nth-child(6),[data-m~="cp"] > :nth-child(7){display:none !important}
+[data-m~="cp"] > :nth-child(2){grid-area:cas;min-width:0}
+[data-m~="cp"] > :nth-child(3){grid-area:cat}
+[data-m~="cp"] > :nth-child(4){grid-area:amt}
+[data-m~="cp"] > :nth-child(5){grid-area:st}
+[data-m~="cp"] > :nth-child(8){grid-area:tog}
+[data-m~="rkd"]{padding:4px 18px 18px !important}
+[data-m~="lb"]{grid-template-columns:44px minmax(0,1fr) 120px minmax(0,180px) 100px !important}
+[data-m~="g1t"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="tkr"],[data-m~="tkh"]{grid-template-columns:minmax(120px,1fr) 90px 100px 100px 100px 110px 120px !important}
+[data-m~="tkr"] > :nth-child(5),[data-m~="tkh"] > :nth-child(5){display:none !important}
+[data-m~="wlr"]{grid-template-columns:100px minmax(0,1fr) 110px 80px !important}
+[data-m~="wlr"] > :nth-child(3){display:none !important}
+}
+@media (max-width: 760px){
+[data-m="stl"]{min-height:6em !important}
+[data-m~="root"]{display:block !important}
+[data-m~="main"]{width:100%;box-sizing:border-box}
+[data-m~="tbt"]{flex:1 1 100% !important}
+[data-m~="ban"]{padding:22px 18px !important;border-radius:22px !important;margin:12px 0 16px !important;gap:12px !important}
+[data-m~="banh"]{font-size:34px !important}
+[data-m~="seg"]{max-width:100%;box-sizing:border-box;overflow-x:auto;scrollbar-width:none}
+[data-m~="seg"]::-webkit-scrollbar{display:none}
+[data-m~="fin"]{width:100% !important}
+div:has(> [data-m~="fin"]),div:has(> div > [data-m~="fin"]){flex:1 1 100%;min-width:0}
+[data-m~="g1"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="g2"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+[data-m~="kv"]{font-size:22px !important}
+[data-m~="wrap"]{flex-wrap:wrap;gap:8px}
+[data-m~="wrap"] button{white-space:nowrap}
+[data-m~="phide"]{display:none !important}
+[data-m~="nomin"]{min-width:0 !important}
+.sx-hero{background-position:16% 50% !important;padding:26px 20px 20px !important;min-height:0 !important;flex-direction:column;align-items:stretch !important;border-radius:24px !important}
+[data-m~="h64"]{font-size:42px !important}
+[data-m~="orb"]{width:130px !important;height:130px !important;right:-36px !important;top:-36px !important;margin-top:0 !important}
+[data-m~="hchip"]{max-width:calc(100% - 70px);box-sizing:border-box}
+[data-m~="hstats"]{position:relative !important;right:auto !important;bottom:auto !important;margin-top:20px;flex-wrap:wrap}
+[data-m~="hstats"] > span{flex:1 1 40%}
+[data-m~="topr"]{grid-template-columns:22px minmax(0,1fr) auto !important}
+[data-m~="topr"] > :nth-child(4){display:none !important}
+[data-m~="fol"]{grid-template-columns:20px minmax(0,1fr) 74px 60px !important}
+[data-m~="rkd"]{padding:4px 14px 14px !important}
+[data-m~="sb"]{grid-template-columns:96px minmax(0,1fr) 42px 34px !important;gap:10px !important}
+[data-m~="ms"]{grid-template-columns:92px minmax(0,1fr) 58px !important;gap:10px !important}
+[data-m~="cha"]{grid-template-columns:100px minmax(0,1fr) 70px 42px !important;gap:8px !important}
+[data-m~="csel"]{min-width:0 !important;width:100%}
+div:has(> [data-m~="csel"]){flex:1 1 auto;min-width:0}
+[data-m~="lbox"]{width:auto !important;right:0;max-width:calc(100vw - 32px)}
+[data-m~="secnav"]{flex:1 1 100% !important;max-width:none !important;flex-direction:row !important;overflow-x:auto;scrollbar-width:none;gap:4px !important}
+[data-m~="secnav"]::-webkit-scrollbar{display:none}
+[data-m~="secnav"] > a{flex:0 0 auto;white-space:nowrap;gap:8px}
+[data-m~="ovr"]{gap:14px !important}
+[data-m~="ovr"] > span:first-child{width:64px !important;height:64px !important;border-radius:18px !important;font-size:20px !important}
+[data-m~="dsr"]{grid-template-columns:minmax(0,96px) minmax(0,1fr) 66px 44px !important}
+[data-m~="tr"]{grid-template-columns:22px minmax(0,1fr) minmax(0,1fr) 64px !important;gap:10px !important}
+[data-m~="tr"] > :nth-child(3),[data-m~="tr"] > :nth-child(5){display:none !important}
+[data-m~="lb"]{grid-template-columns:28px minmax(0,1fr) 74px 62px !important;gap:10px !important}
+[data-m~="lb"] > :nth-child(4){display:none !important}
+[data-m~="br"]{grid-template-columns:20px minmax(0,1fr) 72px 104px !important;gap:10px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="br"] > :nth-child(3){display:none !important}
+[data-m~="br"] button{white-space:nowrap;padding:0 10px !important;font-size:12.5px !important}
+[data-m~="st"]{grid-template-columns:18px minmax(0,1fr) 74px 62px !important;gap:10px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="st"] > :nth-child(4){order:3}
+[data-m~="st"] > :nth-child(3){order:4}
+[data-m~="st"] > :nth-child(5),[data-m~="st"] > :nth-child(6),[data-m~="st"] > :nth-child(7),[data-m~="st"] > :nth-child(8){display:none !important}
+[data-m~="st"] > :nth-child(4) > span:last-child{display:none !important}
+[data-m~="st"] > :nth-child(2){overflow:hidden}
+[data-m~="st"] > :nth-child(2) > span:last-child > span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-m~="ocr"],[data-m~="och"]{grid-template-columns:minmax(0,1fr) 84px 92px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13.5px !important}
+[data-m~="ocr"] > :nth-child(1),[data-m~="ocr"] > :nth-child(4),[data-m~="ocr"] > :nth-child(6),[data-m~="och"] > :nth-child(1),[data-m~="och"] > :nth-child(4),[data-m~="och"] > :nth-child(6){display:none !important}
+[data-m~="ocr"] > :nth-child(2){overflow:hidden}
+[data-m~="tkr"],[data-m~="tkh"]{grid-template-columns:minmax(0,1fr) 84px 104px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13.5px !important}
+[data-m~="tkr"] > :nth-child(3),[data-m~="tkr"] > :nth-child(4),[data-m~="tkr"] > :nth-child(6),[data-m~="tkr"] > :nth-child(7),[data-m~="tkh"] > :nth-child(3),[data-m~="tkh"] > :nth-child(4),[data-m~="tkh"] > :nth-child(6),[data-m~="tkh"] > :nth-child(7){display:none !important}
+[data-m~="wlr"]{grid-template-columns:minmax(0,1fr) 92px 62px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="wlr"] > :nth-child(1){display:none !important}
+[data-m~="cd"]{flex:1 1 100%}
+[data-m~="cd"] > span{flex:1 1 0;min-width:0 !important;padding:10px 4px !important}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+<style>@media (max-width: 760px){[data-acct]{padding:0 12px !important}}</style>
+</helmet>
+<div data-m="root" data-theme="light" style="min-height: 100vh; background: radial-gradient(1100px 520px at 80% -8%, rgba(110,149,255,0.20), transparent 62%), radial-gradient(900px 480px at -5% 0%, rgba(47,84,235,0.08), transparent 60%), #F6F8FD; color: #0B1533; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; display: flex; flex-wrap: wrap; align-items: flex-start">
+<aside aria-label="Sidebar" data-m="side" style="flex: 1 1 296px; max-width: 320px; box-sizing: border-box; padding: 16px 0 16px 16px; position: relative; z-index: 20">
+<div data-m="sidecard" style="border-radius: 24px; border: 1px solid #E3E9F5; background: #FFFFFF; padding: 16px 12px 14px; display: flex; flex-direction: column; gap: 2px; box-shadow: 0 1px 2px rgba(16,24,64,0.04), 0 18px 50px -30px rgba(30,60,160,0.35)">
+<a href="Home.dc.html" aria-label="Streax home" data-m="slogo" style="display: flex; align-items: center; padding: 6px 8px 14px; border-bottom: 1px solid #E8EDF7; margin-bottom: 6px"><span style="display: inline-flex; align-items: center; gap: 10px"><img src="assets/streax-logo.webp" alt="" aria-hidden="true" width="32" height="32" style="flex: 0 0 auto; display: block; width: 32px; height: 32px; border-radius: 10px; box-shadow: 0 6px 16px -8px rgba(37,72,190,0.6)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 27px; line-height: 1; letter-spacing: -0.01em; color: #0B1533">Streax</span></span></a>
+<div data-m="snav" style="display: flex; flex-direction: column; gap: 2px"><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #66728F">Main<span style="flex: 1 1 auto; height: 1px; background: #E8EDF7"></span></span><a href="Home.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"></path></svg>Home</a><a href="Rankings.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"></path></svg>Rankings</a><a href="Casino.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"></rect><circle cx="9" cy="9" r="1.2"></circle><circle cx="15" cy="15" r="1.2"></circle><circle cx="15" cy="9" r="1.2"></circle><circle cx="9" cy="15" r="1.2"></circle></svg>Casino profile</a><a href="Onchain.dc.html" aria-current="page" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #1B2FA8; background: linear-gradient(90deg, rgba(62,107,255,0.12), rgba(62,107,255,0.04)); box-shadow: inset 0 0 0 1px rgba(62,107,255,0.18)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2F54EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3.5l2.5-6 4 12 2.5-6H21"></path><circle cx="12" cy="12" r="10" opacity="0.35"></circle></svg>On-chain monitor</a><a href="Wallets.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"></path><rect x="4" y="8" width="16" height="11" rx="2.5"></rect><circle cx="16" cy="13.5" r="1.2"></circle></svg>Casino wallets</a><a href="Analytics.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M6 15l4-5 4 3 5-7"></path></svg>Analytics</a><a href="Streamers.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3"></rect><path d="M16 10l5-3v10l-5-3"></path></svg>Streamers</a><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #66728F">Player tools<span style="flex: 1 1 auto; height: 1px; background: #E8EDF7"></span></span><a href="Complaints.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path><path d="M12 8v3.5M12 13.8v.01"></path></svg>Complaints</a><a href="WalletCheck.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H17v3"></path><rect x="4" y="8" width="16" height="11" rx="2.5"></rect><path d="M12.5 13.5l1.8 1.8 3.2-3.6"></path></svg>My wallet check</a><a href="BonusCalc.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"></rect><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h3.5"></path></svg>Bonus calculator</a><a href="/articles" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"></path><path d="M9 9h6M9 13h6M9 17h4"></path></svg>Articles</a><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #66728F">Community · sample<span style="flex: 1 1 auto; height: 1px; background: #E8EDF7"></span></span><a href="Community.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v10H9l-4 4z"></path></svg>Player reviews</a><a href="BetFeed.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"></path></svg>Live bet feed</a><a href="Bonuses.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3A4666"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"></rect><path d="M12 9v11M4 13h16M12 9c-2-4-6-4-6-1s6 1 6 1zm0 0c2-4 6-4 6-1s-6 1-6 1z"></path></svg>Leaderboard &amp; codes</a></div>
+<div class="sx-card" data-m="mhide" style="margin-top: 16px; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 16px 40px -22px rgba(31,58,214,0.75)">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1.1; color: #FFFFFF">{{sideCta.title}}</span>
+<span style="font-size: 13px; line-height: 1.45; color: rgba(255,255,255,0.92)">{{sideCta.body}}</span>
+<a href="{{sideCta.href}}" class="wbtn" style="min-height: 42px; border-radius: 12px; border: 0; background: #FFFFFF; color: #1B2FA8; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B2FA8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg>{{sideCta.btn}}</a>
+</div>
+<button type="button" onClick="{{openSupport}}" class="hv" data-m="mhide" style="min-height: 44px; border-radius: 12px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #2A3657; font: inherit; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#55617F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v10H8l-4 4z"></path></svg>Support</button>
+<button type="button" onClick="{{openSources}}" class="ul" data-m="mhide" style="min-height: 36px; border: 0; background: transparent; color: #55617F; font: inherit; font-size: 12.5px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg>Data sources and methodology</button>
+</div>
+</aside>
+<main data-m="main" style="flex: 999 1 560px; min-width: 0; padding: 0 28px 0 24px; box-sizing: border-box">
+<div class="sx-banner" data-m="ban" style="position: relative; z-index: 30; margin: 16px 0 22px; border-radius: 26px; padding: 28px 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; box-shadow: 0 26px 60px -34px rgba(31,58,214,0.7)">
+<div data-m="tbt" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.88)">Streax</span>
+<h1 data-m="banh" style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.02; letter-spacing: -0.01em; color: #FFFFFF">On-chain monitor</h1>
+<span style="font-size: 14.5px; color: rgba(255,255,255,0.92)">Casino wallets, deposits, withdrawals and whales, read straight from the blockchain.</span>
+</div>
+<div data-m="srchw" style="position: relative">
+<label for="gq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Search casinos</label>
+<span style="position: absolute; left: 13px; top: 14px; pointer-events: none; display: inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#606C8A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span>
+<input id="gq" data-m="srch" type="text" autocomplete="off" value="{{gq}}" onChange="{{onGq}}" onFocus="{{gqOn}}" onBlur="{{gqOff}}" placeholder="Search 43 casinos" style="width: 280px; height: 44px; box-sizing: border-box; padding: 0 14px 0 38px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.7); background: rgba(255,255,255,0.97); color: #0B1533; font: inherit; font-size: 14px; box-shadow: 0 8px 24px -16px rgba(20,35,90,0.5)">
+<sc-if value="{{gqOpen}}" hint-placeholder-val="{{ false }}">
+<div class="fu" data-m="drop" style="position: absolute; top: calc(100% + 8px); right: 0; width: 340px; z-index: 60; border-radius: 16px; border: 1px solid #E3E9F5; background: #FFFFFF; box-shadow: 0 24px 60px -24px rgba(20,35,90,0.35); padding: 6px; display: flex; flex-direction: column">
+<sc-for list="{{gqResults}}" as="r" hint-placeholder-count="4">
+<a href="{{r.href}}" class="hv" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; font-size: 14px; color: #0B1533">
+<span style="position: relative; width: 28px; height: 28px; border-radius: 8px; background: {{r.tint}}; color: #1E3A8A; font-size: 10.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{r.ini}}<sc-if value="{{r.logo}}" hint-placeholder-val="{{ false }}"><img src="{{r.logo}}" alt="" width="28" height="28" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(11,21,51,0.10); pointer-events: none"></span></span>
+<span style="flex: 1 1 auto; font-weight: 500">{{r.name}}</span>
+<span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #55617F">#{{r.rank}} · {{r.dep}}</span>
+</a>
+</sc-for>
+<sc-if value="{{gqNone}}" hint-placeholder-val="{{ false }}"><span style="padding: 12px 10px; font-size: 13px; color: #55617F">No casino matches “{{gq}}”</span></sc-if>
+</div>
+</sc-if>
+</div>
+<a href="/theme/night" class="hv" data-theme-toggle="1" aria-label="Switch to night mode" title="Switch to night mode" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #DCE3F1; background: #FFFFFF; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A3657" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"></path></svg></a>
+<button type="button" aria-label="Notifications" onClick="{{bell}}" class="hv" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #DCE3F1; background: #FFFFFF; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A3657" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg></button>
+<a href="{{acct.href}}" aria-label="{{acct.label}}" title="{{acct.label}}" data-acct="1" class="pb" style="position: relative; height: 44px; min-width: 44px; width: {{acct.w}}; box-sizing: border-box; padding: {{acct.pad}}; border-radius: {{acct.radius}}; background: linear-gradient(135deg, #4A75FF, #1B2FA8); color: #FFFFFF; font-weight: 600; font-size: {{acct.fs}}; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; flex: 0 0 auto">{{acct.text}}<sc-if value="{{acct.avatar}}" hint-placeholder-val="{{ false }}"><img src="{{acct.avatar}}" alt="" referrerpolicy="no-referrer" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if></a>
+</div>
+<section aria-label="Monitor status" style="border-radius: 20px; border: 1px solid #E3E9F5; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,64,0.04), 0 14px 40px -28px rgba(30,60,160,0.35); padding: 14px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: {{stc.fg}}; background: {{stc.bg}}; border: 1px solid {{stc.bd}}; border-radius: 999px; padding: 4px 10px; white-space: nowrap"><span class="{{stc.cls}}" style="width: 7px; height: 7px; border-radius: 50%; background: {{stc.dot}}"></span>{{stc.text}}</span>
+<span data-m="stl" style="flex: 1 1 260px; min-width: 0; min-height: 3em; font-size: 13.5px; line-height: 1.5; color: #55617F">{{statusLine}}</span>
+<div role="group" aria-label="Time window" data-m="seg" style="display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid #E3E9F5; background: #EEF2FA">
+<sc-for list="{{wins}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.on}}" class="ul" style="min-height: 36px; padding: 0 13px; border-radius: 9px; border: 0; background: {{o.bg}}; box-shadow: {{o.shadow}}; color: {{o.fg}}; font: inherit; font-size: 13.5px; cursor: pointer; white-space: nowrap">{{o.label}}</button></sc-for>
+</div>
+<button type="button" onClick="{{openHow}}" class="hv" style="min-height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #2A3657; font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap">How it works</button>
+<button type="button" onClick="{{csv}}" class="hv" style="min-height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #2A3657; font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap">Download CSV</button>
+</section>
+
+<sc-if value="{{hasNotice}}" hint-placeholder-val="{{ true }}">
+<div role="note" style="margin-top: 14px; border-radius: 16px; border: 1px solid rgba(47,84,235,0.25); background: rgba(47,84,235,0.06); padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start">
+<span style="width: 30px; height: 30px; border-radius: 9px; background: rgba(47,84,235,0.12); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F54EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-weight: 600; font-size: 14.5px; color: #0B1533">{{notice.title}}</span><span style="font-size: 13.5px; line-height: 1.55; color: #4A5677">{{notice.body}}</span></span>
+</div>
+</sc-if>
+
+<div data-m="g2" style="margin-top: 14px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px">
+<sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+<div class="lift" style="border-radius: 20px; border: 1px solid #E3E9F5; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,64,0.04), 0 14px 40px -28px rgba(30,60,160,0.35); padding: 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #606C8A">{{k.label}}</span>
+<span data-m="kv" style="font-family: 'Geist Mono', monospace; font-size: 28px; font-weight: 500; color: {{k.color}}; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{k.value}}</span>
+<span style="font-size: 13px; color: #55617F">{{k.sub}}</span>
+</div>
+</sc-for>
+</div>
+
+<section aria-label="Hourly flows" style="margin-top: 16px; border-radius: 20px; border: 1px solid #E3E9F5; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,64,0.04), 0 14px 40px -28px rgba(30,60,160,0.35); padding: 18px">
+<div data-m="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 3px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Deposits and withdrawals, last 48 hours</h2><span style="font-size: 13px; color: #55617F">Hourly totals across every tracked casino wallet. Moves between a casino's own wallets are left out.</span></div>
+<span style="display: inline-flex; align-items: center; gap: 14px; font-size: 12.5px; color: #55617F; white-space: nowrap"><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #0E7C66"></span>Deposits</span><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 3px; background: #C2410C"></span>Withdrawals</span></span>
+</div>
+<div style="position: relative; height: 190px; margin-top: 14px">
+<svg viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: calc(100% - 64px); height: 100%; overflow: visible"><line x1="0" y1="20" x2="100" y2="20" stroke="#D5DEEE" stroke-width="1" vector-effect="non-scaling-stroke"></line><path d="{{chart.inPath}}" fill="#0E7C66"></path><path d="{{chart.outPath}}" fill="#C2410C"></path></svg>
+<span style="position: absolute; right: 0; top: -2px; font-family: 'Geist Mono', monospace; font-size: 11.5px; color: #606C8A">{{chart.top}}</span>
+<span style="position: absolute; right: 0; top: calc(50% - 8px); font-family: 'Geist Mono', monospace; font-size: 11.5px; color: #606C8A">$0</span>
+<span style="position: absolute; right: 0; bottom: -2px; font-family: 'Geist Mono', monospace; font-size: 11.5px; color: #606C8A">{{chart.bottom}}</span>
+<sc-if value="{{chart.empty}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; left: 0; right: 64px; top: calc(50% - 22px); text-align: center; font-size: 13.5px; color: #606C8A">{{chart.emptyText}}</span></sc-if>
+</div>
+<div style="display: flex; justify-content: space-between; margin-top: 8px; padding-right: 64px; font-family: 'Geist Mono', monospace; font-size: 11.5px; color: #606C8A"><span>{{chart.from}}</span><span>{{chart.mid}}</span><span>now</span></div>
+</section>
+
+<div data-m="g1t" style="margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 16px; align-items: start">
+<section aria-label="Flow leaderboard" style="border-radius: 20px; border: 1px solid #E3E9F5; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,64,0.04), 0 14px 40px -28px rgba(30,60,160,0.35); overflow: hidden; min-width: 0">
+<div data-m="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid #E3E9F5">
+<div style="display: flex; flex-direction: column; gap: 3px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Flow leaderboard</h2><span style="font-size: 13px; color: #55617F">{{boardSub}}</span></div>
+<div role="group" aria-label="Sort by" data-m="seg" style="display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid #E3E9F5; background: #EEF2FA">
+<sc-for list="{{sorts}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.on}}" class="ul" style="min-height: 36px; padding: 0 13px; border-radius: 9px; border: 0; background: {{o.bg}}; box-shadow: {{o.shadow}}; color: {{o.fg}}; font: inherit; font-size: 13.5px; cursor: pointer; white-space: nowrap">{{o.label}}</button></sc-for>
+</div>
+</div>
+<div data-m="och" style="display: grid; grid-template-columns: 26px minmax(130px, 1.3fr) 92px 92px minmax(100px, 1fr) 92px; gap: 10px; align-items: center; padding: 8px 18px; font-size: 12px; font-weight: 500; color: #55617F; background: #FFFFFF; border-bottom: 1px solid #E3E9F5">
+<span>#</span><span>Casino</span><span style="text-align: right">Deposits</span><span style="text-align: right">Withdrawals</span><span style="text-align: right">Net flow</span><span style="text-align: right">Balance</span>
+</div>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="10">
+<a href="{{r.href}}" class="rh" data-m="ocr" style="display: grid; grid-template-columns: 26px minmax(130px, 1.3fr) 92px 92px minmax(100px, 1fr) 92px; gap: 10px; align-items: center; padding: 11px 18px; border-bottom: 1px solid #EDF1F8; font-size: 14px; color: inherit">
+<span style="font-family: 'Geist Mono', monospace; font-size: 12.5px; color: #606C8A">{{r.rank}}</span>
+<span style="display: flex; align-items: center; gap: 10px; min-width: 0"><span style="position: relative; width: 32px; height: 32px; border-radius: 9px; background: {{r.tint}}; color: #1E3A8A; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{r.ini}}<sc-if value="{{r.logo}}" hint-placeholder-val="{{ false }}"><img src="{{r.logo}}" alt="" width="32" height="32" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(11,21,51,0.10); pointer-events: none"></span></span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 600; color: #0B1533; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.name}}</span><span style="font-size: 12px; color: #606C8A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{r.meta}}</span></span></span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; color: #0E7C66">{{r.inflow}}</span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; color: #C2410C">{{r.outflow}}</span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px"><span style="font-family: 'Geist Mono', monospace; color: {{r.netColor}}">{{r.net}}</span><span style="position: relative; width: 100%; max-width: 120px; height: 4px; border-radius: 2px; background: #E3E9F5"><span style="position: absolute; top: 0; bottom: 0; left: {{r.barL}}; width: {{r.barW}}; border-radius: 2px; background: {{r.netColor}}"></span><span style="position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: #B8C3D9"></span></span></span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; color: #0B1533">{{r.balance}}</span>
+</a>
+</sc-for>
+<sc-if value="{{rowsEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 34px 18px; text-align: center; font-size: 13.5px; line-height: 1.6; color: #55617F">{{rowsEmptyText}}</div></sc-if>
+<div style="padding: 12px 18px; font-size: 12.5px; line-height: 1.5; color: #606C8A">{{boardFoot}}</div>
+</section>
+
+<section aria-label="Whale feed" style="border-radius: 20px; border: 1px solid #E3E9F5; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,64,0.04), 0 14px 40px -28px rgba(30,60,160,0.35); overflow: hidden; min-width: 0">
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-bottom: 1px solid #E3E9F5">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px"><div style="display: flex; align-items: center; gap: 8px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Whale feed</h2><span class="{{wdot}}" style="width: 7px; height: 7px; border-radius: 50%; background: {{wdotColor}}"></span></div><span style="font-size: 12.5px; color: #606C8A">{{whaleSub}}</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><div role="group" aria-label="Direction" data-m="seg" style="display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid #E3E9F5; background: #EEF2FA">
+<sc-for list="{{wdirs}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.on}}" class="ul" style="min-height: 36px; padding: 0 13px; border-radius: 9px; border: 0; background: {{o.bg}}; box-shadow: {{o.shadow}}; color: {{o.fg}}; font: inherit; font-size: 13.5px; cursor: pointer; white-space: nowrap">{{o.label}}</button></sc-for>
+</div><div role="group" aria-label="Minimum size" data-m="seg" style="display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid #E3E9F5; background: #EEF2FA">
+<sc-for list="{{wmins}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.on}}" class="ul" style="min-height: 36px; padding: 0 13px; border-radius: 9px; border: 0; background: {{o.bg}}; box-shadow: {{o.shadow}}; color: {{o.fg}}; font: inherit; font-size: 13.5px; cursor: pointer; white-space: nowrap">{{o.label}}</button></sc-for>
+</div></div>
+</div>
+<div style="display: flex; flex-direction: column; max-height: 640px; overflow-y: auto">
+<sc-for list="{{whales}}" as="w" hint-placeholder-count="8">
+<a href="{{w.url}}" target="_blank" rel="noopener noreferrer" class="rh" style="display: flex; align-items: center; gap: 12px; padding: 12px 18px; border-bottom: 1px solid #EDF1F8; color: inherit">
+<span style="width: 34px; height: 34px; border-radius: 10px; background: {{w.iconBg}}; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{w.iconFg}}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{w.arrow}}"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0"><span style="font-size: 14px; color: #0B1533; overflow: hidden; text-overflow: ellipsis; white-space: nowrap"><span style="font-weight: 600">{{w.name}}</span> {{w.kind}}</span><span style="font-size: 12px; color: #606C8A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{w.detail}}</span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: 0 0 auto"><span style="font-family: 'Geist Mono', monospace; font-size: 14px; color: {{w.color}}">{{w.usd}}</span><span style="font-size: 12px; color: #606C8A">{{w.ago}}</span></span>
+</a>
+</sc-for>
+<sc-if value="{{whalesEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 34px 18px; text-align: center; font-size: 13.5px; line-height: 1.6; color: #55617F">{{whalesEmptyText}}</div></sc-if>
+</div>
+<div style="padding: 12px 18px; font-size: 12.5px; line-height: 1.5; color: #606C8A">{{whaleFoot}}</div>
+</section>
+</div>
+
+<section aria-label="Casino tokens on-chain" style="margin-top: 16px; border-radius: 20px; border: 1px solid #E3E9F5; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,64,0.04), 0 14px 40px -28px rgba(30,60,160,0.35); overflow: hidden">
+<div style="display: flex; flex-direction: column; gap: 3px; padding: 16px 18px; border-bottom: 1px solid #E3E9F5"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Casino tokens on-chain</h2><span style="font-size: 13px; color: #55617F">Supply burned, holders, DEX liquidity and trades, and how much the casino's own tracked wallets hold.</span></div>
+<div data-m="tkh" style="display: grid; grid-template-columns: minmax(130px, 1fr) 96px 110px 110px 104px 110px 120px 130px; gap: 12px; align-items: center; padding: 8px 18px; font-size: 12px; font-weight: 500; color: #55617F; background: #FFFFFF; border-bottom: 1px solid #E3E9F5">
+<span>Token</span><span style="text-align: right">Price 24h</span><span style="text-align: right">DEX liquidity</span><span style="text-align: right">24h volume</span><span style="text-align: right">Buys / sells</span><span style="text-align: right">Holders</span><span style="text-align: right">Burned 7d</span><span style="text-align: right">Held by casino</span>
+</div>
+<sc-for list="{{tokens}}" as="t" hint-placeholder-count="2">
+<div class="rh" data-m="tkr" style="display: grid; grid-template-columns: minmax(130px, 1fr) 96px 110px 110px 104px 110px 120px 130px; gap: 12px; align-items: center; padding: 12px 18px; border-bottom: 1px solid #EDF1F8; font-size: 14px">
+<span style="display: flex; align-items: center; gap: 10px; min-width: 0"><span style="position: relative; width: 32px; height: 32px; border-radius: 50%; background: {{t.tint}}; color: #1E3A8A; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{t.ini}}<sc-if value="{{t.logo}}" hint-placeholder-val="{{ false }}"><img src="{{t.logo}}" alt="" width="32" height="32" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(11,21,51,0.10); pointer-events: none"></span></span><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><a href="{{t.url}}" target="_blank" rel="noopener noreferrer" class="ul" style="font-weight: 600; color: #0B1533">{{t.sym}}</a><span style="font-size: 12px; color: #606C8A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{t.name}}</span></span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><span style="font-family: 'Geist Mono', monospace; color: #0B1533">{{t.price}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: {{t.chColor}}">{{t.ch}}</span></span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; color: #0B1533">{{t.liq}}</span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; color: #0B1533">{{t.vol}}</span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; font-size: 13px"><span style="color: #0E7C66">{{t.buys}}</span><span style="color: #606C8A">{{t.sep}}</span><span style="color: #C2410C">{{t.sells}}</span></span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><span style="font-family: 'Geist Mono', monospace; color: #0B1533">{{t.holders}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: {{t.hColor}}">{{t.hCh}}</span></span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; color: #0B1533">{{t.burned}}</span>
+<span style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><span style="font-family: 'Geist Mono', monospace; color: #0B1533">{{t.treasury}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #606C8A">{{t.treasuryUsd}}</span></span>
+</div>
+</sc-for>
+<div style="padding: 12px 18px; font-size: 12.5px; line-height: 1.5; color: #606C8A">{{tokenFoot}}</div>
+</section>
+
+<section aria-label="Tracked wallets" style="margin-top: 16px; border-radius: 20px; border: 1px solid #E3E9F5; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,64,0.04), 0 14px 40px -28px rgba(30,60,160,0.35); padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<div data-m="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 3px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Tracked casino wallets</h2><span style="font-size: 13px; color: #55617F">{{covSub}}</span></div>
+<button type="button" onClick="{{openAdd}}" class="pb" style="min-height: 42px; padding: 0 16px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #4A75FF 0%, #2442D6 100%); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap">Add a casino wallet</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{coverage}}" as="c" hint-placeholder-count="16">
+<a href="{{c.href}}" class="hv" style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px 0 6px; border-radius: 12px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0B1533; font-size: 13.5px"><span style="position: relative; width: 28px; height: 28px; border-radius: 8px; background: {{c.tint}}; color: #1E3A8A; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{c.ini}}<sc-if value="{{c.logo}}" hint-placeholder-val="{{ false }}"><img src="{{c.logo}}" alt="" width="28" height="28" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(11,21,51,0.10); pointer-events: none"></span></span><span style="font-weight: 500">{{c.name}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #606C8A">{{c.n}}</span></a>
+</sc-for>
+</div>
+<span style="font-size: 12.5px; line-height: 1.55; color: #606C8A">{{covFoot}}</span>
+</section>
+<footer style="margin-top: 48px; padding: 32px 0 28px; border-top: 1px solid #EEF3FF; display: flex; flex-direction: column; gap: 26px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 300px">
+<span style="display: inline-flex; align-items: center; gap: 10px"><img src="assets/streax-logo.webp" alt="" aria-hidden="true" width="26" height="26" style="flex: 0 0 auto; display: block; width: 26px; height: 26px; border-radius: 8px; box-shadow: 0 6px 16px -8px rgba(37,72,190,0.6)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 23px; line-height: 1; letter-spacing: -0.01em; color: #0B1533">Streax</span></span>
+<span style="font-size: 13.5px; line-height: 1.6; color: #55617F">Casino data you can check. Every number on this platform names its source.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px; font-size: 13.5px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #0B1533">Platform</span><a href="Rankings.dc.html" class="ul" style="color: #55617F">Rankings</a><a href="Casino.dc.html" class="ul" style="color: #55617F">Casino profiles</a><a href="Onchain.dc.html" class="ul" style="color: #55617F">On-chain monitor</a><a href="Wallets.dc.html" class="ul" style="color: #55617F">Casino wallets</a><a href="Analytics.dc.html" class="ul" style="color: #55617F">Analytics</a><a href="Streamers.dc.html" class="ul" style="color: #55617F">Streamers</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #0B1533">Community</span><a href="Community.dc.html" class="ul" style="color: #55617F">Reviews</a><a href="Complaints.dc.html" class="ul" style="color: #55617F">Complaints</a><a href="WalletCheck.dc.html" class="ul" style="color: #55617F">My wallet check</a><a href="BonusCalc.dc.html" class="ul" style="color: #55617F">Bonus calculator</a><a href="/articles" class="ul" style="color: #55617F">Articles</a><a href="BetFeed.dc.html" class="ul" style="color: #55617F">Bet feed</a><a href="Bonuses.dc.html" class="ul" style="color: #55617F">Leaderboard and codes</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #0B1533">Data</span><button type="button" onClick="{{openSources}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #55617F; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Sources and methodology</button><button type="button" onClick="{{openAlerts}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #55617F; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Daily alerts</button><button type="button" onClick="{{openSupport}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #55617F; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Contact</button></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 18px; border-top: 1px solid #EEF3FF; font-size: 12.5px; color: #606C8A; text-align: center">
+<span>18+ · Gambling can be addictive. Play responsibly. Help: BeGambleAware.org · GamCare.org.uk · GamblingTherapy.org</span>
+<span>© 2026 Streax · Not financial advice · Third-party figures are shown as published and credited to their source</span>
+</div>
+</footer>
+</main>
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; left: 0; right: 0; bottom: 24px; z-index: 100; display: flex; justify-content: center; padding: 0 16px; pointer-events: none">
+<div role="status" class="fu" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid #D5DEEE; background: rgba(255,255,255,0.98); box-shadow: 0 20px 50px -20px rgba(20,35,90,0.16); font-size: 14px; color: #0B1533"><span style="width: 20px; height: 20px; border-radius: 50%; background: rgba(47,84,235,0.15); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2F54EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{toast}}</div>
+</div>
+</sc-if>
+<sc-if value="{{modalOpen}}" hint-placeholder-val="{{ false }}">
+<div class="fi" onClick="{{closeModal}}" style="position: fixed; inset: 0; z-index: 90; background: rgba(15,25,60,0.32); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px">
+<div role="dialog" aria-modal="true" aria-label="{{modalTitle}}" class="fu" onClick="{{stop}}" style="width: 100%; max-width: {{modalW}}; max-height: calc(100vh - 48px); overflow-y: auto; box-sizing: border-box; border-radius: 18px; border: 1px solid transparent; background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%) padding-box, linear-gradient(160deg, rgba(47,84,235,0.5), rgba(47,84,235,0.06) 50%, rgba(47,84,235,0.2)) border-box; box-shadow: 0 40px 120px -30px rgba(62,107,255,0.35); padding: 24px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">{{modalTitle}}</h2><span style="font-size: 14px; color: #55617F; line-height: 1.5">{{modalSub}}</span></div>
+<button type="button" aria-label="Close dialog" onClick="{{closeModal}}" class="hv" style="width: 40px; height: 40px; flex: 0 0 auto; border-radius: 10px; border: 1px solid #D5DEEE; background: transparent; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A3657" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<sc-if value="{{isSources}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{sources}}" as="s" hint-placeholder-count="6">
+<div style="display: flex; gap: 14px; align-items: flex-start"><span style="width: 28px; height: 28px; border-radius: 8px; background: rgba(47,84,235,0.1); border: 1px solid rgba(47,84,235,0.25); color: #2442D6; font-family: 'Geist Mono', monospace; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto">{{s.n}}</span><div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-weight: 600; font-size: 14.5px">{{s.name}}</span><span style="font-size: 13.5px; line-height: 1.55; color: #4A5677">{{s.gives}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #2F54EB; word-break: break-all">{{s.url}} · {{s.when}}</span></div></div>
+</sc-for>
+<div style="border-radius: 12px; border: 1px solid #DCE3F1; background: #F7F9FE; padding: 14px; font-size: 13.5px; line-height: 1.6; color: #4A5677"><span style="color: #0B1533; font-weight: 600">Streax Score.</span> Nine weighted categories: on-chain activity and reserves (from this data), payout speed and complaint record (from verified player reports) and five review categories (licence, fairness, responsible gambling, support, security). Categories without enough evidence are left out, never guessed, and the score is marked provisional until most of the weight is rated. The full method is in the Streax article How the Streax Score works.</div>
+</sc-if>
+<sc-if value="{{isForm}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{formDone}}" hint-placeholder-val="{{ false }}"><div class="fu" style="border-radius: 14px; border: 1px solid rgba(14,124,102,0.3); background: rgba(14,124,102,0.06); padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 600; color: #0B6B58">{{doneTitle}}</span><span style="font-size: 13.5px; color: #4A5677; line-height: 1.55">{{doneBody}}</span></div></sc-if>
+<sc-if value="{{formOpen}}" hint-placeholder-val="{{ true }}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A5677">Email<input type="email" value="{{email}}" onChange="{{onEmail}}" placeholder="you@company.com" style="height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 1px solid {{emailBd}}; background: #FFFFFF; color: #0B1533; font: inherit; font-size: 14.5px"></label>
+<sc-if value="{{isAlerts}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #4A5677">Send me</span><sc-for list="{{topics}}" as="t" hint-placeholder-count="3"><button type="button" role="checkbox" aria-checked="{{t.on}}" onClick="{{t.toggle}}" class="hv" style="display: flex; align-items: center; gap: 10px; min-height: 42px; padding: 0 12px; border-radius: 10px; border: 1px solid #DCE3F1; background: transparent; color: #0B1533; font: inherit; font-size: 14px; cursor: pointer; text-align: left"><span style="width: 18px; height: 18px; border-radius: 5px; border: 1px solid {{t.bd}}; background: {{t.bg}}; display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; font-weight: 700">{{t.mark}}</span>{{t.label}}</button></sc-for></div></sc-if>
+<sc-if value="{{isSupport}}" hint-placeholder-val="{{ false }}"><label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #4A5677">Message<textarea value="{{msg}}" onChange="{{onMsg}}" rows="4" placeholder="How can we help?" style="box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1px solid #DCE3F1; background: #FFFFFF; color: #0B1533; font: inherit; font-size: 14.5px; resize: vertical"></textarea></label></sc-if>
+<sc-if value="{{hasFormErr}}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; color: #B45309">{{formErr}}</span></sc-if>
+<button type="button" onClick="{{submitForm}}" class="pb" style="min-height: 46px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #4A75FF 0%, #2442D6 100%); color: #FFFFFF; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer">{{submitLabel}}</button>
+</sc-if>
+</sc-if>
+<sc-if value="{{isGate}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{gatePerks}}" as="g" hint-placeholder-count="4"><div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #0B1533"><span style="width: 24px; height: 24px; border-radius: 8px; background: rgba(47,84,235,0.1); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2F54EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{g}}</div></sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="{{gateSignup}}" class="pb" style="flex: 1 1 200px; min-height: 46px; box-sizing: border-box; border-radius: 12px; background: linear-gradient(135deg, #4A75FF 0%, #2442D6 100%); color: #FFFFFF; font-size: 14.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">Create free account</a>
+<a href="{{gateLogin}}" class="hv" style="flex: 1 1 120px; min-height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #D5DEEE; color: #2A3657; font-size: 14.5px; font-weight: 500; display: inline-flex; align-items: center; justify-content: center">Log in</a>
+</div>
+<span style="font-size: 12.5px; color: #606C8A">Free, takes 30 seconds. 18+ only.</span>
+</sc-if>
+<sc-if value="{{isHow}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{how}}" as="h" hint-placeholder-count="6">
+<div style="display: flex; gap: 12px; align-items: flex-start"><span style="width: 26px; height: 26px; border-radius: 8px; background: rgba(47,84,235,0.1); border: 1px solid rgba(47,84,235,0.25); color: #2442D6; font-family: 'Geist Mono', monospace; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto">{{h.n}}</span><span style="font-size: 13.5px; line-height: 1.6; color: #4A5677"><span style="color: #0B1533; font-weight: 600">{{h.t}}</span> {{h.b}}</span></div>
+</sc-for>
+</sc-if>
+<sc-if value="{{isAdd}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{addSteps}}" as="h" hint-placeholder-count="4">
+<div style="display: flex; gap: 12px; align-items: flex-start"><span style="width: 26px; height: 26px; border-radius: 8px; background: rgba(14,124,102,0.1); border: 1px solid rgba(14,124,102,0.3); color: #0B6B58; font-family: 'Geist Mono', monospace; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto">{{h.n}}</span><span style="font-size: 13.5px; line-height: 1.6; color: #4A5677"><span style="color: #0B1533; font-weight: 600">{{h.t}}</span> {{h.b}}</span></div>
+</sc-for>
+<sc-if value="{{canAdmin}}" hint-placeholder-val="{{ false }}"><a href="onchain-admin.html" class="pb" style="display: inline-flex; justify-content: center; align-items: center; min-height: 46px; border-radius: 12px; background: linear-gradient(135deg, #4A75FF 0%, #2442D6 100%); color: #FFFFFF; font-size: 14.5px; font-weight: 600">Open the wallet tool</a></sc-if>
+<sc-if value="{{noAdmin}}" hint-placeholder-val="{{ true }}"><div style="border-radius: 12px; border: 1px dashed #D5DEEE; padding: 12px 14px; font-size: 13.5px; line-height: 1.55; color: #55617F">The wallet tool opens on your Streax server at /onchain-admin.html once the site runs on Render.</div></sc-if>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2293}}'>
+class Component extends DCLogic {
+
+  showToast(msg) {
+    var self = this;
+    clearTimeout(this.toastTimer);
+    this.setState({ toast: msg });
+    this.toastTimer = setTimeout(function () { self.setState({ toast: '' }); }, 2600);
+  }
+  copy(text, msg) {
+    try { if (navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {}); } catch (e) {}
+    this.showToast(msg);
+  }
+  money(v) {
+    if (v == null || isNaN(v)) return 'n/a';
+    var a = Math.abs(v), s = v < 0 ? '-' : '', o;
+    if (a >= 1e9) o = (a / 1e9).toFixed(2) + 'B';
+    else if (a >= 1e6) o = (a / 1e6).toFixed(2) + 'M';
+    else if (a >= 1e3) o = (a / 1e3).toFixed(2) + 'K';
+    else if (a >= 1) o = a.toFixed(2);
+    else if (a === 0) o = '0';
+    else o = a.toPrecision(3);
+    return s + '$' + o;
+  }
+  compact(v) {
+    if (v >= 1e6) return (v / 1e6).toFixed(2) + 'M';
+    if (v >= 1e3) return (v / 1e3).toFixed(1) + 'K';
+    return String(Math.round(v));
+  }
+  price(v) {
+    if (v >= 1000) return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (v >= 1) return '$' + v.toFixed(2);
+    return '$' + v.toPrecision(4);
+  }
+  pct(v) { return (v >= 0 ? '▲ ' : '▼ ') + Math.abs(v).toFixed(2) + '%'; }
+  pcol(v) { return v >= 0 ? '#0E7C66' : '#C2410C'; }
+  seg(opts, active, pick) {
+    return opts.map(function (o) {
+      var on = o.v === active;
+      return { label: o.label, v: o.v, on: on, bg: on ? '#FFFFFF' : 'transparent', shadow: on ? 'inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px #D5DEEE' : 'none', fg: on ? '#0B1533' : '#55617F', pick: function () { pick(o.v); } };
+    });
+  }
+  tint(name) {
+    var t = ['linear-gradient(135deg, #EAF1FF, #D9E6FF)', 'linear-gradient(135deg, #E6F5FF, #D3EAFE)', 'linear-gradient(135deg, #EFECFF, #E0DBFF)', 'linear-gradient(135deg, #E8F4FA, #D7EAF5)', 'linear-gradient(135deg, #EEF2F9, #DFE6F2)'];
+    var h = 0; for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 997;
+    return t[h % t.length];
+  }
+  ini(name) { var s = String(name).replace(/[^A-Za-z0-9]/g, ''); return (s.charAt(0) + (s.charAt(1) || '')).toUpperCase(); }
+  logoMap() { return this._lm || (this._lm = {"tok_shfl":"assets/logos/tok_shfl.png","tok_rlb":"assets/logos/tok_rlb.png","tok_fun":"assets/logos/tok_fun.png","tok_desu":"assets/logos/tok_desu.png","tok_bfg":"assets/logos/tok_bfg.png","tok_scs":"assets/logos/tok_scs.png","tok_winr":"assets/logos/tok_winr.png","chain_eth":"assets/logos/chain_eth.png","chain_sol":"assets/logos/chain_sol.png","chain_trx":"assets/logos/chain_trx.png","chain_bnb":"assets/logos/chain_bnb.png","chain_btc":"assets/logos/chain_btc.png","kick":"assets/logos/kick.png","cas_500.casino":"assets/logos/casinos/500.casino.png","cas_acebet":"assets/logos/casinos/acebet.png","cas_bc.game":"assets/logos/casinos/bc.game.png","cas_betfury.com":"assets/logos/casinos/betfury.com.png","cas_betstrike":"assets/logos/casinos/betstrike.png","cas_bluff":"assets/logos/casinos/bluff.png","cas_cloudbet.com":"assets/logos/casinos/cloudbet.com.png","cas_cybet":"assets/logos/casinos/cybet.png","cas_duel.com":"assets/logos/casinos/duel.com.png","cas_duelbits.com":"assets/logos/casinos/duelbits.com.png","cas_flush":"assets/logos/casinos/flush.png","cas_gamba.com":"assets/logos/casinos/gamba.com.png","cas_gamdom.com":"assets/logos/casinos/gamdom.com.png","cas_goated.com":"assets/logos/casinos/goated.com.png","cas_metawin.com":"assets/logos/casinos/metawin.com.png","cas_rainbet.com":"assets/logos/casinos/rainbet.com.png","cas_razed.com":"assets/logos/casinos/razed.com.png","cas_rollbit.com":"assets/logos/casinos/rollbit.com.png","cas_roobet.com":"assets/logos/casinos/roobet.com.png","cas_shuffle.com":"assets/logos/casinos/shuffle.com.png","cas_solcasino.io":"assets/logos/casinos/solcasino.io.png","cas_sportsbet.io":"assets/logos/casinos/sportsbet.io.png","cas_stake.com":"assets/logos/casinos/stake.com.png","cas_thrill.com":"assets/logos/casinos/thrill.com.png","cas_whale.io":"assets/logos/casinos/whale.io.png","cas_winna.com":"assets/logos/casinos/winna.com.png","cas_yeet.com":"assets/logos/casinos/yeet.com.png"}); }
+  tokLogo(sym) { return this.logoMap()['tok_' + String(sym || '').toLowerCase()] || ''; }
+  chainLogo(name) { var k = { Ethereum: 'eth', ETH: 'eth', Solana: 'sol', SOL: 'sol', Tron: 'trx', TRX: 'trx', 'BNB Chain': 'bnb', BNB: 'bnb', BTC: 'btc', Bitcoin: 'btc' }[name]; return k ? (this.logoMap()['chain_' + k] || '') : ''; }
+  kickLogo() { return this.logoMap().kick || ''; }
+  logo(domain, size) {
+    if (!domain) return '';
+    var own = this.D && this.D.casinoLogos && this.D.casinoLogos[domain];
+    if (own) return own;
+    var mine = this.logoMap()['cas_' + domain];
+    if (mine) return mine;
+    if (domain.indexOf('.') < 0) return '';
+    return this.props && this.props.$local ? 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=' + Math.max(size || 64, 128) : '';
+  }
+  short(a) { return a.slice(0, 6) + '…' + a.slice(-4); }
+  headers(cols, key, dir, setSort) {
+    return cols.map(function (c) {
+      var on = c.k && c.k === key;
+      return { label: c.label, justify: c.right ? 'flex-end' : 'flex-start', sortable: !!c.k, plain: !c.k, color: on ? '#2442D6' : '#55617F', arrow: on ? (dir < 0 ? '↓' : '↑') : (c.k ? '↕' : ''), aria: c.k ? 'Sort by ' + c.label : '', sort: function () { setSort(c.k); } };
+    });
+  }
+  gauge(v) {
+    var len = 81.68, f = v == null ? 0 : v / 100;
+    return { dash: (len * f).toFixed(1) + ' ' + len, color: v == null ? '#B8C3D9' : v >= 75 ? '#0E7C66' : v >= 55 ? '#2F54EB' : v >= 40 ? '#B45309' : '#C2410C', label: v == null ? 'n/a' : String(v) };
+  }
+  shellVals() {
+    var self = this, st = this.state, D = this.D;
+    var q = (st.gq || '').trim().toLowerCase();
+    var res = q ? D.idx.filter(function (c) { return c[0].toLowerCase().indexOf(q) !== -1; }).slice(0, 6).map(function (c) {
+      return { name: c[0], href: 'Casino.dc.html?c=' + c[1], dep: c[2], rank: c[3], ini: self.ini(c[0]), tint: self.tint(c[0]), logo: self.logo(c[4] || c[1], 64) };
+    }) : [];
+    var m = st.modal, isForm = m === 'alerts' || m === 'support';
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(st.email || '');
+    var topicsAll = ['Big deposit moves', 'New casinos added', 'Casino token moves'];
+    var titles = { gate: 'Free with a Streax account', alerts: 'Daily alerts', support: 'Contact support', sources: 'Data sources and methodology' };
+    var subs = { gate: 'Create a free account to unlock ' + String(st.gateWhat || 'this').replace(/^[A-Z](?=[a-z])/, function (c) { return c.toLowerCase(); }) + '. You also get:', alerts: 'One short email a day with the biggest on-chain moves.', support: 'Tell us what you need and we will reply by email.', sources: 'Where every number on this platform comes from, and when it was captured.' };
+    return {
+      acct: self.acctVals(), sideCta: self.sideVals(), isGate: m === 'gate',
+      gatePerks: ['Your own whale alerts by email or Telegram', 'A watchlist of the casinos you follow', '7, 30 and 90-day history with CSV downloads', 'Member-only bonus codes and referral points'],
+      gateSignup: 'Signup.dc.html' + self.gateNext(), gateLogin: 'Login.dc.html' + self.gateNext(),
+      gq: st.gq || '', onGq: function (e) { self.setState({ gq: e.target.value }); },
+      gqOn: function () { clearTimeout(self.blurTimer); self.setState({ gqFocus: true }); },
+      gqOff: function () { self.blurTimer = setTimeout(function () { self.setState({ gqFocus: false }); }, 180); },
+      gqOpen: !!st.gqFocus && q.length > 0, gqResults: res, gqNone: q.length > 0 && res.length === 0,
+      bell: function () { if (!self.member()) { self.gate('Personal whale alerts'); return; } self.showToast('You are all caught up. Whale alerts for your watchlist arrive by email or Telegram.'); },
+      avatar: function () { self.showToast('Accounts arrive with the full launch'); },
+      openAlerts: function () { if (self.member()) { location.href = 'Account.dc.html'; return; } self.gate('Personal whale alerts'); },
+      openSupport: function () { self.setState({ modal: 'support', formDone: false, formErr: '' }); },
+      openSources: function () { self.setState({ modal: 'sources' }); },
+      modalOpen: !!m, isSources: m === 'sources', isForm: isForm, isAlerts: m === 'alerts', isSupport: m === 'support',
+      modalTitle: titles[m] || this.extraTitle || '', modalSub: subs[m] || this.extraSub || '', modalW: m === 'sources' ? '640px' : (this.extraW || '480px'),
+      closeModal: function () { self.setState({ modal: '' }); }, stop: function (e) { e.stopPropagation(); },
+      email: st.email || '', onEmail: function (e) { self.setState({ email: e.target.value, formErr: '' }); },
+      emailBd: st.formErr ? 'rgba(194,65,12,0.6)' : '#DCE3F1',
+      msg: st.msg || '', onMsg: function (e) { self.setState({ msg: e.target.value, formErr: '' }); },
+      topics: topicsAll.map(function (t) { var on = !(st.topicsOff || {})[t]; return { label: t, on: on, bd: on ? '#2F54EB' : '#B8C3D9', bg: on ? '#2F54EB' : 'transparent', mark: on ? '✓' : '', toggle: function () { var o = Object.assign({}, st.topicsOff || {}); o[t] = on; self.setState({ topicsOff: o }); } }; }),
+      hasFormErr: !!st.formErr, formErr: st.formErr || '', formDone: !!st.formDone, formOpen: !st.formDone,
+      submitLabel: m === 'support' ? 'Send message' : 'Turn on alerts',
+      doneTitle: m === 'support' ? 'Message received' : 'Alerts are on for ' + (st.email || ''),
+      doneBody: 'This is the local demo, so nothing is emailed yet. Connect an email service in the backend to send it for real.',
+      submitForm: function () {
+        if (!emailOk) { self.setState({ formErr: 'Enter a valid email address.' }); return; }
+        if (m === 'support' && !(st.msg || '').trim()) { self.setState({ formErr: 'Write a short message.' }); return; }
+        if (m === 'alerts' && topicsAll.every(function (t) { return (st.topicsOff || {})[t]; })) { self.setState({ formErr: 'Pick at least one alert.' }); return; }
+        self.setState({ formDone: true, formErr: '', msg: '' });
+      },
+      sources: [
+        { n: '1', name: '99bitcoins casino on-chain pages', gives: '24h deposits, depositing wallets, payouts, hot wallets, chain and asset split for 43 casinos. Shown as published. Asset values on those pages match ETH and SOL prices from late August 2026.', url: '99bitcoins.com/coins/gambling', when: 'captured 11 Oct 2026, unchanged on recheck 12 Oct' },
+        { n: '2', name: 'Official casino websites', gives: 'Operator name, registration and licence, quoted from each site footer. Casinos whose footer could not be read show "Not verified".', url: 'stake.com, roobet.com, shuffle.com, rainbet.com, thrill.com, sportsbet.io, stake.us', when: '12 Oct 2026' },
+        { n: '3', name: 'DefiLlama coins API', gives: 'Casino token prices, 24h and 7d change and 30 daily closes.', url: 'coins.llama.fi', when: self.props && self.props.$local ? 'live on your local server' : '12 Oct 2026, 08:53 UTC' },
+        { n: '4', name: 'CoinGecko', gives: 'Circulating supply, used for market cap at the current price, and 24h volume.', url: 'coingecko.com/en/categories/gambling', when: '11 Oct 2026' },
+        { n: '5', name: 'Kick channel API', gives: 'Followers, verified flag, live status and viewers for 14 casino streamers.', url: 'kick.com/api/v2/channels/{slug}', when: self.props && self.props.$local ? 'live on your local server' : '12 Oct 2026, 09:05 UTC' },
+        { n: '6', name: 'Etherscan and Blockscout', gives: 'Public name tags and token holdings for the Stake.com and Rollbit wallets (Etherscan), and their ETH balances (Blockscout API, live on the local server).', url: 'etherscan.io, eth.blockscout.com', when: '11 to 12 Oct 2026' },
+        { n: '7', name: 'Logos', gives: 'Token logos from Trust Wallet assets and web3icons, chain logos from cryptocurrency-icons, Kick logo from Simple Icons. Casino icons are each casino’s own website icon, loaded in your browser on the local site; the canvas shows initials until logo files are added.', url: 'github.com/trustwallet/assets, web3icons, cryptocurrency-icons, simpleicons.org, google.com/s2/favicons', when: '12 Oct 2026' }
+      ],
+      hasToast: !!st.toast, toast: st.toast || ''
+    };
+  }
+
+  // ---- Streax accounts ----
+  member() { return !!(this.props && this.props.$me); }
+  locked() {
+    var a = this.props && this.props.$auth;
+    if (this.props && this.props.$local && a && a.enabled === false) return false;
+    return !this.member();
+  }
+  gate(what) { this.setState({ modal: 'gate', gateWhat: what }); }
+  apiPost(path, body) {
+    return fetch(path, { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body || {}) }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) { var e = new Error(j.error || ('Something went wrong (' + r.status + ')')); e.status = r.status; e.code = j.code; e.field = j.field; throw e; }
+        return j;
+      });
+    });
+  }
+  saveMe(me) {
+    if (this.props) this.props.$me = me;
+    try { if (me) sessionStorage.setItem('sx_me', JSON.stringify(me)); else sessionStorage.removeItem('sx_me'); } catch (e) {}
+  }
+  acctVals() {
+    var me = this.props && this.props.$me;
+    if (me) return { href: 'Account.dc.html', label: 'My account, ' + me.name, text: me.initials, pad: '0', radius: '50%', fs: '15px', w: '44px', avatar: me.avatar || '' };
+    return { href: 'Signup.dc.html', label: 'Create a free Streax account', text: 'Sign up', pad: '0 16px', radius: '14px', fs: '14px', w: 'auto', avatar: '' };
+  }
+  sideVals() {
+    if (this.member()) return { title: 'Your whale alerts', body: 'Watchlist, alert settings, member codes and your referral points.', btn: 'Open my account', href: 'Account.dc.html' };
+    return { title: 'Free member perks', body: 'Your own whale alerts, a casino watchlist, full history and member-only codes.', btn: 'Create free account', href: 'Signup.dc.html' };
+  }
+  gateNext() {
+    if (!(this.props && this.props.$local) || typeof location === 'undefined') return '';
+    return '?next=' + encodeURIComponent(location.pathname + location.search);
+  }
+  watchVals(slug, name) {
+    var self = this, me = this.props && this.props.$me;
+    var on = !!(me && me.watchlist && me.watchlist.indexOf(slug) !== -1);
+    return { on: on, label: on ? 'Watching' : 'Watch', fill: on ? 'currentColor' : 'none', aria: (on ? 'Stop watching ' : 'Add to watchlist: ') + name,
+      toggle: function () {
+        if (!me) { self.gate('A casino watchlist with your own whale alerts'); return; }
+        self.apiPost('/api/account/watch', { slug: slug, on: !on }).then(function (j) {
+          me.watchlist = (j.watchlist || []).map(function (w) { return w.slug; });
+          self.saveMe(me);
+          self.showToast(on ? name + ' removed from your watchlist' : name + ' is on your watchlist');
+        }).catch(function (e) { if (e.status === 401) { self.saveMe(null); self.gate('A casino watchlist with your own whale alerts'); } else self.showToast(e.message); });
+      } };
+  }
+  // ---- end accounts ----
+  scoreLib() {
+    if (!this._scoreLib) this._scoreLib = (function () {
+  var CATS = [
+    { id: 'activity', name: 'On-chain activity', w: 15, src: 'On-chain', what: 'Deposit volume and how many wallets deposit.' },
+    { id: 'reserves', name: 'Reserves', w: 15, src: 'On-chain', what: 'Hot wallet money compared with a day of deposits.' },
+    { id: 'payouts', name: 'Payout speed', w: 15, src: 'Players', what: 'Median time from withdrawal request to coins arriving, from verified player reports.' },
+    { id: 'complaints', name: 'Complaint record', w: 15, src: 'Players', what: 'Share of closed complaints the casino resolved.' },
+    { id: 'fairness', name: 'Fairness and RTP', w: 10, src: 'Review', what: 'Provably fair games, a verifier, client seeds and published RTP.' },
+    { id: 'licence', name: 'Licence and compliance', w: 10, src: 'Review', what: 'A licence we could check, KYC timing, geo-blocking and AML policy.' },
+    { id: 'rg', name: 'Responsible gambling', w: 8, src: 'Review', what: 'Self-exclusion, limits, cool-off and help links.' },
+    { id: 'support', name: 'Support', w: 7, src: 'Review', what: '24/7 live help and how fast a human answers.' },
+    { id: 'security', name: 'Account security', w: 5, src: 'Review', what: 'Two-factor login and withdrawal confirmation.' }
+  ];
+  var CHECKS = {
+    fairness: [['provablyFair', 'Provably fair house games'], ['verifier', 'Built-in result verifier'], ['clientSeed', 'Players can set their own client seed'], ['rtpPublished', 'RTP published for every game'], ['maxRtp', 'Commits to the highest RTP version of slots']],
+    compliance: [['kycBeforeDeposit', 'KYC asked before the first deposit, not after a win'], ['geoBlock', 'Blocks restricted countries'], ['restrictedList', 'Publishes its restricted countries'], ['amlPolicy', 'Publishes an AML policy']],
+    rg: [['selfExclusion', 'Self-exclusion from the account page'], ['limits', 'Deposit and loss limits'], ['coolOff', 'Cool-off periods'], ['rgLinks', 'Links to gambling help services'], ['realityCheck', 'Reality checks or session reminders']],
+    support: [['live24', '24/7 live chat with a person']],
+    security: [['twoFA', 'Two-factor login'], ['withdrawalConfirm', 'Withdrawals need a second confirmation'], ['loginAlerts', 'New login or device alerts']]
+  };
+  function clamp(v) { return Math.max(0, Math.min(10, v)); }
+  function lerp(x, pts) {
+    if (x <= pts[0][0]) return pts[0][1];
+    for (var i = 1; i < pts.length; i++) if (x <= pts[i][0]) { var a = pts[i - 1], b = pts[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); }
+    return pts[pts.length - 1][1];
+  }
+  function checks(obj, list) {
+    var yes = 0, known = 0;
+    list.forEach(function (c) { var v = obj && obj[c[0]]; if (v === 'yes') { yes++; known++; } else if (v === 'no') known++; });
+    return { yes: yes, known: known, total: list.length };
+  }
+  function grade(total) {
+    if (total == null) return { label: 'Not rated', tone: 'muted' };
+    if (total >= 85) return { label: 'Excellent', tone: 'good' };
+    if (total >= 70) return { label: 'Good', tone: 'good' };
+    if (total >= 55) return { label: 'Fair', tone: 'accent' };
+    if (total >= 40) return { label: 'Weak', tone: 'warn' };
+    return { label: 'Poor', tone: 'bad' };
+  }
+
+  // input: { onchain: {vol01, reach01, cover, drawdown7d}, review: {...}, complaints: {resolved, unresolved}, payouts: {median, count} }
+  function compute(input) {
+    input = input || {};
+    var oc = input.onchain || {}, rv = input.review || {}, cp = input.complaints || {}, po = input.payouts || {};
+    var out = {};
+    if (oc.vol01 != null && oc.reach01 != null) out.activity = { v: clamp(10 * (0.57 * oc.vol01 + 0.43 * oc.reach01)), note: oc.note || '' };
+    if (oc.cover != null && isFinite(oc.cover)) {
+      var r = lerp(oc.cover, [[0, 0], [0.25, 2], [1, 5], [2, 7], [5, 10]]);
+      if (oc.drawdown7d != null && oc.drawdown7d > 0.4) r -= Math.min(4, (oc.drawdown7d - 0.4) * 10);
+      out.reserves = { v: clamp(r), note: oc.cover.toFixed(1) + 'x a day of deposits' };
+    }
+    if (po.count >= 3 && po.median != null) out.payouts = { v: clamp(lerp(po.median, [[10, 10], [30, 9], [60, 8], [180, 6], [720, 4], [1440, 2], [2880, 0]])), note: 'Median ' + fmtMin(po.median) + ' over ' + po.count + ' reports' };
+    var closed = (cp.resolved || 0) + (cp.unresolved || 0);
+    if (closed >= 3) out.complaints = { v: clamp(10 * (cp.resolved || 0) / closed), note: (cp.resolved || 0) + ' of ' + closed + ' closed complaints resolved' };
+    var f = checks(rv.fairness, CHECKS.fairness);
+    if (f.known >= 3) out.fairness = { v: 10 * f.yes / f.known, note: f.yes + ' of ' + f.known + ' checks passed' };
+    var lic = rv.licence || {}, comp = checks(rv.compliance, CHECKS.compliance), lv = null;
+    if (lic.status === 'licensed') lv = lic.verified ? 10 : 7; else if (lic.status === 'unlicensed') lv = 0;
+    if (lv != null || comp.known >= 2) {
+      var parts = [], ws = [];
+      if (lv != null) { parts.push(lv); ws.push(0.6); }
+      if (comp.known >= 2) { parts.push(10 * comp.yes / comp.known); ws.push(0.4); }
+      var s = 0, t = 0;
+      parts.forEach(function (p, i) { s += p * ws[i]; t += ws[i]; });
+      out.licence = { v: s / t, note: lic.status === 'licensed' ? (lic.verified ? 'Licence checked with the regulator' : 'Licence claimed, not yet checked') : lic.status === 'unlicensed' ? 'No licence found' : comp.yes + ' of ' + comp.known + ' compliance checks passed' };
+    }
+    var g = checks(rv.rg, CHECKS.rg);
+    if (g.known >= 3) out.rg = { v: 10 * g.yes / g.known, note: g.yes + ' of ' + g.known + ' tools available' };
+    var sp = rv.support || {}, sparts = [];
+    if (sp.live24 === 'yes') sparts.push(10); else if (sp.live24 === 'no') sparts.push(3);
+    if (sp.responseMins != null && sp.responseMins !== '' && isFinite(sp.responseMins)) sparts.push(lerp(Number(sp.responseMins), [[2, 10], [5, 9], [15, 7], [60, 5], [240, 3], [1440, 0]]));
+    if (sparts.length) out.support = { v: sparts.reduce(function (a, b) { return a + b; }, 0) / sparts.length, note: sp.responseMins ? 'First reply in about ' + fmtMin(Number(sp.responseMins)) : (sp.live24 === 'yes' ? '24/7 live chat' : 'No 24/7 live chat') };
+    var sc = checks(rv.security, CHECKS.security);
+    if (sc.known >= 2) out.security = { v: 10 * sc.yes / sc.known, note: sc.yes + ' of ' + sc.known + ' protections' };
+
+    var sum = 0, wsum = 0;
+    var cats = CATS.map(function (c) {
+      var x = out[c.id];
+      if (x) { sum += x.v * c.w; wsum += c.w; }
+      return { id: c.id, name: c.name, w: c.w, src: c.src, what: c.what, rated: !!x, v: x ? Math.round(x.v * 10) / 10 : null, note: x ? x.note : '' };
+    });
+    var total = wsum ? Math.round(sum / wsum * 10) : null;
+    var coverage = wsum / 100;
+    var shown = wsum >= 25 ? total : null;
+    // Under half the weight rated, a high number would overstate what we know: label it as early, not "Excellent".
+    var g = shown != null && coverage < 0.5 ? { label: 'Early score', tone: 'muted' } : grade(shown);
+    return { total: shown, coverage: coverage, provisional: coverage < 0.8, rated: cats.filter(function (c) { return c.rated; }).length, cats: cats, grade: g };
+  }
+  function fmtMin(m) {
+    if (m < 1) return 'under a minute';
+    if (m < 90) return Math.round(m) + ' min';
+    if (m < 48 * 60) return (Math.round(m / 6) / 10) + ' h';
+    return Math.round(m / 1440) + ' days';
+  }
+  return { CATS: CATS, CHECKS: CHECKS, compute: compute, grade: grade, fmtMin: fmtMin };
+})();
+    return this._scoreLib;
+  }
+  // ---- Streax Score: on-chain inputs from this page, review and player data from the server when it runs there ----
+  score(c, D) {
+    if (!c || c.dep < 1000) return null;
+    var maxDep = D.casinos[0].dep, maxW = 0;
+    D.casinos.forEach(function (x) { if (x.wal > maxW) maxW = x.wal; });
+    var lg = function (v) { return Math.log(Math.max(v, 1)) / Math.LN10; };
+    var vol = Math.max(0, Math.min(1, (lg(c.dep) - 4) / (lg(maxDep) - 4)));
+    var reach = Math.max(0, Math.min(1, lg(c.wal) / lg(maxW)));
+    var liq = Math.max(0, Math.min(1, (c.hot / c.dep) / 5));
+    var T = (this.trustSum && this.trustSum[c.slug]) || {};
+    var r = this.scoreLib().compute({ onchain: { vol01: vol, reach01: reach, cover: c.hot / c.dep }, review: T.review, complaints: T.complaints, payouts: T.payouts });
+    return { total: r.total, vol: vol * 10, reach: reach * 10, liq: liq * 10, cover: c.hot / c.dep, streax: r };
+  }
+  trustInit() {
+    var self = this;
+    if (!(this.props && this.props.$local) || typeof fetch !== 'function' || !(this.D && this.D.casinos)) return;
+    fetch('/api/trust/summary', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (!j) return;
+      var m = {};
+      Object.keys(j.reviews || {}).forEach(function (k) { (m[k] = m[k] || {}).review = j.reviews[k]; });
+      Object.keys(j.complaints || {}).forEach(function (k) { (m[k] = m[k] || {}).complaints = j.complaints[k]; });
+      Object.keys(j.payouts || {}).forEach(function (k) { (m[k] = m[k] || {}).payouts = j.payouts[k]; });
+      self.trustSum = m;
+      self.setState({ trustTick: Date.now() });
+    }).catch(function () {});
+  }
+
+  constructor(props) {
+    super(props);
+    this.D = {"idx":[["Stake.com","stakecom","$31.77M",1,"stake.com"],["Duel","duel","$16.56M",2,"duel.com"],["Roobet","roobet","$14.18M",3,"roobet.com"],["Rainbet","rainbet","$7.95M",4,"rainbet.com"],["Shuffle","shuffle","$5.71M",5,"shuffle.com"],["Gamdom","gamdom","$5.58M",6,"gamdom.com"],["1win","1win","$1.77M",7,""],["Qzino","qzino","$1.42M",8,""],["Thrill","thrill","$1.13M",9,"thrill.com"],["Toshibet","toshibet","$1.10M",10,""],["StakeUS","stakeus","$1.07M",11,"stake.us"],["Degen","degen","$1.02M",12,""],["Yeet","yeet","$937.61K",13,"yeet.com"],["Duelbits","duelbits","$810.77K",14,"duelbits.com"],["Winna","winna","$808.12K",15,"winna.com"],["Sportsbet.io","sportsbetio","$740.94K",16,"sportsbet.io"],["BC.Game","bcgame","$647.07K",17,"bc.game"],["Razed","razed","$623.24K",18,"razed.com"],["MetaWin","metawin","$545.54K",19,"metawin.com"],["BetFury","betfury","$440.60K",20,"betfury.com"],["500 Casino","500-casino","$369.58K",21,"500.casino"],["Spartans","spartans","$236.08K",22,""],["Dicey","dicey","$235.80K",23,""],["Gamba","gamba","$212.11K",24,"gamba.com"],["Bitcasino","bitcasino","$184.57K",25,"bitcasino.io"],["Solcasino","solcasino","$146.60K",26,"solcasino.io"],["Whale.io","whaleio","$122.94K",27,"whale.io"],["GOATED","goated","$108.87K",28,"goated.com"],["CoinCasino","coincasino","$102.73K",29,"coincasino.com"],["Lucky.fun","luckyfun","$79.10K",30,""],["Shock","shock","$55.94K",31,""],["Flush","flush","$53.23K",32,""],["Rollbit","rollbit","$48.69K",33,"rollbit.com"],["Acebet","acebet","$37.55K",34,""],["Bluff","bluff","$27.92K",35,""],["Chips.gg","chipsgg","$13.10K",36,"chips.gg"],["Cybet","cybet","$7.19K",37,""],["Wager.com","wagercom","$4.67K",38,""],["JackpotBet","jackpotbet","$1.47K",39,""],["Betstrike","betstrike","$10.01",40,""],["BlockBet","blockbet","$0.3244",41,""],["Cloudbet","cloudbet","$0.0907",42,"cloudbet.com"],["Moon Roll","moon-roll","$0.0011",43,""]],"capturedMs":1791795228000,"creatorsMs":1791795900000};
+    this.D.coverage = [{"slug":"stakecom","name":"Stake.com","n":15,"hot":1,"chains":["ethereum"]},{"slug":"bcgame","name":"BC.Game","n":10,"hot":8,"chains":["ethereum"]},{"slug":"bitcasino","name":"Bitcasino","n":10,"hot":2,"chains":["ethereum"]},{"slug":"duelbits","name":"Duelbits","n":5,"hot":0,"chains":["ethereum"]},{"slug":"roobet","name":"Roobet","n":3,"hot":1,"chains":["ethereum"]},{"slug":"rollbit","name":"Rollbit","n":3,"hot":2,"chains":["ethereum"]},{"slug":"betfury","name":"BetFury","n":3,"hot":1,"chains":["ethereum"]},{"slug":"gamdom","name":"Gamdom","n":2,"hot":1,"chains":["ethereum"]},{"slug":"shuffle","name":"Shuffle","n":1,"hot":0,"chains":["ethereum"]},{"slug":"cloudbet","name":"Cloudbet","n":1,"hot":1,"chains":["ethereum"]},{"slug":"duel","name":"Duel","n":1,"hot":0,"chains":["ethereum"]},{"slug":"rainbet","name":"Rainbet","n":1,"hot":0,"chains":["ethereum"]},{"slug":"yeet","name":"Yeet","n":1,"hot":0,"chains":["ethereum"]},{"slug":"goated","name":"GOATED","n":1,"hot":0,"chains":["ethereum"]},{"slug":"chipsgg","name":"Chips.gg","n":1,"hot":1,"chains":["ethereum"]},{"slug":"spartans","name":"Spartans","n":1,"hot":0,"chains":["ethereum"]}];
+    this.state = { gq: '', toast: '', modal: '', email: '', win: '24h', sort: 'inflow', wdir: 'all', wmin: 50000, conn: '', ov: null, wh: null, tk: null, err: '' };
+  }
+  componentDidMount() { var self = this; this.pull(); this.poll = setInterval(function () { self.pull(); }, 60000); }
+  componentWillUnmount() { clearInterval(this.poll); clearTimeout(this.toastTimer); clearTimeout(this.blurTimer); }
+  getJ(path) {
+    return fetch(path, { cache: 'no-store' }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status)); return j; });
+    });
+  }
+  pull(win, wmin) {
+    var self = this;
+    if (!(this.props && this.props.$local) || typeof fetch !== 'function') { if (this.state.conn !== 'none') this.setState({ conn: 'none' }); return; }
+    var w = win || this.state.win, m = wmin || this.state.wmin;
+    Promise.all([this.getJ('/api/onchain/overview?window=' + w), this.getJ('/api/onchain/whales?limit=60&min=' + m), this.getJ('/api/onchain/tokens')])
+      .then(function (r) { self.setState({ ov: r[0], wh: r[1], tk: r[2], conn: 'ok', err: '' }); })
+      .catch(function (e) { self.setState({ conn: 'down', err: String(e && e.message || e) }); });
+  }
+  ago(ts) {
+    if (!ts) return 'never';
+    var s = Math.max(0, (Date.now() - ts) / 1000);
+    if (s < 90) return 'just now';
+    if (s < 3600) return Math.round(s / 60) + ' min ago';
+    if (s < 86400 * 2) return Math.round(s / 3600) + ' h ago';
+    return Math.round(s / 86400) + ' days ago';
+  }
+  domainOf(slug) { var d = ''; (this.D.idx || []).forEach(function (c) { if (c[1] === slug) d = c[4] || c[1]; }); return d || slug; }
+  amt(v) { return v >= 1e6 ? (v / 1e6).toFixed(2) + 'M' : v >= 1e3 ? (v / 1e3).toFixed(1) + 'K' : v >= 1 ? v.toFixed(2) : v.toPrecision(3); }
+  renderVals() {
+    var self = this, st = this.state, D = this.D;
+    this.extraTitle = st.modal === 'how' ? 'How the monitor works' : st.modal === 'add' ? 'Add a casino wallet' : '';
+    this.extraSub = st.modal === 'how' ? 'What is counted, what is left out, and where every number comes from.' : st.modal === 'add' ? 'Follow one small deposit to find where a casino keeps its money.' : '';
+    this.extraW = '560px';
+    var v = this.shellVals();
+    var ov = st.ov, ok = st.conn === 'ok' && ov, stt = ok ? ov.status : null;
+    var winLabel = { '24h': '24 hours', '7d': '7 days', '30d': '30 days' }[st.win];
+    var green = '#0E7C66', orange = '#C2410C';
+
+    // status chip and notice
+    var stc, statusLine, notice = null;
+    if (st.conn === 'none') {
+      stc = { text: 'Preview', fg: '#2442D6', bg: 'rgba(47,84,235,0.06)', bd: 'rgba(47,84,235,0.25)', dot: '#2F54EB', cls: '' };
+      statusLine = D.coverage.length + ' casinos and ' + D.coverage.reduce(function (s, c) { return s + c.n; }, 0) + ' wallets are set up for tracking. Live numbers appear when Streax runs on its server.';
+      notice = { title: 'Live on-chain data needs the Streax server', body: 'This preview has no server behind it, so deposits, withdrawals, balances and whales are not filled in here. Deployed on Render, the server reads every tracked wallet every few minutes and this page fills itself.' };
+    } else if (st.conn === 'down') {
+      stc = { text: 'Offline', fg: '#B45309', bg: 'rgba(194,65,12,0.08)', bd: 'rgba(194,65,12,0.3)', dot: '#C2410C', cls: '' };
+      statusLine = 'The on-chain server did not answer: ' + st.err;
+      notice = { title: 'On-chain server not reachable', body: st.err + '. It retries every minute.' };
+    } else if (!ok) {
+      stc = { text: 'Connecting', fg: '#2442D6', bg: 'rgba(47,84,235,0.06)', bd: 'rgba(47,84,235,0.25)', dot: '#2F54EB', cls: 'pulseSky' };
+      statusLine = 'Loading on-chain data...';
+    } else {
+      var lr = stt.lastRun;
+      var fresh = lr && Date.now() - lr.at < (stt.pollMinutes * 3 + 5) * 60000;
+      stc = fresh ? { text: 'Live', fg: '#0B6B58', bg: 'rgba(14,124,102,0.08)', bd: 'rgba(14,124,102,0.3)', dot: '#0E7C66', cls: 'pulseSky' }
+        : { text: lr ? 'Delayed' : 'Starting', fg: '#B45309', bg: 'rgba(217,119,6,0.08)', bd: 'rgba(217,119,6,0.3)', dot: '#B45309', cls: '' };
+      statusLine = 'Tracking ' + ov.totals.wallets + ' wallets of ' + ov.totals.casinos + ' casinos. ' + (lr ? 'Last read ' + this.ago(lr.at) + ', every ' + stt.pollMinutes + ' min.' : 'First read is running.');
+      if (!stt.keys.etherscan) notice = { title: 'Add an Etherscan API key to start counting flows', body: 'Balances are read already. Deposits and withdrawals need a free key from etherscan.io set as ETHERSCAN_API_KEY on the server.' };
+      else if (!lr) notice = { title: 'First read in progress', body: 'The server is reading the last 48 hours of every tracked wallet. Numbers fill in over the next few minutes.' };
+    }
+
+    // KPIs
+    var t = ok ? ov.totals : null;
+    var kpis = [
+      { label: 'Deposits ' + st.win, value: t ? this.money(t.inflow) : 'Waiting', sub: t ? t.txIn.toLocaleString('en-US') + ' transfers in' : 'Into tracked casino wallets', color: t ? green : '#606C8A' },
+      { label: 'Withdrawals ' + st.win, value: t ? this.money(t.outflow) : 'Waiting', sub: t ? t.txOut.toLocaleString('en-US') + ' transfers out' : 'Paid out to players', color: t ? orange : '#606C8A' },
+      { label: 'Net flow ' + st.win, value: t ? (t.net >= 0 ? '+' : '') + this.money(t.net) : 'Waiting', sub: t ? (t.net >= 0 ? 'More came in than went out' : 'More went out than came in') : 'Deposits minus withdrawals', color: t ? (t.net >= 0 ? green : orange) : '#606C8A' },
+      { label: 'Wallet balances', value: t ? this.money(t.balance) : 'Waiting', sub: t ? t.whales24h + ' whale moves in 24h' : 'Held in tracked wallets', color: t ? '#0B1533' : '#606C8A' }
+    ];
+
+    // hourly chart
+    var hourly = ok ? ov.hourly : [];
+    var mx = 0; hourly.forEach(function (h) { mx = Math.max(mx, h.inflow, h.outflow); });
+    var n = hourly.length || 48, bw = 100 / n, inP = '', outP = '';
+    hourly.forEach(function (h, i) {
+      var x = (i * bw + bw * 0.15).toFixed(3), w = (bw * 0.7).toFixed(3);
+      if (mx > 0 && h.inflow > 0) { var hi = Math.max(0.3, h.inflow / mx * 19); inP += 'M' + x + ' ' + (20 - hi).toFixed(3) + 'h' + w + 'v' + hi.toFixed(3) + 'h-' + w + 'z'; }
+      if (mx > 0 && h.outflow > 0) { var ho = Math.max(0.3, h.outflow / mx * 19); outP += 'M' + x + ' 20h' + w + 'v' + ho.toFixed(3) + 'h-' + w + 'z'; }
+    });
+    var hh = function (ms) { return new Date(ms).toLocaleString('en-GB', { weekday: 'short', hour: '2-digit', minute: '2-digit' }); };
+    var chart = { inPath: inP || 'M0 0', outPath: outP || 'M0 0', top: mx ? this.money(mx) : '', bottom: mx ? '-' + this.money(mx) : '',
+      empty: !mx, emptyText: ok ? 'No deposits or withdrawals recorded in the last 48 hours yet.' : 'Hourly flows appear when the server is running.',
+      from: hourly.length ? hh(hourly[0].t) : '48 h ago', mid: hourly.length ? hh(hourly[Math.floor(hourly.length / 2)].t) : '24 h ago' };
+
+    // leaderboard
+    var list = ok ? ov.casinos.filter(function (c) { return c.wallets > 0; }).slice() : [];
+    var key = st.sort;
+    list.sort(function (a, b) { return key === 'net' ? b.net - a.net : (b[key] - a[key]) || (b.balance - a.balance); });
+    var maxNet = 0; list.forEach(function (c) { maxNet = Math.max(maxNet, Math.abs(c.net)); });
+    var rows = list.map(function (c, i) {
+      var f = maxNet ? Math.min(1, Math.abs(c.net) / maxNet) * 50 : 0;
+      return { rank: i + 1, name: c.name, href: 'Wallets.dc.html?c=' + c.slug, ini: self.ini(c.name), tint: self.tint(c.name), logo: self.logo(self.domainOf(c.slug), 64),
+        meta: (c.depositors ? c.depositors.toLocaleString('en-US') + ' depositors · ' : '') + (c.chains.map(function (x) { return x.name; }).join(', ') || 'No activity yet'),
+        inflow: self.money(c.inflow), outflow: self.money(c.outflow), net: (c.net >= 0 ? '+' : '') + self.money(c.net), netColor: c.net >= 0 ? green : orange,
+        barL: (c.net >= 0 ? 50 : 50 - f).toFixed(1) + '%', barW: f.toFixed(1) + '%', balance: self.money(c.balance) };
+    });
+
+    // whales
+    var wl = ok && st.wh ? st.wh.items.filter(function (w) { return st.wdir === 'all' || w.dir === st.wdir; }) : [];
+    var whales = wl.map(function (w) {
+      var inn = w.dir === 'in';
+      return { name: w.name, kind: inn ? 'deposit' : 'withdrawal', url: w.txUrl, usd: self.money(w.usd), color: inn ? green : orange, ago: self.ago(w.ts),
+        detail: self.amt(w.amount) + ' ' + w.asset + ' on ' + w.chainName + (w.cp ? ' · ' + (inn ? 'from ' : 'to ') + self.short(w.cp) : ''),
+        iconBg: inn ? 'rgba(14,124,102,0.1)' : 'rgba(194,65,12,0.1)', iconFg: inn ? green : orange, arrow: inn ? 'M12 5v14M5 12l7 7 7-7' : 'M12 19V5M5 12l7-7 7 7' };
+    });
+
+    // tokens
+    var tks = st.tk && st.tk.tokens ? st.tk.tokens : [];
+    var tokens = tks.map(function (k) {
+      var hc = k.holders != null && k.holders7d != null ? k.holders - k.holders7d : null;
+      return { sym: k.sym, name: k.name, url: k.dexUrl || k.url, ini: k.sym.slice(0, 2), tint: self.tint(k.sym), logo: self.tokLogo(k.sym),
+        price: k.price != null ? self.price(k.price) : 'n/a', ch: k.ch24 != null ? self.pct(k.ch24) : '', chColor: self.pcol(k.ch24 || 0),
+        liq: k.liquidity != null ? self.money(k.liquidity) : 'n/a', vol: k.vol24 != null ? self.money(k.vol24) : 'n/a',
+        buys: k.buys24 != null ? k.buys24.toLocaleString('en-US') : 'n/a', sells: k.sells24 != null ? k.sells24.toLocaleString('en-US') : 'n/a', sep: ' / ',
+        holders: k.holders != null ? k.holders.toLocaleString('en-US') : 'n/a', hCh: hc == null ? 'history builds daily' : (hc >= 0 ? '+' : '') + hc.toLocaleString('en-US') + ' in 7d', hColor: hc == null ? '#606C8A' : self.pcol(hc),
+        burned: k.burned7d != null ? self.amt(k.burned7d) + ' ' + k.sym : 'history builds daily',
+        treasury: k.treasury ? self.amt(k.treasury) + ' ' + k.sym : '0 ' + k.sym, treasuryUsd: k.treasuryUsd ? self.money(k.treasuryUsd) : 'in tracked wallets' };
+    });
+    if (!tokens.length) tokens = [{ sym: 'RLB', name: 'Rollbit', url: 'https://etherscan.io/token/0x046EeE2cc3188071C02BfC1745A6b17c656e3f3d' }, { sym: 'SHFL', name: 'Shuffle', url: 'https://etherscan.io/token/0x8881562783028F5c1BCB985d2283D5E170D88888' }].map(function (k) {
+      return { sym: k.sym, name: k.name, url: k.url, ini: k.sym.slice(0, 2), tint: self.tint(k.sym), logo: self.tokLogo(k.sym), price: 'Waiting', ch: '', chColor: '#606C8A', liq: 'Waiting', vol: 'Waiting', buys: '', sells: '', sep: 'Waiting', holders: 'Waiting', hCh: '', hColor: '#606C8A', burned: 'Waiting', treasury: 'Waiting', treasuryUsd: '' };
+    });
+
+    var cov = D.coverage.map(function (c) { return { name: c.name, n: c.n, href: 'Wallets.dc.html?c=' + c.slug, ini: self.ini(c.name), tint: self.tint(c.name), logo: self.logo(self.domainOf(c.slug), 64) }; });
+    var nW = D.coverage.reduce(function (s, c) { return s + c.n; }, 0);
+
+    return Object.assign(v, {
+      stc: stc, statusLine: statusLine, hasNotice: !!notice, notice: notice || { title: '', body: '' },
+      wins: this.seg([{ v: '24h', label: '24h' }, { v: '7d', label: '7d' }, { v: '30d', label: '30d' }], st.win, function (k) { if (k !== '24h' && self.locked()) { self.gate('7-day and 30-day history'); return; } self.setState({ win: k }); self.pull(k); }),
+      openHow: function () { self.setState({ modal: 'how' }); },
+      csv: function () { if (self.locked()) { self.gate('CSV downloads'); return; } location.href = '/api/onchain/export/flows.csv?window=' + st.win; },
+      kpis: kpis, chart: chart,
+      sorts: this.seg([{ v: 'inflow', label: 'Deposits' }, { v: 'outflow', label: 'Withdrawals' }, { v: 'net', label: 'Net' }, { v: 'balance', label: 'Balance' }], st.sort, function (k) { self.setState({ sort: k }); }),
+      boardSub: 'Last ' + winLabel + ', in US dollars at current prices.',
+      rows: rows, rowsEmpty: rows.length === 0,
+      rowsEmptyText: ok ? 'No tracked casino has moved funds in this window yet.' : 'The leaderboard ranks every tracked casino by deposits, withdrawals, net flow and balance once the server is running.',
+      boardFoot: 'Counts transfers into and out of each casino\'s tracked wallets. Transfers between a casino\'s own wallets are excluded. Spam tokens are ignored; only USDT, USDC, DAI, ETH, BNB, POL, TRX, SOL, BTC and the casinos\' own tokens count.',
+      wdot: ok ? 'pulse' : '', wdotColor: ok ? '#E11D48' : '#B8C3D9',
+      whaleSub: ok ? 'Updates every minute' : 'Live with the server',
+      wdirs: this.seg([{ v: 'all', label: 'All' }, { v: 'in', label: 'Deposits' }, { v: 'out', label: 'Withdrawals' }], st.wdir, function (k) { self.setState({ wdir: k }); }),
+      wmins: this.seg([{ v: 50000, label: '$50K+' }, { v: 250000, label: '$250K+' }, { v: 1000000, label: '$1M+' }], st.wmin, function (k) { self.setState({ wmin: k }); self.pull(null, k); }),
+      whales: whales, whalesEmpty: whales.length === 0,
+      whalesEmptyText: ok ? 'No transfer above ' + this.money(st.wmin) + ' recorded yet.' : 'Every deposit or withdrawal above $50K shows here within minutes, with a link to the transaction. The server can also post them to Telegram.',
+      whaleFoot: 'Click a row to open the transaction on the block explorer.',
+      tokens: tokens,
+      tokenFoot: 'Supply and burns from the token contract on Ethereum, holders from Ethplorer, liquidity and trades from DexScreener. Burn history starts the day the server starts.',
+      coverage: cov,
+      covSub: D.coverage.length + ' casinos, ' + nW + ' Ethereum wallets from Etherscan public name tags. Same-address balances on BNB Chain and Polygon are read too.',
+      covFoot: 'Tron, Solana and Bitcoin wallets are added with the wallet tool: you follow one small deposit to the casino\'s collection wallet. Addresses are public blockchain data; labels come from Etherscan or from your own deposit trace.',
+      openAdd: function () { self.setState({ modal: 'add' }); },
+      isHow: st.modal === 'how', isAdd: st.modal === 'add', canAdmin: !!(this.props && this.props.$local), noAdmin: !(this.props && this.props.$local),
+      how: [
+        { n: '1', t: 'Wallets.', b: 'Each casino\'s wallets are listed with their source. Ethereum addresses come from Etherscan public name tags such as "Stake.com" or "Roobet: Hot Wallet". More are added by tracing a deposit.' },
+        { n: '2', t: 'Deposits and withdrawals.', b: 'Every few minutes the server reads new transfers for each wallet: Etherscan for Ethereum and Polygon, TronGrid for Tron, a Solana RPC node for Solana and mempool.space for Bitcoin. Money arriving counts as a deposit, money leaving as a withdrawal.' },
+        { n: '3', t: 'Internal moves are removed.', b: 'When a casino moves money between two of its own tracked wallets, it is not counted, so flows are not doubled.' },
+        { n: '4', t: 'Only real assets count.', b: 'Hot wallets receive thousands of fake tokens. Only USDT, USDC, DAI, the native coins and the casinos\' own tokens are counted, matched by contract address, never by name.' },
+        { n: '5', t: 'Dollar values.', b: 'Stablecoins count as one dollar. Other assets use the DefiLlama price at the time the transfer is read.' },
+        { n: '6', t: 'Depositors.', b: 'The number of different addresses that sent money into a casino\'s tracked wallets. For hot wallets these are mostly the personal deposit addresses casinos give each player.' },
+        { n: '7', t: 'What it does not see.', b: 'Casinos also use wallets that are not labeled yet, so these totals are a floor, not the full picture. Deposit addresses sweep into collection wallets, so one sweep can bundle several player deposits.' }
+      ],
+      addSteps: [
+        { n: '1', t: 'Get a deposit address.', b: 'Open the casino, choose deposit, pick the coin and network (for example USDT on Tron) and copy the address it shows you.' },
+        { n: '2', t: 'Send a small deposit.', b: 'Send a small amount. Within minutes the casino sweeps it from that address into its own collection or hot wallet.' },
+        { n: '3', t: 'Trace it.', b: 'Paste the deposit address into the wallet tool. It shows where the funds went and suggests the casino wallet.' },
+        { n: '4', t: 'Add it.', b: 'Confirm the casino and save. The server starts tracking it on the next run. The tool needs the admin token set on the server.' }
+      ]
+    });
+  }
+
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,931 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Streax Studio</title>
+<link rel="icon" type="image/png" href="assets/streax-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/studio/base.css">
+<script src="/studio/markdown.js"></script>
+<script src="/studio/score.js"></script>
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.5 Geist,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accentInk)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hidden{display:none !important}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.sub{color:var(--sub)}
+.muted{color:var(--muted)}
+/* sign in */
+.gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--rootBg)}
+.gate .box{width:100%;max-width:420px;background:var(--card);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);padding:30px}
+.gate h1{margin:14px 0 6px;font-size:36px;line-height:1.05}
+/* shell */
+.app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;padding:18px 14px;border-right:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;gap:4px}
+.brand{display:flex;align-items:center;gap:10px;padding:4px 8px 16px}
+.brand img{width:32px;height:32px;border-radius:10px}
+.brand b{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:26px;line-height:1}
+.brand span{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accentInk);background:var(--accentA);padding:2px 7px;border-radius:6px}
+.navb{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;padding:0 10px;border:0;border-radius:11px;background:transparent;color:var(--sub);font-weight:500;cursor:pointer;text-align:left;text-decoration:none}
+.navb:hover{background:var(--soft);color:var(--ink)}
+.navb[aria-current=page]{background:var(--accentA);color:var(--accentInk)}
+.navb svg{flex:0 0 auto}
+.navb .count{margin-left:auto;min-width:22px;height:20px;padding:0 6px;border-radius:999px;background:var(--bad);color:#fff;font-size:11.5px;font-weight:600;display:inline-flex;align-items:center;justify-content:center}
+.navlabel{margin:14px 10px 4px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.side .foot{margin-top:auto;display:flex;flex-direction:column;gap:4px}
+.main{min-width:0;padding:22px 28px 60px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.head h1{margin:0;font-size:34px;line-height:1.05}
+.head p{margin:4px 0 0;color:var(--sub)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:0 14px;border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--ink);font-weight:500;cursor:pointer;white-space:nowrap;text-decoration:none}
+.btn:hover{border-color:var(--accentB)}
+.btn.primary{border:0;background:var(--primary);color:#fff;font-weight:600;box-shadow:0 10px 24px -14px rgba(36,66,214,.8)}
+.btn.danger{color:var(--bad)}
+.btn.good{border-color:color-mix(in srgb,var(--good) 40%,transparent);color:var(--good)}
+.btn.sm{min-height:32px;padding:0 10px;font-size:13px;border-radius:9px}
+.btn:disabled{opacity:.5;cursor:default}
+.iconbtn{width:36px;height:36px;padding:0;justify-content:center}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}
+.tabs{display:inline-flex;gap:4px;padding:4px;border-radius:13px;background:var(--soft);border:1px solid var(--line)}
+.tab{min-height:34px;padding:0 12px;border:0;border-radius:9px;background:transparent;color:var(--sub);font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.tab[aria-selected=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(16,24,64,.08)}
+.tab .n{font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted)}
+input[type=text],input[type=search],input[type=url],input[type=number],input[type=password],input[type=datetime-local],select,textarea{width:100%;min-height:42px;padding:0 12px;border-radius:11px;border:1px solid var(--border);background:var(--card);outline:none}
+textarea{padding:10px 12px;resize:vertical;line-height:1.55}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accentA)}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:12.5px;font-weight:500;color:var(--sub);min-width:0}
+label.f .hint{font-weight:400;color:var(--muted)}
+.counter{font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--muted);margin-left:auto}
+.counter.warn{color:var(--warn)}.counter.bad{color:var(--bad)}.counter.good{color:var(--good)}
+table.t{width:100%;border-collapse:collapse}
+table.t th{text-align:left;font-size:12px;font-weight:500;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--border);white-space:nowrap}
+table.t td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.t tr.click{cursor:pointer}
+table.t tr.click:hover td{background:var(--soft)}
+table.t tr:last-child td{border-bottom:0}
+.scroll{overflow-x:auto}
+.pill{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.p-good{background:var(--goodA);color:var(--good)}.p-warn{background:var(--warnA);color:var(--warn)}.p-bad{background:var(--badA);color:var(--bad)}.p-accent{background:var(--accentA);color:var(--accentInk)}.p-muted{background:var(--soft);color:var(--muted)}
+.thumb{width:64px;height:40px;border-radius:9px;object-fit:cover;background:#2442D6 url(/assets/streax-card.webp) center/cover;flex:0 0 auto;display:block}
+.empty{padding:48px 20px;text-align:center;color:var(--sub)}
+.empty h3{margin:0 0 6px;color:var(--ink);font-size:18px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100;background:var(--ink);color:var(--bg);padding:11px 16px;border-radius:12px;font-weight:500;box-shadow:0 18px 40px -16px rgba(0,0,0,.5);max-width:calc(100vw - 32px)}
+.toast.err{background:var(--bad);color:#fff}
+/* editor */
+.ed{display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:18px;align-items:start}
+.ed-main{display:flex;flex-direction:column;gap:12px;min-width:0}
+.ed-title{border:0 !important;box-shadow:none !important;background:transparent !important;padding:0 !important;font-family:'Instrument Serif',Georgia,serif;font-size:44px !important;line-height:1.08;min-height:56px !important;resize:none;overflow:hidden}
+.ed-dek{border:0 !important;box-shadow:none !important;background:transparent !important;padding:0 !important;font-size:18px;color:var(--sub);resize:none;overflow:hidden;min-height:30px !important}
+.mdbox{border:1px solid var(--border);border-radius:16px;background:var(--card);overflow:hidden}
+.mdbox:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accentA)}
+.toolbar{display:flex;gap:2px;flex-wrap:wrap;padding:6px;border-bottom:1px solid var(--line);background:var(--soft);position:sticky;top:0;z-index:5}
+.tb{min-width:34px;height:32px;padding:0 8px;border:0;border-radius:8px;background:transparent;color:var(--sub);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:13px}
+.tb:hover{background:var(--card);color:var(--ink)}
+.tbsep{width:1px;background:var(--line);margin:4px 4px}
+#body{border:0;box-shadow:none;border-radius:0;min-height:560px;font-family:'Geist Mono',ui-monospace,monospace;font-size:14px;line-height:1.75;padding:16px 18px;background:var(--card)}
+.mdfoot{display:flex;gap:14px;padding:8px 14px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);background:var(--soft)}
+.dropping{outline:2px dashed var(--accent);outline-offset:-6px}
+.panel{position:sticky;top:16px;max-height:calc(100vh - 32px);display:flex;flex-direction:column;overflow:hidden}
+.panel .ptabs{padding:10px;border-bottom:1px solid var(--line)}
+.panel .pbody{overflow:auto;padding:16px;display:flex;flex-direction:column;gap:14px}
+.preview{font-size:15.5px}
+.preview .prose{font-size:15.5px}
+.preview .prose h2{font-size:23px}
+.preview .prose .callout{font-size:14.5px}
+.preview .prose blockquote{font-size:21px}
+.preview h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:32px;line-height:1.08;margin:6px 0 8px}
+.preview .pdek{color:var(--sub);margin:0 0 14px;font-size:16px}
+.preview .pcover{width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:14px;margin-bottom:16px;display:block}
+.cover-drop{border:1.5px dashed var(--border);border-radius:14px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;color:var(--sub);cursor:pointer;position:relative;overflow:hidden;background:var(--soft)}
+.cover-drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cover-drop:hover{border-color:var(--accent)}
+.cover-actions{display:flex;gap:6px;justify-content:flex-end}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chipb{min-height:30px;padding:0 10px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--sub);font-size:12.5px;font-weight:500;cursor:pointer}
+.chipb[aria-pressed=true]{background:var(--accentA);border-color:var(--accentB);color:var(--accentInk)}
+.serp{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--card)}
+.serp .u{font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.serp .ti{font-size:18px;line-height:1.3;color:#1a0dab;margin:4px 0 3px}
+[data-theme=night] .serp .ti{color:#8ab4f8}
+.serp .de{font-size:13.5px;line-height:1.5;color:var(--body)}
+.checklist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.checklist li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.45}
+.dot{width:18px;height:18px;border-radius:50%;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;margin-top:1px}
+.dot.ok{background:var(--good)}.dot.no{background:var(--warn)}
+.meter{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;border-radius:999px}
+.savebar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 12px;border-radius:14px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);position:sticky;top:10px;z-index:20;margin-bottom:14px}
+.state{font-size:12.5px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.state.dirty{color:var(--warn)}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px}
+.switch input{width:38px;height:22px;appearance:none;-webkit-appearance:none;border-radius:999px;background:var(--line);position:relative;cursor:pointer;flex:0 0 auto;transition:background .15s}
+.switch input::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .15s}
+.switch input:checked{background:var(--accent)}
+.switch input:checked::after{left:19px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* complaints */
+.split{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:18px;align-items:start}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.fact{padding:10px 12px;border-radius:12px;background:var(--soft);border:1px solid var(--line)}
+.fact span{display:block;font-size:11.5px;color:var(--muted)}
+.fact b{font-weight:600;font-size:14px;word-break:break-word}
+.thread{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ev{padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--card)}
+.ev.casino{border-color:var(--accentB);background:var(--accentA)}
+.ev.streax{background:var(--soft)}
+.ev.priv{border-style:dashed;border-color:var(--warn)}
+.evh{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--muted)}
+.evh b{color:var(--ink)}
+.ev p{margin:6px 0 0;white-space:pre-wrap;line-height:1.55}
+.linkbox{display:flex;gap:6px}
+.linkbox input{font-family:'Geist Mono',monospace;font-size:12px}
+/* reviews */
+.seg{display:inline-flex;border:1px solid var(--border);border-radius:9px;overflow:hidden;flex:0 0 auto}
+.seg button{min-height:30px;padding:0 10px;border:0;border-left:1px solid var(--border);background:var(--card);font-size:12.5px;font-weight:500;color:var(--sub);cursor:pointer}
+.seg button:first-child{border-left:0}
+.seg button[aria-pressed=true].y{background:var(--goodA);color:var(--good)}
+.seg button[aria-pressed=true].n{background:var(--badA);color:var(--bad)}
+.seg button[aria-pressed=true].u{background:var(--soft);color:var(--ink)}
+.checkrow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}
+.checkrow:last-child{border-bottom:0}
+.grp h3{margin:0 0 4px;font-size:16px}
+.grp{padding:18px}
+.scorebig{font-family:'Geist Mono',monospace;font-size:44px;font-weight:500;letter-spacing:-.02em;line-height:1}
+.catrow{display:grid;grid-template-columns:minmax(0,1fr) 90px 44px;gap:10px;align-items:center;font-size:13px;padding:6px 0}
+.mobile-top{display:none}
+@media (max-width:1180px){.ed{grid-template-columns:minmax(0,1fr)}.panel{position:static;max-height:none}.split{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:860px){.app{grid-template-columns:minmax(0,1fr)}.side{display:none}.side.open{display:flex;position:fixed;inset:0;z-index:60;height:100%;width:280px;box-shadow:0 0 0 100vmax rgba(0,0,0,.4)}.mobile-top{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:0;z-index:30}.main{padding:16px 16px 60px}.head h1{font-size:28px}.ed-title{font-size:34px !important}.grid2{grid-template-columns:1fr}.hide-s{display:none}}
+</style>
+</head>
+<body>
+<div id="gate" class="gate hidden">
+  <form class="box" id="gate-form" autocomplete="off">
+    <div class="row" style="gap:10px"><img src="assets/streax-logo.webp" alt="" width="36" height="36" style="border-radius:11px"><span class="serif" style="font-size:28px">Streax</span></div>
+    <h1 class="serif">Studio</h1>
+    <p class="sub" style="margin:0 0 18px">Write articles, check complaints, verify payout reports and review casinos.</p>
+    <label class="f">Admin token<input id="gate-token" type="password" required placeholder="The ADMIN_TOKEN value from your server" autocomplete="current-password"></label>
+    <p id="gate-err" class="hidden" role="alert" style="color:var(--bad);font-size:13.5px;margin:10px 0 0"></p>
+    <button class="btn primary" type="submit" style="width:100%;margin-top:14px;min-height:46px">Open the Studio</button>
+    <p class="muted" style="font-size:12.5px;margin:14px 0 0">The token stays in this browser tab only. Close the tab to sign out.</p>
+  </form>
+</div>
+
+<div id="app" class="app hidden">
+  <aside class="side" id="side" aria-label="Studio">
+    <div class="brand"><img src="assets/streax-logo.webp" alt=""><b>Streax</b><span>Studio</span></div>
+    <button class="navb" data-go="articles"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>Articles</button>
+    <button class="navb" data-go="complaints"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M12 8v3M12 13.5v.01"/></svg>Complaints<span class="count hidden" id="n-complaints"></span></button>
+    <button class="navb" data-go="payouts"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>Payout reports<span class="count hidden" id="n-payouts"></span></button>
+    <button class="navb" data-go="reviews"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/></svg>Casino reviews</button>
+    <div class="navlabel">More tools</div>
+    <a class="navb" href="/onchain-admin.html"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 4.5a3.5 3.5 0 0 1 0 7M18 14c2 .8 3 2.6 3 6"/></svg>Members, codes and wallets</a>
+    <a class="navb" href="/articles" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5H5V6h5"/></svg>View the site</a>
+    <div class="foot">
+      <button class="navb" id="theme"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg><span>Night mode</span></button>
+      <button class="navb" id="signout"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></svg>Sign out</button>
+    </div>
+  </aside>
+  <div style="min-width:0">
+    <div class="mobile-top"><button class="btn iconbtn" id="menu" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><b class="serif" style="font-size:22px">Streax Studio</b></div>
+    <main class="main" id="view" tabindex="-1"></main>
+  </div>
+</div>
+<div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+  var TOKEN = '';
+  try { TOKEN = sessionStorage.getItem('sx_admin') || ''; } catch (e) {}
+  var META = { categories: [], casinos: [], base: '' };
+  var TRUST = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var view = $('view');
+
+  // ---------- tiny DOM helper: text is always set as text, never parsed as HTML ----------
+  function el(tag, attrs) {
+    var n = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) {
+      var v = attrs[k];
+      if (v == null || v === false) return;
+      if (k === 'class') n.className = v;
+      else if (k === 'text') n.textContent = v;
+      else if (k === 'html') n.innerHTML = v; // only used with our own SVG/markdown output
+      else if (k.slice(0, 2) === 'on') n.addEventListener(k.slice(2), v);
+      else if (k === 'style') n.setAttribute('style', v);
+      else if (k in n && typeof v !== 'string') n[k] = v;
+      else n.setAttribute(k, v === true ? '' : v);
+    });
+    for (var i = 2; i < arguments.length; i++) add(n, arguments[i]);
+    return n;
+  }
+  function add(n, c) {
+    if (c == null || c === false) return;
+    if (Array.isArray(c)) { c.forEach(function (x) { add(n, x); }); return; }
+    n.appendChild(typeof c === 'string' || typeof c === 'number' ? document.createTextNode(String(c)) : c);
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); return n; }
+  var toastT;
+  function toast(msg, err) {
+    var t = $('toast'); t.textContent = msg; t.className = 'toast' + (err ? ' err' : '');
+    clearTimeout(toastT); toastT = setTimeout(function () { t.className = 'toast hidden'; }, err ? 5200 : 2800);
+  }
+  function api(method, path, body, raw) {
+    var opts = { method: method, headers: { 'x-admin-token': TOKEN }, cache: 'no-store' };
+    if (raw) { opts.body = raw; opts.headers['content-type'] = raw.type || 'application/octet-stream'; }
+    else if (body !== undefined) { opts.body = JSON.stringify(body); opts.headers['content-type'] = 'application/json'; }
+    return fetch(path, opts).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (r.status === 401) { signOut(); throw new Error('The admin token was not accepted'); }
+        if (!r.ok) { var e = new Error(j.error || ('HTTP ' + r.status)); e.status = r.status; throw e; }
+        return j;
+      });
+    });
+  }
+  function fmtDate(ms, time) {
+    if (!ms) return '';
+    var d = new Date(ms);
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: d.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined }) + (time ? ' ' + d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) : '');
+  }
+  function ago(ms) {
+    var s = (Date.now() - ms) / 1000;
+    if (s < 60) return 'just now';
+    if (s < 3600) return Math.round(s / 60) + ' min ago';
+    if (s < 86400) return Math.round(s / 3600) + ' h ago';
+    return Math.round(s / 86400) + ' days ago';
+  }
+  function money(v) { return v == null ? '' : '$' + Number(v).toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+  function pill(text, tone) { return el('span', { class: 'pill p-' + tone, text: text }); }
+  function casinoName(slug) { var c = META.casinos.find(function (x) { return x.slug === slug; }); return c ? c.name : slug; }
+
+  // ---------- theme ----------
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('sx_studio_theme', t); } catch (e) {}
+    var b = $('theme').querySelector('span'); if (b) b.textContent = t === 'night' ? 'Light mode' : 'Night mode';
+  }
+  var saved = null; try { saved = localStorage.getItem('sx_studio_theme'); } catch (e) {}
+  setTheme(saved || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'light'));
+  $('theme').onclick = function () { setTheme(document.documentElement.getAttribute('data-theme') === 'night' ? 'light' : 'night'); };
+  $('menu').onclick = function () { $('side').classList.add('open'); };
+  $('side').addEventListener('click', function (e) { if (e.target.closest('.navb')) $('side').classList.remove('open'); });
+
+  // ---------- sign in ----------
+  function signOut() { TOKEN = ''; try { sessionStorage.removeItem('sx_admin'); } catch (e) {} $('app').classList.add('hidden'); $('gate').classList.remove('hidden'); }
+  $('signout').onclick = signOut;
+  $('gate-form').onsubmit = function (e) {
+    e.preventDefault();
+    TOKEN = $('gate-token').value.trim();
+    boot().catch(function (err) { $('gate-err').textContent = err.message; $('gate-err').classList.remove('hidden'); });
+  };
+  function boot() {
+    return Promise.all([api('GET', '/api/studio/meta'), api('GET', '/api/studio/trust').catch(function () { return null; })]).then(function (r) {
+      META = r[0]; TRUST = r[1];
+      try { sessionStorage.setItem('sx_admin', TOKEN); } catch (e) {}
+      $('gate').classList.add('hidden'); $('app').classList.remove('hidden');
+      badges();
+      route();
+    });
+  }
+  function badges() {
+    if (!TRUST) return;
+    var a = $('n-complaints'), b = $('n-payouts');
+    a.textContent = TRUST.pending; a.classList.toggle('hidden', !TRUST.pending);
+    b.textContent = TRUST.payoutsPending; b.classList.toggle('hidden', !TRUST.payoutsPending);
+  }
+  function refreshBadges() { api('GET', '/api/studio/trust').then(function (t) { TRUST = t; badges(); }).catch(function () {}); }
+
+  // ---------- routing (hash) ----------
+  var leaveGuard = null;
+  document.querySelectorAll('[data-go]').forEach(function (b) { b.onclick = function () { location.hash = '#/' + b.getAttribute('data-go'); }; });
+  window.addEventListener('hashchange', function () {
+    if (leaveGuard && !leaveGuard()) { history.back(); return; }
+    route();
+  });
+  window.addEventListener('beforeunload', function (e) { if (leaveGuard && !leaveGuard(true)) { e.preventDefault(); e.returnValue = ''; } });
+  function route() {
+    leaveGuard = null;
+    var h = (location.hash || '#/articles').slice(2).split('/');
+    document.querySelectorAll('[data-go]').forEach(function (b) { b.setAttribute('aria-current', b.getAttribute('data-go') === h[0] ? 'page' : 'false'); });
+    clear(view);
+    window.scrollTo(0, 0);
+    if (h[0] === 'articles' && h[1]) return editor(h[1] === 'new' ? null : Number(h[1]));
+    if (h[0] === 'complaints' && h[1]) return complaint(Number(h[1]));
+    if (h[0] === 'complaints') return complaints(h[1]);
+    if (h[0] === 'payouts') return payouts();
+    if (h[0] === 'reviews' && h[1]) return review(h[1]);
+    if (h[0] === 'reviews') return reviews();
+    return articles();
+  }
+
+  // =====================================================================
+  // ARTICLES LIST
+  // =====================================================================
+  var artFilter = 'all', artQuery = '';
+  function articles() {
+    var head = el('div', { class: 'head' },
+      el('div', null, el('h1', { class: 'serif', text: 'Articles' }), el('p', { text: 'Write, schedule and publish. Published articles get their own page, a sitemap entry and an RSS item.' })),
+      el('a', { class: 'btn primary', href: '#/articles/new' }, el('span', { html: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>' }), 'New article'));
+    var tabsBox = el('div', { class: 'tabs', role: 'tablist', 'aria-label': 'Filter articles' });
+    var search = el('input', { type: 'search', placeholder: 'Search titles', 'aria-label': 'Search articles', value: artQuery, style: 'max-width:280px' });
+    var box = el('div', { class: 'card' }, el('div', { class: 'empty', text: 'Loading...' }));
+    add(view, [head, el('div', { class: 'row', style: 'justify-content:space-between;margin-bottom:12px' }, tabsBox, search), box]);
+    api('GET', '/api/studio/articles').then(function (j) {
+      var list = j.articles;
+      var now = Date.now();
+      var kind = function (a) { return a.status !== 'published' ? 'draft' : a.published_at > now ? 'scheduled' : 'published'; };
+      function draw() {
+        clear(tabsBox);
+        [['all', 'All'], ['published', 'Published'], ['draft', 'Drafts'], ['scheduled', 'Scheduled']].forEach(function (t) {
+          var n = t[0] === 'all' ? list.length : list.filter(function (a) { return kind(a) === t[0]; }).length;
+          add(tabsBox, el('button', { class: 'tab', role: 'tab', 'aria-selected': String(artFilter === t[0]), onclick: function () { artFilter = t[0]; draw(); } }, t[1], el('span', { class: 'n', text: String(n) })));
+        });
+        var q = artQuery.trim().toLowerCase();
+        var rows = list.filter(function (a) { return (artFilter === 'all' || kind(a) === artFilter) && (!q || a.title.toLowerCase().indexOf(q) !== -1); });
+        clear(box);
+        if (!rows.length) {
+          add(box, el('div', { class: 'empty' }, el('h3', { text: list.length ? 'No articles match' : 'No articles yet' }), el('p', { text: list.length ? 'Try another filter or search.' : 'Write your first article. It goes live at /articles when you publish.' }), list.length ? null : el('a', { class: 'btn primary', href: '#/articles/new', style: 'margin-top:10px' }, 'New article')));
+          return;
+        }
+        var tb = el('tbody');
+        rows.forEach(function (a) {
+          var k = kind(a);
+          var cat = (META.categories.find(function (c) { return c.id === a.category; }) || {}).name || a.category;
+          add(tb, el('tr', { class: 'click', onclick: function () { location.hash = '#/articles/' + a.id; } },
+            el('td', null, el('div', { class: 'row', style: 'gap:12px;flex-wrap:nowrap' }, a.cover ? el('img', { class: 'thumb', src: a.cover, alt: '' }) : el('span', { class: 'thumb' }),
+              el('div', { style: 'min-width:0' }, el('div', { style: 'font-weight:600;line-height:1.35', text: a.title }), el('div', { class: 'mono muted', style: 'font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:420px', text: '/articles/' + a.slug })))),
+            el('td', { class: 'hide-s', text: cat }),
+            el('td', null, k === 'published' ? pill('Published', 'good') : k === 'scheduled' ? pill('Scheduled', 'accent') : pill('Draft', 'muted')),
+            el('td', { class: 'hide-s muted', text: k === 'draft' ? 'Edited ' + ago(a.updated) : fmtDate(a.published_at, k === 'scheduled') }),
+            el('td', { class: 'hide-s mono', style: 'text-align:right', text: k === 'published' ? Number(a.views || 0).toLocaleString('en-US') : '' })));
+        });
+        add(box, el('div', { class: 'scroll' }, el('table', { class: 't' }, el('thead', null, el('tr', null, el('th', { text: 'Article' }), el('th', { class: 'hide-s', text: 'Category' }), el('th', { text: 'Status' }), el('th', { class: 'hide-s', text: 'Date' }), el('th', { class: 'hide-s', style: 'text-align:right', text: 'Views' }))), tb)));
+      }
+      search.oninput = function () { artQuery = search.value; draw(); };
+      draw();
+    }).catch(function (e) { clear(box); add(box, el('div', { class: 'empty', text: e.message })); });
+  }
+
+  // =====================================================================
+  // ARTICLE EDITOR
+  // =====================================================================
+  var ICON = {
+    h2: 'H2', h3: 'H3',
+    b: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 5h6a3.5 3.5 0 0 1 0 7H7zM7 12h7a3.5 3.5 0 0 1 0 7H7z"/></svg>',
+    i: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M14 5h-4M14 19h-4M14 5l-4 14"/></svg>',
+    link: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7L11.5 7"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1.4-1.4"/></svg>',
+    img: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/></svg>',
+    ul: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4.5 6h.01M4.5 12h.01M4.5 18h.01"/></svg>',
+    ol: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M10 6h10M10 12h10M10 18h10M4 5h1.5v4M4 9h3M4 15.5c0-1 2.5-1 2.5 0S4 17 4 18.5h3"/></svg>',
+    quote: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 11c0-3 2-5 5-5v2c-1.7 0-3 1.3-3 3h3v6H5zm9 0c0-3 2-5 5-5v2c-1.7 0-3 1.3-3 3h3v6h-5z"/></svg>',
+    note: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v.01M11 12h1v5h1"/></svg>',
+    table: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M10 4v16"/></svg>',
+    hr: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 12h16"/></svg>'
+  };
+  function blank() {
+    return { id: 0, title: '', dek: '', body: '', slug: '', cover: '', cover_alt: '', category: 'news', tags: '', author: 'Streax Research', author_role: '', featured: 0, seo_title: '', seo_desc: '', keyword: '', casinos: '', status: 'draft', published_at: null };
+  }
+  function editor(id) {
+    var A = blank(), saved = '', slugTouched = false;
+    var snapshot = function () { return JSON.stringify([A.title, A.dek, A.body, A.slug, A.cover, A.cover_alt, A.category, A.tags, A.author, A.author_role, A.featured, A.seo_title, A.seo_desc, A.keyword, A.casinos, A.published_at]); };
+    var dirty = function () { return snapshot() !== saved; };
+    leaveGuard = function (quiet) { return !dirty() || (!quiet && confirm('You have unsaved changes. Leave without saving?')); };
+
+    var stateEl = el('span', { class: 'state' });
+    var publishBtn = el('button', { class: 'btn primary', type: 'button' });
+    var saveBtn = el('button', { class: 'btn', type: 'button', text: 'Save draft' });
+    var viewBtn = el('a', { class: 'btn', target: '_blank', rel: 'noopener' }, 'Preview');
+    var moreBox = el('div', { class: 'row', style: 'gap:6px' });
+    var bar = el('div', { class: 'savebar' },
+      el('a', { class: 'btn iconbtn', href: '#/articles', 'aria-label': 'Back to articles', html: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>' }),
+      el('div', { style: 'flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap' }, el('span', { id: 'st-pill' }), stateEl),
+      moreBox, viewBtn, saveBtn, publishBtn);
+
+    var title = el('textarea', { class: 'ed-title', rows: 1, placeholder: 'Article title', 'aria-label': 'Title', maxlength: 140 });
+    var dek = el('textarea', { class: 'ed-dek', rows: 1, placeholder: 'A one or two sentence summary readers see under the title', 'aria-label': 'Summary', maxlength: 300 });
+    var body = el('textarea', { id: 'body', placeholder: 'Write in Markdown.\n\n## A section heading\n\nA paragraph with **bold**, *italic* and a [link](https://example.com).\n\n- A list item\n\n> [!TIP]\n> A highlighted tip box.', 'aria-label': 'Article text', spellcheck: 'true' });
+    var fileIn = el('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp,image/gif', class: 'hidden' });
+    var words = el('span'), readT = el('span'), headsT = el('span');
+    function tool(key, label, fn) { return el('button', { type: 'button', class: 'tb', title: label, 'aria-label': label, html: ICON[key].length < 4 ? ICON[key] : ICON[key], onclick: fn }); }
+    var toolbar = el('div', { class: 'toolbar', role: 'toolbar', 'aria-label': 'Formatting' },
+      tool('h2', 'Section heading', function () { linePrefix('## '); }), tool('h3', 'Sub heading', function () { linePrefix('### '); }),
+      el('span', { class: 'tbsep' }), tool('b', 'Bold', function () { wrap('**', '**', 'bold text'); }), tool('i', 'Italic', function () { wrap('*', '*', 'italic text'); }), tool('link', 'Link', insertLink),
+      el('span', { class: 'tbsep' }), tool('ul', 'Bullet list', function () { linePrefix('- '); }), tool('ol', 'Numbered list', function () { linePrefix('1. '); }), tool('quote', 'Quote', function () { linePrefix('> '); }),
+      tool('note', 'Tip box', function () { insertBlock('> [!TIP]\n> Your tip here.'); }), tool('table', 'Table', function () { insertBlock('| Column | Column |\n|---|---|\n| Value | Value |'); }), tool('hr', 'Divider', function () { insertBlock('---'); }),
+      el('span', { class: 'tbsep' }), tool('img', 'Upload an image', function () { fileIn.click(); }));
+    var mdbox = el('div', { class: 'mdbox' }, toolbar, body, el('div', { class: 'mdfoot' }, words, readT, headsT, el('span', { style: 'margin-left:auto', text: 'Drop or paste images to upload · Ctrl+S saves' })));
+
+    // right panel
+    var pbody = el('div', { class: 'pbody' });
+    var ptabs = el('div', { class: 'tabs', role: 'tablist', 'aria-label': 'Panel' });
+    var panelTab = 'settings';
+    var panel = el('div', { class: 'card panel' }, el('div', { class: 'ptabs' }, ptabs), pbody);
+
+    add(view, [bar, el('div', { class: 'ed' }, el('div', { class: 'ed-main' }, title, dek, mdbox, fileIn), panel)]);
+
+    function grow(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; }
+    function sel() { return { s: body.selectionStart, e: body.selectionEnd, v: body.value }; }
+    function setBody(v, s, e) { body.value = v; A.body = v; body.focus(); body.setSelectionRange(s, e); changed(); }
+    function wrap(a, b, ph) { var x = sel(); var mid = x.v.slice(x.s, x.e) || ph; setBody(x.v.slice(0, x.s) + a + mid + b + x.v.slice(x.e), x.s + a.length, x.s + a.length + mid.length); }
+    function linePrefix(p) {
+      var x = sel(); var ls = x.v.lastIndexOf('\n', x.s - 1) + 1; var le = x.v.indexOf('\n', x.e); if (le < 0) le = x.v.length;
+      var block = x.v.slice(ls, le).split('\n').map(function (l, i) { return (p === '1. ' ? (i + 1) + '. ' : p) + l.replace(/^(#{1,4}\s+|[-*+]\s+|\d+\.\s+|>\s?)/, ''); }).join('\n');
+      setBody(x.v.slice(0, ls) + block + x.v.slice(le), ls, ls + block.length);
+    }
+    function insertBlock(t) { var x = sel(); var pre = x.v.slice(0, x.s).replace(/\n*$/, ''); var ins = (pre ? '\n\n' : '') + t + '\n\n'; setBody(pre + ins + x.v.slice(x.e).replace(/^\n*/, ''), pre.length + ins.length, pre.length + ins.length); }
+    function insertLink() { var x = sel(); var txt = x.v.slice(x.s, x.e) || 'link text'; var u = prompt('Link address (https://... or a Streax page like /Rankings.dc.html)', 'https://'); if (!u || u === 'https://') return; setBody(x.v.slice(0, x.s) + '[' + txt + '](' + u.trim() + ')' + x.v.slice(x.e), x.s + 1, x.s + 1 + txt.length); }
+    // Photos are made web-ready before upload: at most 1600 px wide, WebP at quality 95. Readers on phones then load
+    // a few hundred KB instead of a multi-megabyte camera file. GIFs (may be animated) and small images go up as they are.
+    function webReady(file) {
+      if (!/^image\/(png|jpeg|webp)$/.test(file.type) || typeof createImageBitmap !== 'function') return Promise.resolve(file);
+      return createImageBitmap(file).then(function (bmp) {
+        var max = 1600, w = bmp.width, h = bmp.height;
+        if (w <= max && file.size < 400 * 1024 && file.type === 'image/webp') { bmp.close && bmp.close(); return file; }
+        var k = Math.min(1, max / w), cw = Math.round(w * k), ch = Math.round(h * k);
+        var c = document.createElement('canvas'); c.width = cw; c.height = ch;
+        var g = c.getContext('2d'); g.imageSmoothingQuality = 'high'; g.drawImage(bmp, 0, 0, cw, ch); bmp.close && bmp.close();
+        return new Promise(function (res) { c.toBlob(function (b) { res(b && b.type === 'image/webp' && b.size < file.size ? b : file); }, 'image/webp', 0.95); });
+      }).catch(function () { return file; });
+    }
+    function upload(file) {
+      if (!file) return Promise.reject(new Error('No file'));
+      if (file.size > 25 * 1048576) { toast('Images must be under 25 MB', true); return Promise.reject(new Error('too big')); }
+      toast('Preparing ' + (file.name || 'image') + '...');
+      return webReady(file).then(function (ready) {
+        if (ready.size > 6 * 1048576) { toast('That image is still over 6 MB after resizing. Try a smaller one.', true); throw new Error('too big'); }
+        toast('Uploading ' + (file.name || 'image') + '...');
+        return api('POST', '/api/studio/upload', undefined, ready);
+      }).then(function (j) { toast('Image uploaded'); return j.url; }).catch(function (e) { if (e.message !== 'too big') toast(e.message, true); throw e; });
+    }
+    function uploadInline(file) {
+      upload(file).then(function (u) {
+        var alt = (file.name || 'image').replace(/\.[a-z]+$/i, '').replace(/[-_]+/g, ' ');
+        insertBlock('![' + alt + '](' + u + ' "Caption, or delete this")');
+      }).catch(function () {});
+    }
+    fileIn.onchange = function () { if (fileIn.files[0]) uploadInline(fileIn.files[0]); fileIn.value = ''; };
+    body.addEventListener('dragover', function (e) { e.preventDefault(); mdbox.classList.add('dropping'); });
+    body.addEventListener('dragleave', function () { mdbox.classList.remove('dropping'); });
+    body.addEventListener('drop', function (e) { e.preventDefault(); mdbox.classList.remove('dropping'); var f = e.dataTransfer.files && e.dataTransfer.files[0]; if (f && /^image\//.test(f.type)) uploadInline(f); });
+    body.addEventListener('paste', function (e) { var it = e.clipboardData && Array.from(e.clipboardData.items || []).find(function (i) { return /^image\//.test(i.type); }); if (it) { e.preventDefault(); uploadInline(it.getAsFile()); } });
+    body.addEventListener('keydown', function (e) {
+      if (e.key === 'Tab') { e.preventDefault(); var x = sel(); setBody(x.v.slice(0, x.s) + '  ' + x.v.slice(x.e), x.s + 2, x.s + 2); }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'b') { e.preventDefault(); wrap('**', '**', 'bold text'); }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'i') { e.preventDefault(); wrap('*', '*', 'italic text'); }
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); insertLink(); }
+    });
+    function onKey(e) { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); } }
+    document.addEventListener('keydown', onKey);
+    var prevGuard = leaveGuard;
+    leaveGuard = function (quiet) { var ok = prevGuard(quiet); if (ok && !quiet) document.removeEventListener('keydown', onKey); return ok; };
+
+    title.oninput = function () { A.title = title.value.replace(/\n/g, ' '); if (!slugTouched && !A.id) A.slug = ''; grow(title); changed(); };
+    dek.oninput = function () { A.dek = dek.value.replace(/\n/g, ' '); grow(dek); changed(); };
+    var renderTimer;
+    body.oninput = function () { A.body = body.value; changed(); };
+
+    function md() { return StreaxMarkdown.render(A.body || ''); }
+    function changed() {
+      var r = md();
+      words.textContent = r.words.toLocaleString('en-US') + ' words';
+      readT.textContent = r.minutes + ' min read';
+      headsT.textContent = r.toc.length + ' headings';
+      stateEl.className = 'state' + (dirty() ? ' dirty' : '');
+      stateEl.textContent = dirty() ? 'Unsaved changes' : (A.id ? 'Saved ' + ago(A.updated || Date.now()) : 'Not saved yet');
+      clearTimeout(renderTimer);
+      renderTimer = setTimeout(drawPanel, panelTab === 'preview' ? 120 : 0);
+    }
+    function statusPill() {
+      var box = $('st-pill'); clear(box);
+      if (!A.id) add(box, pill('New draft', 'muted'));
+      else if (A.status !== 'published') add(box, pill('Draft', 'muted'));
+      else if (A.published_at > Date.now()) add(box, pill('Scheduled for ' + fmtDate(A.published_at, true), 'accent'));
+      else add(box, pill('Published', 'good'));
+      publishBtn.textContent = A.status === 'published' ? 'Update' : (A.published_at && A.published_at > Date.now() ? 'Schedule' : 'Publish');
+      saveBtn.textContent = A.status === 'published' ? 'Save' : 'Save draft';
+      saveBtn.classList.toggle('hidden', A.status === 'published');
+      viewBtn.textContent = A.status === 'published' && A.published_at <= Date.now() ? 'View live' : 'Preview';
+      viewBtn.href = A.id ? (A.status === 'published' && A.published_at <= Date.now() ? A.url : A.previewUrl) : '#';
+      viewBtn.classList.toggle('hidden', !A.id);
+      clear(moreBox);
+      if (A.id && A.status === 'published') add(moreBox, el('button', { class: 'btn', type: 'button', text: 'Unpublish', onclick: function () { if (confirm('Unpublish this article? Its page will show 404 until you publish it again.')) save('draft'); } }));
+      if (A.id) add(moreBox, el('button', { class: 'btn danger iconbtn', type: 'button', title: 'Delete article', 'aria-label': 'Delete article', html: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>', onclick: del }));
+    }
+    function payload(status) {
+      var p = { title: A.title, dek: A.dek, body: A.body, cover: A.cover, cover_alt: A.cover_alt, category: A.category, tags: A.tags, author: A.author, author_role: A.author_role, featured: !!A.featured, seo_title: A.seo_title, seo_desc: A.seo_desc, keyword: A.keyword, casinos: A.casinos, published_at: A.published_at };
+      if (A.slug) p.slug = A.slug;
+      if (status) p.status = status;
+      return p;
+    }
+    var busy = false;
+    function save(status) {
+      if (busy) return;
+      if (!A.title.trim()) { toast('Add a title first', true); title.focus(); return; }
+      if (status === 'published' && A.status !== 'published') {
+        var issues = seoChecks().filter(function (c) { return !c.ok && c.must; });
+        if (issues.length && !confirm('Before you publish:\n\n' + issues.map(function (c) { return '- ' + c.label; }).join('\n') + '\n\nPublish anyway?')) return;
+      }
+      busy = true; publishBtn.disabled = saveBtn.disabled = true;
+      var req = A.id ? api('POST', '/api/studio/articles/' + A.id, payload(status)) : api('POST', '/api/studio/articles', payload(status || 'draft'));
+      req.then(function (j) {
+        var wasNew = !A.id;
+        load(j.article);
+        toast(status === 'published' ? (A.published_at > Date.now() ? 'Scheduled' : 'Published. It is live at /articles/' + A.slug) : status === 'draft' && j.article.status === 'draft' && wasNew === false ? 'Saved as draft' : 'Saved');
+        if (wasNew) history.replaceState(null, '', '#/articles/' + A.id);
+      }).catch(function (e) { toast(e.message, true); }).finally(function () { busy = false; publishBtn.disabled = saveBtn.disabled = false; });
+    }
+    saveBtn.onclick = function () { save(); };
+    publishBtn.onclick = function () { save('published'); };
+    function del() {
+      if (!confirm('Delete "' + A.title + '" for good? This cannot be undone.')) return;
+      api('DELETE', '/api/studio/articles/' + A.id).then(function () { saved = snapshot(); toast('Article deleted'); location.hash = '#/articles'; }).catch(function (e) { toast(e.message, true); });
+    }
+    function load(a) {
+      A = Object.assign(blank(), a);
+      ['dek', 'body', 'cover', 'cover_alt', 'tags', 'author', 'author_role', 'seo_title', 'seo_desc', 'keyword', 'casinos'].forEach(function (k) { if (A[k] == null) A[k] = ''; });
+      title.value = A.title; dek.value = A.dek; body.value = A.body;
+      saved = snapshot(); slugTouched = !!A.id;
+      grow(title); grow(dek); statusPill(); changed();
+    }
+
+    // ---------- panel ----------
+    function seoChecks() {
+      var r = md(), kw = (A.keyword || '').trim().toLowerCase();
+      var st = (A.seo_title || A.title || ''), sd = (A.seo_desc || A.dek || '');
+      var firstPara = (A.body || '').split(/\n\s*\n/).find(function (p) { return p.trim() && !/^\s*(#|>|!|\||-|\d+\.)/.test(p); }) || '';
+      var internal = /\]\((\/|[A-Za-z]+\.dc\.html)/.test(A.body || '');
+      var imgs = (A.body.match(/!\[[^\]]*\]\(/g) || []).length, alts = (A.body.match(/!\[\s*\]\(/g) || []).length;
+      var list = [
+        { label: 'Title is 30 to 65 characters (' + st.length + ')', ok: st.length >= 30 && st.length <= 65, must: false },
+        { label: 'Meta description is 110 to 160 characters (' + sd.length + ')', ok: sd.length >= 110 && sd.length <= 160, must: true },
+        { label: 'Cover image with alt text', ok: !!A.cover && !!A.cover_alt, must: true },
+        { label: 'At least 300 words (' + r.words + ')', ok: r.words >= 300, must: true },
+        { label: 'Two or more section headings', ok: r.toc.length >= 2, must: false },
+        { label: 'Links to another Streax page', ok: internal, must: false },
+        { label: 'Every image has alt text', ok: alts === 0, must: imgs > 0 }
+      ];
+      if (kw) {
+        list.push({ label: 'Focus keyword in the title', ok: st.toLowerCase().indexOf(kw) !== -1, must: false });
+        list.push({ label: 'Focus keyword in the description', ok: sd.toLowerCase().indexOf(kw) !== -1, must: false });
+        list.push({ label: 'Focus keyword in the first paragraph', ok: firstPara.toLowerCase().indexOf(kw) !== -1, must: false });
+        list.push({ label: 'Focus keyword in the address', ok: (A.slug || slugify(A.title)).indexOf(slugify(kw)) !== -1, must: false });
+      } else list.push({ label: 'Set a focus keyword to check its use', ok: false, must: false });
+      return list;
+    }
+    function slugify(s) { return String(s || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 80); }
+    function counter(n, lo, hi) { return el('span', { class: 'counter ' + (n === 0 ? '' : n < lo ? 'warn' : n > hi ? 'bad' : 'good'), text: n + ' / ' + hi }); }
+    function field(label, input, extra) { return el('label', { class: 'f' }, el('span', { class: 'row', style: 'gap:6px' }, label, extra || null), input); }
+    function drawPanel() {
+      clear(ptabs);
+      [['settings', 'Settings'], ['seo', 'SEO'], ['preview', 'Preview']].forEach(function (t) {
+        add(ptabs, el('button', { class: 'tab', role: 'tab', 'aria-selected': String(panelTab === t[0]), onclick: function () { panelTab = t[0]; drawPanel(); } }, t[1], t[0] === 'seo' ? el('span', { class: 'n', text: seoChecks().filter(function (c) { return c.ok; }).length + '/' + seoChecks().length }) : null));
+      });
+      var keepScroll = pbody.scrollTop;
+      clear(pbody);
+      if (panelTab === 'preview') {
+        var r = md();
+        add(pbody, el('div', { class: 'preview' },
+          A.cover ? el('img', { class: 'pcover', src: A.cover, alt: A.cover_alt || '' }) : null,
+          el('span', { class: 'pill p-accent', text: (META.categories.find(function (c) { return c.id === A.category; }) || {}).name || '' }),
+          el('h1', { text: A.title || 'Untitled' }), A.dek ? el('p', { class: 'pdek', text: A.dek }) : null,
+          el('div', { class: 'prose', html: r.html })));
+        pbody.scrollTop = keepScroll;
+        return;
+      }
+      if (panelTab === 'seo') {
+        var base = (META.base || location.origin).replace(/^https?:\/\//, '');
+        var slugIn = el('input', { type: 'text', value: A.slug || slugify(A.title), 'aria-label': 'Address', oninput: function () { A.slug = slugify(slugIn.value); slugTouched = true; changed(); } });
+        var st = el('input', { type: 'text', value: A.seo_title, placeholder: A.title || 'Defaults to the title', maxlength: 80, oninput: function () { A.seo_title = st.value; changed(); } });
+        var sd = el('textarea', { rows: 3, placeholder: A.dek || 'Defaults to the summary. Write what a searcher gets from this page.', maxlength: 200, oninput: function () { A.seo_desc = sd.value; changed(); } });
+        sd.value = A.seo_desc;
+        var kw = el('input', { type: 'text', value: A.keyword, placeholder: 'For example: crypto casino payouts', maxlength: 60, oninput: function () { A.keyword = kw.value; changed(); } });
+        var tl = (A.seo_title || A.title || ''), dl = (A.seo_desc || A.dek || '');
+        var checks = seoChecks(), okN = checks.filter(function (c) { return c.ok; }).length, pct = okN / checks.length;
+        add(pbody, [
+          el('div', { class: 'serp', 'aria-label': 'Google preview' }, el('div', { class: 'u', text: base + ' › articles › ' + (A.slug || slugify(A.title) || 'your-article') }), el('div', { class: 'ti', text: (tl || 'Your title') .slice(0, 62) + (tl.length > 62 ? '...' : '') + ' · Streax' }), el('div', { class: 'de', text: (dl || 'Your description appears here.').slice(0, 158) + (dl.length > 158 ? '...' : '') })),
+          field('Address', slugIn, el('span', { class: 'counter mono', text: '/articles/' })),
+          field('Search title', st, counter((A.seo_title || A.title || '').length, 30, 65)),
+          field('Meta description', sd, counter((A.seo_desc || A.dek || '').length, 110, 160)),
+          field('Focus keyword', kw),
+          el('div', null, el('div', { class: 'row', style: 'justify-content:space-between;margin-bottom:6px' }, el('b', { text: 'SEO checklist' }), el('span', { class: 'mono muted', text: okN + ' of ' + checks.length })),
+            el('div', { class: 'meter' }, el('i', { style: 'width:' + Math.round(pct * 100) + '%;background:' + (pct >= 0.8 ? 'var(--good)' : pct >= 0.5 ? 'var(--accent)' : 'var(--warn)') })),
+            el('ul', { class: 'checklist', style: 'margin-top:12px' }, checks.map(function (c) { return el('li', null, el('span', { class: 'dot ' + (c.ok ? 'ok' : 'no'), 'aria-hidden': 'true', text: c.ok ? '✓' : '!' }), el('span', { text: c.label + (c.must && !c.ok ? ' (recommended before publishing)' : '') })); })))
+        ]);
+        return;
+      }
+      // settings
+      var coverBox = el('div', { class: 'cover-drop', role: 'button', tabindex: '0', 'aria-label': 'Upload a cover image' });
+      var coverFile = el('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp,image/gif', class: 'hidden' });
+      if (A.cover) add(coverBox, el('img', { src: A.cover, alt: '' }));
+      else add(coverBox, [el('span', { html: ICON.img }), el('b', { text: 'Add a cover image', style: 'color:var(--ink)' }), el('span', { style: 'font-size:12.5px', text: 'Drop it here or click. 1600 x 900 works best.' })]);
+      var pickCover = function (f) { upload(f).then(function (u) { A.cover = u; changed(); drawPanel(); }).catch(function () {}); };
+      coverBox.onclick = function () { coverFile.click(); };
+      coverBox.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); coverFile.click(); } };
+      coverBox.ondragover = function (e) { e.preventDefault(); coverBox.classList.add('dropping'); };
+      coverBox.ondragleave = function () { coverBox.classList.remove('dropping'); };
+      coverBox.ondrop = function (e) { e.preventDefault(); coverBox.classList.remove('dropping'); var f = e.dataTransfer.files[0]; if (f) pickCover(f); };
+      coverFile.onchange = function () { if (coverFile.files[0]) pickCover(coverFile.files[0]); };
+      var alt = el('input', { type: 'text', value: A.cover_alt, placeholder: 'Describe the image for screen readers and search', maxlength: 200, oninput: function () { A.cover_alt = alt.value; changed(); } });
+      var cat = el('select', { onchange: function () { A.category = cat.value; changed(); } }, META.categories.map(function (c) { return el('option', { value: c.id, text: c.name, selected: c.id === A.category }); }));
+      var tags = el('input', { type: 'text', value: A.tags, placeholder: 'payouts, Stake, KYC', oninput: function () { A.tags = tags.value; changed(); } });
+      var author = el('input', { type: 'text', value: A.author, placeholder: 'Streax Research', oninput: function () { A.author = author.value; changed(); } });
+      var role = el('input', { type: 'text', value: A.author_role, placeholder: 'Editor', oninput: function () { A.author_role = role.value; changed(); } });
+      var feat = el('input', { type: 'checkbox', checked: !!A.featured, onchange: function () { A.featured = feat.checked ? 1 : 0; changed(); } });
+      var when = el('input', { type: 'datetime-local', value: A.published_at ? toLocal(A.published_at) : '', onchange: function () { A.published_at = when.value ? new Date(when.value).getTime() : null; changed(); statusPill(); } });
+      var picked = (A.casinos || '').split(',').filter(Boolean);
+      var cq = el('input', { type: 'search', placeholder: 'Find a casino', 'aria-label': 'Find a casino' });
+      var chipBox = el('div', { class: 'chips' });
+      function drawChips() {
+        clear(chipBox);
+        var q = cq.value.trim().toLowerCase();
+        var shown = META.casinos.filter(function (c) { return picked.indexOf(c.slug) !== -1 || (q && c.name.toLowerCase().indexOf(q) !== -1); }).slice(0, 24);
+        if (!shown.length) add(chipBox, el('span', { class: 'muted', style: 'font-size:12.5px', text: 'Search to tag casinos. Tagged articles show on that casino\'s page.' }));
+        shown.forEach(function (c) {
+          var on = picked.indexOf(c.slug) !== -1;
+          add(chipBox, el('button', { type: 'button', class: 'chipb', 'aria-pressed': String(on), text: (on ? '✓ ' : '+ ') + c.name, onclick: function () {
+            if (on) picked = picked.filter(function (s) { return s !== c.slug; }); else picked.push(c.slug);
+            A.casinos = picked.join(','); changed(); drawChips();
+          } }));
+        });
+      }
+      cq.oninput = drawChips;
+      drawChips();
+      add(pbody, [
+        el('div', { style: 'display:flex;flex-direction:column;gap:8px' }, el('b', { text: 'Cover image' }), coverBox, coverFile, A.cover ? el('div', { class: 'cover-actions' }, el('button', { type: 'button', class: 'btn sm', text: 'Replace', onclick: function () { coverFile.click(); } }), el('button', { type: 'button', class: 'btn sm danger', text: 'Remove', onclick: function () { A.cover = ''; changed(); drawPanel(); } })) : null, field('Alt text', alt)),
+        el('div', { class: 'grid2' }, field('Category', cat), field('Tags', tags, el('span', { class: 'hint', text: 'comma separated' }))),
+        el('div', { class: 'grid2' }, field('Author', author), field('Author role', role)),
+        field('Publish date', when, el('span', { class: 'hint', text: 'empty means now; a future date schedules it' })),
+        el('label', { class: 'switch' }, el('span', null, el('b', { text: 'Feature on the articles page' }), el('br'), el('span', { class: 'muted', style: 'font-size:12.5px', text: 'The newest featured article gets the big card.' })), feat),
+        el('div', { style: 'display:flex;flex-direction:column;gap:8px' }, el('b', { text: 'Casinos in this article' }), cq, chipBox)
+      ]);
+    }
+    function toLocal(ms) { var d = new Date(ms); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 16); }
+
+    if (id) {
+      stateEl.textContent = 'Loading...';
+      api('GET', '/api/studio/articles/' + id).then(function (j) { load(j.article); }).catch(function (e) { toast(e.message, true); location.hash = '#/articles'; });
+    } else { load(blank()); title.focus(); }
+  }
+
+  // =====================================================================
+  // COMPLAINTS
+  // =====================================================================
+  var STAT_TONE = { review: 'warn', waiting: 'accent', proposed: 'accent', resolved: 'good', unresolved: 'bad', rejected: 'muted' };
+  function statusPill(c) { return pill(c.statusName, STAT_TONE[c.status] || 'muted'); }
+  function complaints(filter) {
+    filter = filter || 'review';
+    add(view, el('div', { class: 'head' }, el('div', null, el('h1', { class: 'serif', text: 'Complaints' }), el('p', { text: 'Check new complaints, send them to the casino and close them with a published outcome.' }))));
+    var tabsBox = el('div', { class: 'tabs', role: 'tablist', style: 'margin-bottom:12px' });
+    [['review', 'Needs your check'], ['open', 'Open'], ['resolved', 'Resolved'], ['unresolved', 'Unresolved'], ['rejected', 'Rejected'], ['all', 'All']].forEach(function (t) {
+      add(tabsBox, el('button', { class: 'tab', role: 'tab', 'aria-selected': String(filter === t[0]), onclick: function () { location.hash = '#/complaints/' + t[0]; } }, t[1], t[0] === 'review' && TRUST && TRUST.pending ? el('span', { class: 'n', text: String(TRUST.pending) }) : null));
+    });
+    var box = el('div', { class: 'card' }, el('div', { class: 'empty', text: 'Loading...' }));
+    add(view, [tabsBox, box]);
+    api('GET', '/api/studio/complaints?status=' + (filter === 'all' ? '' : filter)).then(function (j) {
+      clear(box);
+      if (!j.complaints.length) { add(box, el('div', { class: 'empty' }, el('h3', { text: filter === 'review' ? 'Nothing waiting for you' : 'No complaints here' }), el('p', { text: filter === 'review' ? 'New complaints from members land here first. Nothing is public until you send it to the casino.' : 'Try another tab.' }))); return; }
+      var tb = el('tbody');
+      j.complaints.forEach(function (c) {
+        add(tb, el('tr', { class: 'click', onclick: function () { location.hash = '#/complaints/' + c.id; } },
+          el('td', { class: 'mono', text: c.ref }),
+          el('td', null, el('div', { style: 'font-weight:600', text: c.title }), el('div', { class: 'muted', style: 'font-size:12.5px', text: c.casinoName + ' · ' + c.categoryName })),
+          el('td', { class: 'hide-s', text: c.player }),
+          el('td', { class: 'hide-s mono', text: money(c.amount) }),
+          el('td', null, statusPill(c)),
+          el('td', { class: 'hide-s muted', text: ago(c.updated) })));
+      });
+      add(box, el('div', { class: 'scroll' }, el('table', { class: 't' }, el('thead', null, el('tr', null, ['Ref', 'Complaint', 'Player', 'Amount', 'Status', 'Updated'].map(function (h, i) { return el('th', { class: i === 2 || i === 3 || i === 5 ? 'hide-s' : null, text: h }); }))), tb)));
+    }).catch(function (e) { clear(box); add(box, el('div', { class: 'empty', text: e.message })); });
+  }
+  function complaint(id) {
+    var box = el('div', null, el('div', { class: 'empty', text: 'Loading...' }));
+    add(view, box);
+    var link = '';
+    function draw(c) {
+      clear(box);
+      var origin = location.origin;
+      var head = el('div', { class: 'head' }, el('div', { style: 'min-width:0' },
+        el('a', { href: '#/complaints/' + (c.status === 'review' ? 'review' : c.closed ? c.status : 'open'), class: 'muted', style: 'font-size:13px;text-decoration:none', text: '← Complaints' }),
+        el('h1', { class: 'serif', style: 'margin-top:6px', text: c.title }),
+        el('div', { class: 'row', style: 'margin-top:8px' }, statusPill(c), el('span', { class: 'mono muted', text: c.ref }), el('span', { class: 'muted', text: c.casinoName + ' · ' + c.categoryName }))),
+        c.status !== 'review' ? el('a', { class: 'btn', href: '/Complaints.dc.html?id=' + c.ref, target: '_blank', rel: 'noopener', text: 'Public page' }) : null);
+      var facts = el('div', { class: 'facts' },
+        fact('Player', c.player.name || c.player), fact('Email', (c.player.email || '') + (c.player.verified ? ' (confirmed)' : '')),
+        fact('Amount', c.amount != null ? money(c.amount) : 'Not given'), fact('Filed', fmtDate(c.created, true)),
+        c.deadline && !c.closed ? fact(c.status === 'proposed' ? 'Player must answer by' : 'Casino must reply by', fmtDate(c.deadline, true)) : null,
+        c.tx ? el('div', { class: 'fact' }, el('span', { text: c.tx.chainName + ' transaction' }), el('a', { href: c.tx.url, target: '_blank', rel: 'noopener', class: 'mono', style: 'font-size:12.5px;word-break:break-all', text: c.tx.hash.slice(0, 18) + '...' })) : null);
+      var txNote = c.tx && c.tx.check ? el('div', { class: 'card', style: 'padding:12px 14px;margin-top:10px;font-size:13.5px;border-color:' + (c.tx.check.status === 'matched' ? 'color-mix(in srgb,var(--good) 40%,transparent)' : 'var(--border)') }, el('b', { text: c.tx.check.status === 'matched' ? 'Transaction matched on-chain. ' : c.tx.check.status === 'other' ? 'Transaction belongs to another casino. ' : 'Not matched automatically. ' }), c.tx.check.note) : null;
+      var bodyIn = el('textarea', { rows: 9 }); bodyIn.value = c.body;
+      var titleIn = el('input', { type: 'text', value: c.title, maxlength: 120 });
+      var catIn = el('select', null, (TRUST ? TRUST.categories : []).map(function (x) { return el('option', { value: x.id, text: x.name, selected: x.id === c.category }); }));
+      var editing = false;
+      var bodyView = el('div', { class: 'card', style: 'padding:16px;white-space:pre-wrap;line-height:1.65', text: c.body });
+      var editBox = el('div', { class: 'card hidden', style: 'padding:16px;display:flex;flex-direction:column;gap:10px' },
+        el('label', { class: 'f' }, 'Title', titleIn), el('label', { class: 'f' }, 'Category', catIn), el('label', { class: 'f' }, 'Text (remove personal data before it goes public)', bodyIn),
+        el('div', { class: 'row' }, el('button', { class: 'btn primary', text: 'Save edits', onclick: function () { act({ action: 'edit', title: titleIn.value, text: bodyIn.value, category: catIn.value }, 'Edits saved'); } }), el('button', { class: 'btn', text: 'Cancel', onclick: function () { editBox.classList.add('hidden'); bodyView.classList.remove('hidden'); } })));
+      var thread = el('ol', { class: 'thread' }, c.events.map(function (e) {
+        return el('li', { class: 'ev ' + e.who + (e.private ? ' priv' : '') }, el('div', { class: 'evh' }, el('b', { text: (e.private ? 'Private note · ' : '') + (e.who === 'player' ? c.player.name || c.player : e.name || e.who) }), el('span', { text: fmtDate(e.ts, true) })), e.body ? el('p', { text: e.body }) : null);
+      }));
+      var left = el('div', { style: 'display:flex;flex-direction:column;gap:14px;min-width:0' }, facts, txNote,
+        el('div', { class: 'row', style: 'justify-content:space-between' }, el('b', { text: 'What the player wrote' }), el('button', { class: 'btn sm', text: 'Edit or redact', onclick: function () { editBox.classList.remove('hidden'); bodyView.classList.add('hidden'); } })),
+        bodyView, editBox, el('b', { text: 'Timeline' }), thread);
+
+      // actions
+      var note = el('textarea', { rows: 4, placeholder: 'Message or reason' });
+      var priv = el('input', { type: 'checkbox' });
+      var acts = el('div', { class: 'card', style: 'padding:16px;display:flex;flex-direction:column;gap:12px;position:sticky;top:16px' });
+      function act(body, ok) {
+        if (body.action !== 'edit' && body.action !== 'approve' && body.action !== 'link' && body.action !== 'reopen' && !note.value.trim() && body.body === undefined) { toast('Write a message or reason first', true); note.focus(); return; }
+        if (body.body === undefined) body.body = note.value;
+        api('POST', '/api/studio/complaints/' + c.id, body).then(function (j) {
+          if (j.replyLink) link = origin + j.replyLink;
+          toast(ok); refreshBadges(); draw(j.complaint);
+        }).catch(function (e) { toast(e.message, true); });
+      }
+      if (link) add(acts, el('div', { style: 'display:flex;flex-direction:column;gap:6px;padding:12px;border-radius:12px;background:var(--goodA)' }, el('b', { style: 'color:var(--good)', text: 'Casino reply link' }), el('span', { style: 'font-size:12.5px', text: 'Send this to the casino\'s support or affiliate manager. Anyone with it can reply as the casino, and it is shown only now.' }),
+        el('div', { class: 'linkbox' }, el('input', { type: 'text', readOnly: true, value: link, onfocus: function (e) { e.target.select(); } }), el('button', { class: 'btn sm', text: 'Copy', onclick: function () { navigator.clipboard.writeText(link).then(function () { toast('Link copied'); }); } }))));
+      if (c.status === 'review') {
+        add(acts, [el('b', { text: 'Check this complaint' }), el('span', { class: 'muted', style: 'font-size:13px', text: 'Is it about a real account issue, with enough detail and no personal data? Approving makes it public and gives the casino ' + 7 + ' days to reply.' }),
+          el('button', { class: 'btn primary', text: 'Approve and send to the casino', onclick: function () { act({ action: 'approve', body: note.value }, 'Sent to the casino'); } }),
+          note,
+          el('div', { class: 'row' }, el('button', { class: 'btn', text: 'Ask the player for details', onclick: function () { act({ action: 'request' }, 'Message sent to the player'); } }), el('button', { class: 'btn danger', text: 'Reject', onclick: function () { if (confirm('Reject this complaint? The reason is published.')) act({ action: 'rejected' }, 'Complaint rejected'); } }))]);
+      } else if (!c.closed) {
+        add(acts, [el('b', { text: 'Casino link' }), el('span', { class: 'muted', style: 'font-size:13px', text: c.casinoReplied ? 'The casino has replied.' : 'The casino has not replied yet.' }),
+          el('button', { class: 'btn', text: c.hasLink ? 'Make a new casino link' : 'Make a casino link', onclick: function () { if (!c.hasLink || confirm('The old link will stop working. Continue?')) act({ action: 'link' }, 'New link ready'); } }),
+          el('div', { style: 'height:1px;background:var(--line)' }),
+          el('b', { text: 'Message or close' }), note,
+          el('label', { class: 'row', style: 'gap:8px;font-size:13px' }, priv, 'Private note (only the Studio sees it)'),
+          el('button', { class: 'btn', text: 'Post message', onclick: function () { act({ action: 'message', private: priv.checked }, priv.checked ? 'Note saved' : 'Message posted'); } }),
+          el('div', { class: 'row' }, el('button', { class: 'btn good', text: 'Close: resolved', onclick: function () { act({ action: 'resolved' }, 'Closed as resolved'); } }), el('button', { class: 'btn danger', text: 'Close: unresolved', onclick: function () { act({ action: 'unresolved' }, 'Closed as unresolved'); } })),
+          el('button', { class: 'btn', text: 'Close: rejected', onclick: function () { act({ action: 'rejected' }, 'Closed as rejected'); } })]);
+      } else {
+        add(acts, [el('b', { text: 'Closed as ' + c.statusName.toLowerCase() }), el('span', { style: 'font-size:13.5px', text: c.outcome || '' }), note, el('button', { class: 'btn', text: 'Reopen', onclick: function () { if (confirm('Reopen and send back to the casino?')) act({ action: 'reopen' }, 'Reopened'); } }),
+          el('button', { class: 'btn', text: 'Post message', onclick: function () { act({ action: 'message', private: false }, 'Message posted'); } })]);
+      }
+      add(box, [head, el('div', { class: 'split' }, left, acts)]);
+    }
+    function fact(k, v) { return el('div', { class: 'fact' }, el('span', { text: k }), el('b', { text: v || '' })); }
+    api('GET', '/api/studio/complaints/' + id).then(function (j) { draw(j.complaint); }).catch(function (e) { clear(box); add(box, el('div', { class: 'empty', text: e.message })); });
+  }
+
+  // =====================================================================
+  // PAYOUT REPORTS
+  // =====================================================================
+  var payFilter = 'pending';
+  function payouts() {
+    add(view, el('div', { class: 'head' }, el('div', null, el('h1', { class: 'serif', text: 'Payout reports' }), el('p', { text: 'Members report how long withdrawals took. Reports matched on-chain are approved automatically; check the rest here.' }))));
+    var tabsBox = el('div', { class: 'tabs', role: 'tablist', style: 'margin-bottom:12px' });
+    var box = el('div', { class: 'card' }, el('div', { class: 'empty', text: 'Loading...' }));
+    add(view, [tabsBox, box]);
+    function load() {
+      clear(tabsBox);
+      [['pending', 'To check'], ['approved', 'Approved'], ['rejected', 'Rejected'], ['all', 'All']].forEach(function (t) { add(tabsBox, el('button', { class: 'tab', role: 'tab', 'aria-selected': String(payFilter === t[0]), onclick: function () { payFilter = t[0]; load(); } }, t[1])); });
+      api('GET', '/api/studio/payouts?status=' + payFilter).then(function (j) {
+        clear(box);
+        if (!j.payouts.length) { add(box, el('div', { class: 'empty' }, el('h3', { text: payFilter === 'pending' ? 'Nothing to check' : 'No reports here' }), el('p', { text: 'Members report payouts from a casino page or the Complaints page.' }))); return; }
+        var tb = el('tbody');
+        j.payouts.forEach(function (r) {
+          var set = function (st) { api('POST', '/api/studio/payouts/' + r.id, { status: st }).then(function () { toast(st === 'approved' ? 'Approved. The member gets 25 points.' : st === 'rejected' ? 'Rejected' : 'Moved back'); refreshBadges(); load(); }).catch(function (e) { toast(e.message, true); }); };
+          add(tb, el('tr', null,
+            el('td', null, el('div', { style: 'font-weight:600', text: r.casinoName }), el('div', { class: 'muted', style: 'font-size:12.5px', text: fmtDate(r.created, true) })),
+            el('td', { class: 'mono', text: r.amount != null ? money(r.amount) : '' }),
+            el('td', { class: 'mono', text: StreaxScore.fmtMin(r.minutes) }),
+            el('td', { class: 'hide-s' }, el('a', { href: r.url, target: '_blank', rel: 'noopener', class: 'mono', style: 'font-size:12.5px', text: r.chainName + ' ' + r.tx.slice(0, 10) + '...' })),
+            el('td', { class: 'hide-s' }, r.matched ? pill('Matched on-chain', 'good') : pill('Self-reported', 'muted')),
+            el('td', null, r.status === 'approved' ? pill('Approved', 'good') : r.status === 'rejected' ? pill('Rejected', 'bad') : el('div', { class: 'row', style: 'gap:6px;flex-wrap:nowrap' }, el('button', { class: 'btn sm good', text: 'Approve', onclick: function () { set('approved'); } }), el('button', { class: 'btn sm danger', text: 'Reject', onclick: function () { set('rejected'); } })))));
+        });
+        add(box, el('div', { class: 'scroll' }, el('table', { class: 't' }, el('thead', null, el('tr', null, el('th', { text: 'Casino' }), el('th', { text: 'Amount' }), el('th', { text: 'Took' }), el('th', { class: 'hide-s', text: 'Transaction' }), el('th', { class: 'hide-s', text: 'Check' }), el('th', { text: 'Status' }))), tb)));
+      }).catch(function (e) { clear(box); add(box, el('div', { class: 'empty', text: e.message })); });
+    }
+    load();
+  }
+
+  // =====================================================================
+  // CASINO REVIEWS
+  // =====================================================================
+  var revQuery = '';
+  function reviews() {
+    add(view, el('div', { class: 'head' }, el('div', null, el('h1', { class: 'serif', text: 'Casino reviews' }), el('p', { text: 'Your checks feed five of the nine Streax Score categories. Only answer what you verified; leave the rest as unknown.' }))));
+    var search = el('input', { type: 'search', placeholder: 'Find a casino', 'aria-label': 'Find a casino', value: revQuery, style: 'max-width:320px;margin-bottom:12px' });
+    var box = el('div', { class: 'card' }, el('div', { class: 'empty', text: 'Loading...' }));
+    add(view, [search, box]);
+    api('GET', '/api/studio/reviews').then(function (j) {
+      function draw() {
+        clear(box);
+        var q = revQuery.trim().toLowerCase();
+        var rows = j.casinos.filter(function (c) { return !q || c.name.toLowerCase().indexOf(q) !== -1; });
+        var tb = el('tbody');
+        rows.forEach(function (c) {
+          add(tb, el('tr', { class: 'click', onclick: function () { location.hash = '#/reviews/' + c.slug; } },
+            el('td', null, el('div', { style: 'font-weight:600', text: c.name }), el('div', { class: 'muted', style: 'font-size:12.5px', text: c.domain || '' })),
+            el('td', null, c.reviewed ? pill('Reviewed', 'good') : pill('Not reviewed', 'muted')),
+            el('td', { class: 'hide-s muted', text: c.updated ? 'Updated ' + ago(c.updated) : '' }),
+            el('td', { class: 'hide-s mono', text: c.complaints ? c.complaints.total + ' complaints' : '' })));
+        });
+        add(box, el('div', { class: 'scroll' }, el('table', { class: 't' }, el('thead', null, el('tr', null, el('th', { text: 'Casino' }), el('th', { text: 'Review' }), el('th', { class: 'hide-s', text: 'Last update' }), el('th', { class: 'hide-s', text: 'Complaints' }))), tb)));
+      }
+      search.oninput = function () { revQuery = search.value; draw(); };
+      draw();
+    }).catch(function (e) { clear(box); add(box, el('div', { class: 'empty', text: e.message })); });
+  }
+  function review(slug) {
+    var box = el('div', null, el('div', { class: 'empty', text: 'Loading...' }));
+    add(view, box);
+    api('GET', '/api/studio/reviews/' + slug).then(function (j) {
+      var R = j.review || {};
+      var D = {
+        licence: Object.assign({ status: 'unknown', regulator: '', number: '', url: '', verified: false, operator: '' }, R.licence),
+        fairness: Object.assign({}, R.fairness), compliance: Object.assign({}, R.compliance), rg: Object.assign({}, R.rg), security: Object.assign({}, R.security),
+        support: Object.assign({ live24: 'unknown', responseMins: null, languages: '', channels: '' }, R.support),
+        payments: Object.assign({ minWithdrawal: '', fees: '', limits: '', coins: '', kycThreshold: '' }, R.payments),
+        ratings: (R.ratings || []).slice(), summary: R.summary || ''
+      };
+      var savedSnap = JSON.stringify(D);
+      leaveGuard = function (quiet) { return JSON.stringify(D) === savedSnap || (!quiet && confirm('You have unsaved review changes. Leave without saving?')); };
+      var C = TRUST ? TRUST.checks : StreaxScore.CHECKS;
+      var scoreBox = el('div', { class: 'card', style: 'padding:18px;position:sticky;top:16px;display:flex;flex-direction:column;gap:10px' });
+      function drawScore() {
+        clear(scoreBox);
+        var s = StreaxScore.compute({ review: D });
+        var revCats = s.cats.filter(function (c) { return c.src === 'Review'; });
+        add(scoreBox, [el('b', { text: 'Review categories' }), el('span', { class: 'muted', style: 'font-size:12.5px', text: 'The full score adds on-chain activity, reserves, payouts and complaints on the casino page.' })]);
+        revCats.forEach(function (c) {
+          add(scoreBox, el('div', { class: 'catrow' }, el('span', null, el('span', { style: 'font-weight:500', text: c.name }), el('br'), el('span', { class: 'muted', style: 'font-size:12px', text: c.rated ? c.note : 'Not rated: answer more checks' })),
+            el('div', { class: 'meter' }, el('i', { style: 'width:' + (c.rated ? c.v * 10 : 0) + '%;background:' + (c.v >= 7 ? 'var(--good)' : c.v >= 4 ? 'var(--accent)' : 'var(--warn)') })),
+            el('span', { class: 'mono', style: 'text-align:right', text: c.rated ? c.v.toFixed(1) : 'n/a' })));
+        });
+        add(scoreBox, el('button', { class: 'btn primary', text: 'Save review', onclick: save }));
+        add(scoreBox, el('a', { class: 'btn', href: '/Casino.dc.html?c=' + slug, target: '_blank', rel: 'noopener', text: 'Open the casino page' }));
+      }
+      function seg(obj, key) {
+        var wrap = el('div', { class: 'seg', role: 'group' });
+        function drawSeg() {
+          clear(wrap);
+          [['yes', 'Yes', 'y'], ['no', 'No', 'n'], ['unknown', 'Unknown', 'u']].forEach(function (o) {
+            add(wrap, el('button', { type: 'button', class: o[2], 'aria-pressed': String((obj[key] || 'unknown') === o[0]), text: o[1], onclick: function () { obj[key] = o[0]; drawSeg(); drawScore(); } }));
+          });
+        }
+        drawSeg();
+        return wrap;
+      }
+      function group(title, sub, rows) { return el('section', { class: 'card grp' }, el('h3', { text: title }), sub ? el('p', { class: 'muted', style: 'margin:0 0 8px;font-size:13px', text: sub }) : null, rows); }
+      function checksFor(key, objKey) { return C[key].map(function (c) { return el('div', { class: 'checkrow' }, el('span', { text: c[1] }), seg(D[objKey || key], c[0])); }); }
+      function inp(obj, key, ph, type) { var i = el('input', { type: type || 'text', value: obj[key] == null ? '' : obj[key], placeholder: ph || '' }); i.oninput = function () { obj[key] = type === 'number' ? (i.value === '' ? null : Number(i.value)) : i.value; drawScore(); }; return i; }
+      var licStatus = el('select', { onchange: function () { D.licence.status = licStatus.value; drawScore(); } }, [['unknown', 'Not checked yet'], ['licensed', 'Licensed'], ['unlicensed', 'No licence found']].map(function (o) { return el('option', { value: o[0], text: o[1], selected: D.licence.status === o[0] }); }));
+      var licVer = el('input', { type: 'checkbox', checked: !!D.licence.verified, onchange: function () { D.licence.verified = licVer.checked; drawScore(); } });
+      var ratingsBox = el('div', { style: 'display:flex;flex-direction:column;gap:8px' });
+      function drawRatings() {
+        clear(ratingsBox);
+        D.ratings.forEach(function (r, i) {
+          add(ratingsBox, el('div', { class: 'row', style: 'gap:6px;flex-wrap:nowrap' }, inp(r, 'source', 'Trustpilot'), (function () { var x = inp(r, 'score', '4.2', 'number'); x.style.maxWidth = '84px'; x.step = '0.1'; return x; })(), (function () { var x = inp(r, 'outOf', '5', 'number'); x.style.maxWidth = '70px'; return x; })(), (function () { var x = inp(r, 'count', 'Reviews', 'number'); x.style.maxWidth = '110px'; return x; })(), inp(r, 'url', 'https://...'),
+            el('button', { class: 'btn iconbtn danger', type: 'button', 'aria-label': 'Remove rating', text: '×', onclick: function () { D.ratings.splice(i, 1); drawRatings(); } })));
+        });
+        add(ratingsBox, el('button', { class: 'btn sm', type: 'button', style: 'align-self:flex-start', text: '+ Add a rating source', onclick: function () { D.ratings.push({ source: '', score: null, outOf: 5, count: null, url: '' }); drawRatings(); } }));
+      }
+      drawRatings();
+      var summary = el('textarea', { rows: 4, maxlength: 600, placeholder: 'Two or three sentences readers see at the top of the review.' }); summary.value = D.summary; summary.oninput = function () { D.summary = summary.value; };
+      var reviewer = el('input', { type: 'text', placeholder: 'Your name', value: R.reviewer || '' });
+      function save() {
+        api('POST', '/api/studio/reviews/' + slug, { review: D, reviewer: reviewer.value }).then(function () { savedSnap = JSON.stringify(D); toast('Review saved. The casino page shows it now.'); }).catch(function (e) { toast(e.message, true); });
+      }
+      var forms = el('div', { style: 'display:flex;flex-direction:column;gap:14px;min-width:0' },
+        group('Summary', null, [summary, el('label', { class: 'f', style: 'margin-top:10px' }, 'Reviewed by', reviewer)]),
+        group('Licence', 'Check the licence on the regulator\'s own site before ticking verified.', [el('div', { class: 'grid2' }, el('label', { class: 'f' }, 'Status', licStatus), el('label', { class: 'f' }, 'Regulator', inp(D.licence, 'regulator', 'Curaçao Gaming Authority'))),
+          el('div', { class: 'grid2', style: 'margin-top:10px' }, el('label', { class: 'f' }, 'Licence number', inp(D.licence, 'number', 'OGL/2024/...')), el('label', { class: 'f' }, 'Regulator page (https)', inp(D.licence, 'url', 'https://...'))),
+          el('label', { class: 'f', style: 'margin-top:10px' }, 'Operator', inp(D.licence, 'operator', 'Company name')),
+          el('label', { class: 'switch', style: 'margin-top:12px' }, el('span', { text: 'I checked this licence on the regulator\'s site' }), licVer)]),
+        group('Compliance', null, checksFor('compliance')),
+        group('Fairness and RTP', null, checksFor('fairness')),
+        group('Responsible gambling', 'Open the account settings and try each tool.', checksFor('rg')),
+        group('Support', 'Time a live chat: how many minutes until a person answers?', [el('div', { class: 'checkrow' }, el('span', { text: '24/7 live chat with a person' }), seg(D.support, 'live24')),
+          el('div', { class: 'grid2', style: 'margin-top:10px' }, el('label', { class: 'f' }, 'Minutes to a human reply', inp(D.support, 'responseMins', '3', 'number')), el('label', { class: 'f' }, 'Languages', inp(D.support, 'languages', 'English, Spanish'))),
+          el('label', { class: 'f', style: 'margin-top:10px' }, 'Channels', inp(D.support, 'channels', 'Live chat, email'))]),
+        group('Account security', null, checksFor('security')),
+        group('Payments', 'Shown on the casino page as written.', [el('div', { class: 'grid2' }, el('label', { class: 'f' }, 'Minimum withdrawal', inp(D.payments, 'minWithdrawal', '$20 in USDT')), el('label', { class: 'f' }, 'Withdrawal fees', inp(D.payments, 'fees', 'Network fee only'))),
+          el('div', { class: 'grid2', style: 'margin-top:10px' }, el('label', { class: 'f' }, 'Withdrawal limits', inp(D.payments, 'limits', 'None stated')), el('label', { class: 'f' }, 'KYC asked at', inp(D.payments, 'kycThreshold', 'Sign-up, or over $2,000'))),
+          el('label', { class: 'f', style: 'margin-top:10px' }, 'Coins accepted', inp(D.payments, 'coins', 'BTC, ETH, USDT, SOL...'))]),
+        group('Ratings elsewhere', 'Copy the score and review count as shown on each site today.', ratingsBox));
+      clear(box);
+      add(box, [el('div', { class: 'head' }, el('div', null, el('a', { href: '#/reviews', class: 'muted', style: 'font-size:13px;text-decoration:none', text: '← Casino reviews' }), el('h1', { class: 'serif', style: 'margin-top:6px', text: j.name }), el('p', { text: R.updated ? 'Last saved ' + fmtDate(R.updated, true) + (R.reviewer ? ' by ' + R.reviewer : '') : 'Not reviewed yet' }))),
+        el('div', { class: 'split' }, forms, scoreBox)]);
+      drawScore();
+    }).catch(function (e) { clear(box); add(box, el('div', { class: 'empty', text: e.message })); });
+  }
+
+  // ---------- start ----------
+  if (TOKEN) boot().catch(function () { signOut(); });
+  else signOut();
+})();
+</script>
+</body>
+</html>

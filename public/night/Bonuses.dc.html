@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leaderboard and codes</title>
+<link rel="icon" type="image/png" href="assets/streax-icon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:#070B17}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #8FA8FF;outline-offset:2px}
+input::placeholder,textarea::placeholder{color:#67749A}
+.hv{transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+.hv:hover{background-color:#16203A !important}
+.nav{transition:background-color .15s ease,color .15s ease}
+.nav:hover{background-color:#141E36 !important;color:#EAF0FF !important}
+.rh{transition:background-color .15s ease}
+.rh:hover{background-color:rgba(143,168,255,0.035) !important}
+.lift{transition:transform .18s ease,border-color .18s ease}
+.lift:hover{transform:translateY(-2px);border-color:#334673 !important}
+.pb{transition:filter .15s ease,transform .15s ease}
+.pb:hover{filter:brightness(1.08)}
+.pb:active{transform:translateY(1px)}
+.ul{transition:color .15s ease}
+.ul:hover{color:#B4C4FF !important}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(251,113,133,.6)}70%{box-shadow:0 0 0 7px rgba(251,113,133,0)}100%{box-shadow:0 0 0 0 rgba(251,113,133,0)}}
+.pulse{animation:pulse 1.8s infinite}
+@keyframes pulseSky{0%{box-shadow:0 0 0 0 rgba(94,234,212,.55)}70%{box-shadow:0 0 0 7px rgba(94,234,212,0)}100%{box-shadow:0 0 0 0 rgba(94,234,212,0)}}
+.pulseSky{animation:pulseSky 1.8s infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fu{animation:fadeUp .22s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fi{animation:fadeIn .18s ease-out}
+@keyframes nA{from{background-color:rgba(143,168,255,0.12)}to{background-color:rgba(143,168,255,0)}}
+@keyframes nB{from{background-color:rgba(143,168,255,0.12)}to{background-color:rgba(143,168,255,0)}}
+.nA{animation:nA 1.6s ease-out}
+.nB{animation:nB 1.6s ease-out}
+input[type=range]{accent-color:#2F54EB}
+.sx-banner{background:#0F1A5C url(assets/streax-banner-night.webp) center/cover no-repeat}
+.sx-hero{background:#0F1A5C url(assets/streax-hero-night.webp) center/cover no-repeat}
+.sx-card{background:#0F1A5C url(assets/streax-card-night.webp) center/cover no-repeat}
+.sx-wash{background:#0E1528 url(assets/streax-wash-night.webp) center/cover no-repeat}
+.glass:hover{background-color:rgba(255,255,255,0.3) !important}
+.wbtn:hover{background-color:#F0F4FF !important}
+@media (max-width: 1080px){
+[data-m~="side"]{flex-basis:100% !important;max-width:none !important;min-width:0;width:100%;box-sizing:border-box;padding:12px 16px 0 !important}
+[data-m~="main"]{min-width:0}
+[data-m~="sidecard"]{min-width:0;border-radius:18px !important;padding:10px 10px 8px !important;gap:6px !important}
+[data-m~="slogo"]{border-bottom:0 !important;margin:0 !important;padding:2px 4px 4px !important}
+[data-m~="snav"]{flex-direction:row !important;overflow-x:auto;gap:6px !important;scrollbar-width:none;padding:0 0 2px}
+[data-m~="snav"]::-webkit-scrollbar{display:none}
+[data-m~="snav"] > a{flex:0 0 auto;min-height:38px !important;padding:0 12px !important;gap:8px !important;font-size:13.5px !important;white-space:nowrap}
+[data-m~="snav"] > a:not([aria-current]){background-color:#131C33}
+[data-m~="slab"],[data-m~="mhide"]{display:none !important}
+[data-m~="main"]{padding:0 16px !important}
+[data-m~="srchw"]{flex:1 1 0;min-width:0}
+[data-m~="srch"]{width:100% !important}
+[data-m~="drop"]{width:auto !important;left:0;right:0 !important}
+[data-m~="hdr"]{display:none !important}
+[data-m~="rk"]{display:flex !important;flex-wrap:wrap;gap:12px !important;padding:14px !important}
+[data-m~="rk"] > :nth-child(1){order:1;flex:0 0 40px}
+[data-m~="rk"] > :nth-child(2){order:2;flex:1 1 calc(100% - 166px);min-width:0}
+[data-m~="rk"] > :nth-child(3){display:none !important}
+[data-m~="rk"] > :nth-child(4){order:3}
+[data-m~="rk"] > :nth-child(9){order:4;align-self:center}
+[data-m~="rk"] > :nth-child(5){order:5;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(6){order:6;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(7){order:7;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(8){order:8;flex:1 1 100%}
+[data-m~="bf"]{grid-template-columns:minmax(0,1.2fr) minmax(0,0.9fr) 64px 76px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13px !important}
+[data-m~="bf"] > :nth-child(1){min-width:0;overflow:hidden}
+[data-m~="bf"] > :nth-child(1) > span:last-child{overflow:hidden;text-overflow:ellipsis}
+[data-m~="bf"] > :nth-child(4){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-m~="bf"] > :nth-child(2),[data-m~="bf"] > :nth-child(3),[data-m~="bf"] > :nth-child(6){display:none !important}
+[data-m~="kc"]{grid-template-columns:minmax(0,1fr) auto auto !important;grid-template-areas:"cas val red" "code code when";row-gap:8px !important;padding:12px 14px !important}
+[data-m~="kc"] > :nth-child(1){grid-area:cas;min-width:0}
+[data-m~="kc"] > :nth-child(2){grid-area:code;justify-self:start}
+[data-m~="kc"] > :nth-child(3){grid-area:val}
+[data-m~="kc"] > :nth-child(4){grid-area:when}
+[data-m~="kc"] > :nth-child(5),[data-m~="kc"] > :nth-child(6),[data-m~="kc"] > :nth-child(7){display:none !important}
+[data-m~="kc"] > :nth-child(8){grid-area:red}
+[data-m~="cp"]{grid-template-columns:minmax(0,1fr) auto auto !important;grid-template-areas:"cat cat st" "cas amt tog";row-gap:8px !important;padding:12px 14px !important}
+[data-m~="cp"] > :nth-child(1),[data-m~="cp"] > :nth-child(6),[data-m~="cp"] > :nth-child(7){display:none !important}
+[data-m~="cp"] > :nth-child(2){grid-area:cas;min-width:0}
+[data-m~="cp"] > :nth-child(3){grid-area:cat}
+[data-m~="cp"] > :nth-child(4){grid-area:amt}
+[data-m~="cp"] > :nth-child(5){grid-area:st}
+[data-m~="cp"] > :nth-child(8){grid-area:tog}
+[data-m~="rkd"]{padding:4px 18px 18px !important}
+[data-m~="lb"]{grid-template-columns:44px minmax(0,1fr) 120px minmax(0,180px) 100px !important}
+[data-m~="g1t"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="tkr"],[data-m~="tkh"]{grid-template-columns:minmax(120px,1fr) 90px 100px 100px 100px 110px 120px !important}
+[data-m~="tkr"] > :nth-child(5),[data-m~="tkh"] > :nth-child(5){display:none !important}
+[data-m~="wlr"]{grid-template-columns:100px minmax(0,1fr) 110px 80px !important}
+[data-m~="wlr"] > :nth-child(3){display:none !important}
+}
+@media (max-width: 760px){
+[data-m~="root"]{display:block !important}
+[data-m~="main"]{width:100%;box-sizing:border-box}
+[data-m~="tbt"]{flex:1 1 100% !important}
+[data-m~="ban"]{padding:22px 18px !important;border-radius:22px !important;margin:12px 0 16px !important;gap:12px !important}
+[data-m~="banh"]{font-size:34px !important}
+[data-m~="seg"]{max-width:100%;box-sizing:border-box;overflow-x:auto;scrollbar-width:none}
+[data-m~="seg"]::-webkit-scrollbar{display:none}
+[data-m~="fin"]{width:100% !important}
+div:has(> [data-m~="fin"]),div:has(> div > [data-m~="fin"]){flex:1 1 100%;min-width:0}
+[data-m~="g1"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="g2"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+[data-m~="kv"]{font-size:22px !important}
+[data-m~="wrap"]{flex-wrap:wrap;gap:8px}
+[data-m~="wrap"] button{white-space:nowrap}
+[data-m~="phide"]{display:none !important}
+[data-m~="nomin"]{min-width:0 !important}
+.sx-hero{background-position:16% 50% !important;padding:26px 20px 20px !important;min-height:0 !important;flex-direction:column;align-items:stretch !important;border-radius:24px !important}
+[data-m~="h64"]{font-size:42px !important}
+[data-m~="orb"]{width:130px !important;height:130px !important;right:-36px !important;top:-36px !important;margin-top:0 !important}
+[data-m~="hchip"]{max-width:calc(100% - 70px);box-sizing:border-box}
+[data-m~="hstats"]{position:relative !important;right:auto !important;bottom:auto !important;margin-top:20px;flex-wrap:wrap}
+[data-m~="hstats"] > span{flex:1 1 40%}
+[data-m~="topr"]{grid-template-columns:22px minmax(0,1fr) auto !important}
+[data-m~="topr"] > :nth-child(4){display:none !important}
+[data-m~="fol"]{grid-template-columns:20px minmax(0,1fr) 74px 60px !important}
+[data-m~="rkd"]{padding:4px 14px 14px !important}
+[data-m~="sb"]{grid-template-columns:96px minmax(0,1fr) 42px 34px !important;gap:10px !important}
+[data-m~="ms"]{grid-template-columns:92px minmax(0,1fr) 58px !important;gap:10px !important}
+[data-m~="cha"]{grid-template-columns:100px minmax(0,1fr) 70px 42px !important;gap:8px !important}
+[data-m~="csel"]{min-width:0 !important;width:100%}
+div:has(> [data-m~="csel"]){flex:1 1 auto;min-width:0}
+[data-m~="lbox"]{width:auto !important;right:0;max-width:calc(100vw - 32px)}
+[data-m~="secnav"]{flex:1 1 100% !important;max-width:none !important;flex-direction:row !important;overflow-x:auto;scrollbar-width:none;gap:4px !important}
+[data-m~="secnav"]::-webkit-scrollbar{display:none}
+[data-m~="secnav"] > a{flex:0 0 auto;white-space:nowrap;gap:8px}
+[data-m~="ovr"]{gap:14px !important}
+[data-m~="ovr"] > span:first-child{width:64px !important;height:64px !important;border-radius:18px !important;font-size:20px !important}
+[data-m~="dsr"]{grid-template-columns:minmax(0,96px) minmax(0,1fr) 66px 44px !important}
+[data-m~="tr"]{grid-template-columns:22px minmax(0,1fr) minmax(0,1fr) 64px !important;gap:10px !important}
+[data-m~="tr"] > :nth-child(3),[data-m~="tr"] > :nth-child(5){display:none !important}
+[data-m~="lb"]{grid-template-columns:28px minmax(0,1fr) 74px 62px !important;gap:10px !important}
+[data-m~="lb"] > :nth-child(4){display:none !important}
+[data-m~="br"]{grid-template-columns:20px minmax(0,1fr) 72px 104px !important;gap:10px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="br"] > :nth-child(3){display:none !important}
+[data-m~="br"] button{white-space:nowrap;padding:0 10px !important;font-size:12.5px !important}
+[data-m~="st"]{grid-template-columns:18px minmax(0,1fr) 74px 62px !important;gap:10px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="st"] > :nth-child(4){order:3}
+[data-m~="st"] > :nth-child(3){order:4}
+[data-m~="st"] > :nth-child(5),[data-m~="st"] > :nth-child(6),[data-m~="st"] > :nth-child(7),[data-m~="st"] > :nth-child(8){display:none !important}
+[data-m~="st"] > :nth-child(4) > span:last-child{display:none !important}
+[data-m~="st"] > :nth-child(2){overflow:hidden}
+[data-m~="st"] > :nth-child(2) > span:last-child > span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-m~="ocr"],[data-m~="och"]{grid-template-columns:minmax(0,1fr) 84px 92px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13.5px !important}
+[data-m~="ocr"] > :nth-child(1),[data-m~="ocr"] > :nth-child(4),[data-m~="ocr"] > :nth-child(6),[data-m~="och"] > :nth-child(1),[data-m~="och"] > :nth-child(4),[data-m~="och"] > :nth-child(6){display:none !important}
+[data-m~="ocr"] > :nth-child(2){overflow:hidden}
+[data-m~="tkr"],[data-m~="tkh"]{grid-template-columns:minmax(0,1fr) 84px 104px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13.5px !important}
+[data-m~="tkr"] > :nth-child(3),[data-m~="tkr"] > :nth-child(4),[data-m~="tkr"] > :nth-child(6),[data-m~="tkr"] > :nth-child(7),[data-m~="tkh"] > :nth-child(3),[data-m~="tkh"] > :nth-child(4),[data-m~="tkh"] > :nth-child(6),[data-m~="tkh"] > :nth-child(7){display:none !important}
+[data-m~="wlr"]{grid-template-columns:minmax(0,1fr) 92px 62px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="wlr"] > :nth-child(1){display:none !important}
+[data-m~="cd"]{flex:1 1 100%}
+[data-m~="cd"] > span{flex:1 1 0;min-width:0 !important;padding:10px 4px !important}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+<style>@media (max-width: 760px){[data-acct]{padding:0 12px !important}}</style>
+</helmet>
+<div data-m="root" data-theme="night" style="min-height: 100vh; background: radial-gradient(1100px 520px at 80% -8%, rgba(62,107,255,0.22), transparent 62%), radial-gradient(900px 480px at -5% 0%, rgba(47,84,235,0.12), transparent 60%), #070B17; color: #EAF0FF; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; display: flex; flex-wrap: wrap; align-items: flex-start">
+<aside aria-label="Sidebar" data-m="side" style="flex: 1 1 296px; max-width: 320px; box-sizing: border-box; padding: 16px 0 16px 16px; position: relative; z-index: 20">
+<div data-m="sidecard" style="border-radius: 24px; border: 1px solid #1C2742; background: #0E1528; padding: 16px 12px 14px; display: flex; flex-direction: column; gap: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 22px 54px -30px rgba(0,0,0,0.9)">
+<a href="Home.dc.html" aria-label="Streax home" data-m="slogo" style="display: flex; align-items: center; padding: 6px 8px 14px; border-bottom: 1px solid #18223A; margin-bottom: 6px"><span style="display: inline-flex; align-items: center; gap: 10px"><img src="assets/streax-logo.webp" alt="" aria-hidden="true" width="32" height="32" style="flex: 0 0 auto; display: block; width: 32px; height: 32px; border-radius: 10px; box-shadow: 0 6px 16px -8px rgba(37,72,190,0.6)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 27px; line-height: 1; letter-spacing: -0.01em; color: #EAF0FF">Streax</span></span></a>
+<div data-m="snav" style="display: flex; flex-direction: column; gap: 2px"><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #75829F">Main<span style="flex: 1 1 auto; height: 1px; background: #18223A"></span></span><a href="Home.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"></path></svg>Home</a><a href="Rankings.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"></path></svg>Rankings</a><a href="Casino.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"></rect><circle cx="9" cy="9" r="1.2"></circle><circle cx="15" cy="15" r="1.2"></circle><circle cx="15" cy="9" r="1.2"></circle><circle cx="9" cy="15" r="1.2"></circle></svg>Casino profile</a><a href="Onchain.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3.5l2.5-6 4 12 2.5-6H21"></path><circle cx="12" cy="12" r="10" opacity="0.35"></circle></svg>On-chain monitor</a><a href="Wallets.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"></path><rect x="4" y="8" width="16" height="11" rx="2.5"></rect><circle cx="16" cy="13.5" r="1.2"></circle></svg>Casino wallets</a><a href="Analytics.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M6 15l4-5 4 3 5-7"></path></svg>Analytics</a><a href="Streamers.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3"></rect><path d="M16 10l5-3v10l-5-3"></path></svg>Streamers</a><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #75829F">Player tools<span style="flex: 1 1 auto; height: 1px; background: #18223A"></span></span><a href="Complaints.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path><path d="M12 8v3.5M12 13.8v.01"></path></svg>Complaints</a><a href="WalletCheck.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H17v3"></path><rect x="4" y="8" width="16" height="11" rx="2.5"></rect><path d="M12.5 13.5l1.8 1.8 3.2-3.6"></path></svg>My wallet check</a><a href="BonusCalc.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"></rect><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h3.5"></path></svg>Bonus calculator</a><a href="/articles" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"></path><path d="M9 9h6M9 13h6M9 17h4"></path></svg>Articles</a><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #75829F">Community · sample<span style="flex: 1 1 auto; height: 1px; background: #18223A"></span></span><a href="Community.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v10H9l-4 4z"></path></svg>Player reviews</a><a href="BetFeed.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #B4C0DB"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"></path></svg>Live bet feed</a><a href="Bonuses.dc.html" aria-current="page" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #C3D0FF; background: linear-gradient(90deg, rgba(62,107,255,0.12), rgba(62,107,255,0.04)); box-shadow: inset 0 0 0 1px rgba(62,107,255,0.18)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8FA8FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"></rect><path d="M12 9v11M4 13h16M12 9c-2-4-6-4-6-1s6 1 6 1zm0 0c2-4 6-4 6-1s-6 1-6 1z"></path></svg>Leaderboard &amp; codes</a></div>
+<div class="sx-card" data-m="mhide" style="margin-top: 16px; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 16px 40px -22px rgba(31,58,214,0.75)">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1.1; color: #FFFFFF">{{sideCta.title}}</span>
+<span style="font-size: 13px; line-height: 1.45; color: rgba(255,255,255,0.92)">{{sideCta.body}}</span>
+<a href="{{sideCta.href}}" class="wbtn" style="min-height: 42px; border-radius: 12px; border: 0; background: #FFFFFF; color: #1B2FA8; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B2FA8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg>{{sideCta.btn}}</a>
+</div>
+<button type="button" onClick="{{openSupport}}" class="hv" data-m="mhide" style="min-height: 44px; border-radius: 12px; border: 1px solid #263457; background: #0E1528; color: #C9D3EA; font: inherit; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#93A1C2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v10H8l-4 4z"></path></svg>Support</button>
+<button type="button" onClick="{{openSources}}" class="ul" data-m="mhide" style="min-height: 36px; border: 0; background: transparent; color: #93A1C2; font: inherit; font-size: 12.5px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg>Data sources and methodology</button>
+</div>
+</aside>
+<main data-m="main" style="flex: 999 1 560px; min-width: 0; padding: 0 28px 0 24px; box-sizing: border-box">
+<div class="sx-banner" data-m="ban" style="position: relative; z-index: 30; margin: 16px 0 22px; border-radius: 26px; padding: 28px 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; box-shadow: 0 26px 60px -34px rgba(20,40,160,0.85)">
+<div data-m="tbt" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.88)">Streax</span>
+<h1 data-m="banh" style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.02; letter-spacing: -0.01em; color: #FFFFFF">Leaderboard and codes</h1>
+<span style="font-size: 14.5px; color: rgba(255,255,255,0.92)">A cross-casino wager leaderboard and a live bonus code feed. Sample data.</span>
+</div>
+<div data-m="srchw" style="position: relative">
+<label for="gq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Search casinos</label>
+<span style="position: absolute; left: 13px; top: 14px; pointer-events: none; display: inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7D8AAB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span>
+<input id="gq" data-m="srch" type="text" autocomplete="off" value="{{gq}}" onChange="{{onGq}}" onFocus="{{gqOn}}" onBlur="{{gqOff}}" placeholder="Search 43 casinos" style="width: 280px; height: 44px; box-sizing: border-box; padding: 0 14px 0 38px; border-radius: 14px; border: 1px solid rgba(143,168,255,0.30); background: rgba(14,21,40,0.94); color: #EAF0FF; font: inherit; font-size: 14px; box-shadow: 0 8px 24px -16px rgba(20,35,90,0.5)">
+<sc-if value="{{gqOpen}}" hint-placeholder-val="{{ false }}">
+<div class="fu" data-m="drop" style="position: absolute; top: calc(100% + 8px); right: 0; width: 340px; z-index: 60; border-radius: 16px; border: 1px solid #1C2742; background: #0E1528; box-shadow: 0 24px 60px -24px rgba(20,35,90,0.35); padding: 6px; display: flex; flex-direction: column">
+<sc-for list="{{gqResults}}" as="r" hint-placeholder-count="4">
+<a href="{{r.href}}" class="hv" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; font-size: 14px; color: #EAF0FF">
+<span style="position: relative; width: 28px; height: 28px; border-radius: 8px; background: {{r.tint}}; color: #DCE6FF; font-size: 10.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{r.ini}}<sc-if value="{{r.logo}}" hint-placeholder-val="{{ false }}"><img src="{{r.logo}}" alt="" width="28" height="28" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); pointer-events: none"></span></span>
+<span style="flex: 1 1 auto; font-weight: 500">{{r.name}}</span>
+<span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #93A1C2">#{{r.rank}} · {{r.dep}}</span>
+</a>
+</sc-for>
+<sc-if value="{{gqNone}}" hint-placeholder-val="{{ false }}"><span style="padding: 12px 10px; font-size: 13px; color: #93A1C2">No casino matches “{{gq}}”</span></sc-if>
+</div>
+</sc-if>
+</div>
+<a href="/theme/light" class="hv" data-theme-toggle="1" aria-label="Switch to light mode" title="Switch to light mode" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #263457; background: #0E1528; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9D3EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"></path></svg></a>
+<button type="button" aria-label="Notifications" onClick="{{bell}}" class="hv" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #263457; background: #0E1528; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C9D3EA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg></button>
+<a href="{{acct.href}}" aria-label="{{acct.label}}" title="{{acct.label}}" data-acct="1" class="pb" style="position: relative; height: 44px; min-width: 44px; width: {{acct.w}}; box-sizing: border-box; padding: {{acct.pad}}; border-radius: {{acct.radius}}; background: linear-gradient(135deg, #4A75FF, #1B2FA8); color: #FFFFFF; font-weight: 600; font-size: {{acct.fs}}; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; flex: 0 0 auto">{{acct.text}}<sc-if value="{{acct.avatar}}" hint-placeholder-val="{{ false }}"><img src="{{acct.avatar}}" alt="" referrerpolicy="no-referrer" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if></a>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; border: 1px solid rgba(252,211,77,0.28); background: rgba(252,211,77,0.05); font-size: 13.5px; color: #E5D3A1"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: #FCD34D; background: rgba(252,211,77,0.08); border: 1px solid rgba(252,211,77,0.3); border-radius: 999px; padding: 3px 9px; white-space: nowrap">Sample data</span>Players, wagers, prizes and codes here are made up and casino names are fictional. Nothing on this page can be redeemed.</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px"><div role="group" aria-label="Section" data-m="seg" style="display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid #1C2742; background: #0A1020">
+<sc-for list="{{tabs}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.on}}" class="ul" style="min-height: 36px; padding: 0 13px; border-radius: 9px; border: 0; background: {{o.bg}}; box-shadow: {{o.shadow}}; color: {{o.fg}}; font: inherit; font-size: 13.5px; cursor: pointer; white-space: nowrap">{{o.label}}</button></sc-for>
+</div></div>
+
+<sc-if value="{{isBoard}}" hint-placeholder-val="{{ true }}">
+<section data-m="g2" aria-label="How it works" style="margin-top: 16px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{how}}" as="h" hint-placeholder-count="4"><div style="border-radius: 20px; border: 1px solid #1C2742; background: #0E1528; box-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 18px 44px -30px rgba(0,0,0,0.9); padding: 18px; display: flex; flex-direction: column; gap: 8px"><span style="display: flex; align-items: center; gap: 10px"><span style="width: 32px; height: 32px; border-radius: 10px; background: rgba(143,168,255,0.1); border: 1px solid rgba(143,168,255,0.25); display: inline-flex; align-items: center; justify-content: center; font-family: 'Geist Mono', monospace; color: #B4C4FF">{{h.n}}</span><span style="font-weight: 600; font-size: 16px">{{h.title}}</span></span><span style="font-size: 13.5px; line-height: 1.55; color: #8C9AB9">{{h.body}}</span></div></sc-for>
+</section>
+<section aria-label="Leaderboard header" style="margin-top: 16px; border-radius: 20px; border: 1px solid #1C2742; background: #0E1528; box-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 18px 44px -30px rgba(0,0,0,0.9); padding: 20px 22px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; background: radial-gradient(520px 200px at 85% 50%, rgba(110,139,255,0.12), transparent 60%), #0E1528">
+<div style="display: flex; flex-direction: column; gap: 6px; max-width: 620px"><span style="display: flex; align-items: center; gap: 10px"><h2 style="margin: 0; font-size: 20px; font-weight: 600">{{boardTitle}}</h2><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: #FCD34D; background: rgba(252,211,77,0.08); border: 1px solid rgba(252,211,77,0.3); border-radius: 999px; padding: 3px 9px; white-space: nowrap">Sample data</span></span><span style="font-size: 14px; line-height: 1.55; color: #9AA8C7">Wagers from every partnered casino stack into one rank. The prize pool pays the top 15 when the timer ends.</span></div>
+<div data-m="cd" style="display: flex; align-items: center; gap: 1px; border-radius: 14px; overflow: hidden; border: 1px solid #22304F; background: #22304F">
+<sc-for list="{{countdown}}" as="c" hint-placeholder-count="4"><span style="display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 10px 16px; background: #0B1222; min-width: 52px"><span style="font-family: 'Geist Mono', monospace; font-size: 22px; color: #EEF3FF">{{c.v}}</span><span style="font-size: 11.5px; color: #75829F">{{c.l}}</span></span></sc-for>
+</div>
+</section>
+<div style="display: flex; justify-content: flex-end; margin-top: 10px"><button type="button" onClick="{{togglePast}}" class="ul" style="border: 0; background: transparent; color: #8C9AB9; font: inherit; font-size: 13px; cursor: pointer">{{pastLabel}}</button></div>
+<section aria-label="Leaderboard" style="margin-top: 6px; border-radius: 20px; border: 1px solid #1C2742; background: #0E1528; box-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 18px 44px -30px rgba(0,0,0,0.9); padding: 10px 14px 14px">
+<div data-m="lb" style="display: grid; grid-template-columns: 44px minmax(200px, 1fr) 140px 200px 110px; gap: 12px; padding: 8px 12px; font-size: 12px; font-weight: 500; color: #8C9AB9"><span>#</span><span>Player</span><span style="text-align: right">Wager</span><span style="text-align: center">Casinos</span><span style="text-align: right">Prize</span></div>
+<sc-for list="{{board}}" as="r" hint-placeholder-count="10"><div data-m="lb" class="rh" style="display: grid; grid-template-columns: 44px minmax(200px, 1fr) 140px 200px 110px; gap: 12px; align-items: center; padding: 12px; margin-top: 6px; border-radius: 14px; border: 1px solid #1C2742; background: #0B1222">
+<span style="width: 28px; height: 28px; border-radius: 50%; background: {{r.medal}}; color: {{r.mfg}}; font-family: 'Geist Mono', monospace; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center">{{r.rank}}</span>
+<span style="display: flex; align-items: center; gap: 10px"><span style="width: 32px; height: 32px; border-radius: 50%; background: {{r.tint}}; color: #DCE6FF; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">{{r.ini}}</span><span style="font-weight: 600; font-size: 15px">{{r.user}}</span></span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; font-size: 15px">{{r.wager}}</span>
+<span style="display: flex; justify-content: center; gap: 4px"><sc-for list="{{r.cas}}" as="c" hint-placeholder-count="3"><span title="{{c.name}}" style="width: 26px; height: 26px; border-radius: 50%; background: {{c.tint}}; border: 1px solid #22304F; color: #DCE6FF; font-size: 9.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">{{c.ini}}</span></sc-for></span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; font-size: 15px; color: #EEF3FF">{{r.prize}}</span>
+</div></sc-for>
+<sc-if value="{{canMoreBoard}}" hint-placeholder-val="{{ true }}"><div style="display: flex; justify-content: center; margin-top: 12px"><button type="button" onClick="{{moreBoard}}" class="hv" style="min-height: 40px; padding: 0 16px; border-radius: 12px; border: 1px solid #263457; background: #0E1528; color: #EAF0FF; font: inherit; font-size: 14px; cursor: pointer">Show all 15</button></div></sc-if>
+</section>
+</sc-if>
+
+<sc-if value="{{isCodes}}" hint-placeholder-val="{{ false }}">
+<section aria-label="Code drops" style="margin-top: 16px; border-radius: 20px; border: 1px solid #1C2742; background: #0E1528; box-shadow: 0 1px 2px rgba(0,0,0,0.35), 0 18px 44px -30px rgba(0,0,0,0.9); overflow: hidden">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid #1C2742">
+<div style="display: flex; align-items: center; gap: 12px"><span style="display: inline-flex; align-items: center; gap: 8px; min-height: 30px; padding: 0 11px; border-radius: 999px; border: 1px solid rgba(94,234,212,0.35); background: rgba(94,234,212,0.08); color: #99F6E4; font-size: 13px; font-weight: 600"><span class="pulseSky" style="width: 7px; height: 7px; border-radius: 50%; background: #5EEAD4"></span>Live</span><h2 style="margin: 0; font-size: 19px; font-weight: 600">Code drop feed</h2><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; color: #FCD34D; background: rgba(252,211,77,0.08); border: 1px solid rgba(252,211,77,0.3); border-radius: 999px; padding: 3px 9px; white-space: nowrap">Sample data</span></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<div style="position: relative"><span style="position: absolute; left: 12px; top: 14px; pointer-events: none; display: inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#75829F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span><input data-m="fin" type="text" aria-label="Search codes" value="{{kq}}" onChange="{{onKq}}" placeholder="Search codes or casinos" style="width: 230px; height: 44px; box-sizing: border-box; padding: 0 14px 0 38px; border-radius: 12px; border: 1px solid #22304F; background: #0E1528; color: #EAF0FF; font: inherit; font-size: 14px"></div>
+<div role="group" aria-label="Code type" data-m="seg" style="display: inline-flex; padding: 4px; border-radius: 12px; border: 1px solid #1C2742; background: #0A1020">
+<sc-for list="{{kinds}}" as="o" hint-placeholder-count="3"><button type="button" onClick="{{o.pick}}" aria-pressed="{{o.on}}" class="ul" style="min-height: 36px; padding: 0 13px; border-radius: 9px; border: 0; background: {{o.bg}}; box-shadow: {{o.shadow}}; color: {{o.fg}}; font: inherit; font-size: 13.5px; cursor: pointer; white-space: nowrap">{{o.label}}</button></sc-for>
+</div>
+<button type="button" onClick="{{toggleSound}}" aria-pressed="{{sound}}" aria-label="Sound alerts" class="hv" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #22304F; background: #0E1528; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{soundColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"></path><path d="{{soundPath}}"></path></svg></button>
+</div>
+</div>
+<div data-m="hdr" style="display: grid; grid-template-columns: {{ktmpl}}; gap: 12px; padding: 4px 18px; font-size: 12px; font-weight: 500; color: #8C9AB9; background: #0E1528; border-bottom: 1px solid #1C2742; min-height: 38px; align-items: center"><span>Casino</span><span>Code</span><span style="text-align: right">Value</span><span style="text-align: right">Dropped</span><span style="text-align: right">Claims</span><span style="text-align: right">Wager req.</span><span style="text-align: right">Value per $1K</span><span></span></div>
+<sc-for list="{{codes}}" as="k" hint-placeholder-count="10"><div data-m="kc" class="{{k.cls}}" style="display: grid; grid-template-columns: {{ktmpl}}; gap: 12px; align-items: center; padding: 11px 18px; border-bottom: 1px solid #131C33; font-size: 14px">
+<span style="display: flex; align-items: center; gap: 10px"><span style="width: 28px; height: 28px; border-radius: 50%; background: {{k.tint}}; color: #DCE6FF; font-size: 10.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">{{k.ini}}</span><span style="font-weight: 600">{{k.casino}}</span><sc-if value="{{k.excl}}" hint-placeholder-val="{{ false }}"><span style="font-size: 10.5px; color: #B4C4FF; border: 1px solid rgba(143,168,255,0.3); border-radius: 999px; padding: 1px 7px">Exclusive</span></sc-if></span>
+<button type="button" onClick="{{k.copy}}" aria-label="{{k.copyAria}}" class="ul" style="display: inline-flex; align-items: center; gap: 8px; padding: 0; border: 0; background: transparent; color: #EAF0FF; font-family: 'Geist Mono', monospace; font-size: 13.5px; cursor: pointer; text-align: left">{{k.code}}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#75829F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a1 1 0 0 1 1-1h10"></path></svg></button>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; color: #EEF3FF">{{k.value}}</span>
+<span style="text-align: right; color: #8C9AB9; font-size: 13px">{{k.when}}</span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right">{{k.claims}}</span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right">{{k.wager}}</span>
+<span style="font-family: 'Geist Mono', monospace; text-align: right; color: {{k.vColor}}">{{k.per}}</span>
+<span style="display: flex; justify-content: flex-end"><button type="button" onClick="{{k.redeem}}" class="hv" style="min-height: 34px; padding: 0 12px; border-radius: 9px; border: 1px solid #263457; background: transparent; color: #EAF0FF; font: inherit; font-size: 12.5px; cursor: pointer">Redeem ↗</button></span>
+</div></sc-for>
+<sc-if value="{{kEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 36px; text-align: center; color: #8C9AB9">No code matches “{{kq}}”</div></sc-if>
+</section>
+</sc-if>
+<footer style="margin-top: 48px; padding: 32px 0 28px; border-top: 1px solid #16203A; display: flex; flex-direction: column; gap: 26px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 300px">
+<span style="display: inline-flex; align-items: center; gap: 10px"><img src="assets/streax-logo.webp" alt="" aria-hidden="true" width="26" height="26" style="flex: 0 0 auto; display: block; width: 26px; height: 26px; border-radius: 8px; box-shadow: 0 6px 16px -8px rgba(37,72,190,0.6)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 23px; line-height: 1; letter-spacing: -0.01em; color: #EAF0FF">Streax</span></span>
+<span style="font-size: 13.5px; line-height: 1.6; color: #8C9AB9">Casino data you can check. Every number on this platform names its source.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px; font-size: 13.5px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #EAF0FF">Platform</span><a href="Rankings.dc.html" class="ul" style="color: #8C9AB9">Rankings</a><a href="Casino.dc.html" class="ul" style="color: #8C9AB9">Casino profiles</a><a href="Onchain.dc.html" class="ul" style="color: #8C9AB9">On-chain monitor</a><a href="Wallets.dc.html" class="ul" style="color: #8C9AB9">Casino wallets</a><a href="Analytics.dc.html" class="ul" style="color: #8C9AB9">Analytics</a><a href="Streamers.dc.html" class="ul" style="color: #8C9AB9">Streamers</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #EAF0FF">Community</span><a href="Community.dc.html" class="ul" style="color: #8C9AB9">Reviews</a><a href="Complaints.dc.html" class="ul" style="color: #8C9AB9">Complaints</a><a href="WalletCheck.dc.html" class="ul" style="color: #8C9AB9">My wallet check</a><a href="BonusCalc.dc.html" class="ul" style="color: #8C9AB9">Bonus calculator</a><a href="/articles" class="ul" style="color: #8C9AB9">Articles</a><a href="BetFeed.dc.html" class="ul" style="color: #8C9AB9">Bet feed</a><a href="Bonuses.dc.html" class="ul" style="color: #8C9AB9">Leaderboard and codes</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #EAF0FF">Data</span><button type="button" onClick="{{openSources}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #8C9AB9; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Sources and methodology</button><button type="button" onClick="{{openAlerts}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #8C9AB9; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Daily alerts</button><button type="button" onClick="{{openSupport}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #8C9AB9; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Contact</button></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 18px; border-top: 1px solid #16203A; font-size: 12.5px; color: #75829F; text-align: center">
+<span>18+ · Gambling can be addictive. Play responsibly. Help: BeGambleAware.org · GamCare.org.uk · GamblingTherapy.org</span>
+<span>© 2026 Streax · Not financial advice · Third-party figures are shown as published and credited to their source</span>
+</div>
+</footer>
+</main>
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; left: 0; right: 0; bottom: 24px; z-index: 100; display: flex; justify-content: center; padding: 0 16px; pointer-events: none">
+<div role="status" class="fu" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid #263457; background: rgba(16,24,44,0.98); box-shadow: 0 20px 50px -20px rgba(0,0,0,0.9); font-size: 14px; color: #EAF0FF"><span style="width: 20px; height: 20px; border-radius: 50%; background: rgba(143,168,255,0.15); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8FA8FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{toast}}</div>
+</div>
+</sc-if>
+<sc-if value="{{modalOpen}}" hint-placeholder-val="{{ false }}">
+<div class="fi" onClick="{{closeModal}}" style="position: fixed; inset: 0; z-index: 90; background: rgba(3,6,16,0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px">
+<div role="dialog" aria-modal="true" aria-label="{{modalTitle}}" class="fu" onClick="{{stop}}" style="width: 100%; max-width: {{modalW}}; max-height: calc(100vh - 48px); overflow-y: auto; box-sizing: border-box; border-radius: 18px; border: 1px solid transparent; background: linear-gradient(180deg, #111A30 0%, #0C1324 100%) padding-box, linear-gradient(160deg, rgba(143,168,255,0.5), rgba(143,168,255,0.06) 50%, rgba(143,168,255,0.2)) border-box; box-shadow: 0 40px 120px -30px rgba(110,139,255,0.35); padding: 24px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">{{modalTitle}}</h2><span style="font-size: 14px; color: #8C9AB9; line-height: 1.5">{{modalSub}}</span></div>
+<button type="button" aria-label="Close dialog" onClick="{{closeModal}}" class="hv" style="width: 40px; height: 40px; flex: 0 0 auto; border-radius: 10px; border: 1px solid #263457; background: transparent; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9D3EA" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<sc-if value="{{isSources}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{sources}}" as="s" hint-placeholder-count="6">
+<div style="display: flex; gap: 14px; align-items: flex-start"><span style="width: 28px; height: 28px; border-radius: 8px; background: rgba(143,168,255,0.1); border: 1px solid rgba(143,168,255,0.25); color: #B4C4FF; font-family: 'Geist Mono', monospace; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto">{{s.n}}</span><div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-weight: 600; font-size: 14.5px">{{s.name}}</span><span style="font-size: 13.5px; line-height: 1.55; color: #9AA8C7">{{s.gives}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #8FA8FF; word-break: break-all">{{s.url}} · {{s.when}}</span></div></div>
+</sc-for>
+<div style="border-radius: 12px; border: 1px solid #22304F; background: #0B1222; padding: 14px; font-size: 13.5px; line-height: 1.6; color: #9AA8C7"><span style="color: #EAF0FF; font-weight: 600">Streax Score.</span> Nine weighted categories: on-chain activity and reserves (from this data), payout speed and complaint record (from verified player reports) and five review categories (licence, fairness, responsible gambling, support, security). Categories without enough evidence are left out, never guessed, and the score is marked provisional until most of the weight is rated. The full method is in the Streax article How the Streax Score works.</div>
+</sc-if>
+<sc-if value="{{isForm}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{formDone}}" hint-placeholder-val="{{ false }}"><div class="fu" style="border-radius: 14px; border: 1px solid rgba(94,234,212,0.3); background: rgba(94,234,212,0.06); padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 600; color: #99F6E4">{{doneTitle}}</span><span style="font-size: 13.5px; color: #9AA8C7; line-height: 1.55">{{doneBody}}</span></div></sc-if>
+<sc-if value="{{formOpen}}" hint-placeholder-val="{{ true }}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #9AA8C7">Email<input type="email" value="{{email}}" onChange="{{onEmail}}" placeholder="you@company.com" style="height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 1px solid {{emailBd}}; background: #0E1528; color: #EAF0FF; font: inherit; font-size: 14.5px"></label>
+<sc-if value="{{isAlerts}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #9AA8C7">Send me</span><sc-for list="{{topics}}" as="t" hint-placeholder-count="3"><button type="button" role="checkbox" aria-checked="{{t.on}}" onClick="{{t.toggle}}" class="hv" style="display: flex; align-items: center; gap: 10px; min-height: 42px; padding: 0 12px; border-radius: 10px; border: 1px solid #22304F; background: transparent; color: #EAF0FF; font: inherit; font-size: 14px; cursor: pointer; text-align: left"><span style="width: 18px; height: 18px; border-radius: 5px; border: 1px solid {{t.bd}}; background: {{t.bg}}; display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; font-weight: 700">{{t.mark}}</span>{{t.label}}</button></sc-for></div></sc-if>
+<sc-if value="{{isSupport}}" hint-placeholder-val="{{ false }}"><label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #9AA8C7">Message<textarea value="{{msg}}" onChange="{{onMsg}}" rows="4" placeholder="How can we help?" style="box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1px solid #22304F; background: #0E1528; color: #EAF0FF; font: inherit; font-size: 14.5px; resize: vertical"></textarea></label></sc-if>
+<sc-if value="{{hasFormErr}}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; color: #FDBA74">{{formErr}}</span></sc-if>
+<button type="button" onClick="{{submitForm}}" class="pb" style="min-height: 46px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #5A82FF 0%, #2F54EB 100%); color: #FFFFFF; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer">{{submitLabel}}</button>
+</sc-if>
+</sc-if>
+<sc-if value="{{isGate}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{gatePerks}}" as="g" hint-placeholder-count="4"><div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #EAF0FF"><span style="width: 24px; height: 24px; border-radius: 8px; background: rgba(143,168,255,0.1); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8FA8FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{g}}</div></sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="{{gateSignup}}" class="pb" style="flex: 1 1 200px; min-height: 46px; box-sizing: border-box; border-radius: 12px; background: linear-gradient(135deg, #5A82FF 0%, #2F54EB 100%); color: #FFFFFF; font-size: 14.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">Create free account</a>
+<a href="{{gateLogin}}" class="hv" style="flex: 1 1 120px; min-height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #263457; color: #C9D3EA; font-size: 14.5px; font-weight: 500; display: inline-flex; align-items: center; justify-content: center">Log in</a>
+</div>
+<span style="font-size: 12.5px; color: #75829F">Free, takes 30 seconds. 18+ only.</span>
+</sc-if>
+
+</div>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1743}}'>
+class Component extends DCLogic {
+
+  showToast(msg) {
+    var self = this;
+    clearTimeout(this.toastTimer);
+    this.setState({ toast: msg });
+    this.toastTimer = setTimeout(function () { self.setState({ toast: '' }); }, 2600);
+  }
+  copy(text, msg) {
+    try { if (navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {}); } catch (e) {}
+    this.showToast(msg);
+  }
+  money(v) {
+    if (v == null || isNaN(v)) return 'n/a';
+    var a = Math.abs(v), s = v < 0 ? '-' : '', o;
+    if (a >= 1e9) o = (a / 1e9).toFixed(2) + 'B';
+    else if (a >= 1e6) o = (a / 1e6).toFixed(2) + 'M';
+    else if (a >= 1e3) o = (a / 1e3).toFixed(2) + 'K';
+    else if (a >= 1) o = a.toFixed(2);
+    else if (a === 0) o = '0';
+    else o = a.toPrecision(3);
+    return s + '$' + o;
+  }
+  compact(v) {
+    if (v >= 1e6) return (v / 1e6).toFixed(2) + 'M';
+    if (v >= 1e3) return (v / 1e3).toFixed(1) + 'K';
+    return String(Math.round(v));
+  }
+  price(v) {
+    if (v >= 1000) return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (v >= 1) return '$' + v.toFixed(2);
+    return '$' + v.toPrecision(4);
+  }
+  pct(v) { return (v >= 0 ? '▲ ' : '▼ ') + Math.abs(v).toFixed(2) + '%'; }
+  pcol(v) { return v >= 0 ? '#5EEAD4' : '#FB923C'; }
+  seg(opts, active, pick) {
+    return opts.map(function (o) {
+      var on = o.v === active;
+      return { label: o.label, v: o.v, on: on, bg: on ? 'linear-gradient(180deg, #24335A 0%, #1B2848 100%)' : 'transparent', shadow: on ? 'inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px #263457' : 'none', fg: on ? '#EEF3FF' : '#8C9AB9', pick: function () { pick(o.v); } };
+    });
+  }
+  tint(name) {
+    var t = ['linear-gradient(135deg, #1C2D6A, #131F4A)', 'linear-gradient(135deg, #173A62, #0F2444)', 'linear-gradient(135deg, #2B2C6E, #191A45)', 'linear-gradient(135deg, #163B5E, #0D233B)', 'linear-gradient(135deg, #263354, #161E35)'];
+    var h = 0; for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 997;
+    return t[h % t.length];
+  }
+  ini(name) { var s = String(name).replace(/[^A-Za-z0-9]/g, ''); return (s.charAt(0) + (s.charAt(1) || '')).toUpperCase(); }
+  logoMap() { return this._lm || (this._lm = {"tok_shfl":"assets/logos/tok_shfl.png","tok_rlb":"assets/logos/tok_rlb.png","tok_fun":"assets/logos/tok_fun.png","tok_desu":"assets/logos/tok_desu.png","tok_bfg":"assets/logos/tok_bfg.png","tok_scs":"assets/logos/tok_scs.png","tok_winr":"assets/logos/tok_winr.png","chain_eth":"assets/logos/chain_eth.png","chain_sol":"assets/logos/chain_sol.png","chain_trx":"assets/logos/chain_trx.png","chain_bnb":"assets/logos/chain_bnb.png","chain_btc":"assets/logos/chain_btc.png","kick":"assets/logos/kick.png","cas_500.casino":"assets/logos/casinos/500.casino.png","cas_acebet":"assets/logos/casinos/acebet.png","cas_bc.game":"assets/logos/casinos/bc.game.png","cas_betfury.com":"assets/logos/casinos/betfury.com.png","cas_betstrike":"assets/logos/casinos/betstrike.png","cas_bluff":"assets/logos/casinos/bluff.png","cas_cloudbet.com":"assets/logos/casinos/cloudbet.com.png","cas_cybet":"assets/logos/casinos/cybet.png","cas_duel.com":"assets/logos/casinos/duel.com.png","cas_duelbits.com":"assets/logos/casinos/duelbits.com.png","cas_flush":"assets/logos/casinos/flush.png","cas_gamba.com":"assets/logos/casinos/gamba.com.png","cas_gamdom.com":"assets/logos/casinos/gamdom.com.png","cas_goated.com":"assets/logos/casinos/goated.com.png","cas_metawin.com":"assets/logos/casinos/metawin.com.png","cas_rainbet.com":"assets/logos/casinos/rainbet.com.png","cas_razed.com":"assets/logos/casinos/razed.com.png","cas_rollbit.com":"assets/logos/casinos/rollbit.com.png","cas_roobet.com":"assets/logos/casinos/roobet.com.png","cas_shuffle.com":"assets/logos/casinos/shuffle.com.png","cas_solcasino.io":"assets/logos/casinos/solcasino.io.png","cas_sportsbet.io":"assets/logos/casinos/sportsbet.io.png","cas_stake.com":"assets/logos/casinos/stake.com.png","cas_thrill.com":"assets/logos/casinos/thrill.com.png","cas_whale.io":"assets/logos/casinos/whale.io.png","cas_winna.com":"assets/logos/casinos/winna.com.png","cas_yeet.com":"assets/logos/casinos/yeet.com.png"}); }
+  tokLogo(sym) { return this.logoMap()['tok_' + String(sym || '').toLowerCase()] || ''; }
+  chainLogo(name) { var k = { Ethereum: 'eth', ETH: 'eth', Solana: 'sol', SOL: 'sol', Tron: 'trx', TRX: 'trx', 'BNB Chain': 'bnb', BNB: 'bnb', BTC: 'btc', Bitcoin: 'btc' }[name]; return k ? (this.logoMap()['chain_' + k] || '') : ''; }
+  kickLogo() { return this.logoMap().kick || ''; }
+  logo(domain, size) {
+    if (!domain) return '';
+    var own = this.D && this.D.casinoLogos && this.D.casinoLogos[domain];
+    if (own) return own;
+    var mine = this.logoMap()['cas_' + domain];
+    if (mine) return mine;
+    if (domain.indexOf('.') < 0) return '';
+    return this.props && this.props.$local ? 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=' + Math.max(size || 64, 128) : '';
+  }
+  short(a) { return a.slice(0, 6) + '…' + a.slice(-4); }
+  headers(cols, key, dir, setSort) {
+    return cols.map(function (c) {
+      var on = c.k && c.k === key;
+      return { label: c.label, justify: c.right ? 'flex-end' : 'flex-start', sortable: !!c.k, plain: !c.k, color: on ? '#B4C4FF' : '#8C9AB9', arrow: on ? (dir < 0 ? '↓' : '↑') : (c.k ? '↕' : ''), aria: c.k ? 'Sort by ' + c.label : '', sort: function () { setSort(c.k); } };
+    });
+  }
+  gauge(v) {
+    var len = 81.68, f = v == null ? 0 : v / 100;
+    return { dash: (len * f).toFixed(1) + ' ' + len, color: v == null ? '#3A4A70' : v >= 75 ? '#5EEAD4' : v >= 55 ? '#8FA8FF' : v >= 40 ? '#FCD34D' : '#FB923C', label: v == null ? 'n/a' : String(v) };
+  }
+  shellVals() {
+    var self = this, st = this.state, D = this.D;
+    var q = (st.gq || '').trim().toLowerCase();
+    var res = q ? D.idx.filter(function (c) { return c[0].toLowerCase().indexOf(q) !== -1; }).slice(0, 6).map(function (c) {
+      return { name: c[0], href: 'Casino.dc.html?c=' + c[1], dep: c[2], rank: c[3], ini: self.ini(c[0]), tint: self.tint(c[0]), logo: self.logo(c[4] || c[1], 64) };
+    }) : [];
+    var m = st.modal, isForm = m === 'alerts' || m === 'support';
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(st.email || '');
+    var topicsAll = ['Big deposit moves', 'New casinos added', 'Casino token moves'];
+    var titles = { gate: 'Free with a Streax account', alerts: 'Daily alerts', support: 'Contact support', sources: 'Data sources and methodology' };
+    var subs = { gate: 'Create a free account to unlock ' + String(st.gateWhat || 'this').replace(/^[A-Z](?=[a-z])/, function (c) { return c.toLowerCase(); }) + '. You also get:', alerts: 'One short email a day with the biggest on-chain moves.', support: 'Tell us what you need and we will reply by email.', sources: 'Where every number on this platform comes from, and when it was captured.' };
+    return {
+      acct: self.acctVals(), sideCta: self.sideVals(), isGate: m === 'gate',
+      gatePerks: ['Your own whale alerts by email or Telegram', 'A watchlist of the casinos you follow', '7, 30 and 90-day history with CSV downloads', 'Member-only bonus codes and referral points'],
+      gateSignup: 'Signup.dc.html' + self.gateNext(), gateLogin: 'Login.dc.html' + self.gateNext(),
+      gq: st.gq || '', onGq: function (e) { self.setState({ gq: e.target.value }); },
+      gqOn: function () { clearTimeout(self.blurTimer); self.setState({ gqFocus: true }); },
+      gqOff: function () { self.blurTimer = setTimeout(function () { self.setState({ gqFocus: false }); }, 180); },
+      gqOpen: !!st.gqFocus && q.length > 0, gqResults: res, gqNone: q.length > 0 && res.length === 0,
+      bell: function () { if (!self.member()) { self.gate('Personal whale alerts'); return; } self.showToast('You are all caught up. Whale alerts for your watchlist arrive by email or Telegram.'); },
+      avatar: function () { self.showToast('Accounts arrive with the full launch'); },
+      openAlerts: function () { if (self.member()) { location.href = 'Account.dc.html'; return; } self.gate('Personal whale alerts'); },
+      openSupport: function () { self.setState({ modal: 'support', formDone: false, formErr: '' }); },
+      openSources: function () { self.setState({ modal: 'sources' }); },
+      modalOpen: !!m, isSources: m === 'sources', isForm: isForm, isAlerts: m === 'alerts', isSupport: m === 'support',
+      modalTitle: titles[m] || this.extraTitle || '', modalSub: subs[m] || this.extraSub || '', modalW: m === 'sources' ? '640px' : (this.extraW || '480px'),
+      closeModal: function () { self.setState({ modal: '' }); }, stop: function (e) { e.stopPropagation(); },
+      email: st.email || '', onEmail: function (e) { self.setState({ email: e.target.value, formErr: '' }); },
+      emailBd: st.formErr ? 'rgba(251,146,60,0.6)' : '#22304F',
+      msg: st.msg || '', onMsg: function (e) { self.setState({ msg: e.target.value, formErr: '' }); },
+      topics: topicsAll.map(function (t) { var on = !(st.topicsOff || {})[t]; return { label: t, on: on, bd: on ? '#8FA8FF' : '#3A4A70', bg: on ? '#8FA8FF' : 'transparent', mark: on ? '✓' : '', toggle: function () { var o = Object.assign({}, st.topicsOff || {}); o[t] = on; self.setState({ topicsOff: o }); } }; }),
+      hasFormErr: !!st.formErr, formErr: st.formErr || '', formDone: !!st.formDone, formOpen: !st.formDone,
+      submitLabel: m === 'support' ? 'Send message' : 'Turn on alerts',
+      doneTitle: m === 'support' ? 'Message received' : 'Alerts are on for ' + (st.email || ''),
+      doneBody: 'This is the local demo, so nothing is emailed yet. Connect an email service in the backend to send it for real.',
+      submitForm: function () {
+        if (!emailOk) { self.setState({ formErr: 'Enter a valid email address.' }); return; }
+        if (m === 'support' && !(st.msg || '').trim()) { self.setState({ formErr: 'Write a short message.' }); return; }
+        if (m === 'alerts' && topicsAll.every(function (t) { return (st.topicsOff || {})[t]; })) { self.setState({ formErr: 'Pick at least one alert.' }); return; }
+        self.setState({ formDone: true, formErr: '', msg: '' });
+      },
+      sources: [
+        { n: '1', name: '99bitcoins casino on-chain pages', gives: '24h deposits, depositing wallets, payouts, hot wallets, chain and asset split for 43 casinos. Shown as published. Asset values on those pages match ETH and SOL prices from late August 2026.', url: '99bitcoins.com/coins/gambling', when: 'captured 11 Oct 2026, unchanged on recheck 12 Oct' },
+        { n: '2', name: 'Official casino websites', gives: 'Operator name, registration and licence, quoted from each site footer. Casinos whose footer could not be read show "Not verified".', url: 'stake.com, roobet.com, shuffle.com, rainbet.com, thrill.com, sportsbet.io, stake.us', when: '12 Oct 2026' },
+        { n: '3', name: 'DefiLlama coins API', gives: 'Casino token prices, 24h and 7d change and 30 daily closes.', url: 'coins.llama.fi', when: self.props && self.props.$local ? 'live on your local server' : '12 Oct 2026, 08:53 UTC' },
+        { n: '4', name: 'CoinGecko', gives: 'Circulating supply, used for market cap at the current price, and 24h volume.', url: 'coingecko.com/en/categories/gambling', when: '11 Oct 2026' },
+        { n: '5', name: 'Kick channel API', gives: 'Followers, verified flag, live status and viewers for 14 casino streamers.', url: 'kick.com/api/v2/channels/{slug}', when: self.props && self.props.$local ? 'live on your local server' : '12 Oct 2026, 09:05 UTC' },
+        { n: '6', name: 'Etherscan and Blockscout', gives: 'Public name tags and token holdings for the Stake.com and Rollbit wallets (Etherscan), and their ETH balances (Blockscout API, live on the local server).', url: 'etherscan.io, eth.blockscout.com', when: '11 to 12 Oct 2026' },
+        { n: '7', name: 'Logos', gives: 'Token logos from Trust Wallet assets and web3icons, chain logos from cryptocurrency-icons, Kick logo from Simple Icons. Casino icons are each casino’s own website icon, loaded in your browser on the local site; the canvas shows initials until logo files are added.', url: 'github.com/trustwallet/assets, web3icons, cryptocurrency-icons, simpleicons.org, google.com/s2/favicons', when: '12 Oct 2026' }
+      ],
+      hasToast: !!st.toast, toast: st.toast || ''
+    };
+  }
+
+  // ---- Streax accounts ----
+  member() { return !!(this.props && this.props.$me); }
+  locked() {
+    var a = this.props && this.props.$auth;
+    if (this.props && this.props.$local && a && a.enabled === false) return false;
+    return !this.member();
+  }
+  gate(what) { this.setState({ modal: 'gate', gateWhat: what }); }
+  apiPost(path, body) {
+    return fetch(path, { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body || {}) }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) { var e = new Error(j.error || ('Something went wrong (' + r.status + ')')); e.status = r.status; e.code = j.code; e.field = j.field; throw e; }
+        return j;
+      });
+    });
+  }
+  saveMe(me) {
+    if (this.props) this.props.$me = me;
+    try { if (me) sessionStorage.setItem('sx_me', JSON.stringify(me)); else sessionStorage.removeItem('sx_me'); } catch (e) {}
+  }
+  acctVals() {
+    var me = this.props && this.props.$me;
+    if (me) return { href: 'Account.dc.html', label: 'My account, ' + me.name, text: me.initials, pad: '0', radius: '50%', fs: '15px', w: '44px', avatar: me.avatar || '' };
+    return { href: 'Signup.dc.html', label: 'Create a free Streax account', text: 'Sign up', pad: '0 16px', radius: '14px', fs: '14px', w: 'auto', avatar: '' };
+  }
+  sideVals() {
+    if (this.member()) return { title: 'Your whale alerts', body: 'Watchlist, alert settings, member codes and your referral points.', btn: 'Open my account', href: 'Account.dc.html' };
+    return { title: 'Free member perks', body: 'Your own whale alerts, a casino watchlist, full history and member-only codes.', btn: 'Create free account', href: 'Signup.dc.html' };
+  }
+  gateNext() {
+    if (!(this.props && this.props.$local) || typeof location === 'undefined') return '';
+    return '?next=' + encodeURIComponent(location.pathname + location.search);
+  }
+  watchVals(slug, name) {
+    var self = this, me = this.props && this.props.$me;
+    var on = !!(me && me.watchlist && me.watchlist.indexOf(slug) !== -1);
+    return { on: on, label: on ? 'Watching' : 'Watch', fill: on ? 'currentColor' : 'none', aria: (on ? 'Stop watching ' : 'Add to watchlist: ') + name,
+      toggle: function () {
+        if (!me) { self.gate('A casino watchlist with your own whale alerts'); return; }
+        self.apiPost('/api/account/watch', { slug: slug, on: !on }).then(function (j) {
+          me.watchlist = (j.watchlist || []).map(function (w) { return w.slug; });
+          self.saveMe(me);
+          self.showToast(on ? name + ' removed from your watchlist' : name + ' is on your watchlist');
+        }).catch(function (e) { if (e.status === 401) { self.saveMe(null); self.gate('A casino watchlist with your own whale alerts'); } else self.showToast(e.message); });
+      } };
+  }
+  // ---- end accounts ----
+  scoreLib() {
+    if (!this._scoreLib) this._scoreLib = (function () {
+  var CATS = [
+    { id: 'activity', name: 'On-chain activity', w: 15, src: 'On-chain', what: 'Deposit volume and how many wallets deposit.' },
+    { id: 'reserves', name: 'Reserves', w: 15, src: 'On-chain', what: 'Hot wallet money compared with a day of deposits.' },
+    { id: 'payouts', name: 'Payout speed', w: 15, src: 'Players', what: 'Median time from withdrawal request to coins arriving, from verified player reports.' },
+    { id: 'complaints', name: 'Complaint record', w: 15, src: 'Players', what: 'Share of closed complaints the casino resolved.' },
+    { id: 'fairness', name: 'Fairness and RTP', w: 10, src: 'Review', what: 'Provably fair games, a verifier, client seeds and published RTP.' },
+    { id: 'licence', name: 'Licence and compliance', w: 10, src: 'Review', what: 'A licence we could check, KYC timing, geo-blocking and AML policy.' },
+    { id: 'rg', name: 'Responsible gambling', w: 8, src: 'Review', what: 'Self-exclusion, limits, cool-off and help links.' },
+    { id: 'support', name: 'Support', w: 7, src: 'Review', what: '24/7 live help and how fast a human answers.' },
+    { id: 'security', name: 'Account security', w: 5, src: 'Review', what: 'Two-factor login and withdrawal confirmation.' }
+  ];
+  var CHECKS = {
+    fairness: [['provablyFair', 'Provably fair house games'], ['verifier', 'Built-in result verifier'], ['clientSeed', 'Players can set their own client seed'], ['rtpPublished', 'RTP published for every game'], ['maxRtp', 'Commits to the highest RTP version of slots']],
+    compliance: [['kycBeforeDeposit', 'KYC asked before the first deposit, not after a win'], ['geoBlock', 'Blocks restricted countries'], ['restrictedList', 'Publishes its restricted countries'], ['amlPolicy', 'Publishes an AML policy']],
+    rg: [['selfExclusion', 'Self-exclusion from the account page'], ['limits', 'Deposit and loss limits'], ['coolOff', 'Cool-off periods'], ['rgLinks', 'Links to gambling help services'], ['realityCheck', 'Reality checks or session reminders']],
+    support: [['live24', '24/7 live chat with a person']],
+    security: [['twoFA', 'Two-factor login'], ['withdrawalConfirm', 'Withdrawals need a second confirmation'], ['loginAlerts', 'New login or device alerts']]
+  };
+  function clamp(v) { return Math.max(0, Math.min(10, v)); }
+  function lerp(x, pts) {
+    if (x <= pts[0][0]) return pts[0][1];
+    for (var i = 1; i < pts.length; i++) if (x <= pts[i][0]) { var a = pts[i - 1], b = pts[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); }
+    return pts[pts.length - 1][1];
+  }
+  function checks(obj, list) {
+    var yes = 0, known = 0;
+    list.forEach(function (c) { var v = obj && obj[c[0]]; if (v === 'yes') { yes++; known++; } else if (v === 'no') known++; });
+    return { yes: yes, known: known, total: list.length };
+  }
+  function grade(total) {
+    if (total == null) return { label: 'Not rated', tone: 'muted' };
+    if (total >= 85) return { label: 'Excellent', tone: 'good' };
+    if (total >= 70) return { label: 'Good', tone: 'good' };
+    if (total >= 55) return { label: 'Fair', tone: 'accent' };
+    if (total >= 40) return { label: 'Weak', tone: 'warn' };
+    return { label: 'Poor', tone: 'bad' };
+  }
+
+  // input: { onchain: {vol01, reach01, cover, drawdown7d}, review: {...}, complaints: {resolved, unresolved}, payouts: {median, count} }
+  function compute(input) {
+    input = input || {};
+    var oc = input.onchain || {}, rv = input.review || {}, cp = input.complaints || {}, po = input.payouts || {};
+    var out = {};
+    if (oc.vol01 != null && oc.reach01 != null) out.activity = { v: clamp(10 * (0.57 * oc.vol01 + 0.43 * oc.reach01)), note: oc.note || '' };
+    if (oc.cover != null && isFinite(oc.cover)) {
+      var r = lerp(oc.cover, [[0, 0], [0.25, 2], [1, 5], [2, 7], [5, 10]]);
+      if (oc.drawdown7d != null && oc.drawdown7d > 0.4) r -= Math.min(4, (oc.drawdown7d - 0.4) * 10);
+      out.reserves = { v: clamp(r), note: oc.cover.toFixed(1) + 'x a day of deposits' };
+    }
+    if (po.count >= 3 && po.median != null) out.payouts = { v: clamp(lerp(po.median, [[10, 10], [30, 9], [60, 8], [180, 6], [720, 4], [1440, 2], [2880, 0]])), note: 'Median ' + fmtMin(po.median) + ' over ' + po.count + ' reports' };
+    var closed = (cp.resolved || 0) + (cp.unresolved || 0);
+    if (closed >= 3) out.complaints = { v: clamp(10 * (cp.resolved || 0) / closed), note: (cp.resolved || 0) + ' of ' + closed + ' closed complaints resolved' };
+    var f = checks(rv.fairness, CHECKS.fairness);
+    if (f.known >= 3) out.fairness = { v: 10 * f.yes / f.known, note: f.yes + ' of ' + f.known + ' checks passed' };
+    var lic = rv.licence || {}, comp = checks(rv.compliance, CHECKS.compliance), lv = null;
+    if (lic.status === 'licensed') lv = lic.verified ? 10 : 7; else if (lic.status === 'unlicensed') lv = 0;
+    if (lv != null || comp.known >= 2) {
+      var parts = [], ws = [];
+      if (lv != null) { parts.push(lv); ws.push(0.6); }
+      if (comp.known >= 2) { parts.push(10 * comp.yes / comp.known); ws.push(0.4); }
+      var s = 0, t = 0;
+      parts.forEach(function (p, i) { s += p * ws[i]; t += ws[i]; });
+      out.licence = { v: s / t, note: lic.status === 'licensed' ? (lic.verified ? 'Licence checked with the regulator' : 'Licence claimed, not yet checked') : lic.status === 'unlicensed' ? 'No licence found' : comp.yes + ' of ' + comp.known + ' compliance checks passed' };
+    }
+    var g = checks(rv.rg, CHECKS.rg);
+    if (g.known >= 3) out.rg = { v: 10 * g.yes / g.known, note: g.yes + ' of ' + g.known + ' tools available' };
+    var sp = rv.support || {}, sparts = [];
+    if (sp.live24 === 'yes') sparts.push(10); else if (sp.live24 === 'no') sparts.push(3);
+    if (sp.responseMins != null && sp.responseMins !== '' && isFinite(sp.responseMins)) sparts.push(lerp(Number(sp.responseMins), [[2, 10], [5, 9], [15, 7], [60, 5], [240, 3], [1440, 0]]));
+    if (sparts.length) out.support = { v: sparts.reduce(function (a, b) { return a + b; }, 0) / sparts.length, note: sp.responseMins ? 'First reply in about ' + fmtMin(Number(sp.responseMins)) : (sp.live24 === 'yes' ? '24/7 live chat' : 'No 24/7 live chat') };
+    var sc = checks(rv.security, CHECKS.security);
+    if (sc.known >= 2) out.security = { v: 10 * sc.yes / sc.known, note: sc.yes + ' of ' + sc.known + ' protections' };
+
+    var sum = 0, wsum = 0;
+    var cats = CATS.map(function (c) {
+      var x = out[c.id];
+      if (x) { sum += x.v * c.w; wsum += c.w; }
+      return { id: c.id, name: c.name, w: c.w, src: c.src, what: c.what, rated: !!x, v: x ? Math.round(x.v * 10) / 10 : null, note: x ? x.note : '' };
+    });
+    var total = wsum ? Math.round(sum / wsum * 10) : null;
+    var coverage = wsum / 100;
+    var shown = wsum >= 25 ? total : null;
+    // Under half the weight rated, a high number would overstate what we know: label it as early, not "Excellent".
+    var g = shown != null && coverage < 0.5 ? { label: 'Early score', tone: 'muted' } : grade(shown);
+    return { total: shown, coverage: coverage, provisional: coverage < 0.8, rated: cats.filter(function (c) { return c.rated; }).length, cats: cats, grade: g };
+  }
+  function fmtMin(m) {
+    if (m < 1) return 'under a minute';
+    if (m < 90) return Math.round(m) + ' min';
+    if (m < 48 * 60) return (Math.round(m / 6) / 10) + ' h';
+    return Math.round(m / 1440) + ' days';
+  }
+  return { CATS: CATS, CHECKS: CHECKS, compute: compute, grade: grade, fmtMin: fmtMin };
+})();
+    return this._scoreLib;
+  }
+  // ---- Streax Score: on-chain inputs from this page, review and player data from the server when it runs there ----
+  score(c, D) {
+    if (!c || c.dep < 1000) return null;
+    var maxDep = D.casinos[0].dep, maxW = 0;
+    D.casinos.forEach(function (x) { if (x.wal > maxW) maxW = x.wal; });
+    var lg = function (v) { return Math.log(Math.max(v, 1)) / Math.LN10; };
+    var vol = Math.max(0, Math.min(1, (lg(c.dep) - 4) / (lg(maxDep) - 4)));
+    var reach = Math.max(0, Math.min(1, lg(c.wal) / lg(maxW)));
+    var liq = Math.max(0, Math.min(1, (c.hot / c.dep) / 5));
+    var T = (this.trustSum && this.trustSum[c.slug]) || {};
+    var r = this.scoreLib().compute({ onchain: { vol01: vol, reach01: reach, cover: c.hot / c.dep }, review: T.review, complaints: T.complaints, payouts: T.payouts });
+    return { total: r.total, vol: vol * 10, reach: reach * 10, liq: liq * 10, cover: c.hot / c.dep, streax: r };
+  }
+  trustInit() {
+    var self = this;
+    if (!(this.props && this.props.$local) || typeof fetch !== 'function' || !(this.D && this.D.casinos)) return;
+    fetch('/api/trust/summary', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (!j) return;
+      var m = {};
+      Object.keys(j.reviews || {}).forEach(function (k) { (m[k] = m[k] || {}).review = j.reviews[k]; });
+      Object.keys(j.complaints || {}).forEach(function (k) { (m[k] = m[k] || {}).complaints = j.complaints[k]; });
+      Object.keys(j.payouts || {}).forEach(function (k) { (m[k] = m[k] || {}).payouts = j.payouts[k]; });
+      self.trustSum = m;
+      self.setState({ trustTick: Date.now() });
+    }).catch(function () {});
+  }
+
+  constructor(props) {
+    super(props);
+    this.D = {"idx":[["Stake.com","stakecom","$31.77M",1,"stake.com"],["Duel","duel","$16.56M",2,"duel.com"],["Roobet","roobet","$14.18M",3,"roobet.com"],["Rainbet","rainbet","$7.95M",4,"rainbet.com"],["Shuffle","shuffle","$5.71M",5,"shuffle.com"],["Gamdom","gamdom","$5.58M",6,"gamdom.com"],["1win","1win","$1.77M",7,""],["Qzino","qzino","$1.42M",8,""],["Thrill","thrill","$1.13M",9,"thrill.com"],["Toshibet","toshibet","$1.10M",10,""],["StakeUS","stakeus","$1.07M",11,"stake.us"],["Degen","degen","$1.02M",12,""],["Yeet","yeet","$937.61K",13,"yeet.com"],["Duelbits","duelbits","$810.77K",14,"duelbits.com"],["Winna","winna","$808.12K",15,"winna.com"],["Sportsbet.io","sportsbetio","$740.94K",16,"sportsbet.io"],["BC.Game","bcgame","$647.07K",17,"bc.game"],["Razed","razed","$623.24K",18,"razed.com"],["MetaWin","metawin","$545.54K",19,"metawin.com"],["BetFury","betfury","$440.60K",20,"betfury.com"],["500 Casino","500-casino","$369.58K",21,"500.casino"],["Spartans","spartans","$236.08K",22,""],["Dicey","dicey","$235.80K",23,""],["Gamba","gamba","$212.11K",24,"gamba.com"],["Bitcasino","bitcasino","$184.57K",25,"bitcasino.io"],["Solcasino","solcasino","$146.60K",26,"solcasino.io"],["Whale.io","whaleio","$122.94K",27,"whale.io"],["GOATED","goated","$108.87K",28,"goated.com"],["CoinCasino","coincasino","$102.73K",29,"coincasino.com"],["Lucky.fun","luckyfun","$79.10K",30,""],["Shock","shock","$55.94K",31,""],["Flush","flush","$53.23K",32,""],["Rollbit","rollbit","$48.69K",33,"rollbit.com"],["Acebet","acebet","$37.55K",34,""],["Bluff","bluff","$27.92K",35,""],["Chips.gg","chipsgg","$13.10K",36,"chips.gg"],["Cybet","cybet","$7.19K",37,""],["Wager.com","wagercom","$4.67K",38,""],["JackpotBet","jackpotbet","$1.47K",39,""],["Betstrike","betstrike","$10.01",40,""],["BlockBet","blockbet","$0.3244",41,""],["Cloudbet","cloudbet","$0.0907",42,"cloudbet.com"],["Moon Roll","moon-roll","$0.0011",43,""]],"capturedMs":1791795228000,"creatorsMs":1791795900000};
+    this.C = ['Vaultbet', 'Lumora', 'Orbitplay', 'Nova Casino', 'Tidewin', 'Redline', 'Kestrel', 'Brightdice'];
+    var now = Date.now(), M = 60000;
+    var K = [['Lumora', 'LUMI7KQ2', 2, 12, 400, 3000, false], ['Vaultbet', 'VB25WEEK', 25, 34, 150, 50000, true], ['Orbitplay', 'ORB4DAY9', 4, 58, 800, 9000, false], ['Tidewin', 'TIDE6RX', 6, 95, 250, 18000, false],
+      ['Kestrel', 'KES2FLASH', 2, 140, 1200, 6000, false], ['Nova Casino', 'NOVA8HQ', 8, 200, 220, 20000, true], ['Brightdice', 'BD3PERK', 3, 260, 900, 7000, false], ['Redline', 'RED12VIP', 12, 320, 110, 36000, true]];
+    var codes = K.map(function (k, i) { return { id: 'k' + i, casino: k[0], code: k[1], value: k[2], at: now - k[3] * M, claims: k[4], wager: k[5], excl: k[6] }; });
+    this.state = { gq: '', toast: '', modal: '', email: '', tab: 'board', past: false, showAll: false, now: now, codes: codes, kq: '', kind: 'all', sound: false, newId: '', flip: false };
+  }
+  componentDidMount() {
+    var self = this;
+    this.clock = setInterval(function () { self.setState({ now: Date.now() }); }, 1000);
+    this.drop = setInterval(function () { self.dropCode(); }, 25000);
+  }
+  componentWillUnmount() { clearInterval(this.clock); clearInterval(this.drop); clearTimeout(this.toastTimer); clearTimeout(this.blurTimer); }
+  dropCode() {
+    var A = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789', s = '';
+    for (var i = 0; i < 7; i++) s += A.charAt(Math.floor(Math.random() * A.length));
+    var c = { id: 'd' + Date.now(), casino: this.C[Math.floor(Math.random() * this.C.length)], code: s, value: [1, 1.5, 2, 3, 5][Math.floor(Math.random() * 5)], at: Date.now(), claims: [100, 200, 500, 1000][Math.floor(Math.random() * 4)], wager: [2500, 4000, 8000, 15000][Math.floor(Math.random() * 4)], excl: Math.random() < 0.25 };
+    this.setState({ codes: [c].concat(this.state.codes).slice(0, 20), newId: c.id, flip: !this.state.flip });
+    if (this.state.sound) this.showToast('New code from ' + c.casino + ' (sample)');
+  }
+  renderVals() {
+    var self = this, st = this.state, v = this.shellVals();
+    var end = new Date('2026-11-01T00:00:00+05:30').getTime();
+    var left = Math.max(0, end - st.now), d = Math.floor(left / 86400000), h = Math.floor(left / 3600000) % 24, m = Math.floor(left / 60000) % 60, s = Math.floor(left / 1000) % 60;
+    var users = st.past ? ['nightowl', 'raptor_9', 'mira', 'quinn.v', 'ash', 'bento', 'lyra22', 'koda', 'pax', 'tomo', 'reyes', 'ivy_o', 'dune', 'cass', 'jett']
+      : ['quartzfox', 'nova_ash', 'tidewalker', 'bento', 'lyric', 'paxton', 'ember_j', 'okapi', 'mint', 'rhea', 'mako', 'vela', 'orrin', 'lux', 'sable'];
+    var wagers = st.past ? [301.2, 188.4, 120.9, 77.3, 61.0, 44.2, 30.5, 22.1, 18.7, 14.2, 11.9, 9.8, 7.4, 6.1, 5.0] : [188.6, 142.3, 97.5, 64.2, 47.9, 36.4, 28.8, 17.6, 14.3, 10.7, 8.9, 7.2, 5.8, 4.4, 3.1];
+    var prizes = [2500, 1500, 1000, 900, 750, 650, 550, 450, 400, 350, 300, 250, 200, 125, 75];
+    var medals = ['linear-gradient(135deg, #FDE68A, #F59E0B)', 'linear-gradient(135deg, #E2E8F0, #94A3B8)', 'linear-gradient(135deg, #FDBA74, #C2410C)'];
+    var C = this.C;
+    var board = users.map(function (u, i) {
+      var cas = [C[i % C.length], C[(i * 3 + 1) % C.length], C[(i * 5 + 2) % C.length]].slice(0, 1 + (i % 3));
+      return { rank: i + 1, user: u, ini: self.ini(u), tint: self.tint(u), wager: '$' + wagers[i].toFixed(1) + 'K', prize: '$' + prizes[i].toLocaleString('en-US'),
+        medal: i < 3 ? medals[i] : '#16203A', mfg: i < 3 ? '#1F1300' : '#9AA8C7', cas: cas.map(function (c) { return { name: c, ini: self.ini(c), tint: self.tint(c) }; }) };
+    });
+    var kq = (st.kq || '').trim().toLowerCase();
+    var codes = st.codes.filter(function (c) { return (st.kind === 'all' || c.excl) && (!kq || (c.casino + ' ' + c.code).toLowerCase().indexOf(kq) !== -1); }).map(function (c) {
+      var per = c.value / c.wager * 1000, mins = Math.max(0, Math.round((st.now - c.at) / 60000));
+      return { casino: c.casino, ini: self.ini(c.casino), tint: self.tint(c.casino), code: c.code, excl: c.excl, value: '$' + c.value, claims: c.claims.toLocaleString('en-US'), wager: '$' + (c.wager >= 1000 ? (c.wager / 1000) + 'K' : c.wager),
+        per: '$' + per.toFixed(2), vColor: per >= 0.5 ? '#5EEAD4' : '#EAF0FF', when: mins < 1 ? 'just now' : mins < 60 ? mins + ' min ago' : Math.round(mins / 60) + 'h ago', cls: c.id === st.newId ? (st.flip ? 'nA' : 'nB') : '',
+        copyAria: 'Copy code ' + c.code, copy: function () { self.copy(c.code, 'Code ' + c.code + ' copied (sample)'); },
+        redeem: function () { self.showToast('Sample code. Real codes link to the casino once a code source is connected.'); } };
+    });
+    return Object.assign(v, {
+      tabs: this.seg([{ v: 'board', label: 'Leaderboard' }, { v: 'codes', label: 'Live codes' }], st.tab, function (k) { self.setState({ tab: k }); }),
+      isBoard: st.tab === 'board', isCodes: st.tab === 'codes',
+      how: [['1', 'Register', 'Open an account at a partner casino with your referral code.'], ['2', 'Link accounts', 'Connect each casino account so its wagers count toward your rank.'], ['3', 'Wager anywhere', 'All partner casinos feed one combined total.'], ['4', 'Get paid', 'The top 15 split the $10,000 pool when the month ends.']].map(function (x) { return { n: x[0], title: x[1], body: x[2] }; }),
+      boardTitle: st.past ? 'September 2026 leaderboard' : '$10,000 monthly leaderboard',
+      countdown: st.past ? [{ v: '00', l: 'Days' }, { v: '00', l: 'Hours' }, { v: '00', l: 'Minutes' }, { v: '00', l: 'Seconds' }] : [{ v: String(d), l: 'Days' }, { v: ('0' + h).slice(-2), l: 'Hours' }, { v: ('0' + m).slice(-2), l: 'Minutes' }, { v: ('0' + s).slice(-2), l: 'Seconds' }],
+      togglePast: function () { self.setState({ past: !st.past }); }, pastLabel: st.past ? '← Back to the current leaderboard' : 'View past leaderboard',
+      board: st.showAll ? board : board.slice(0, 10), canMoreBoard: !st.showAll, moreBoard: function () { self.setState({ showAll: true }); },
+      kq: st.kq, onKq: function (e) { self.setState({ kq: e.target.value }); },
+      kinds: this.seg([{ v: 'all', label: 'All' }, { v: 'excl', label: 'Exclusive' }], st.kind, function (k) { self.setState({ kind: k }); }),
+      sound: st.sound, soundColor: st.sound ? '#8FA8FF' : '#8C9AB9', soundPath: st.sound ? 'M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12' : 'M17 9l4 6M21 9l-4 6',
+      toggleSound: function () { self.setState({ sound: !st.sound }); self.showToast(st.sound ? 'Drop alerts off' : 'Drop alerts on. New codes show a notice.'); },
+      ktmpl: 'minmax(170px, 1.1fr) minmax(140px, 1fr) 70px 100px 80px 100px 110px 100px',
+      codes: codes, kEmpty: codes.length === 0
+    });
+  }
+
+}
+</script>
+</body>
+</html>

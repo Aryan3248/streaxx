@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Streax admin tools</title>
+<link rel="icon" type="image/png" href="assets/streax-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F8FD;--surface:#FFFFFF;--border:#E3E9F5;--ink:#0B1533;--sub:#55617F;--muted:#606C8A;--accent:#2F54EB;--accent2:#2442D6;--good:#0E7C66;--goodbg:rgba(14,124,102,.08);--bad:#C2410C;--badbg:rgba(194,65,12,.08);--input:#FFFFFF;--shadow:0 18px 40px -26px rgba(20,35,90,.35)}
+@media (prefers-color-scheme: dark){:root{--bg:#070B17;--surface:#0E1528;--border:#1C2742;--ink:#EAF0FF;--sub:#8C9AB9;--muted:#75829F;--accent:#8FA8FF;--accent2:#B4C4FF;--good:#5EEAD4;--goodbg:rgba(94,234,212,.08);--bad:#FB923C;--badbg:rgba(251,146,60,.08);--input:#0B1222;--shadow:0 18px 40px -26px rgba(0,0,0,.8)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Geist,system-ui,sans-serif}
+a{color:var(--accent)}
+.wrap{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+header{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+header img{width:36px;height:36px;border-radius:11px}
+h1{margin:0;font:400 30px/1.1 'Instrument Serif',Georgia,serif}
+h2{margin:0 0 4px;font-size:18px;font-weight:600;letter-spacing:-.01em}
+.sub{color:var(--sub);font-size:13.5px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;box-shadow:var(--shadow);margin-top:16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-top:12px}
+label{display:flex;flex-direction:column;gap:6px;font-size:12.5px;color:var(--sub);flex:1 1 180px;min-width:0}
+input,select{height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--border);background:var(--input);color:var(--ink);font:inherit;font-size:14px;width:100%}
+button{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--border);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap}
+button.primary{border:0;background:linear-gradient(135deg,#4A75FF,#2442D6);color:#fff;font-weight:600}
+button.small{min-height:34px;padding:0 10px;font-size:12.5px;border-radius:9px}
+button:disabled{opacity:.55;cursor:default}
+.mono{font-family:'Geist Mono',monospace;font-size:12.5px;word-break:break-all}
+.msg{margin-top:12px;font-size:13.5px;padding:10px 12px;border-radius:12px;display:none}
+.msg.ok{display:block;background:var(--goodbg);color:var(--good)}
+.msg.err{display:block;background:var(--badbg);color:var(--bad)}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13.5px}
+th{text-align:left;font-size:12px;font-weight:500;color:var(--sub);padding:8px 6px;border-bottom:1px solid var(--border)}
+td{padding:10px 6px;border-bottom:1px solid var(--border);vertical-align:middle}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:2px 6px;background:var(--goodbg);color:var(--good)}
+.pill.off{background:var(--badbg);color:var(--bad)}
+.steps{margin:10px 0 0;padding-left:18px;color:var(--sub);font-size:13.5px}
+.steps li{margin:4px 0}
+.scroll{overflow-x:auto}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:12px}.stat{border:1px solid var(--border);border-radius:14px;padding:12px}.stat b{display:block;font-family:'Geist Mono',monospace;font-size:22px;font-weight:500}.stat span{font-size:12.5px;color:var(--sub)}
+@media (max-width:640px){.hide-s{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><img src="assets/streax-logo.webp" alt=""><div><h1>Admin tools</h1><div class="sub">Members, member bonus codes and casino wallets. <a href="Onchain.dc.html">Back to the On-chain monitor</a></div></div></header>
+
+<section class="card" aria-labelledby="t-token">
+<h2 id="t-token">Admin token</h2>
+<div class="sub">The value of ADMIN_TOKEN on your server. It stays in this browser tab only.</div>
+<div class="row"><label>Token<input id="token" type="password" autocomplete="off" placeholder="Paste ADMIN_TOKEN"></label><button id="save-token">Use token</button><button id="run">Run the indexer now</button></div>
+<div id="token-msg" class="msg"></div>
+</section>
+
+<section class="card" aria-labelledby="t-status">
+<h2 id="t-status">Server status</h2>
+<div id="status" class="sub">Loading...</div>
+</section>
+
+<section class="card" aria-labelledby="t-members">
+<h2 id="t-members">Members</h2>
+<div class="sub">Accounts on your site. The CSV has every member with points, level, referrals and whether they opted in to news emails.</div>
+<div id="member-stats" class="stats"><span class="sub">Enter the admin token to load member numbers.</span></div>
+<div class="row"><button id="members-csv">Download members CSV</button></div>
+<div id="members-msg" class="msg"></div>
+</section>
+
+<section class="card" aria-labelledby="t-codes">
+<h2 id="t-codes">Member bonus codes</h2>
+<div class="sub">Codes appear on members' account pages. Members click Reveal to see the code; you can see how many did. Use your affiliate link as the link. Only list offers you are allowed to promote where your members live.</div>
+<div class="row">
+<label>Casino<select id="c-casino"></select></label>
+<label style="flex:0 1 160px">Who sees it<select id="c-level"><option value="member">All members</option><option value="silver">Silver and Gold</option><option value="gold">Gold only</option></select></label>
+<label style="flex:0 1 170px">Ends (optional)<input id="c-expires" type="date"></label>
+</div>
+<div class="row"><label>Offer title<input id="c-title" maxlength="80" placeholder="For example: 10% rakeback for 7 days"></label><label style="flex:0 1 200px">Code<input id="c-code" maxlength="60" placeholder="STREAX10"></label></div>
+<div class="row"><label>Link (https, optional)<input id="c-url" placeholder="https://..."></label></div>
+<div class="row"><label>Terms (optional)<input id="c-terms" maxlength="300" placeholder="18+. New accounts only. Min deposit $20. Terms apply."></label><button id="c-add" class="primary">Add code</button></div>
+<div id="codes-msg" class="msg"></div>
+<div class="scroll"><table id="codes"><thead><tr><th>Casino</th><th>Offer</th><th>Code</th><th class="hide-s">Who</th><th class="hide-s">Reveals</th><th>Status</th><th></th></tr></thead><tbody><tr><td colspan="7" class="sub">Enter the admin token to load codes.</td></tr></tbody></table></div>
+</section>
+
+<section class="card" aria-labelledby="t-trace">
+<h2 id="t-trace">1. Trace a deposit address</h2>
+<ol class="steps"><li>In the casino, open deposit, pick a coin and network, and copy your deposit address.</li><li>Send a small amount and wait until the casino credits it (it then sweeps the funds onward).</li><li>Paste that deposit address below. The top destination is usually the casino's collection or hot wallet.</li></ol>
+<div class="row"><label style="flex:0 1 170px">Chain<select id="d-chain"><option value="ethereum">Ethereum</option><option value="tron">Tron</option><option value="solana">Solana</option><option value="bitcoin">Bitcoin</option><option value="polygon">Polygon</option><option value="bsc">BNB Chain (paid Etherscan)</option></select></label><label>Deposit address<input id="d-address" autocomplete="off" placeholder="0x..., T..., or a Solana or Bitcoin address"></label><button id="trace" class="primary">Trace</button></div>
+<div id="trace-msg" class="msg"></div>
+<div class="scroll"><table id="cands" hidden><thead><tr><th>Destination</th><th>Transfers</th><th class="hide-s">Amount</th><th class="hide-s">Last seen</th><th>Known as</th><th></th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section class="card" aria-labelledby="t-add">
+<h2 id="t-add">2. Add a casino wallet</h2>
+<div class="row">
+<label>Casino<select id="a-casino"></select></label>
+<label style="flex:0 1 170px">Chain<select id="a-chain"><option value="ethereum">Ethereum</option><option value="tron">Tron</option><option value="solana">Solana</option><option value="bitcoin">Bitcoin</option><option value="polygon">Polygon</option><option value="bsc">BNB Chain</option></select></label>
+<label style="flex:0 1 150px">Type<select id="a-role"><option value="hot">Hot wallet</option><option value="wallet">Other casino wallet</option><option value="cold">Cold wallet</option></select></label>
+</div>
+<div class="row"><label>Address<input id="a-address" autocomplete="off"></label><label>Label<input id="a-label" autocomplete="off" placeholder="For example: Stake Tron collection wallet"></label></div>
+<div class="row"><label>How you found it<input id="a-source" autocomplete="off" value="Traced from my own deposit"></label><button id="add" class="primary">Add wallet</button></div>
+<div id="add-msg" class="msg"></div>
+</section>
+
+<section class="card" aria-labelledby="t-list">
+<h2 id="t-list">3. Tracked wallets</h2>
+<div class="sub">Wallets from the registry and the ones you added. Removing stops tracking; history already recorded stays.</div>
+<div class="scroll"><table id="wallets"><thead><tr><th>Casino</th><th>Chain</th><th>Wallet</th><th class="hide-s">Source</th><th></th></tr></thead><tbody><tr><td colspan="5" class="sub">Enter the admin token to load the list.</td></tr></tbody></table></div>
+</section>
+</div>
+<script>
+var CASINOS = [{"slug":"1win","name":"1win"},{"slug":"500-casino","name":"500 Casino"},{"slug":"acebet","name":"Acebet"},{"slug":"bcgame","name":"BC.Game"},{"slug":"betfury","name":"BetFury"},{"slug":"betstrike","name":"Betstrike"},{"slug":"bitcasino","name":"Bitcasino"},{"slug":"blockbet","name":"BlockBet"},{"slug":"bluff","name":"Bluff"},{"slug":"chipsgg","name":"Chips.gg"},{"slug":"cloudbet","name":"Cloudbet"},{"slug":"coincasino","name":"CoinCasino"},{"slug":"cybet","name":"Cybet"},{"slug":"degen","name":"Degen"},{"slug":"dicey","name":"Dicey"},{"slug":"duel","name":"Duel"},{"slug":"duelbits","name":"Duelbits"},{"slug":"flush","name":"Flush"},{"slug":"gamba","name":"Gamba"},{"slug":"gamdom","name":"Gamdom"},{"slug":"goated","name":"GOATED"},{"slug":"jackpotbet","name":"JackpotBet"},{"slug":"luckyfun","name":"Lucky.fun"},{"slug":"metawin","name":"MetaWin"},{"slug":"moon-roll","name":"Moon Roll"},{"slug":"qzino","name":"Qzino"},{"slug":"rainbet","name":"Rainbet"},{"slug":"razed","name":"Razed"},{"slug":"rollbit","name":"Rollbit"},{"slug":"roobet","name":"Roobet"},{"slug":"shock","name":"Shock"},{"slug":"shuffle","name":"Shuffle"},{"slug":"solcasino","name":"Solcasino"},{"slug":"spartans","name":"Spartans"},{"slug":"sportsbetio","name":"Sportsbet.io"},{"slug":"stakecom","name":"Stake.com"},{"slug":"stakeus","name":"StakeUS"},{"slug":"thrill","name":"Thrill"},{"slug":"toshibet","name":"Toshibet"},{"slug":"wagercom","name":"Wager.com"},{"slug":"whaleio","name":"Whale.io"},{"slug":"winna","name":"Winna"},{"slug":"yeet","name":"Yeet"}];
+var TOKEN = '';
+try { TOKEN = sessionStorage.getItem('sx_admin') || ''; } catch (e) {}
+var $ = function (id) { return document.getElementById(id); };
+$('token').value = TOKEN;
+function show(id, text, ok) { var el = $(id); el.textContent = text; el.className = 'msg ' + (ok ? 'ok' : 'err'); }
+function api(method, path, body) {
+  return fetch(path, { method: method, headers: { 'content-type': 'application/json', 'x-admin-token': TOKEN }, body: body ? JSON.stringify(body) : undefined })
+    .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status)); return j; }); });
+}
+function money(v) { return v >= 1e6 ? '$' + (v / 1e6).toFixed(2) + 'M' : v >= 1e3 ? '$' + (v / 1e3).toFixed(1) + 'K' : '$' + Math.round(v); }
+function cell(tr, text, cls) { var td = document.createElement('td'); if (cls) td.className = cls; td.textContent = text; tr.appendChild(td); return td; }
+var sel = $('a-casino');
+CASINOS.forEach(function (c) { var o = document.createElement('option'); o.value = c.slug; o.textContent = c.name; sel.appendChild(o); });
+
+function loadStatus() {
+  fetch('/api/onchain/status', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (s) {
+    var el = $('status'); el.textContent = '';
+    if (!s.keys) { el.textContent = s.error || 'On-chain monitor is off.'; return; }
+    var keys = [['Etherscan', s.keys.etherscan], ['TronGrid', s.keys.trongrid], ['Solana RPC', s.keys.solanaRpc], ['Telegram alerts', s.keys.telegram], ['Admin token', s.keys.admin]];
+    var p = document.createElement('div'); p.style.display = 'flex'; p.style.flexWrap = 'wrap'; p.style.gap = '8px';
+    keys.forEach(function (k) { var b = document.createElement('span'); b.className = 'pill' + (k[1] ? '' : ' off'); b.textContent = k[0] + (k[1] ? ' set' : ' missing'); p.appendChild(b); });
+    el.appendChild(p);
+    var lr = document.createElement('div'); lr.style.marginTop = '10px';
+    lr.textContent = s.lastRun ? 'Last run ' + new Date(s.lastRun.at).toLocaleString() + ': ' + s.lastRun.note : 'No run finished yet.';
+    el.appendChild(lr);
+    (s.sources || []).forEach(function (x) { var d = document.createElement('div'); d.className = 'mono'; d.style.marginTop = '4px'; d.textContent = (x.ok ? 'OK   ' : 'FAIL ') + x.name + (x.ok ? '' : ': ' + x.lastError); el.appendChild(d); });
+  }).catch(function (e) { $('status').textContent = 'Server not reachable: ' + e.message; });
+}
+function loadWallets() {
+  if (!TOKEN) return;
+  api('GET', '/api/onchain/admin/wallets').then(function (j) {
+    var tb = $('wallets').querySelector('tbody'); tb.textContent = '';
+    j.wallets.filter(function (w) { return w.source !== 'mirror' && w.active; }).forEach(function (w) {
+      var tr = document.createElement('tr');
+      cell(tr, w.casino); cell(tr, w.chain); var td = cell(tr, ''); var b = document.createElement('div'); b.textContent = w.label || ''; td.appendChild(b);
+      var a = document.createElement('div'); a.className = 'mono'; a.textContent = w.address; td.appendChild(a);
+      cell(tr, w.source || '', 'hide-s');
+      var t2 = cell(tr, ''); var btn = document.createElement('button'); btn.className = 'small'; btn.textContent = 'Remove';
+      btn.onclick = function () { if (!confirm('Stop tracking ' + w.address + '?')) return; api('DELETE', '/api/onchain/admin/wallets', { chain: w.chain, address: w.address }).then(loadWallets).catch(function (e) { alert(e.message); }); };
+      t2.appendChild(btn); tb.appendChild(tr);
+    });
+  }).catch(function (e) { show('token-msg', e.message, false); });
+}
+$('save-token').onclick = function () {
+  TOKEN = $('token').value.trim();
+  try { sessionStorage.setItem('sx_admin', TOKEN); } catch (e) {}
+  api('GET', '/api/onchain/admin/wallets').then(function () { show('token-msg', 'Token accepted.', true); loadWallets(); loadAccounts(); }).catch(function (e) { show('token-msg', e.message, false); });
+};
+$('run').onclick = function () { api('POST', '/api/onchain/admin/run').then(function () { show('token-msg', 'Run started. Refresh the status in a minute.', true); setTimeout(loadStatus, 60000); }).catch(function (e) { show('token-msg', e.message, false); }); };
+$('trace').onclick = function () {
+  var btn = this; btn.disabled = true; show('trace-msg', 'Tracing...', true);
+  api('POST', '/api/onchain/admin/discover', { chain: $('d-chain').value, address: $('d-address').value.trim() }).then(function (j) {
+    var t = $('cands'), tb = t.querySelector('tbody'); tb.textContent = ''; t.hidden = !j.candidates.length;
+    show('trace-msg', j.transfersOut ? j.transfersOut + ' outgoing transfers found.' : 'No outgoing transfers yet. Wait until the casino sweeps your deposit, then trace again.', !!j.transfersOut);
+    j.candidates.forEach(function (c) {
+      var tr = document.createElement('tr');
+      var td = cell(tr, ''); var a = document.createElement('a'); a.href = c.url; a.target = '_blank'; a.rel = 'noopener'; a.className = 'mono'; a.textContent = c.address; td.appendChild(a);
+      cell(tr, String(c.count)); cell(tr, Object.keys(c.assets).map(function (k) { return (Math.round(c.assets[k] * 100) / 100) + ' ' + k; }).join(', ') + (c.usd ? ' (' + money(c.usd) + ')' : ''), 'hide-s');
+      cell(tr, new Date(c.last).toLocaleString(), 'hide-s'); cell(tr, c.knownName || 'Not tracked yet');
+      var t2 = cell(tr, ''); var b = document.createElement('button'); b.className = 'small'; b.textContent = 'Use this';
+      b.onclick = function () { $('a-chain').value = j.chain; $('a-address').value = c.address; if (c.knownCasino) $('a-casino').value = c.knownCasino; $('a-address').scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+      t2.appendChild(b); tb.appendChild(tr);
+    });
+  }).catch(function (e) { show('trace-msg', e.message, false); }).then(function () { btn.disabled = false; });
+};
+$('add').onclick = function () {
+  var c = CASINOS.filter(function (x) { return x.slug === $('a-casino').value; })[0];
+  api('POST', '/api/onchain/admin/wallets', { casino: c.slug, name: c.name, chain: $('a-chain').value, address: $('a-address').value.trim(), role: $('a-role').value, label: $('a-label').value.trim(), source: $('a-source').value.trim() })
+    .then(function () { show('add-msg', 'Added. It is tracked from the next run.', true); loadWallets(); }).catch(function (e) { show('add-msg', e.message, false); });
+};
+
+var csel = $('c-casino');
+CASINOS.forEach(function (c) { var o = document.createElement('option'); o.value = c.slug; o.textContent = c.name; csel.appendChild(o); });
+var LEVEL_NAMES = { member: 'All members', silver: 'Silver and Gold', gold: 'Gold only' };
+function loadAccounts() {
+  if (!TOKEN) return;
+  api('GET', '/api/admin/accounts').then(function (j) {
+    var box = $('member-stats'); box.textContent = '';
+    [['users', 'Members'], ['signups7d', 'Joined this week'], ['verified', 'Email confirmed'], ['google', 'Google sign-in'], ['referred', 'Joined by invite'], ['telegram', 'Telegram alerts'], ['watching', 'Using a watchlist'], ['reveals', 'Codes revealed']].forEach(function (k) {
+      var d = document.createElement('div'); d.className = 'stat'; var b = document.createElement('b'); b.textContent = String(j.stats[k[0]] || 0); var s = document.createElement('span'); s.textContent = k[1]; d.appendChild(b); d.appendChild(s); box.appendChild(d);
+    });
+    var names = {}; (j.casinos || []).forEach(function (c) { names[c.slug] = c.name; });
+    var tb = $('codes').querySelector('tbody'); tb.textContent = '';
+    if (!j.codes.length) { var tr0 = document.createElement('tr'); cell(tr0, 'No codes yet. Add your first one above.', 'sub').colSpan = 7; tb.appendChild(tr0); }
+    j.codes.forEach(function (c) {
+      var tr = document.createElement('tr');
+      cell(tr, names[c.casino] || c.casino); cell(tr, c.title); cell(tr, c.code, 'mono'); cell(tr, LEVEL_NAMES[c.level] || c.level, 'hide-s'); cell(tr, String(c.reveals), 'hide-s');
+      var expired = c.expires && c.expires < Date.now();
+      var st = cell(tr, ''); var pill = document.createElement('span'); pill.className = 'pill' + (c.active && !expired ? '' : ' off'); pill.textContent = expired ? 'Ended' : c.active ? 'Live' : 'Hidden'; st.appendChild(pill);
+      var act = cell(tr, '');
+      var t = document.createElement('button'); t.className = 'small'; t.textContent = c.active ? 'Hide' : 'Show';
+      t.onclick = function () { api('POST', '/api/admin/codes/' + c.id, { active: !c.active }).then(loadAccounts).catch(function (e) { show('codes-msg', e.message, false); }); };
+      var d = document.createElement('button'); d.className = 'small'; d.textContent = 'Delete'; d.style.marginLeft = '6px';
+      d.onclick = function () { if (!confirm('Delete this code?')) return; api('DELETE', '/api/admin/codes/' + c.id).then(loadAccounts).catch(function (e) { show('codes-msg', e.message, false); }); };
+      act.appendChild(t); act.appendChild(d); tb.appendChild(tr);
+    });
+  }).catch(function (e) { show('codes-msg', e.message, false); });
+}
+$('c-add').onclick = function () {
+  api('POST', '/api/admin/codes', { casino: $('c-casino').value, level: $('c-level').value, title: $('c-title').value.trim(), code: $('c-code').value.trim(), url: $('c-url').value.trim(), terms: $('c-terms').value.trim(), expires: $('c-expires').value || '' })
+    .then(function () { show('codes-msg', 'Code added. Members see it on their account page now.', true); ['c-title', 'c-code', 'c-url', 'c-terms', 'c-expires'].forEach(function (id) { $(id).value = ''; }); loadAccounts(); })
+    .catch(function (e) { show('codes-msg', e.message, false); });
+};
+$('members-csv').onclick = function () {
+  fetch('/api/admin/members.csv', { headers: { 'x-admin-token': TOKEN } }).then(function (r) { if (!r.ok) return r.json().then(function (j) { throw new Error(j.error || ('HTTP ' + r.status)); }); return r.blob(); })
+    .then(function (b) { var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'streax-members.csv'; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000); show('members-msg', 'Download started.', true); })
+    .catch(function (e) { show('members-msg', e.message, false); });
+};
+loadStatus(); loadWallets(); loadAccounts();
+</script>
+</body>
+</html>
