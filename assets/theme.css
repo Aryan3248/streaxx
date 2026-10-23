@@ -1,0 +1,54 @@
+/* Streax theme: flat, clean dashboard look with a violet accent.
+   Loaded on every page by support.js. Night pages get html.sx-night. */
+:root {
+  --sx-accent: #6D28D9; --sx-accent-2: #7C3AED; --sx-accent-soft: rgba(109,40,217,0.08);
+  --sx-ink: #16141F; --sx-muted: #6B6B78; --sx-line: #E8E8EE; --sx-card: #FFFFFF; --sx-bg: #F4F4F6;
+  --sx-good: #0E7C66; --sx-bad: #C2410C;
+}
+html.sx-night {
+  --sx-accent: #8B5CF6; --sx-accent-2: #A78BFA; --sx-accent-soft: rgba(139,92,246,0.14);
+  --sx-ink: #EDEDF3; --sx-muted: #9A9AAE; --sx-line: #26262F; --sx-card: #141419; --sx-bg: #0B0B10;
+  --sx-good: #5EEAD4; --sx-bad: #FB923C;
+}
+
+/* One sans-serif family everywhere, with tabular numbers for figures. */
+[style*="Instrument Serif"] { font-family: 'Geist', system-ui, sans-serif !important; font-weight: 600 !important; letter-spacing: -0.025em !important; font-style: normal !important; }
+[style*="Instrument Serif"] em, [style*="Instrument Serif"] i { font-style: normal !important; color: var(--sx-accent) !important; }
+[style*="Geist Mono"] { font-family: 'Geist', system-ui, sans-serif !important; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+[style*="font-size: 28px"][style*="Geist Mono"], [style*="font-size: 30px"][style*="Geist Mono"], [style*="font-size: 26px"][style*="Geist Mono"] { font-weight: 650 !important; }
+
+/* Page header: a plain title on the page background instead of a coloured banner. */
+.sx-banner { background: transparent !important; box-shadow: none !important; padding: 6px 0 4px !important; margin: 18px 0 20px !important; border-radius: 0 !important; }
+.sx-banner [data-m~="tbt"] > span:first-child { display: none !important; }
+.sx-banner h1 { color: var(--sx-ink) !important; font-family: 'Geist', system-ui, sans-serif !important; font-size: 30px !important; font-weight: 650 !important; letter-spacing: -0.03em !important; line-height: 1.15 !important; }
+.sx-banner [data-m~="tbt"] > span { color: var(--sx-muted) !important; font-size: 14px !important; }
+.sx-banner input { border-color: var(--sx-line) !important; box-shadow: none !important; background: var(--sx-card) !important; color: var(--sx-ink) !important; }
+.sx-banner a, .sx-banner button { box-shadow: none !important; }
+
+/* Promo card in the sidebar and the home hero: solid violet, no photo texture. */
+.sx-card { background: linear-gradient(140deg, #7C3AED 0%, #5B21B6 100%) !important; box-shadow: 0 10px 30px -18px rgba(91,33,182,0.8) !important; }
+
+/* Cards: flatter, crisper edges. */
+section[style*="border-radius: 20px"], div[style*="border-radius: 20px"][style*="box-shadow"] { box-shadow: 0 1px 2px rgba(20,20,40,0.04) !important; }
+html.sx-night section[style*="border-radius: 20px"] { box-shadow: none !important; }
+
+/* Active sidebar item: soft violet pill. */
+a.nav[aria-current="page"] { background: var(--sx-accent-soft) !important; box-shadow: none !important; color: var(--sx-accent) !important; font-weight: 600 !important; }
+a.nav[aria-current="page"] svg { stroke: var(--sx-accent) !important; }
+.nav:hover { background-color: var(--sx-accent-soft) !important; }
+
+/* Segmented controls: the selected option is a solid violet pill, as in the reference design. */
+button[aria-pressed="true"].ul, a[aria-pressed="true"].ul { background: var(--sx-accent) !important; color: #FFFFFF !important; box-shadow: none !important; }
+
+/* Gentle entrance for every card. */
+@keyframes sxRise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+#dc-root main section { animation: sxRise .45s cubic-bezier(.2,.7,.2,1) both; }
+#dc-root main section:nth-of-type(2) { animation-delay: .04s; }
+#dc-root main section:nth-of-type(3) { animation-delay: .08s; }
+#dc-root main section:nth-of-type(4) { animation-delay: .12s; }
+#dc-root main section:nth-of-type(n+5) { animation-delay: .16s; }
+@media (prefers-reduced-motion: reduce) { #dc-root main section { animation: none; } }
+
+/* Rows: a soft hover. */
+.rh { transition: background-color .15s ease; }
+.rh:hover { background-color: var(--sx-accent-soft) !important; }
