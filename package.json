@@ -1,14 +1,14 @@
 {
   "name": "streax",
-  "version": "1.4.0",
   "private": true,
-  "description": "Streax: crypto casino data platform with an on-chain casino monitor, the Streax Score, public complaints with on-chain proof, player tools, an article Studio, and free member accounts",
-  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "test": "node --test"
+    "start": "node server.mjs"
   },
   "engines": {
-    "node": ">=22.5"
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@netlify/blobs": "11.1.4"
   }
 }

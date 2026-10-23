@@ -1,42 +1,52 @@
+# Render Blueprint: New > Blueprint, pick the repo with this file.
+# The disk keeps accounts, complaints and on-chain history between deploys.
+# Disks need a paid instance (Starter or above). On the Free plan, remove the
+# disk block and expect all data to reset on every deploy or restart.
 services:
   - type: web
     name: streax
     runtime: node
-    plan: 0.5c-512mb
-    buildCommand: echo "No build step needed"
-    startCommand: node server.js
-    healthCheckPath: /healthz
-    autoDeployTrigger: commit
+    plan: starter
+    buildCommand: npm install --omit=dev
+    startCommand: node server.mjs
+    healthCheckPath: /api/auth/me
+    autoDeploy: true
     disk:
       name: streax-data
       mountPath: /var/data
       sizeGB: 1
     envVars:
-      - key: NO_OPEN
-        value: "1"
       - key: NODE_VERSION
         value: "22"
-      - key: DATA_DIR
-        value: /var/data
-      - key: WHALE_USD
-        value: "50000"
+      - key: STREAX_LOCAL_STORE
+        value: /var/data/streax
       - key: ADMIN_TOKEN
         generateValue: true
       - key: ETHERSCAN_API_KEY
         sync: false
-      - key: TRONGRID_API_KEY
+      - key: RESEND_API_KEY
         sync: false
-      - key: SOLANA_RPC_URL
+      - key: MAIL_FROM
         sync: false
       - key: TELEGRAM_BOT_TOKEN
         sync: false
-      - key: TELEGRAM_CHAT_ID
+      - key: TELEGRAM_BOT_NAME
         sync: false
+      - key: TELEGRAM_WEBHOOK_SECRET
+        generateValue: true
       - key: GOOGLE_CLIENT_ID
         sync: false
       - key: GOOGLE_CLIENT_SECRET
         sync: false
-      - key: RESEND_API_KEY
+      - key: KICK_CLIENT_ID
         sync: false
-      - key: MAIL_FROM
+      - key: KICK_CLIENT_SECRET
+        sync: false
+      - key: TWITCH_CLIENT_ID
+        sync: false
+      - key: TWITCH_CLIENT_SECRET
+        sync: false
+      - key: TRONGRID_API_KEY
+        sync: false
+      - key: SITE_URL
         sync: false

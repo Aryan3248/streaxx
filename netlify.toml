@@ -1,0 +1,126 @@
+[build]
+  publish = "."
+  command = "npm install --omit=dev"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Keep server code and tooling out of the public site.
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/node_modules/*"
+  to = "/404"
+  status = 404
+  force = true
+
+# Old article addresses go to the article pages.
+[[redirects]]
+  from = "/articles"
+  to = "/Articles.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/"
+  to = "/Articles.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/how-the-streax-score-works"
+  to = "/ArticleScore.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/how-the-streax-score-works/"
+  to = "/ArticleScore.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/wagering-requirements-explained"
+  to = "/ArticleWagering.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/wagering-requirements-explained/"
+  to = "/ArticleWagering.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/how-to-file-a-casino-complaint"
+  to = "/ArticleComplaints.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/articles/how-to-file-a-casino-complaint/"
+  to = "/ArticleComplaints.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/night/articles"
+  to = "/night/Articles.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/night/articles/"
+  to = "/night/Articles.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/night/articles/how-the-streax-score-works"
+  to = "/night/ArticleScore.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/night/articles/how-the-streax-score-works/"
+  to = "/night/ArticleScore.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/night/articles/wagering-requirements-explained"
+  to = "/night/ArticleWagering.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/night/articles/wagering-requirements-explained/"
+  to = "/night/ArticleWagering.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/night/articles/how-to-file-a-casino-complaint"
+  to = "/night/ArticleComplaints.dc.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/night/articles/how-to-file-a-casino-complaint/"
+  to = "/night/ArticleComplaints.dc.html"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

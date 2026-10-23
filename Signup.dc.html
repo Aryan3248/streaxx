@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Create your free Streax account</title>
+<link rel="icon" type="image/png" href="assets/streax-icon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="dc-tpl"><x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:#F4F4F6}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #6D28D9;outline-offset:2px}
+input::placeholder,textarea::placeholder{color:#7A7A8C}
+.hv{transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+.hv:hover{background-color:#F3EEFF !important}
+.nav{transition:background-color .15s ease,color .15s ease}
+.nav:hover{background-color:#F3EEFF !important;color:#16141F !important}
+.rh{transition:background-color .15s ease}
+.rh:hover{background-color:rgba(109,40,217,0.035) !important}
+.lift{transition:transform .18s ease,border-color .18s ease}
+.lift:hover{transform:translateY(-2px);border-color:#BFD0F5 !important}
+.pb{transition:filter .15s ease,transform .15s ease}
+.pb:hover{filter:brightness(1.08)}
+.pb:active{transform:translateY(1px)}
+.ul{transition:color .15s ease}
+.ul:hover{color:#5B21B6 !important}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(225,29,72,.6)}70%{box-shadow:0 0 0 7px rgba(225,29,72,0)}100%{box-shadow:0 0 0 0 rgba(225,29,72,0)}}
+.pulse{animation:pulse 1.8s infinite}
+@keyframes pulseSky{0%{box-shadow:0 0 0 0 rgba(14,124,102,.55)}70%{box-shadow:0 0 0 7px rgba(14,124,102,0)}100%{box-shadow:0 0 0 0 rgba(14,124,102,0)}}
+.pulseSky{animation:pulseSky 1.8s infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fu{animation:fadeUp .22s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fi{animation:fadeIn .18s ease-out}
+@keyframes nA{from{background-color:rgba(109,40,217,0.12)}to{background-color:rgba(109,40,217,0)}}
+@keyframes nB{from{background-color:rgba(109,40,217,0.12)}to{background-color:rgba(109,40,217,0)}}
+.nA{animation:nA 1.6s ease-out}
+.nB{animation:nB 1.6s ease-out}
+input[type=range]{accent-color:#6D28D9}
+.sx-banner{background:#6D28D9 url(assets/streax-banner.webp) center/cover no-repeat}
+.sx-hero{background:#6D28D9 url(assets/streax-hero.webp) center/cover no-repeat}
+.sx-card{background:#6D28D9 url(assets/streax-card.webp) center/cover no-repeat}
+.sx-wash{background:#FFFFFF url(assets/streax-wash.webp) center/cover no-repeat}
+.glass:hover{background-color:rgba(255,255,255,0.3) !important}
+.wbtn:hover{background-color:#F5F0FF !important}
+@media (max-width: 1080px){
+[data-m~="side"]{flex-basis:100% !important;max-width:none !important;min-width:0;width:100%;box-sizing:border-box;padding:12px 16px 0 !important}
+[data-m~="main"]{min-width:0}
+[data-m~="sidecard"]{min-width:0;border-radius:18px !important;padding:10px 10px 8px !important;gap:6px !important}
+[data-m~="slogo"]{border-bottom:0 !important;margin:0 !important;padding:2px 4px 4px !important}
+[data-m~="snav"]{flex-direction:row !important;overflow-x:auto;gap:6px !important;scrollbar-width:none;padding:0 0 2px}
+[data-m~="snav"]::-webkit-scrollbar{display:none}
+[data-m~="snav"] > a{flex:0 0 auto;min-height:38px !important;padding:0 12px !important;gap:8px !important;font-size:13.5px !important;white-space:nowrap}
+[data-m~="snav"] > a:not([aria-current]){background-color:#F5F5F8}
+[data-m~="slab"],[data-m~="mhide"]{display:none !important}
+[data-m~="main"]{padding:0 16px !important}
+[data-m~="srchw"]{flex:1 1 0;min-width:0}
+[data-m~="srch"]{width:100% !important}
+[data-m~="drop"]{width:auto !important;left:0;right:0 !important}
+[data-m~="hdr"]{display:none !important}
+[data-m~="rk"]{display:flex !important;flex-wrap:wrap;gap:12px !important;padding:14px !important}
+[data-m~="rk"] > :nth-child(1){order:1;flex:0 0 40px}
+[data-m~="rk"] > :nth-child(2){order:2;flex:1 1 calc(100% - 166px);min-width:0}
+[data-m~="rk"] > :nth-child(3){display:none !important}
+[data-m~="rk"] > :nth-child(4){order:3}
+[data-m~="rk"] > :nth-child(9){order:4;align-self:center}
+[data-m~="rk"] > :nth-child(5){order:5;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(6){order:6;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(7){order:7;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(8){order:8;flex:1 1 100%}
+[data-m~="bf"]{grid-template-columns:minmax(0,1.2fr) minmax(0,0.9fr) 64px 76px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13px !important}
+[data-m~="bf"] > :nth-child(1){min-width:0;overflow:hidden}
+[data-m~="bf"] > :nth-child(1) > span:last-child{overflow:hidden;text-overflow:ellipsis}
+[data-m~="bf"] > :nth-child(4){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-m~="bf"] > :nth-child(2),[data-m~="bf"] > :nth-child(3),[data-m~="bf"] > :nth-child(6){display:none !important}
+[data-m~="kc"]{grid-template-columns:minmax(0,1fr) auto auto !important;grid-template-areas:"cas val red" "code code when";row-gap:8px !important;padding:12px 14px !important}
+[data-m~="kc"] > :nth-child(1){grid-area:cas;min-width:0}
+[data-m~="kc"] > :nth-child(2){grid-area:code;justify-self:start}
+[data-m~="kc"] > :nth-child(3){grid-area:val}
+[data-m~="kc"] > :nth-child(4){grid-area:when}
+[data-m~="kc"] > :nth-child(5),[data-m~="kc"] > :nth-child(6),[data-m~="kc"] > :nth-child(7){display:none !important}
+[data-m~="kc"] > :nth-child(8){grid-area:red}
+[data-m~="cp"]{grid-template-columns:minmax(0,1fr) auto auto !important;grid-template-areas:"cat cat st" "cas amt tog";row-gap:8px !important;padding:12px 14px !important}
+[data-m~="cp"] > :nth-child(1),[data-m~="cp"] > :nth-child(6),[data-m~="cp"] > :nth-child(7){display:none !important}
+[data-m~="cp"] > :nth-child(2){grid-area:cas;min-width:0}
+[data-m~="cp"] > :nth-child(3){grid-area:cat}
+[data-m~="cp"] > :nth-child(4){grid-area:amt}
+[data-m~="cp"] > :nth-child(5){grid-area:st}
+[data-m~="cp"] > :nth-child(8){grid-area:tog}
+[data-m~="rkd"]{padding:4px 18px 18px !important}
+[data-m~="lb"]{grid-template-columns:44px minmax(0,1fr) 120px minmax(0,180px) 100px !important}
+[data-m~="g1t"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="tkr"],[data-m~="tkh"]{grid-template-columns:minmax(120px,1fr) 90px 100px 100px 100px 110px 120px !important}
+[data-m~="tkr"] > :nth-child(5),[data-m~="tkh"] > :nth-child(5){display:none !important}
+[data-m~="wlr"]{grid-template-columns:100px minmax(0,1fr) 110px 80px !important}
+[data-m~="wlr"] > :nth-child(3){display:none !important}
+}
+@media (max-width: 760px){
+[data-m="stl"]{min-height:6em !important}
+[data-m~="root"]{display:block !important}
+[data-m~="main"]{width:100%;box-sizing:border-box}
+[data-m~="tbt"]{flex:1 1 100% !important}
+[data-m~="ban"]{padding:22px 18px !important;border-radius:22px !important;margin:12px 0 16px !important;gap:12px !important}
+[data-m~="banh"]{font-size:34px !important}
+[data-m~="seg"]{max-width:100%;box-sizing:border-box;overflow-x:auto;scrollbar-width:none}
+[data-m~="seg"]::-webkit-scrollbar{display:none}
+[data-m~="fin"]{width:100% !important}
+div:has(> [data-m~="fin"]),div:has(> div > [data-m~="fin"]){flex:1 1 100%;min-width:0}
+[data-m~="g1"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="g2"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+[data-m~="kv"]{font-size:22px !important}
+[data-m~="wrap"]{flex-wrap:wrap;gap:8px}
+[data-m~="wrap"] button{white-space:nowrap}
+[data-m~="phide"]{display:none !important}
+[data-m~="nomin"]{min-width:0 !important}
+.sx-hero{background-position:16% 50% !important;padding:26px 20px 20px !important;min-height:0 !important;flex-direction:column;align-items:stretch !important;border-radius:24px !important}
+[data-m~="h64"]{font-size:42px !important}
+[data-m~="orb"]{width:130px !important;height:130px !important;right:-36px !important;top:-36px !important;margin-top:0 !important}
+[data-m~="hchip"]{max-width:calc(100% - 70px);box-sizing:border-box}
+[data-m~="hstats"]{position:relative !important;right:auto !important;bottom:auto !important;margin-top:20px;flex-wrap:wrap}
+[data-m~="hstats"] > span{flex:1 1 40%}
+[data-m~="topr"]{grid-template-columns:22px minmax(0,1fr) auto !important}
+[data-m~="topr"] > :nth-child(4){display:none !important}
+[data-m~="fol"]{grid-template-columns:20px minmax(0,1fr) 74px 60px !important}
+[data-m~="rkd"]{padding:4px 14px 14px !important}
+[data-m~="sb"]{grid-template-columns:96px minmax(0,1fr) 42px 34px !important;gap:10px !important}
+[data-m~="ms"]{grid-template-columns:92px minmax(0,1fr) 58px !important;gap:10px !important}
+[data-m~="cha"]{grid-template-columns:100px minmax(0,1fr) 70px 42px !important;gap:8px !important}
+[data-m~="csel"]{min-width:0 !important;width:100%}
+div:has(> [data-m~="csel"]){flex:1 1 auto;min-width:0}
+[data-m~="lbox"]{width:auto !important;right:0;max-width:calc(100vw - 32px)}
+[data-m~="secnav"]{flex:1 1 100% !important;max-width:none !important;flex-direction:row !important;overflow-x:auto;scrollbar-width:none;gap:4px !important}
+[data-m~="secnav"]::-webkit-scrollbar{display:none}
+[data-m~="secnav"] > a{flex:0 0 auto;white-space:nowrap;gap:8px}
+[data-m~="ovr"]{gap:14px !important}
+[data-m~="ovr"] > span:first-child{width:64px !important;height:64px !important;border-radius:18px !important;font-size:20px !important}
+[data-m~="dsr"]{grid-template-columns:minmax(0,96px) minmax(0,1fr) 66px 44px !important}
+[data-m~="tr"]{grid-template-columns:22px minmax(0,1fr) minmax(0,1fr) 64px !important;gap:10px !important}
+[data-m~="tr"] > :nth-child(3),[data-m~="tr"] > :nth-child(5){display:none !important}
+[data-m~="lb"]{grid-template-columns:28px minmax(0,1fr) 74px 62px !important;gap:10px !important}
+[data-m~="lb"] > :nth-child(4){display:none !important}
+[data-m~="br"]{grid-template-columns:20px minmax(0,1fr) 72px 104px !important;gap:10px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="br"] > :nth-child(3){display:none !important}
+[data-m~="br"] button{white-space:nowrap;padding:0 10px !important;font-size:12.5px !important}
+[data-m~="st"]{grid-template-columns:18px minmax(0,1fr) 74px 62px !important;gap:10px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="st"] > :nth-child(4){order:3}
+[data-m~="st"] > :nth-child(3){order:4}
+[data-m~="st"] > :nth-child(5),[data-m~="st"] > :nth-child(6),[data-m~="st"] > :nth-child(7),[data-m~="st"] > :nth-child(8){display:none !important}
+[data-m~="st"] > :nth-child(4) > span:last-child{display:none !important}
+[data-m~="st"] > :nth-child(2){overflow:hidden}
+[data-m~="st"] > :nth-child(2) > span:last-child > span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-m~="ocr"],[data-m~="och"]{grid-template-columns:minmax(0,1fr) 84px 92px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13.5px !important}
+[data-m~="ocr"] > :nth-child(1),[data-m~="ocr"] > :nth-child(4),[data-m~="ocr"] > :nth-child(6),[data-m~="och"] > :nth-child(1),[data-m~="och"] > :nth-child(4),[data-m~="och"] > :nth-child(6){display:none !important}
+[data-m~="ocr"] > :nth-child(2){overflow:hidden}
+[data-m~="tkr"],[data-m~="tkh"]{grid-template-columns:minmax(0,1fr) 84px 104px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13.5px !important}
+[data-m~="tkr"] > :nth-child(3),[data-m~="tkr"] > :nth-child(4),[data-m~="tkr"] > :nth-child(6),[data-m~="tkr"] > :nth-child(7),[data-m~="tkh"] > :nth-child(3),[data-m~="tkh"] > :nth-child(4),[data-m~="tkh"] > :nth-child(6),[data-m~="tkh"] > :nth-child(7){display:none !important}
+[data-m~="wlr"]{grid-template-columns:minmax(0,1fr) 92px 62px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="wlr"] > :nth-child(1){display:none !important}
+[data-m~="cd"]{flex:1 1 100%}
+[data-m~="cd"] > span{flex:1 1 0;min-width:0 !important;padding:10px 4px !important}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+<style>@media (max-width: 760px){[data-acct]{padding:0 12px !important}}</style>
+<style>
+@media (max-width: 1080px){
+[data-m~="auth"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="authside"]{min-height:0 !important;order:2}
+[data-m~="authmain"]{order:1}
+[data-m~="authfill"]{min-height:0 !important}
+[data-m~="authlogo"]{display:inline-flex !important}
+}
+@media (max-width: 760px){
+[data-m~="authroot"]{padding:12px !important}
+[data-m~="authside"]{padding:22px !important;border-radius:22px !important;gap:18px !important}
+[data-m~="authh1"]{font-size:34px !important}
+[data-m~="authcard"]{padding:22px 18px !important;border-radius:20px !important}
+[data-m~="perkd"]{display:none !important}
+}
+</style>
+</helmet>
+<div data-m="authroot" data-theme="light" style="min-height: 100vh; box-sizing: border-box; background: radial-gradient(1100px 520px at 80% -8%, rgba(110,149,255,0.20), transparent 62%), radial-gradient(900px 480px at -5% 0%, rgba(109,40,217,0.08), transparent 60%), #F4F4F6; color: #16141F; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; padding: 20px; display: flex; justify-content: center">
+<div data-m="auth" style="width: 100%; max-width: 1220px; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 20px; align-items: stretch">
+<aside data-m="authside" class="sx-hero" aria-label="Why join Streax" style="position: relative; overflow: hidden; border-radius: 28px; padding: 34px 36px; display: flex; flex-direction: column; gap: 26px; color: #FFFFFF; box-shadow: 0 30px 80px -40px rgba(109,40,217,0.8); min-height: calc(100vh - 40px); box-sizing: border-box">
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,26,100,0.5) 0%, rgba(14,26,100,0.24) 45%, rgba(14,26,100,0) 78%); pointer-events: none"></div>
+<a href="Home.dc.html" aria-label="Streax home" style="position: relative; display: inline-flex; align-items: center; gap: 10px; color: #FFFFFF; align-self: flex-start"><img src="assets/streax-logo.webp" alt="" width="36" height="36" style="display: block; width: 36px; height: 36px; border-radius: 11px; box-shadow: 0 10px 24px -10px rgba(0,0,0,0.5)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 30px; line-height: 1">Streax</span></a>
+<div style="position: relative; display: flex; flex-direction: column; gap: 14px; margin-top: auto">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.86)">{{side.eyebrow}}</span>
+<h1 data-m="authh1" style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 54px; line-height: 1.0; letter-spacing: -0.01em; max-width: 560px">{{side.title}}</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.55; color: rgba(255,255,255,0.92); max-width: 480px">{{side.sub}}</p>
+</div>
+<ul style="position: relative; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{perks}}" as="p" hint-placeholder-count="4">
+<li style="display: flex; gap: 14px; align-items: flex-start; padding: 13px 14px; border-radius: 16px; background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.24)">
+<span style="width: 38px; height: 38px; border-radius: 12px; background: rgba(255,255,255,0.95); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{p.icon}}"></path></svg></span>
+<span style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-weight: 600; font-size: 15px">{{p.title}}</span><span data-m="perkd" style="font-size: 13.5px; line-height: 1.5; color: rgba(255,255,255,0.88)">{{p.body}}</span></span>
+</li>
+</sc-for>
+</ul>
+<div style="position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<sc-for list="{{badges}}" as="b" hint-placeholder-count="2"><span style="display: inline-flex; align-items: center; padding: 7px 12px; border-radius: 999px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); font-size: 13px; font-weight: 600; color: #FFFFFF">{{b}}</span></sc-for>
+<span style="font-size: 12.5px; color: rgba(255,255,255,0.82)">Free forever. 18+ only.</span>
+</div>
+</aside>
+<main data-m="authmain" style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
+<div data-m="authtop" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+<a href="Home.dc.html" class="ul" style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; font-size: 14px; color: #6B6B78"><span data-m="mhide" style="display: inline-flex; align-items: center; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Back to Streax</span><span data-m="authlogo" style="display: none; align-items: center; gap: 9px; color: #16141F"><img src="assets/streax-logo.webp" alt="" width="30" height="30" style="display: block; width: 30px; height: 30px; border-radius: 9px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; line-height: 1">Streax</span></span></a>
+<div style="display: flex; align-items: center; gap: 10px"><span data-m="mhide" style="font-size: 14px; color: #6B6B78">{{alt.text}}</span><a href="{{alt.href}}" class="hv" style="min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 14px; border: 1px solid #DCDCE4; background: #FFFFFF; color: #2E2D3A; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center">{{alt.btn}}</a><a href="night/Signup.dc.html" class="hv" data-theme-toggle="1" aria-label="Switch to night mode" title="Switch to night mode" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #E2E2E8; background: #FFFFFF; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E2D3A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"></path></svg></a></div>
+</div>
+<div data-m="authfill" style="flex: 1 1 auto; min-height: 640px; display: flex; align-items: center; justify-content: center">
+<section data-m="authcard" aria-labelledby="card-title" style="width: 100%; max-width: 470px; box-sizing: border-box; border-radius: 24px; border: 1px solid #E8E8EE; background: #FFFFFF; box-shadow: 0 1px 2px rgba(20,20,40,0.04), 0 14px 40px -28px rgba(20,20,40,0.10); padding: 34px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px"><h2 id="card-title" style="margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.02em">{{card.title}}</h2><span style="font-size: 14.5px; line-height: 1.5; color: #6B6B78">{{card.sub}}</span></div>
+<sc-if value="{{hasNotice}}" hint-placeholder-val="{{ false }}"><div role="note" style="border-radius: 12px; border: 1px solid rgba(109,40,217,0.25); background: rgba(109,40,217,0.06); color: #55556A; padding: 11px 13px; font-size: 13.5px; line-height: 1.5">{{notice}}</div></sc-if>
+<button type="button" onClick="{{google}}" class="hv" style="width: 100%; min-height: 50px; border-radius: 12px; border: 1px solid #DCDCE4; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"></path><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"></path><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"></path><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"></path></svg>{{googleLabel}}</button>
+<div style="display: flex; align-items: center; gap: 12px; font-size: 12.5px; color: #74748A"><span style="flex: 1 1 auto; height: 1px; background: #EDEDF2"></span>or with email<span style="flex: 1 1 auto; height: 1px; background: #EDEDF2"></span></div>
+<form action="javascript:void(0)" novalidate style="display: flex; flex-direction: column; gap: 14px; margin: 0">
+<label for="su-name" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #55556A">Name<input id="su-name" name="name" type="text" autocomplete="name" value="{{name}}" onChange="{{onName}}" placeholder="Your name" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E8; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px"></label>
+<label for="su-email" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #55556A">Email<input id="su-email" name="email" type="email" autocomplete="email" inputmode="email" value="{{email}}" onChange="{{onEmail}}" placeholder="you@example.com" aria-invalid="{{inv.email}}" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E8; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px; border-color: {{bd.email}}"></label>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><label for="su-pw" style="font-size: 13px; font-weight: 500; color: #55556A">Password</label></div>
+<div style="position: relative"><input id="su-pw" name="password" type="{{pwType}}" autocomplete="new-password" value="{{password}}" onChange="{{onPw}}" placeholder="At least 8 characters" aria-invalid="{{inv.password}}" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E8; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px; padding-right: 74px; border-color: {{bd.password}}">
+<button type="button" onClick="{{togglePw}}" aria-pressed="{{pwPressed}}" aria-label="{{pwToggleAria}}" class="hv" style="position: absolute; right: 6px; top: 6px; height: 36px; padding: 0 10px; border-radius: 9px; border: 0; background: transparent; color: #5B21B6; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{pwToggleText}}</button></div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #74748A"><span style="flex: 0 0 96px; height: 4px; border-radius: 2px; background: #EDEDF2; overflow: hidden"><span style="display: block; height: 100%; width: {{strength.w}}; background: {{strength.color}}"></span></span>{{strength.label}}</div>
+</div>
+<label for="su-ref" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #55556A"><span>Invite code <span style="font-weight: 400; color: #74748A">(optional)</span></span><input id="su-ref" name="ref" type="text" autocomplete="off" value="{{ref}}" onChange="{{onRef}}" placeholder="From a friend's link" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E8; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px; font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; text-transform: uppercase"></label>
+<sc-if value="{{hasRefNote}}" hint-placeholder-val="{{ false }}"><span style="margin-top: -6px; font-size: 12.5px; color: #0E7C66">{{refNote}}</span></sc-if>
+<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.45; color: #55556A; cursor: pointer"><input type="checkbox" checked="{{adult}}" onChange="{{toggleAdult}}" aria-invalid="{{inv.adult}}" style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #6D28D9; flex: 0 0 auto; cursor: pointer"><span>I am 18 or older and online gambling is legal where I live.</span></label>
+<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.45; color: #55556A; cursor: pointer"><input type="checkbox" checked="{{marketing}}" onChange="{{toggleMarketing}}" style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #6D28D9; flex: 0 0 auto; cursor: pointer"><span>Email me Streax news and the biggest casino moves. Optional.</span></label>
+<sc-if value="{{hasErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="border-radius: 12px; border: 1px solid rgba(194,65,12,0.3); background: rgba(194,65,12,0.08); color: #C2410C; padding: 10px 12px; font-size: 13.5px; line-height: 1.5">{{err}}</div></sc-if>
+<button type="submit" onClick="{{submit}}" disabled="{{busy}}" class="pb" style="width: 100%; min-height: 50px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%); color: #FFFFFF; font: inherit; font-size: 15.5px; font-weight: 600; cursor: pointer; box-shadow: 0 14px 30px -16px rgba(36,66,214,0.7)">{{submitLabel}}</button>
+</form>
+<p style="margin: 0; font-size: 12.5px; line-height: 1.55; color: #74748A">Free forever. We never sell your email. You can delete your account any time from your account page.</p>
+</section>
+</div>
+<p style="margin: 0 0 4px; text-align: center; font-size: 12.5px; line-height: 1.6; color: #74748A">18+ only. Gambling can be addictive. Free help: BeGambleAware.org · GamCare.org.uk</p>
+</main>
+</div>
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; left: 0; right: 0; bottom: 24px; z-index: 100; display: flex; justify-content: center; padding: 0 16px; pointer-events: none">
+<div role="status" class="fu" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid #DCDCE4; background: rgba(255,255,255,0.98); box-shadow: 0 20px 50px -20px rgba(20,20,40,0.16); font-size: 14px; color: #16141F"><span style="width: 20px; height: 20px; border-radius: 50%; background: rgba(109,40,217,0.15); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{toast}}</div>
+</div>
+</sc-if>
+</div>
+</x-dc></template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1107}}'>
+class Component extends DCLogic {
+
+  showToast(msg) {
+    var self = this;
+    clearTimeout(this.toastTimer);
+    this.setState({ toast: msg });
+    this.toastTimer = setTimeout(function () { self.setState({ toast: '' }); }, 2600);
+  }
+  copy(text, msg) {
+    try { if (navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {}); } catch (e) {}
+    this.showToast(msg);
+  }
+  money(v) {
+    if (v == null || isNaN(v)) return 'n/a';
+    var a = Math.abs(v), s = v < 0 ? '-' : '', o;
+    if (a >= 1e9) o = (a / 1e9).toFixed(2) + 'B';
+    else if (a >= 1e6) o = (a / 1e6).toFixed(2) + 'M';
+    else if (a >= 1e3) o = (a / 1e3).toFixed(2) + 'K';
+    else if (a >= 1) o = a.toFixed(2);
+    else if (a === 0) o = '0';
+    else o = a.toPrecision(3);
+    return s + '$' + o;
+  }
+  compact(v) {
+    if (v >= 1e6) return (v / 1e6).toFixed(2) + 'M';
+    if (v >= 1e3) return (v / 1e3).toFixed(1) + 'K';
+    return String(Math.round(v));
+  }
+  price(v) {
+    if (v >= 1000) return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (v >= 1) return '$' + v.toFixed(2);
+    return '$' + v.toPrecision(4);
+  }
+  pct(v) { return (v >= 0 ? '▲ ' : '▼ ') + Math.abs(v).toFixed(2) + '%'; }
+  pcol(v) { return v >= 0 ? '#0E7C66' : '#C2410C'; }
+  seg(opts, active, pick) {
+    return opts.map(function (o) {
+      var on = o.v === active;
+      return { label: o.label, v: o.v, on: on, bg: on ? '#FFFFFF' : 'transparent', shadow: on ? 'inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px #DCDCE4' : 'none', fg: on ? '#16141F' : '#6B6B78', pick: function () { pick(o.v); } };
+    });
+  }
+  tint(name) {
+    var t = ['linear-gradient(135deg, #EAF1FF, #D9E6FF)', 'linear-gradient(135deg, #E6F5FF, #D3EAFE)', 'linear-gradient(135deg, #EFECFF, #E0DBFF)', 'linear-gradient(135deg, #E8F4FA, #D7EAF5)', 'linear-gradient(135deg, #EEF2F9, #DFE6F2)'];
+    var h = 0; for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 997;
+    return t[h % t.length];
+  }
+  ini(name) { var s = String(name).replace(/[^A-Za-z0-9]/g, ''); return (s.charAt(0) + (s.charAt(1) || '')).toUpperCase(); }
+  logoMap() { return this._lm || (this._lm = {"tok_shfl":"assets/logos/tok_shfl.png","tok_rlb":"assets/logos/tok_rlb.png","tok_fun":"assets/logos/tok_fun.png","tok_desu":"assets/logos/tok_desu.png","tok_bfg":"assets/logos/tok_bfg.png","tok_scs":"assets/logos/tok_scs.png","tok_winr":"assets/logos/tok_winr.png","chain_eth":"assets/logos/chain_eth.png","chain_sol":"assets/logos/chain_sol.png","chain_trx":"assets/logos/chain_trx.png","chain_bnb":"assets/logos/chain_bnb.png","chain_btc":"assets/logos/chain_btc.png","kick":"assets/logos/kick.png","cas_500.casino":"assets/logos/casinos/500.casino.png","cas_acebet":"assets/logos/casinos/acebet.png","cas_bc.game":"assets/logos/casinos/bc.game.png","cas_betfury.com":"assets/logos/casinos/betfury.com.png","cas_betstrike":"assets/logos/casinos/betstrike.png","cas_bluff":"assets/logos/casinos/bluff.png","cas_cloudbet.com":"assets/logos/casinos/cloudbet.com.png","cas_cybet":"assets/logos/casinos/cybet.png","cas_duel.com":"assets/logos/casinos/duel.com.png","cas_duelbits.com":"assets/logos/casinos/duelbits.com.png","cas_flush":"assets/logos/casinos/flush.png","cas_gamba.com":"assets/logos/casinos/gamba.com.png","cas_gamdom.com":"assets/logos/casinos/gamdom.com.png","cas_goated.com":"assets/logos/casinos/goated.com.png","cas_metawin.com":"assets/logos/casinos/metawin.com.png","cas_rainbet.com":"assets/logos/casinos/rainbet.com.png","cas_razed.com":"assets/logos/casinos/razed.com.png","cas_rollbit.com":"assets/logos/casinos/rollbit.com.png","cas_roobet.com":"assets/logos/casinos/roobet.com.png","cas_shuffle.com":"assets/logos/casinos/shuffle.com.png","cas_solcasino.io":"assets/logos/casinos/solcasino.io.png","cas_sportsbet.io":"assets/logos/casinos/sportsbet.io.png","cas_stake.com":"assets/logos/casinos/stake.com.png","cas_thrill.com":"assets/logos/casinos/thrill.com.png","cas_whale.io":"assets/logos/casinos/whale.io.png","cas_winna.com":"assets/logos/casinos/winna.com.png","cas_yeet.com":"assets/logos/casinos/yeet.com.png"}); }
+  tokLogo(sym) { return this.logoMap()['tok_' + String(sym || '').toLowerCase()] || ''; }
+  chainLogo(name) { var k = { Ethereum: 'eth', ETH: 'eth', Solana: 'sol', SOL: 'sol', Tron: 'trx', TRX: 'trx', 'BNB Chain': 'bnb', BNB: 'bnb', BTC: 'btc', Bitcoin: 'btc' }[name]; return k ? (this.logoMap()['chain_' + k] || '') : ''; }
+  kickLogo() { return this.logoMap().kick || ''; }
+  logo(domain, size) {
+    if (!domain) return '';
+    var own = this.D && this.D.casinoLogos && this.D.casinoLogos[domain];
+    if (own) return own;
+    var mine = this.logoMap()['cas_' + domain];
+    if (mine) return mine;
+    if (domain.indexOf('.') < 0) return '';
+    return true ? 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=' + Math.max(size || 64, 128) : '';
+  }
+  short(a) { return a.slice(0, 6) + '…' + a.slice(-4); }
+  headers(cols, key, dir, setSort) {
+    return cols.map(function (c) {
+      var on = c.k && c.k === key;
+      return { label: c.label, justify: c.right ? 'flex-end' : 'flex-start', sortable: !!c.k, plain: !c.k, color: on ? '#5B21B6' : '#6B6B78', arrow: on ? (dir < 0 ? '↓' : '↑') : (c.k ? '↕' : ''), aria: c.k ? 'Sort by ' + c.label : '', sort: function () { setSort(c.k); } };
+    });
+  }
+  gauge(v) {
+    var len = 81.68, f = v == null ? 0 : v / 100;
+    return { dash: (len * f).toFixed(1) + ' ' + len, color: v == null ? '#C6C6D2' : v >= 75 ? '#0E7C66' : v >= 55 ? '#6D28D9' : v >= 40 ? '#B45309' : '#C2410C', label: v == null ? 'n/a' : String(v) };
+  }
+  shellVals() {
+    var self = this, st = this.state, D = this.D;
+    var q = (st.gq || '').trim().toLowerCase();
+    var res = q ? D.idx.filter(function (c) { return c[0].toLowerCase().indexOf(q) !== -1; }).slice(0, 6).map(function (c) {
+      return { name: c[0], href: 'Casino.dc.html?c=' + c[1], dep: c[2], rank: c[3], ini: self.ini(c[0]), tint: self.tint(c[0]), logo: self.logo(c[4] || c[1], 64) };
+    }) : [];
+    var m = st.modal, isForm = m === 'alerts' || m === 'support';
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(st.email || '');
+    var topicsAll = ['Big deposit moves', 'New casinos added', 'Casino token moves'];
+    var titles = { gate: 'Free with a Streax account', alerts: 'Daily alerts', support: 'Contact support', sources: 'Data sources and methodology' };
+    var subs = { gate: 'Create a free account to unlock ' + String(st.gateWhat || 'this').replace(/^[A-Z](?=[a-z])/, function (c) { return c.toLowerCase(); }) + '. You also get:', alerts: 'One short email a day with the biggest on-chain moves.', support: 'Tell us what you need and we will reply by email.', sources: 'Where every number on this platform comes from, and when it was captured.' };
+    return {
+      acct: self.acctVals(), sideCta: self.sideVals(), isGate: m === 'gate',
+      gatePerks: ['Your own whale alerts by email or Telegram', 'A watchlist of the casinos you follow', '7, 30 and 90-day history with CSV downloads', 'Member-only bonus codes and referral points'],
+      gateSignup: 'Signup.dc.html' + self.gateNext(), gateLogin: 'Login.dc.html' + self.gateNext(),
+      gq: st.gq || '', onGq: function (e) { self.setState({ gq: e.target.value }); },
+      gqOn: function () { clearTimeout(self.blurTimer); self.setState({ gqFocus: true }); },
+      gqOff: function () { self.blurTimer = setTimeout(function () { self.setState({ gqFocus: false }); }, 180); },
+      gqOpen: !!st.gqFocus && q.length > 0, gqResults: res, gqNone: q.length > 0 && res.length === 0,
+      bell: function () { if (!self.member()) { self.gate('Personal whale alerts'); return; } self.showToast('You are all caught up. Whale alerts for your watchlist arrive by email or Telegram.'); },
+      avatar: function () { self.showToast('Accounts arrive with the full launch'); },
+      openAlerts: function () { if (self.member()) { location.href = 'Account.dc.html'; return; } self.gate('Personal whale alerts'); },
+      openSupport: function () { self.setState({ modal: 'support', formDone: false, formErr: '' }); },
+      openSources: function () { self.setState({ modal: 'sources' }); },
+      modalOpen: !!m, isSources: m === 'sources', isForm: isForm, isAlerts: m === 'alerts', isSupport: m === 'support',
+      modalTitle: titles[m] || this.extraTitle || '', modalSub: subs[m] || this.extraSub || '', modalW: m === 'sources' ? '640px' : (this.extraW || '480px'),
+      closeModal: function () { self.setState({ modal: '' }); }, stop: function (e) { e.stopPropagation(); },
+      email: st.email || '', onEmail: function (e) { self.setState({ email: e.target.value, formErr: '' }); },
+      emailBd: st.formErr ? 'rgba(194,65,12,0.6)' : '#E2E2E8',
+      msg: st.msg || '', onMsg: function (e) { self.setState({ msg: e.target.value, formErr: '' }); },
+      topics: topicsAll.map(function (t) { var on = !(st.topicsOff || {})[t]; return { label: t, on: on, bd: on ? '#6D28D9' : '#C6C6D2', bg: on ? '#6D28D9' : 'transparent', mark: on ? '✓' : '', toggle: function () { var o = Object.assign({}, st.topicsOff || {}); o[t] = on; self.setState({ topicsOff: o }); } }; }),
+      hasFormErr: !!st.formErr, formErr: st.formErr || '', formDone: !!st.formDone, formOpen: !st.formDone,
+      submitLabel: m === 'support' ? 'Send message' : 'Turn on alerts',
+      doneTitle: m === 'support' ? 'Message received' : 'Alerts are on for ' + (st.email || ''),
+      doneBody: 'This is the local demo, so nothing is emailed yet. Connect an email service in the backend to send it for real.',
+      submitForm: function () {
+        if (!emailOk) { self.setState({ formErr: 'Enter a valid email address.' }); return; }
+        if (m === 'support' && !(st.msg || '').trim()) { self.setState({ formErr: 'Write a short message.' }); return; }
+        if (m === 'alerts' && topicsAll.every(function (t) { return (st.topicsOff || {})[t]; })) { self.setState({ formErr: 'Pick at least one alert.' }); return; }
+        self.setState({ formDone: true, formErr: '', msg: '' });
+      },
+      sources: [
+        { n: '1', name: 'Streax on-chain monitor', gives: 'Live deposits, withdrawals, depositing wallets, whale moves and balances for every casino with labeled wallets, read every 10 minutes. These replace the 99bitcoins figures for those casinos.', url: 'etherscan.io, trongrid.io, ethereum-rpc.publicnode.com', when: 'live, every 10 minutes' },
+        { n: '2', name: '99bitcoins casino on-chain pages', gives: '24h deposits, depositing wallets, payouts, hot wallets, chain and asset split for 43 casinos. Shown as published. Asset values on those pages match ETH and SOL prices from late August 2026.', url: '99bitcoins.com/coins/gambling', when: 'captured 11 Oct 2026, unchanged on recheck 12 Oct' },
+        { n: '3', name: 'Official casino websites', gives: 'Operator name, registration and licence, quoted from each site footer. Casinos whose footer could not be read show "Not verified".', url: 'stake.com, roobet.com, shuffle.com, rainbet.com, thrill.com, sportsbet.io, stake.us', when: '12 Oct 2026' },
+        { n: '4', name: 'DefiLlama coins API', gives: 'Casino token prices, 24h and 7d change and 30 daily closes.', url: 'coins.llama.fi', when: self.props && self.props.$local ? 'live on your local server' : '12 Oct 2026, 08:53 UTC' },
+        { n: '5', name: 'CoinGecko', gives: 'Circulating supply, used for market cap at the current price, and 24h volume.', url: 'coingecko.com/en/categories/gambling', when: '11 Oct 2026' },
+        { n: '6', name: 'Kick and Twitch APIs', gives: 'Followers, live status, viewers and stream titles for tracked casino streamers, plus anyone live in the Slots and casino categories.', url: 'docs.kick.com, dev.twitch.tv', when: self.props && self.props.$local ? 'live on your local server' : '12 Oct 2026, 09:05 UTC' },
+        { n: '7', name: 'Etherscan and Blockscout', gives: 'Public name tags and token holdings for the Stake.com and Rollbit wallets (Etherscan), and their ETH balances (Blockscout API, 12 Oct 2026 snapshot).', url: 'etherscan.io, eth.blockscout.com', when: '11 to 12 Oct 2026' },
+        { n: '8', name: 'Logos', gives: 'Token logos from Trust Wallet assets and web3icons, chain logos from cryptocurrency-icons, Kick logo from Simple Icons. Casino icons are each casino’s own website icon, loaded in your browser on the local site; the canvas shows initials until logo files are added.', url: 'github.com/trustwallet/assets, web3icons, cryptocurrency-icons, simpleicons.org, google.com/s2/favicons', when: '12 Oct 2026' }
+      ],
+      hasToast: !!st.toast, toast: st.toast || ''
+    };
+  }
+
+  // ---- Streax accounts ----
+  member() { return !!(this.props && this.props.$me); }
+  locked() {
+    var a = this.props && this.props.$auth;
+    if (this.props && this.props.$local && a && a.enabled === false) return false;
+    return !this.member();
+  }
+  gate(what) { this.setState({ modal: 'gate', gateWhat: what }); }
+  apiPost(path, body) {
+    return fetch(path, { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body || {}) }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) { var e = new Error(j.error || ('Something went wrong (' + r.status + ')')); e.status = r.status; e.code = j.code; e.field = j.field; throw e; }
+        return j;
+      });
+    });
+  }
+  saveMe(me) {
+    if (this.props) this.props.$me = me;
+    try { if (me) sessionStorage.setItem('sx_me', JSON.stringify(me)); else sessionStorage.removeItem('sx_me'); } catch (e) {}
+  }
+  acctVals() {
+    var me = this.props && this.props.$me;
+    if (me) return { href: 'Account.dc.html', label: 'My account, ' + me.name, text: me.initials, pad: '0', radius: '50%', fs: '15px', w: '44px', avatar: me.avatar || '' };
+    return { href: 'Signup.dc.html', label: 'Create a free Streax account', text: 'Sign up', pad: '0 16px', radius: '14px', fs: '14px', w: 'auto', avatar: '' };
+  }
+  sideVals() {
+    if (this.member()) return { title: 'Your whale alerts', body: 'Watchlist, alert settings, member codes and your referral points.', btn: 'Open my account', href: 'Account.dc.html' };
+    return { title: 'Free member perks', body: 'Your own whale alerts, a casino watchlist, full history and member-only codes.', btn: 'Create free account', href: 'Signup.dc.html' };
+  }
+  gateNext() {
+    if (!(this.props && this.props.$local) || typeof location === 'undefined') return '';
+    return '?next=' + encodeURIComponent(location.pathname + location.search);
+  }
+  watchVals(slug, name) {
+    var self = this, me = this.props && this.props.$me;
+    var on = !!(me && me.watchlist && me.watchlist.indexOf(slug) !== -1);
+    return { on: on, label: on ? 'Watching' : 'Watch', fill: on ? 'currentColor' : 'none', aria: (on ? 'Stop watching ' : 'Add to watchlist: ') + name,
+      toggle: function () {
+        if (!me) { self.gate('A casino watchlist with your own whale alerts'); return; }
+        self.apiPost('/api/account/watch', { slug: slug, on: !on }).then(function (j) {
+          me.watchlist = (j.watchlist || []).map(function (w) { return w.slug; });
+          self.saveMe(me);
+          self.showToast(on ? name + ' removed from your watchlist' : name + ' is on your watchlist');
+        }).catch(function (e) { if (e.status === 401) { self.saveMe(null); self.gate('A casino watchlist with your own whale alerts'); } else self.showToast(e.message); });
+      } };
+  }
+  // ---- end accounts ----
+  scoreLib() {
+    if (!this._scoreLib) this._scoreLib = (function () {
+  var CATS = [
+    { id: 'activity', name: 'On-chain activity', w: 15, src: 'On-chain', what: 'Deposit volume and how many wallets deposit.' },
+    { id: 'reserves', name: 'Reserves', w: 15, src: 'On-chain', what: 'Hot wallet money compared with a day of deposits.' },
+    { id: 'payouts', name: 'Payout speed', w: 15, src: 'Players', what: 'Median time from withdrawal request to coins arriving, from verified player reports.' },
+    { id: 'complaints', name: 'Complaint record', w: 15, src: 'Players', what: 'Share of closed complaints the casino resolved.' },
+    { id: 'fairness', name: 'Fairness and RTP', w: 10, src: 'Review', what: 'Provably fair games, a verifier, client seeds and published RTP.' },
+    { id: 'licence', name: 'Licence and compliance', w: 10, src: 'Review', what: 'A licence we could check, KYC timing, geo-blocking and AML policy.' },
+    { id: 'rg', name: 'Responsible gambling', w: 8, src: 'Review', what: 'Self-exclusion, limits, cool-off and help links.' },
+    { id: 'support', name: 'Support', w: 7, src: 'Review', what: '24/7 live help and how fast a human answers.' },
+    { id: 'security', name: 'Account security', w: 5, src: 'Review', what: 'Two-factor login and withdrawal confirmation.' }
+  ];
+  var CHECKS = {
+    fairness: [['provablyFair', 'Provably fair house games'], ['verifier', 'Built-in result verifier'], ['clientSeed', 'Players can set their own client seed'], ['rtpPublished', 'RTP published for every game'], ['maxRtp', 'Commits to the highest RTP version of slots']],
+    compliance: [['kycBeforeDeposit', 'KYC asked before the first deposit, not after a win'], ['geoBlock', 'Blocks restricted countries'], ['restrictedList', 'Publishes its restricted countries'], ['amlPolicy', 'Publishes an AML policy']],
+    rg: [['selfExclusion', 'Self-exclusion from the account page'], ['limits', 'Deposit and loss limits'], ['coolOff', 'Cool-off periods'], ['rgLinks', 'Links to gambling help services'], ['realityCheck', 'Reality checks or session reminders']],
+    support: [['live24', '24/7 live chat with a person']],
+    security: [['twoFA', 'Two-factor login'], ['withdrawalConfirm', 'Withdrawals need a second confirmation'], ['loginAlerts', 'New login or device alerts']]
+  };
+  function clamp(v) { return Math.max(0, Math.min(10, v)); }
+  function lerp(x, pts) {
+    if (x <= pts[0][0]) return pts[0][1];
+    for (var i = 1; i < pts.length; i++) if (x <= pts[i][0]) { var a = pts[i - 1], b = pts[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); }
+    return pts[pts.length - 1][1];
+  }
+  function checks(obj, list) {
+    var yes = 0, known = 0;
+    list.forEach(function (c) { var v = obj && obj[c[0]]; if (v === 'yes') { yes++; known++; } else if (v === 'no') known++; });
+    return { yes: yes, known: known, total: list.length };
+  }
+  function grade(total) {
+    if (total == null) return { label: 'Not rated', tone: 'muted' };
+    if (total >= 85) return { label: 'Excellent', tone: 'good' };
+    if (total >= 70) return { label: 'Good', tone: 'good' };
+    if (total >= 55) return { label: 'Fair', tone: 'accent' };
+    if (total >= 40) return { label: 'Weak', tone: 'warn' };
+    return { label: 'Poor', tone: 'bad' };
+  }
+
+  // input: { onchain: {vol01, reach01, cover, drawdown7d}, review: {...}, complaints: {resolved, unresolved}, payouts: {median, count} }
+  function compute(input) {
+    input = input || {};
+    var oc = input.onchain || {}, rv = input.review || {}, cp = input.complaints || {}, po = input.payouts || {};
+    var out = {};
+    if (oc.vol01 != null && oc.reach01 != null) out.activity = { v: clamp(10 * (0.57 * oc.vol01 + 0.43 * oc.reach01)), note: oc.note || '' };
+    if (oc.cover != null && isFinite(oc.cover)) {
+      var r = lerp(oc.cover, [[0, 0], [0.25, 2], [1, 5], [2, 7], [5, 10]]);
+      if (oc.drawdown7d != null && oc.drawdown7d > 0.4) r -= Math.min(4, (oc.drawdown7d - 0.4) * 10);
+      out.reserves = { v: clamp(r), note: oc.cover.toFixed(1) + 'x a day of deposits' };
+    }
+    if (po.count >= 3 && po.median != null) out.payouts = { v: clamp(lerp(po.median, [[10, 10], [30, 9], [60, 8], [180, 6], [720, 4], [1440, 2], [2880, 0]])), note: 'Median ' + fmtMin(po.median) + ' over ' + po.count + ' reports' };
+    var closed = (cp.resolved || 0) + (cp.unresolved || 0);
+    if (closed >= 3) out.complaints = { v: clamp(10 * (cp.resolved || 0) / closed), note: (cp.resolved || 0) + ' of ' + closed + ' closed complaints resolved' };
+    var f = checks(rv.fairness, CHECKS.fairness);
+    if (f.known >= 3) out.fairness = { v: 10 * f.yes / f.known, note: f.yes + ' of ' + f.known + ' checks passed' };
+    var lic = rv.licence || {}, comp = checks(rv.compliance, CHECKS.compliance), lv = null;
+    if (lic.status === 'licensed') lv = lic.verified ? 10 : 7; else if (lic.status === 'unlicensed') lv = 0;
+    if (lv != null || comp.known >= 2) {
+      var parts = [], ws = [];
+      if (lv != null) { parts.push(lv); ws.push(0.6); }
+      if (comp.known >= 2) { parts.push(10 * comp.yes / comp.known); ws.push(0.4); }
+      var s = 0, t = 0;
+      parts.forEach(function (p, i) { s += p * ws[i]; t += ws[i]; });
+      out.licence = { v: s / t, note: lic.status === 'licensed' ? (lic.verified ? 'Licence checked with the regulator' : 'Licence claimed, not yet checked') : lic.status === 'unlicensed' ? 'No licence found' : comp.yes + ' of ' + comp.known + ' compliance checks passed' };
+    }
+    var g = checks(rv.rg, CHECKS.rg);
+    if (g.known >= 3) out.rg = { v: 10 * g.yes / g.known, note: g.yes + ' of ' + g.known + ' tools available' };
+    var sp = rv.support || {}, sparts = [];
+    if (sp.live24 === 'yes') sparts.push(10); else if (sp.live24 === 'no') sparts.push(3);
+    if (sp.responseMins != null && sp.responseMins !== '' && isFinite(sp.responseMins)) sparts.push(lerp(Number(sp.responseMins), [[2, 10], [5, 9], [15, 7], [60, 5], [240, 3], [1440, 0]]));
+    if (sparts.length) out.support = { v: sparts.reduce(function (a, b) { return a + b; }, 0) / sparts.length, note: sp.responseMins ? 'First reply in about ' + fmtMin(Number(sp.responseMins)) : (sp.live24 === 'yes' ? '24/7 live chat' : 'No 24/7 live chat') };
+    var sc = checks(rv.security, CHECKS.security);
+    if (sc.known >= 2) out.security = { v: 10 * sc.yes / sc.known, note: sc.yes + ' of ' + sc.known + ' protections' };
+
+    var sum = 0, wsum = 0;
+    var cats = CATS.map(function (c) {
+      var x = out[c.id];
+      if (x) { sum += x.v * c.w; wsum += c.w; }
+      return { id: c.id, name: c.name, w: c.w, src: c.src, what: c.what, rated: !!x, v: x ? Math.round(x.v * 10) / 10 : null, note: x ? x.note : '' };
+    });
+    var total = wsum ? Math.round(sum / wsum * 10) : null;
+    var coverage = wsum / 100;
+    var shown = wsum >= 25 ? total : null;
+    // Under half the weight rated, a high number would overstate what we know: label it as early, not "Excellent".
+    var g = shown != null && coverage < 0.5 ? { label: 'Early score', tone: 'muted' } : grade(shown);
+    return { total: shown, coverage: coverage, provisional: coverage < 0.8, rated: cats.filter(function (c) { return c.rated; }).length, cats: cats, grade: g };
+  }
+  function fmtMin(m) {
+    if (m < 1) return 'under a minute';
+    if (m < 90) return Math.round(m) + ' min';
+    if (m < 48 * 60) return (Math.round(m / 6) / 10) + ' h';
+    return Math.round(m / 1440) + ' days';
+  }
+  return { CATS: CATS, CHECKS: CHECKS, compute: compute, grade: grade, fmtMin: fmtMin };
+})();
+    return this._scoreLib;
+  }
+  // ---- Streax Score: on-chain inputs from this page, review and player data from the server when it runs there ----
+  score(c, D) {
+    if (!c || c.dep < 1000) return null;
+    var maxDep = D.casinos[0].dep, maxW = 0;
+    D.casinos.forEach(function (x) { if (x.wal > maxW) maxW = x.wal; });
+    var lg = function (v) { return Math.log(Math.max(v, 1)) / Math.LN10; };
+    var vol = Math.max(0, Math.min(1, (lg(c.dep) - 4) / (lg(maxDep) - 4)));
+    var reach = Math.max(0, Math.min(1, lg(c.wal) / lg(maxW)));
+    var liq = Math.max(0, Math.min(1, (c.hot / c.dep) / 5));
+    var T = (this.trustSum && this.trustSum[c.slug]) || {};
+    var r = this.scoreLib().compute({ onchain: { vol01: vol, reach01: reach, cover: c.hot / c.dep }, review: T.review, complaints: T.complaints, payouts: T.payouts });
+    return { total: r.total, vol: vol * 10, reach: reach * 10, liq: liq * 10, cover: c.hot / c.dep, streax: r };
+  }
+  trustInit() {
+    var self = this;
+    if (!(this.props && this.props.$local) || typeof fetch !== 'function' || !(this.D && this.D.casinos)) return;
+    fetch('/api/trust/summary', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (!j) return;
+      var m = {};
+      Object.keys(j.reviews || {}).forEach(function (k) { (m[k] = m[k] || {}).review = j.reviews[k]; });
+      Object.keys(j.complaints || {}).forEach(function (k) { (m[k] = m[k] || {}).complaints = j.complaints[k]; });
+      Object.keys(j.payouts || {}).forEach(function (k) { (m[k] = m[k] || {}).payouts = j.payouts[k]; });
+      self.trustSum = m;
+      self.setState({ trustTick: Date.now() });
+    }).catch(function () {});
+  }
+
+
+  query() {
+    var q = {};
+    try { location.search.slice(1).split('&').forEach(function (kv) { if (!kv) return; var i = kv.indexOf('='); try { q[decodeURIComponent(i < 0 ? kv : kv.slice(0, i))] = i < 0 ? '' : decodeURIComponent(kv.slice(i + 1).replace(/\+/g, ' ')); } catch (e) {} }); } catch (e) {}
+    return q;
+  }
+  live() { return !!(this.props && this.props.$local); }
+  nextUrl(fallback) {
+    var n = this.q.next || '';
+    return /^\/[A-Za-z0-9._~\/-]*(\?[A-Za-z0-9._~=&%-]*)?$/.test(n) && n.indexOf('//') !== 0 ? n : fallback;
+  }
+  field(id, fallback) { try { var el = document.getElementById(id); if (el && typeof el.value === 'string') return el.value; } catch (e) {} return fallback || ''; }
+  strength(pw) {
+    var s = 0;
+    if (pw.length >= 8) s++;
+    if (pw.length >= 12) s++;
+    if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++;
+    if (/\d/.test(pw)) s++;
+    if (/[^A-Za-z0-9]/.test(pw)) s++;
+    if (!pw) return { w: '0%', color: '#EDEDF2', label: '8 characters or more' };
+    if (pw.length < 8) return { w: '20%', color: '#C2410C', label: 'Too short' };
+    if (s <= 2) return { w: '45%', color: '#B45309', label: 'Okay. Longer is stronger.' };
+    if (s <= 3) return { w: '72%', color: '#0E7C66', label: 'Good password' };
+    return { w: '100%', color: '#0E7C66', label: 'Strong password' };
+  }
+  errNotice(code) {
+    return {
+      google_off: 'Google sign-in is not switched on yet. Use your email and password.',
+      google_cancel: 'Google sign-in was cancelled.',
+      google_state: 'Google sign-in did not complete. Please try again.',
+      google_failed: 'Google sign-in did not complete. Please try again.',
+      google_confirm: 'Tick the 18+ box, then continue with Google to create your account.',
+      google_unverified: 'Your Google email is not verified. Sign up with email and a password instead.',
+      failed: 'Something went wrong. Please try again.',
+      busy: 'Too many tries. Wait a few minutes and try again.',
+      off: 'Accounts are off on this server for now.'
+    }[code] || '';
+  }
+  fieldVals(names, st) {
+    var bd = {}, inv = {};
+    names.forEach(function (n) { var bad = st.field === n; bd[n] = bad ? '#C2410C' : '#E2E2E8'; inv[n] = bad ? 'true' : 'false'; });
+    return { bd: bd, inv: inv };
+  }
+
+  constructor(props) {
+    super(props);
+    this.D = { idx: [] };
+    this.q = this.query();
+    var ref = String(this.q.ref || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+    this.state = { toast: '', name: '', email: '', password: '', ref: ref, adult: false, marketing: false, showPw: false, busy: false, err: '', field: this.q.err === 'google_confirm' ? 'adult' : '', codes: null };
+  }
+  componentDidMount() {
+    var self = this;
+    if (this.live() && typeof fetch === 'function') fetch('/api/codes', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { if (j && j.codes) self.setState({ codes: j.codes }); }).catch(function () {});
+  }
+  componentWillUnmount() { clearTimeout(this.toastTimer); }
+  renderVals() {
+    var self = this, st = this.state;
+    var fv = this.fieldVals(['email', 'password', 'adult'], st);
+    var notice = !this.live() ? 'Preview of the sign-up page. Accounts work when Streax runs on its server.' : this.errNotice(this.q.err);
+    var badges = ['+100 points when you join'];
+    if (st.ref) badges.push('+100 friend bonus');
+    if (st.codes && st.codes.length) badges.push(st.codes.length + (st.codes.length === 1 ? ' member code live' : ' member codes live'));
+    var next = this.q.next ? '&next=' + encodeURIComponent(this.nextUrl('')) : '';
+    return {
+      side: { eyebrow: 'Free membership', title: 'Follow the money behind crypto casinos.', sub: 'Streax members track casino wallets in real time, get their own whale alerts and unlock member-only codes. Free, no card needed.' },
+      perks: [{"icon": "M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z M10 20a2 2 0 0 0 4 0", "title": "Your own whale alerts", "body": "Pick casinos and get a Telegram or email ping when big money moves in or out."}, {"icon": "M4 19h16 M7 15l4-5 3 3 5-7", "title": "Full on-chain history", "body": "7, 30 and 90-day deposits and withdrawals, with CSV downloads."}, {"icon": "M4 9h16v11H4z M12 9v11 M4 13h16 M12 9c-2-4-6-4-6-1s6 1 6 1z m0 0c2-4 6-4 6-1s-6 1-6 1z", "title": "Member-only bonus codes", "body": "Casino offers for members first. Silver and Gold unlock more."}, {"icon": "M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z", "title": "Points and levels", "body": "Earn points for joining, inviting friends and setting up alerts."}], badges: badges,
+      alt: { text: 'Have an account?', btn: 'Log in', href: 'Login.dc.html' + (this.q.next ? '?next=' + encodeURIComponent(this.nextUrl('')) : '') },
+      card: { title: 'Create your free account', sub: 'Watchlist, whale alerts, full history and member codes. Takes 30 seconds.' },
+      hasNotice: !!notice, notice: notice,
+      googleLabel: 'Sign up with Google',
+      google: function () {
+        if (!self.live()) { self.showToast('Preview: Google sign-up works on your Streax server'); return; }
+        if (!st.adult) { self.setState({ err: 'Tick the 18+ box first, then continue with Google.', field: 'adult' }); return; }
+        location.href = '/auth/google?mode=signup&adult=1' + (st.ref ? '&ref=' + encodeURIComponent(st.ref) : '') + (st.marketing ? '&marketing=1' : '') + next;
+      },
+      name: st.name, onName: function (e) { self.setState({ name: e.target.value }); },
+      email: st.email, onEmail: function (e) { self.setState({ email: e.target.value, err: st.field === 'email' ? '' : st.err, field: st.field === 'email' ? '' : st.field }); },
+      password: st.password, onPw: function (e) { self.setState({ password: e.target.value, err: st.field === 'password' ? '' : st.err, field: st.field === 'password' ? '' : st.field }); },
+      pwType: st.showPw ? 'text' : 'password', pwPressed: st.showPw ? 'true' : 'false', pwToggleText: st.showPw ? 'Hide' : 'Show', pwToggleAria: st.showPw ? 'Hide password' : 'Show password',
+      togglePw: function () { self.setState({ showPw: !st.showPw }); },
+      strength: this.strength(st.password),
+      ref: st.ref, onRef: function (e) { self.setState({ ref: String(e.target.value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12) }); },
+      hasRefNote: !!st.ref, refNote: 'Invite applied: you and your friend both get bonus points.',
+      adult: st.adult, toggleAdult: function (e) { self.setState({ adult: !!e.target.checked, err: st.field === 'adult' ? '' : st.err, field: st.field === 'adult' ? '' : st.field }); },
+      marketing: st.marketing, toggleMarketing: function (e) { self.setState({ marketing: !!e.target.checked }); },
+      bd: fv.bd, inv: fv.inv, hasErr: !!st.err, err: st.err,
+      busy: st.busy, submitLabel: st.busy ? 'Creating your account...' : 'Create free account',
+      submit: function (e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (st.busy) return;
+        var name = self.field('su-name', st.name).trim(), email = self.field('su-email', st.email).trim(), pw = self.field('su-pw', st.password);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { self.setState({ email: email, err: 'Enter a valid email address.', field: 'email' }); return; }
+        if (pw.length < 8) { self.setState({ password: pw, err: 'Use at least 8 characters for your password.', field: 'password' }); return; }
+        if (!st.adult) { self.setState({ err: 'Confirm you are 18 or older to create an account.', field: 'adult' }); return; }
+        if (!self.live()) { self.showToast('Preview: sign-up works on your Streax server'); return; }
+        self.setState({ busy: true, err: '', field: '', name: name, email: email, password: pw });
+        self.apiPost('/api/auth/signup', { name: name, email: email, password: pw, adult: true, marketing: !!st.marketing, ref: st.ref }).then(function (j) {
+          self.saveMe(j.user);
+          location.href = self.nextUrl('Account.dc.html?welcome=1');
+        }).catch(function (x) { self.setState({ busy: false, err: x.message, field: x.field || '' }); });
+      },
+      hasToast: !!st.toast, toast: st.toast || ''
+    };
+  }
+
+}
+</script>
+</body>
+</html>
