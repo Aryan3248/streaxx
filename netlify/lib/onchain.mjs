@@ -91,6 +91,7 @@ export async function run(log = () => {}, opts = {}) {
 
   await precompute(reg, t0, state);
   if (newWhales.length) await sendAlerts(newWhales).catch((e) => errors.push('alerts: ' + e.message));
+  try { const H = await import('./health.mjs'); await H.writeBrief(); await H.sendHealthAlerts(); } catch (e) { errors.push('health: ' + e.message); }
   try { const { settleAll } = await import('./complaints.mjs'); await settleAll(); } catch (e) { errors.push('complaints: ' + e.message); }
 
   state.lastRun = { at: Date.now(), ms: Date.now() - t0, transfers: uniq.length, errors: errors.slice(0, 20) };
@@ -103,7 +104,8 @@ export async function run(log = () => {}, opts = {}) {
 }
 
 async function aggregate(recs, now) {
-  const cutH = now - 32 * D, cutD = now - 92 * D;
+  // daily totals are kept two years so the 1Y view can compare with the year before
+  const cutH = now - 32 * D, cutD = now - 732 * D;
   await update(db(), 'hourly', (hr) => {
     recs.forEach((r) => {
       if (r.internal || r.usd == null) return;
@@ -145,7 +147,7 @@ async function addWhales(recs, now) {
       const w = { key: r.key, slug: r.slug, name: casinoName(r.slug), dir: r.dir, usd: r.usd, ts: r.ts, amount: r.amount, asset: r.asset, chain: r.chain, chainName: CHAIN_NAMES[r.chain], cp: r.cp, hash: r.hash, txUrl: explorerTx(r.chain, r.hash) };
       list.push(w); added.push(w); have.add(r.key);
     });
-    return list.filter((w) => w.ts > now - 92 * D).sort((a, b) => b.ts - a.ts).slice(0, 20000);
+    return list.filter((w) => w.ts > now - 400 * D).sort((a, b) => b.ts - a.ts).slice(0, 20000);
   }, []);
   return added;
 }
@@ -170,7 +172,7 @@ async function readBalances(reg, px, now) {
       const arr = (h[c.slug] = h[c.slug] || []);
       const last = arr[arr.length - 1];
       if (last && last.t === day) last.usd = usd; else arr.push({ t: day, usd });
-      h[c.slug] = arr.filter((x) => x.t > now - 92 * D);
+      h[c.slug] = arr.filter((x) => x.t > now - 400 * D);
     });
     return h;
   }, {});
@@ -407,7 +409,7 @@ export async function analytics(days) {
   const casinos = [];
   for (const c of reg.filter((x) => x.wallets.length)) {
     const d = dl[c.slug] || {}, info = casinoBySlug(c.slug) || {};
-    const row = { slug: c.slug, name: c.name, domain: info.domain || '', dep: [], wd: [], txIn: [], txOut: [], bal: [], depTotal: 0, wdTotal: 0, txInTotal: 0, txOutTotal: 0, prevDep: 0, prevWd: 0 };
+    const row = { slug: c.slug, name: c.name, domain: info.domain || '', kind: c.kind || 'casino', dep: [], wd: [], txIn: [], txOut: [], bal: [], depTotal: 0, wdTotal: 0, txInTotal: 0, txOutTotal: 0, prevDep: 0, prevWd: 0 };
     const hist = {}; ((bh || {})[c.slug] || []).forEach((x) => { hist[x.t] = x.usd; });
     let lastBal = null;
     dates.forEach((t) => {
@@ -468,3 +470,53 @@ export async function depositAddressIndex() {
 }
 
 export { TOKENS, SITE };
+
+// One casino's public profile: 30-day flows with the 30 before, last 24 hours,
+// chain split, treasury by chain with 24h/7d change, largest deposits, rank and share.
+export async function profile(slug) {
+  const reg = await getRegistry();
+  const c = reg.find((x) => x.slug === slug);
+  if (!c || !c.wallets.length) return { slug, tracked: false };
+  const now = Date.now(), today = dayOf(now);
+  const [det, A, hourly, dailyAll, depmap] = await Promise.all([casinoDetail(slug, 30), analytics(30), db().get('hourly'), db().get('daily'), db().get('depmap/' + slug)]);
+  const row = A.casinos.find((x) => x.slug === slug) || {};
+  const ranked = A.casinos.filter((x) => x.depTotal > 0).sort((a, b) => b.depTotal - a.depTotal);
+  const total = ranked.reduce((s, x) => s + x.depTotal, 0) || 1;
+  // last 24 hours from the hourly totals
+  const hr = (hourly || {})[slug] || {};
+  const h24 = { dep: 0, wd: 0, txIn: 0, txOut: 0 };
+  Object.entries(hr).forEach(([t, b]) => { if (Number(t) >= now - 24 * H) { h24.dep += b[0]; h24.wd += b[1]; h24.txIn += b[2]; h24.txOut += b[3]; } });
+  const dm = depmap || { in: {} }, m24 = Math.floor((now - 24 * H) / 60000), m7 = Math.floor((now - 7 * D) / 60000);
+  h24.depositors = Object.values(dm.in).filter((v) => v >= m24).length;
+  // windows for the flows card
+  const dl = (dailyAll || {})[slug] || {};
+  const win = (days) => { const o = { dep: 0, wd: 0, txIn: 0, txOut: 0 }; for (let i = 0; i < days; i++) { const x = dl[today - i * D] || {}; o.dep += x.i || 0; o.wd += x.o || 0; o.txIn += x.ti || 0; o.txOut += x.to || 0; } return o; };
+  const w7 = win(7), w30 = win(30);
+  w7.depositors = Object.values(dm.in).filter((v) => v >= m7).length;
+  w30.depositors = row.depositors || det.depositors || 0;
+  // chain split of deposits, last 7 days
+  const chains7 = {};
+  for (let i = 0; i < 7; i++) Object.entries((dl[today - i * D] || {}).a || {}).forEach(([k, v]) => { const ch = CHAIN_NAMES[k.split('|')[1]] || k.split('|')[1]; chains7[ch] = (chains7[ch] || 0) + v[0]; });
+  const c7tot = Object.values(chains7).reduce((s, v) => s + v, 0) || 1;
+  // treasury by chain with the coins held
+  const byChain = {};
+  det.wallets.forEach((w) => { const x = (byChain[w.chainName] = byChain[w.chainName] || { chain: w.chainName, usd: 0, wallets: 0, coins: new Set() }); x.usd += w.usd || 0; x.wallets++; (w.assets || []).forEach((a) => { if (a.usd > 1) x.coins.add(a.asset); }); });
+  const hist = det.balanceHistory || [];
+  const allBh = (((await db().get('balhist')) || {})[slug] || []);
+  const at = (ms) => { let v = null; allBh.forEach((x) => { if (x.t <= ms) v = x.usd; }); return v; };
+  const bal = det.balance, b24 = at(now - 24 * H), b7 = at(now - 7 * D);
+  const tRanked = A.casinos.filter((x) => x.balance > 0).sort((a, b) => b.balance - a.balance);
+  return {
+    slug, name: c.name, tracked: true, updatedAt: A.updatedAt,
+    rank30: ranked.findIndex((x) => x.slug === slug) + 1, of: ranked.length,
+    share30: (row.depTotal || 0) / total * 100,
+    d30: { dep: row.depTotal || 0, wd: row.wdTotal || 0, txIn: row.txInTotal || 0, depositors: row.depositors || 0, prevDep: row.prevDep || 0, daily: (row.dep || []).map((v, i) => ({ t: A.dates[i], dep: v, wd: row.wd[i] })) },
+    flows: { '24h': h24, '7d': w7, '30d': w30 },
+    largest: (det.large || []).filter((w) => w.dir === 'in').sort((a, b) => b.usd - a.usd).slice(0, 5),
+    largestOut: (det.large || []).filter((w) => w.dir === 'out').sort((a, b) => b.usd - a.usd).slice(0, 5),
+    chains7: Object.entries(chains7).map(([chain, v]) => ({ chain, usd: v, pct: v / c7tot * 100 })).sort((a, b) => b.usd - a.usd),
+    treasury: { total: bal, ch24: b24 ? (bal - b24) / b24 * 100 : null, ch7: b7 ? (bal - b7) / b7 * 100 : null, rank: tRanked.findIndex((x) => x.slug === slug) + 1, of: tRanked.length, wallets: det.wallets.length,
+      chains: Object.values(byChain).map((x) => ({ chain: x.chain, usd: x.usd, wallets: x.wallets, coins: [...x.coins].slice(0, 4), pct: bal ? x.usd / bal * 100 : 0 })).sort((a, b) => b.usd - a.usd), history: hist.map((x) => ({ t: x.t, usd: x.usd })) },
+    chainsTracked: [...new Set(c.wallets.map((w) => w.chainName))]
+  };
+}

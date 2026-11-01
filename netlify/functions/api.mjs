@@ -8,6 +8,9 @@ import { googleStart, googleCallback } from '../lib/google.mjs';
 import { real } from '../lib/real.mjs';
 import { walletCheck } from '../lib/walletcheck.mjs';
 import * as onchain from '../lib/onchain.mjs';
+import * as markets from '../lib/markets.mjs';
+import * as odds from '../lib/odds.mjs';
+import * as health from '../lib/health.mjs';
 
 const memberOrLogin = async (req) => {
   const u = await currentUser(req);
@@ -30,6 +33,17 @@ const dataRoutes = {
   'GET /api/onchain/top': (req) => { const q = new URL(req.url).searchParams; return onchain.topWhales(num(q.get('days'), 7, 1, 90), ['in', 'out'].includes(q.get('dir')) ? q.get('dir') : '', 10); },
   'GET /api/onchain/trend': () => onchain.trend(),
   'GET /api/live/casinos': () => onchain.liveCasinos(),
+  'GET /api/health': () => health.healthAll(),
+  'GET /api/payout-check': (req) => { const q = new URL(req.url).searchParams; return health.payoutCheck(q.get('c') || '', q.get('amount')); },
+  'GET /api/brief': () => health.brief(),
+  'GET /api/casino/:slug/profile': (req, ctx) => onchain.profile(ctx.params.slug),
+  'GET /api/markets': (req) => { const q = new URL(req.url).searchParams; return markets.breakdown(q.get('window') || '7d', q.get('kind') === 'unboxing' ? 'unboxing' : 'casino'); },
+  'GET /api/markets/providers': (req) => markets.providers(new URL(req.url).searchParams.get('window') || '30d'),
+  'GET /api/odds/leagues': () => ({ ready: odds.oddsReady(), leagues: odds.FEATURED.map(([key, name]) => ({ key, name })) }),
+  'GET /api/odds/league/:sport': (req, ctx) => odds.league(ctx.params.sport),
+  'GET /api/odds/books': () => odds.bookRanking(),
+  'POST /api/odds/slip': (req, ctx, b) => odds.checkSlip(b.text),
+  'GET /api/odds/predictions': () => odds.predictions().catch((e) => { console.error('predictions', e && e.message); return { events: [], unavailable: true }; }),
   async 'GET /api/onchain/analytics'(req) {
     const days = [7, 30, 90].includes(Number(new URL(req.url).searchParams.get('days'))) ? Number(new URL(req.url).searchParams.get('days')) : 30;
     return onchain.analytics(days);

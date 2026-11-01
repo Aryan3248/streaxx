@@ -5,7 +5,7 @@ import { fail, siteUrl } from './http.mjs';
 import { store, update } from './store.mjs';
 import { content } from './accounts.mjs';
 import { adminQueue, adminComplaint, adminComplaintAction, adminPayout } from './complaints.mjs';
-import { getRegistry, casinoBySlug, CHAIN_NAMES, explorerAddr, norm, SITE } from './data.mjs';
+import { getRegistry, casinoBySlug, CHAIN_NAMES, explorerAddr, norm, SITE, customSites, KINDS } from './data.mjs';
 import { etherscan, etherscanKey, tronTransfers } from './chain.mjs';
 import { mailReady, tgReady, tgSetWebhook } from './notify.mjs';
 import { status as monitorStatus } from './onchain.mjs';
@@ -37,9 +37,9 @@ export const adminRoutes = {
   async 'GET /api/admin/status'(req) {
     return {
       monitor: await monitorStatus(),
-      ready: { etherscan: !!etherscanKey(), email: mailReady(), telegram: tgReady(), google: !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) },
+      ready: { etherscan: !!etherscanKey(), email: mailReady(), telegram: tgReady(), google: !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET), odds: !!process.env.ODDS_API_KEY },
       site: siteUrl(req),
-      casinos: SITE.idx.map((c) => ({ slug: c[1], name: c[0] }))
+      casinos: SITE.idx.map((c) => ({ slug: c[1], name: c[0] })).concat((await customSites()).map((x) => ({ slug: x.slug, name: x.name + (x.kind === 'unboxing' ? ' (unboxing)' : '') })))
     };
   },
   async 'GET /api/admin/settings'() { return { settings: (await content().get('settings')) || { liveOnly: false } }; },
@@ -59,6 +59,7 @@ export const adminRoutes = {
   async 'GET /api/admin/wallets'() { return { registry: await getRegistry(), extra: (await store('onchain').get('extraWallets')) || [] }; },
   async 'POST /api/admin/wallets'(req, ctx, b) {
     const slug = String(b.slug || ''), chain = String(b.chain || '');
+    await customSites();
     if (!casinoBySlug(slug)) fail(400, 'Unknown casino slug');
     if (!['ethereum', 'tron'].includes(chain)) fail(400, 'The monitor reads Ethereum and Tron wallets');
     const address = String(b.address || '').trim();
@@ -67,6 +68,38 @@ export const adminRoutes = {
     const w = { slug, chain, chainName: CHAIN_NAMES[chain], address, label: String(b.label || casinoBySlug(slug).name).slice(0, 80), role, source: String(b.source || 'Deposit trace').slice(0, 120), url: explorerAddr(chain, address) };
     await update(store('onchain'), 'extraWallets', (l) => { if (l.some((x) => x.chain === chain && norm(chain, x.address) === norm(chain, address))) fail(400, 'That wallet is already added'); l.push(w); return l; }, []);
     return { ok: true, wallet: w };
+  },
+  // Sites admins add: unboxing sites, or casinos missing from the published list.
+  async 'GET /api/admin/sites'() { return { sites: (await store('onchain').get('sites')) || [], providers: (await store('onchain').get('providers')) || [] }; },
+  async 'POST /api/admin/sites'(req, ctx, b) {
+    const name = String(b.name || '').trim().slice(0, 60), kind = KINDS.includes(b.kind) ? b.kind : 'unboxing';
+    if (!name) fail(400, 'Give the site a name', { field: 'name' });
+    const slug = String(b.slug || name).toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 30);
+    const domain = String(b.domain || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '').slice(0, 80);
+    if (casinoBySlug(slug) && !(await customSites()).some((x) => x.slug === slug)) fail(400, 'A casino with that name already exists');
+    await update(store('onchain'), 'sites', (l) => { const i = l.findIndex((x) => x.slug === slug); const v = { slug, name, domain, kind }; if (i >= 0) l[i] = v; else l.push(v); return l; }, []);
+    await customSites();
+    return { ok: true, site: { slug, name, domain, kind } };
+  },
+  async 'POST /api/admin/sites/remove'(req, ctx, b) {
+    await update(store('onchain'), 'sites', (l) => l.filter((x) => x.slug !== b.slug), []);
+    await update(store('onchain'), 'extraWallets', (l) => l.filter((x) => x.slug !== b.slug), []);
+    return { ok: true };
+  },
+  // Game providers and the casinos that carry them.
+  async 'POST /api/admin/providers'(req, ctx, b) {
+    const name = String(b.name || '').trim().slice(0, 60);
+    if (!name) fail(400, 'Give the provider a name', { field: 'name' });
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 30);
+    await customSites();
+    const casinos = [...new Set((Array.isArray(b.casinos) ? b.casinos : String(b.casinos || '').split(',')).map((x) => String(x).trim()).filter((x) => casinoBySlug(x)))];
+    const v = { slug, name, domain: String(b.domain || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/.*$/, '').slice(0, 80), casinos, rtp: String(b.rtp || '').slice(0, 40), source: String(b.source || '').slice(0, 160) };
+    await update(store('onchain'), 'providers', (l) => { const i = l.findIndex((x) => x.slug === slug); if (i >= 0) l[i] = v; else l.push(v); return l; }, []);
+    return { ok: true, provider: v };
+  },
+  async 'POST /api/admin/providers/remove'(req, ctx, b) {
+    await update(store('onchain'), 'providers', (l) => l.filter((x) => x.slug !== b.slug), []);
+    return { ok: true };
   },
   async 'POST /api/admin/wallets/remove'(req, ctx, b) {
     await update(store('onchain'), 'extraWallets', (l) => l.filter((x) => !(x.chain === b.chain && norm(b.chain, x.address) === norm(b.chain, String(b.address || '')))), []);

@@ -36,13 +36,24 @@ function localStore(name) {
 }
 
 function blobStore(name) {
-  const s = getStore({ name, consistency: 'strong' });
+  // Strong consistency first; if the platform refuses it, fall back to the
+  // default (eventual) store rather than failing the whole request.
+  let s = null, weak = null;
+  const strong = () => (s = s || getStore({ name, consistency: 'strong' }));
+  const eventual = () => (weak = weak || getStore({ name }));
+  const safe = async (what, fn) => {
+    try { return await fn(strong()); }
+    catch (e) { console.error('blobs ' + name + ' ' + what + ' (strong):', e && e.message); return fn(eventual()); }
+  };
   return {
-    get: (key) => s.get(key, { type: 'json' }),
-    async getMeta(key) { const r = await s.getWithMetadata(key, { type: 'json' }); return r ? { data: r.data, etag: r.etag } : null; },
-    set: (key, value, opts = {}) => s.setJSON(key, value, opts),
-    del: (key) => s.delete(key),
-    async list(prefix = '') { const r = await s.list({ prefix }); return r.blobs.map((b) => b.key); }
+    async get(key) {
+      try { return await safe('get', (st) => st.get(key, { type: 'json' })); }
+      catch (e) { console.error('blobs ' + name + ' get ' + key + ':', e && e.message); return null; }
+    },
+    async getMeta(key) { const r = await safe('getMeta', (st) => st.getWithMetadata(key, { type: 'json' })); return r ? { data: r.data, etag: r.etag } : null; },
+    set: (key, value, opts = {}) => safe('set', (st) => st.setJSON(key, value, opts)),
+    del: (key) => safe('del', (st) => st.delete(key)),
+    async list(prefix = '') { const r = await safe('list', (st) => st.list({ prefix })); return r.blobs.map((b) => b.key); }
   };
 }
 

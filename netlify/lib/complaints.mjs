@@ -200,7 +200,7 @@ function payoutStats(list) {
   const median = m.length % 2 ? m[(m.length - 1) / 2] : (m[m.length / 2 - 1] + m[m.length / 2]) / 2;
   return { count: m.length, median, fastest: m[0], slowest: m[m.length - 1], recent: list.slice().sort((a, b) => b.receivedAt - a.receivedAt).slice(0, 5).map((p) => ({ url: p.url, amount: p.amount, chainName: p.chainName, minutes: p.minutes })) };
 }
-async function trustData() {
+export async function trustData() {
   const ix = (await db().get('index')) || { items: {} };
   const pays = ((await db().get('payouts')) || { items: [] }).items.filter((p) => p.status === 'approved' && p.receivedAt > Date.now() - 90 * D);
   const reviews = (await content().get('reviews')) || {};
