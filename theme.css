@@ -1,0 +1,218 @@
+/* Streax theme layer, modelled on a market terminal: charcoal surfaces, one
+   green accent, sans headlines and mono figures, plus the motion system.
+   Loaded on every page by support.js. Night pages get html.sx-night. */
+:root {
+  --sx-accent: #6D28D9; --sx-accent-2: #7C3AED; --sx-accent-soft: rgba(124,58,237,0.09);
+  --sx-ink: #0A0B0E; --sx-muted: #5E6068; --sx-line: #E7E7EA; --sx-card: #FFFFFF; --sx-bg: #F6F6F7;
+  --sx-ease: cubic-bezier(.2,.7,.2,1);
+}
+html.sx-night {
+  --sx-accent: #8B5CF6; --sx-accent-2: #A78BFA; --sx-accent-soft: rgba(139,92,246,0.10);
+  --sx-ink: #F5F5F5; --sx-muted: #959597; --sx-line: #1F2024; --sx-card: #121317; --sx-bg: #0A0B0E;
+}
+
+/* Type: one sans family for headlines, mono for every figure. */
+[style*="Instrument Serif"] { font-family: 'Geist', system-ui, sans-serif !important; font-weight: 600 !important; letter-spacing: -0.035em !important; font-style: normal !important; }
+[style*="Instrument Serif"] em, [style*="Instrument Serif"] i, [style*="Instrument Serif"] span[style*="italic"] { font-style: normal !important; color: var(--sx-accent-2) !important; }
+.sx-banner h1 { font-family: 'Geist', system-ui, sans-serif !important; font-weight: 600 !important; letter-spacing: -0.035em !important; }
+
+/* Shapes: tighter corners and flat cards with hairline borders. */
+#dc-root [style*="border-radius: 20px"] { border-radius: 14px !important; }
+#dc-root [style*="border-radius: 18px"] { border-radius: 14px !important; }
+#dc-root [style*="border-radius: 30px"], #dc-root [style*="border-radius: 28px"], #dc-root [style*="border-radius: 24px"] { border-radius: 16px !important; }
+html.sx-night #dc-root main section, html.sx-night #dc-root aside { box-shadow: none !important; }
+#dc-root main section:not(.sx-hero) { box-shadow: 0 1px 2px rgba(10,11,14,.04) !important; }
+html.sx-night #dc-root main section:not(.sx-hero) { box-shadow: none !important; }
+
+/* Hero and page banners: a charcoal panel with a soft green glow and a dot grid. */
+.sx-hero, .sx-banner { background: radial-gradient(90% 120% at 100% 0%, rgba(139,92,246,.16), transparent 55%), radial-gradient(60% 80% at 0% 100%, rgba(139,92,246,.07), transparent 60%), #121317 !important; border: 1px solid #1F2024 !important; box-shadow: none !important; }
+.sx-hero::before, .sx-banner::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px); background-size: 22px 22px; -webkit-mask-image: linear-gradient(90deg, transparent 20%, #000 75%); mask-image: linear-gradient(90deg, transparent 20%, #000 75%); }
+.sx-banner { position: relative; overflow: hidden; }
+.sx-hero > *, .sx-banner > * { position: relative; }
+.sx-hero h1, .sx-hero h2, .sx-banner h1 { color: #F5F5F5 !important; }
+
+/* Sidebar promo card: dark green. */
+.sx-card { background: radial-gradient(120% 120% at 100% 0%, rgba(139,92,246,.35), transparent 60%), #160F24 !important; border: 1px solid rgba(139,92,246,.25) !important; box-shadow: none !important; }
+
+/* Active sidebar item: green-tinted pill with a hairline border, as on a terminal. */
+a.nav[aria-current="page"] { background: var(--sx-accent-soft) !important; box-shadow: inset 0 0 0 1px rgba(139,92,246,.35) !important; color: var(--sx-ink) !important; font-weight: 600 !important; }
+a.nav[aria-current="page"] svg { stroke: var(--sx-accent-2) !important; }
+
+/* First visit: the logo draws in, then the page fades up. */
+#sx-intro { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: #0A0B0E; animation: sxIntroOut .45s var(--sx-ease) 1s both; }
+#sx-intro img { width: 64px; height: 64px; border-radius: 16px; filter: drop-shadow(0 0 22px rgba(139,92,246,.45)); animation: sxPop .5s var(--sx-ease) both; }
+#sx-intro rect { stroke-dasharray: 200; stroke-dashoffset: 200; animation: sxDraw .7s var(--sx-ease) both; }
+#sx-intro circle { opacity: 0; transform-origin: center; animation: sxPop .3s var(--sx-ease) both; }
+#sx-intro span { font: 600 15px/1 'Geist', system-ui, sans-serif; color: #F5F5F5; letter-spacing: -.01em; opacity: 0; animation: sxFade .4s var(--sx-ease) .55s both; }
+#sx-intro span b { color: #8B5CF6; font-weight: 600; }
+@keyframes sxDraw { to { stroke-dashoffset: 0; } }
+@keyframes sxPop { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+@keyframes sxFade { to { opacity: 1; } }
+@keyframes sxIntroOut { to { opacity: 0; visibility: hidden; } }
+
+/* Figures line up in columns. */
+[style*="Geist Mono"] { font-variant-numeric: tabular-nums; }
+
+/* Smooth scrolling and crisp text everywhere. */
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Segmented controls: the selected option is a solid green pill. */
+button[aria-pressed="true"].ul, a[aria-pressed="true"].ul { background: var(--sx-accent) !important; color: #FFFFFF !important; }
+button.ul, a.ul { transition: background-color .2s var(--sx-ease), color .2s var(--sx-ease), transform .15s var(--sx-ease); }
+button.ul:active, a.ul:active { transform: scale(.97); }
+
+/* Buttons and links: soft press and hover. */
+#dc-root a[style*="border-radius"], #dc-root button { transition: transform .15s var(--sx-ease), box-shadow .2s var(--sx-ease), background-color .2s var(--sx-ease), border-color .2s var(--sx-ease), opacity .2s; }
+#dc-root button:active, #dc-root a[style*="border-radius"]:active { transform: scale(.98); }
+
+/* Sidebar items: slide the highlight in. */
+.nav { transition: background-color .2s var(--sx-ease), color .2s var(--sx-ease), transform .2s var(--sx-ease); }
+.nav:hover { background-color: var(--sx-accent-soft) !important; }
+.nav:hover svg { transform: translateX(1px); }
+.nav svg { transition: transform .2s var(--sx-ease); }
+
+/* Cards: rise in once, lift slightly on hover. */
+@keyframes sxRise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+#dc-root main section { animation: sxRise .6s var(--sx-ease) both; transition: transform .25s var(--sx-ease), box-shadow .25s var(--sx-ease), border-color .25s var(--sx-ease); }
+#dc-root main section:nth-of-type(2) { animation-delay: .06s; }
+#dc-root main section:nth-of-type(3) { animation-delay: .12s; }
+#dc-root main section:nth-of-type(4) { animation-delay: .18s; }
+#dc-root main section:nth-of-type(n+5) { animation-delay: .24s; }
+/* Sections further down reveal as they scroll into view (motion in support.js). */
+.sx-wait { opacity: 0; transform: translateY(14px); }
+.sx-show { opacity: 1; transform: none; transition: opacity .7s var(--sx-ease), transform .7s var(--sx-ease); }
+
+/* Hero: a light sweep passes over the artwork on load, then the headline rises in. */
+.sx-hero { position: relative; overflow: hidden; }
+.sx-hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 35%, rgba(139,92,246,.10) 50%, transparent 65%); transform: translateX(-100%); animation: sxSweep 1.8s var(--sx-ease) .3s 1 both; }
+@keyframes sxSweep { to { transform: translateX(100%); } }
+.sx-hero h1, .sx-hero h2 { animation: sxRise .8s var(--sx-ease) .1s both; }
+.sx-hero p { animation: sxRise .8s var(--sx-ease) .2s both; }
+
+/* Rows: soft hover. */
+.rh { transition: background-color .15s ease; }
+.rh:hover { background-color: var(--sx-accent-soft) !important; }
+
+/* Live dots pulse. */
+@keyframes sxPulse { 0% { box-shadow: 0 0 0 0 rgba(124,58,237,.55); } 70% { box-shadow: 0 0 0 8px rgba(124,58,237,0); } 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); } }
+.sx-live-dot { animation: sxPulse 2s infinite; border-radius: 50%; }
+
+/* Whale ticker under the header. */
+.sx-ticker { position: relative; overflow: hidden; border: 1px solid var(--sx-line); background: var(--sx-card); border-radius: 14px; margin: 0 0 16px; height: 40px; display: flex; align-items: center; }
+.sx-ticker-view { flex: 1; min-width: 0; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.sx-ticker-track { display: flex; gap: 34px; white-space: nowrap; padding-right: 34px; animation: sxTick 70s linear infinite; font-size: 13px; color: var(--sx-muted); }
+.sx-ticker:hover .sx-ticker-track { animation-play-state: paused; }
+.sx-ticker b { color: var(--sx-ink); font-weight: 600; }
+.sx-ticker .in { color: #6D28D9; font-family: 'Geist Mono', ui-monospace, monospace; }
+.sx-ticker .out { color: #DC2626; font-family: 'Geist Mono', ui-monospace, monospace; }
+html.sx-night .sx-ticker .in { color: #4ADE80; } html.sx-night .sx-ticker .out { color: #F87171; }
+@keyframes sxTick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #dc-root main section, .sx-hero::after, .sx-hero h1, .sx-hero h2, .sx-hero p, .sx-live-dot { animation: none !important; }
+  #sx-intro { display: none; }
+  .sx-wait { opacity: 1; transform: none; }
+  .sx-ticker-track { animation: none; }
+}
+
+/* Phones: comfortable tap sizes and no sideways scroll. */
+@media (max-width: 640px) {
+  .sx-ticker { height: 36px; border-radius: 12px; }
+  .sx-ticker-track { font-size: 12px; gap: 24px; }
+  #dc-root main { overflow-x: clip; }
+  #dc-root button, #dc-root a.ul { min-height: 40px; }
+}
+
+/* Home hero: the Streax mark floats top right instead of the glass orb. */
+.sx-hero img[src*="streax-ribbon"] { display: none !important; }
+.sx-hero img[data-m="orb"] { content: url('streax-mark.png'); width: 200px !important; height: 200px !important; margin-top: -130px !important; right: 7% !important; animation: sxFloat 6s ease-in-out infinite; }
+@keyframes sxFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.sx-hero [data-m="hstats"] > span { background: rgba(10,11,14,.72) !important; border: 1px solid #2A2C31 !important; box-shadow: none !important; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.sx-hero [data-m="hstats"] > span > span:first-child { color: #959597 !important; }
+.sx-hero [data-m="hstats"] > span > span:last-child { color: #F5F5F5 !important; }
+.sx-hero [data-m="hchip"] { border-color: rgba(139,92,246,.35) !important; background: rgba(139,92,246,.08) !important; }
+.sx-hero [data-m="hchip"] > span { background: #8B5CF6 !important; }
+.sx-hero .glass { border-color: #2A2C31 !important; background: rgba(255,255,255,.04) !important; }
+.sx-hero .wbtn { background: #8B5CF6 !important; color: #0A0B0E !important; box-shadow: none !important; }
+.sx-hero .wbtn svg { stroke: #0A0B0E !important; }
+@media (prefers-reduced-motion: reduce) { .sx-hero img[data-m="orb"] { animation: none; } }
+
+/* Feature cards that used a textured wash: plain charcoal with a faint green glow. */
+.sx-wash { background: radial-gradient(80% 120% at 100% 0%, rgba(139,92,246,.10), transparent 60%), var(--sx-card) !important; }
+
+/* Article headings: same sans headline style as the rest of the site. */
+.ax-prose h2, .ax-prose h3, .ax-tile h3 { font-family: 'Geist', system-ui, sans-serif !important; font-weight: 600 !important; letter-spacing: -0.02em !important; }
+
+/* Phones: the hero mark would sit on the headline, so it is hidden there. */
+@media (max-width: 640px) { .sx-hero img[data-m="orb"] { display: none !important; } }
+
+/* ---- Home hero: deep navy with a violet glow and a blue light streak ---- */
+.sx-hero { background:
+    radial-gradient(60% 90% at 8% 0%, rgba(124,58,237,.45), transparent 60%),
+    radial-gradient(50% 80% at 100% 100%, rgba(99,102,241,.35), transparent 60%),
+    linear-gradient(115deg, #0B0C1E 0%, #0E1030 55%, #15124A 100%) !important;
+  border: 1px solid rgba(139,92,246,.22) !important; min-height: 360px !important; }
+.sx-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; -webkit-mask-image: none; mask-image: none;
+  background: radial-gradient(120% 60% at 95% 110%, transparent 54%, rgba(129,140,248,.55) 55%, rgba(129,140,248,0) 58%),
+              radial-gradient(130% 70% at 100% 120%, transparent 56%, rgba(139,92,246,.35) 57.5%, rgba(139,92,246,0) 61%); }
+.sx-hero img[data-m="orb"], .sx-hero [data-m="hstats"] { display: none !important; }
+.sx-hero h2 > span { background: linear-gradient(90deg, #A78BFA 0%, #818CF8 60%, #60A5FA 100%); -webkit-background-clip: text; background-clip: text; color: transparent !important; -webkit-text-fill-color: transparent; }
+.sx-hero [data-m="hchip"] { border-color: rgba(255,255,255,.16) !important; background: rgba(255,255,255,.06) !important; }
+.sx-hero [data-m="hchip"] > span { width: 10px !important; height: 10px !important; border-radius: 0 !important; background: linear-gradient(135deg,#C4B5FD,#818CF8) !important; clip-path: polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%); }
+.sx-hero .wbtn { background: linear-gradient(90deg, #A855F7, #7C3AED 55%, #6366F1) !important; color: #fff !important; box-shadow: 0 14px 34px -14px rgba(124,58,237,.8) !important; }
+.sx-hero .wbtn svg { stroke: #fff !important; }
+.sx-hero .glass { border-color: rgba(255,255,255,.18) !important; background: rgba(255,255,255,.04) !important; color: #fff !important; }
+@media (max-width: 1240px) { .sx-hero { flex-direction: column !important; align-items: stretch !important; } }
+
+/* Casino ticker on Home */
+.sx-ticker { height: 50px !important; border-radius: 14px !important; background: linear-gradient(90deg, rgba(139,92,246,.10), transparent 30%), var(--sx-card) !important; padding: 0 !important; }
+.tk-lab { flex: none; display: flex; align-items: center; gap: 8px; height: 100%; padding: 0 14px; border-right: 1px solid var(--sx-line); background: rgba(139,92,246,.10); font: 700 11px/1 'Geist', system-ui, sans-serif; letter-spacing: .1em; color: #C4B5FD; }
+.tk-lab .sx-live-dot { width: 8px; height: 8px; background: #22C55E; display: inline-block; }
+.sx-ticker-track { gap: 0 !important; padding-right: 0 !important; animation-duration: 80s !important; }
+.tk-it { display: inline-flex; align-items: center; gap: 9px; height: 50px; padding: 0 18px; border-right: 1px solid var(--sx-line); color: var(--sx-ink); text-decoration: none; }
+.tk-it:hover { background: var(--sx-accent-soft); }
+.tk-it img, .tk-ini { width: 24px; height: 24px; border-radius: 7px; flex: none; }
+.tk-ini { display: grid; place-items: center; font: 700 9.5px 'Geist', sans-serif; font-style: normal; background: var(--sx-line); color: var(--sx-muted); }
+.tk-it b { font-weight: 600; font-size: 13.5px; }
+.tk-v { font: 600 13px 'Geist Mono', monospace; }
+.tk-c { font: 600 11.5px 'Geist Mono', monospace; padding: 2px 6px; border-radius: 6px; }
+.tk-c.up { color: #16A34A; background: rgba(22,163,74,.10); } .tk-c.dn { color: #DC2626; background: rgba(220,38,38,.08); }
+html.sx-night .tk-c.up { color: #4ADE80; background: rgba(74,222,128,.10); } html.sx-night .tk-c.dn { color: #F87171; background: rgba(248,113,113,.10); }
+@media (max-width: 640px) { .tk-lab span { display: none; } .tk-it .sk { display: none; } .tk-it { padding: 0 13px; height: 44px; } .sx-ticker { height: 44px !important; } }
+
+.sx-hero h2 { font-size: clamp(34px, 3.3vw, 52px) !important; }
+.sx-hero h2 > span { white-space: nowrap; }
+@media (max-width: 640px) { .sx-hero h2 > span { white-space: normal; } }
+html:not(.sx-night) .tk-lab { color: #6D28D9; background: rgba(109,40,217,.08); }
+
+/* Phone tab bar: full width with labels at rest; scrolling down shrinks it to a
+   compact icon pill, scrolling up brings it back. Class toggled in motion.js. */
+@media (max-width: 760px) {
+  .sx-tabs { transition: left .35s cubic-bezier(.2,.7,.2,1), right .35s cubic-bezier(.2,.7,.2,1), height .35s cubic-bezier(.2,.7,.2,1), border-radius .35s, bottom .35s; }
+  .sx-tab > span:last-child { transition: opacity .2s, max-height .3s, margin .3s; max-height: 16px; overflow: hidden; }
+  .sx-tab .ti { transition: width .3s, height .3s; }
+  html.sx-mini .sx-tabs { left: 50%; right: auto; transform: translateX(-50%); width: 248px; height: 50px; border-radius: 999px; bottom: calc(14px + env(safe-area-inset-bottom)); }
+  html.sx-mini .sx-tab { min-height: 50px; gap: 0; }
+  html.sx-mini .sx-tab > span:last-child { opacity: 0; max-height: 0; margin: 0; }
+  html.sx-mini .sx-tab .ti { width: 38px; height: 32px; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) { .sx-tabs, .sx-tab > span:last-child, .sx-tab .ti { transition: none; } }
+
+/* ===== SaaS refresh: neutral surfaces, quiet type, light purple gradients ===== */
+html.sx-night { --sx-ink: #EDEDF0; --sx-muted: #A0A0AB; --sx-line: #232328; --sx-card: #111113; --sx-bg: #0B0B0D; --sx-accent: #7C5CFF; --sx-accent-2: #A78BFA; --sx-accent-soft: rgba(124,92,255,.12); }
+:root:not(.sx-night) { --sx-ink: #121218; --sx-muted: #5B5B6B; --sx-line: #E6E5EE; --sx-card: #FFFFFF; --sx-bg: #F7F7FA; --sx-accent: #6B4BEF; --sx-accent-2: #7C5CFF; --sx-accent-soft: rgba(124,92,255,.08); }
+body { background: radial-gradient(900px 420px at 72% -120px, rgba(124,92,255,.14), transparent 70%), var(--sx-bg) !important; background-attachment: fixed !important; }
+#dc-root main section:not(.sx-hero):not(.cp-head) { border-radius: 12px !important; background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0) 120px), var(--sx-card) !important; border-color: var(--sx-line) !important; }
+html:not(.sx-night) #dc-root main section:not(.sx-hero):not(.cp-head) { background: linear-gradient(180deg, rgba(124,92,255,.035), #fff 120px) !important; }
+a.nav[aria-current="page"] { background: linear-gradient(90deg, rgba(124,92,255,.18), rgba(124,92,255,.04)) !important; box-shadow: inset 0 0 0 1px rgba(124,92,255,.22) !important; }
+button[aria-pressed="true"].ul, a[aria-pressed="true"].ul { background: linear-gradient(180deg, #8B6CFF, #6B4BEF) !important; }
+.hx-card, .mv-card, .cp-card, .mk-card, .sp-card, .ax-card { border-radius: 12px !important; }
+.hx-title, .mv-ct, .cp-ct, .ax-head h2 { text-transform: none !important; letter-spacing: -.01em !important; font-size: 14px !important; font-weight: 600 !important; }
+
+/* Phone: compact top bar (logo, search, sign up), no big logo card. */
+@media (max-width: 760px) {
+  [data-m~="sidecard"], aside[data-m~="side"] { display: none !important; }
+  .sx-mlogo { display: block !important; width: 34px; height: 34px; border-radius: 10px; flex: none; }
+}
+.sx-mlogo { display: none; }
