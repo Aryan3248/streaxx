@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>My account</title>
+<link rel="icon" type="image/png" href="assets/streax-icon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="dc-tpl"><x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+<style>
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:#F6F6F7}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #6D28D9;outline-offset:2px}
+input::placeholder,textarea::placeholder{color:#73757D}
+.hv{transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+.hv:hover{background-color:#F5F3FF !important}
+.nav{transition:background-color .15s ease,color .15s ease}
+.nav:hover{background-color:#F5F3FF !important;color:#0B0C0B !important}
+.rh{transition:background-color .15s ease}
+.rh:hover{background-color:rgba(124,58,237,0.035) !important}
+.lift{transition:transform .18s ease,border-color .18s ease}
+.lift:hover{transform:translateY(-2px);border-color:#A9D0B9 !important}
+.pb{transition:filter .15s ease,transform .15s ease}
+.pb:hover{filter:brightness(1.08)}
+.pb:active{transform:translateY(1px)}
+.ul{transition:color .15s ease}
+.ul:hover{color:#5B21B6 !important}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(225,29,72,.6)}70%{box-shadow:0 0 0 7px rgba(225,29,72,0)}100%{box-shadow:0 0 0 0 rgba(225,29,72,0)}}
+.pulse{animation:pulse 1.8s infinite}
+@keyframes pulseSky{0%{box-shadow:0 0 0 0 rgba(14,124,102,.55)}70%{box-shadow:0 0 0 7px rgba(14,124,102,0)}100%{box-shadow:0 0 0 0 rgba(14,124,102,0)}}
+.pulseSky{animation:pulseSky 1.8s infinite}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fu{animation:fadeUp .22s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.fi{animation:fadeIn .18s ease-out}
+@keyframes nA{from{background-color:rgba(124,58,237,0.12)}to{background-color:rgba(124,58,237,0)}}
+@keyframes nB{from{background-color:rgba(124,58,237,0.12)}to{background-color:rgba(124,58,237,0)}}
+.nA{animation:nA 1.6s ease-out}
+.nB{animation:nB 1.6s ease-out}
+input[type=range]{accent-color:#6D28D9}
+.sx-banner{background:#6D28D9 url(assets/streax-banner.webp) center/cover no-repeat}
+.sx-hero{background:#6D28D9 url(assets/streax-hero.webp) center/cover no-repeat}
+.sx-card{background:#6D28D9 url(assets/streax-card.webp) center/cover no-repeat}
+.sx-wash{background:#FFFFFF url(assets/streax-wash.webp) center/cover no-repeat}
+.glass:hover{background-color:rgba(255,255,255,0.3) !important}
+.wbtn:hover{background-color:#F5F3FF !important}
+@media (max-width: 1080px){
+[data-m~="side"]{flex-basis:100% !important;max-width:none !important;min-width:0;width:100%;box-sizing:border-box;padding:12px 16px 0 !important}
+[data-m~="main"]{min-width:0}
+[data-m~="sidecard"]{min-width:0;border-radius:18px !important;padding:10px 10px 8px !important;gap:6px !important}
+[data-m~="slogo"]{border-bottom:0 !important;margin:0 !important;padding:2px 4px 4px !important}
+[data-m~="snav"]{flex-direction:row !important;overflow-x:auto;gap:6px !important;scrollbar-width:none;padding:0 0 2px}
+[data-m~="snav"]::-webkit-scrollbar{display:none}
+[data-m~="snav"] > a{flex:0 0 auto;min-height:38px !important;padding:0 12px !important;gap:8px !important;font-size:13.5px !important;white-space:nowrap}
+[data-m~="snav"] > a:not([aria-current]){background-color:#F5F5F6}
+[data-m~="slab"],[data-m~="mhide"]{display:none !important}
+[data-m~="main"]{padding:0 16px !important}
+[data-m~="srchw"]{flex:1 1 0;min-width:0}
+[data-m~="srch"]{width:100% !important}
+[data-m~="drop"]{width:auto !important;left:0;right:0 !important}
+[data-m~="hdr"]{display:none !important}
+[data-m~="rk"]{display:flex !important;flex-wrap:wrap;gap:12px !important;padding:14px !important}
+[data-m~="rk"] > :nth-child(1){order:1;flex:0 0 40px}
+[data-m~="rk"] > :nth-child(2){order:2;flex:1 1 calc(100% - 166px);min-width:0}
+[data-m~="rk"] > :nth-child(3){display:none !important}
+[data-m~="rk"] > :nth-child(4){order:3}
+[data-m~="rk"] > :nth-child(9){order:4;align-self:center}
+[data-m~="rk"] > :nth-child(5){order:5;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(6){order:6;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(7){order:7;flex:1 1 0;min-width:0}
+[data-m~="rk"] > :nth-child(8){order:8;flex:1 1 100%}
+[data-m~="bf"]{grid-template-columns:minmax(0,1.2fr) minmax(0,0.9fr) 64px 76px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13px !important}
+[data-m~="bf"] > :nth-child(1){min-width:0;overflow:hidden}
+[data-m~="bf"] > :nth-child(1) > span:last-child{overflow:hidden;text-overflow:ellipsis}
+[data-m~="bf"] > :nth-child(4){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-m~="bf"] > :nth-child(2),[data-m~="bf"] > :nth-child(3),[data-m~="bf"] > :nth-child(6){display:none !important}
+[data-m~="kc"]{grid-template-columns:minmax(0,1fr) auto auto !important;grid-template-areas:"cas val red" "code code when";row-gap:8px !important;padding:12px 14px !important}
+[data-m~="kc"] > :nth-child(1){grid-area:cas;min-width:0}
+[data-m~="kc"] > :nth-child(2){grid-area:code;justify-self:start}
+[data-m~="kc"] > :nth-child(3){grid-area:val}
+[data-m~="kc"] > :nth-child(4){grid-area:when}
+[data-m~="kc"] > :nth-child(5),[data-m~="kc"] > :nth-child(6),[data-m~="kc"] > :nth-child(7){display:none !important}
+[data-m~="kc"] > :nth-child(8){grid-area:red}
+[data-m~="cp"]{grid-template-columns:minmax(0,1fr) auto auto !important;grid-template-areas:"cat cat st" "cas amt tog";row-gap:8px !important;padding:12px 14px !important}
+[data-m~="cp"] > :nth-child(1),[data-m~="cp"] > :nth-child(6),[data-m~="cp"] > :nth-child(7){display:none !important}
+[data-m~="cp"] > :nth-child(2){grid-area:cas;min-width:0}
+[data-m~="cp"] > :nth-child(3){grid-area:cat}
+[data-m~="cp"] > :nth-child(4){grid-area:amt}
+[data-m~="cp"] > :nth-child(5){grid-area:st}
+[data-m~="cp"] > :nth-child(8){grid-area:tog}
+[data-m~="rkd"]{padding:4px 18px 18px !important}
+[data-m~="lb"]{grid-template-columns:44px minmax(0,1fr) 120px minmax(0,180px) 100px !important}
+[data-m~="g1t"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="tkr"],[data-m~="tkh"]{grid-template-columns:minmax(120px,1fr) 90px 100px 100px 100px 110px 120px !important}
+[data-m~="tkr"] > :nth-child(5),[data-m~="tkh"] > :nth-child(5){display:none !important}
+[data-m~="wlr"]{grid-template-columns:100px minmax(0,1fr) 110px 80px !important}
+[data-m~="wlr"] > :nth-child(3){display:none !important}
+}
+@media (max-width: 760px){
+[data-m="stl"]{min-height:6em !important}
+[data-m~="root"]{display:block !important}
+[data-m~="main"]{width:100%;box-sizing:border-box}
+[data-m~="tbt"]{flex:1 1 100% !important}
+[data-m~="ban"]{padding:22px 18px !important;border-radius:22px !important;margin:12px 0 16px !important;gap:12px !important}
+[data-m~="banh"]{font-size:34px !important}
+[data-m~="seg"]{max-width:100%;box-sizing:border-box;overflow-x:auto;scrollbar-width:none}
+[data-m~="seg"]::-webkit-scrollbar{display:none}
+[data-m~="fin"]{width:100% !important}
+div:has(> [data-m~="fin"]),div:has(> div > [data-m~="fin"]){flex:1 1 100%;min-width:0}
+[data-m~="g1"]{grid-template-columns:minmax(0,1fr) !important}
+[data-m~="g2"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+[data-m~="kv"]{font-size:22px !important}
+[data-m~="wrap"]{flex-wrap:wrap;gap:8px}
+[data-m~="wrap"] button{white-space:nowrap}
+[data-m~="phide"]{display:none !important}
+[data-m~="nomin"]{min-width:0 !important}
+.sx-hero{background-position:16% 50% !important;padding:26px 20px 20px !important;min-height:0 !important;flex-direction:column;align-items:stretch !important;border-radius:24px !important}
+[data-m~="h64"]{font-size:42px !important}
+[data-m~="orb"]{width:130px !important;height:130px !important;right:-36px !important;top:-36px !important;margin-top:0 !important}
+[data-m~="hchip"]{max-width:calc(100% - 70px);box-sizing:border-box}
+[data-m~="hstats"]{position:relative !important;right:auto !important;bottom:auto !important;margin-top:20px;flex-wrap:wrap}
+[data-m~="hstats"] > span{flex:1 1 40%}
+[data-m~="topr"]{grid-template-columns:22px minmax(0,1fr) auto !important}
+[data-m~="topr"] > :nth-child(4){display:none !important}
+[data-m~="fol"]{grid-template-columns:20px minmax(0,1fr) 74px 60px !important}
+[data-m~="rkd"]{padding:4px 14px 14px !important}
+[data-m~="sb"]{grid-template-columns:96px minmax(0,1fr) 42px 34px !important;gap:10px !important}
+[data-m~="ms"]{grid-template-columns:92px minmax(0,1fr) 58px !important;gap:10px !important}
+[data-m~="cha"]{grid-template-columns:100px minmax(0,1fr) 70px 42px !important;gap:8px !important}
+[data-m~="csel"]{min-width:0 !important;width:100%}
+div:has(> [data-m~="csel"]){flex:1 1 auto;min-width:0}
+[data-m~="lbox"]{width:auto !important;right:0;max-width:calc(100vw - 32px)}
+[data-m~="secnav"]{flex:1 1 100% !important;max-width:none !important;flex-direction:row !important;overflow-x:auto;scrollbar-width:none;gap:4px !important}
+[data-m~="secnav"]::-webkit-scrollbar{display:none}
+[data-m~="secnav"] > a{flex:0 0 auto;white-space:nowrap;gap:8px}
+[data-m~="ovr"]{gap:14px !important}
+[data-m~="ovr"] > span:first-child{width:64px !important;height:64px !important;border-radius:18px !important;font-size:20px !important}
+[data-m~="dsr"]{grid-template-columns:minmax(0,96px) minmax(0,1fr) 66px 44px !important}
+[data-m~="tr"]{grid-template-columns:22px minmax(0,1fr) minmax(0,1fr) 64px !important;gap:10px !important}
+[data-m~="tr"] > :nth-child(3),[data-m~="tr"] > :nth-child(5){display:none !important}
+[data-m~="lb"]{grid-template-columns:28px minmax(0,1fr) 74px 62px !important;gap:10px !important}
+[data-m~="lb"] > :nth-child(4){display:none !important}
+[data-m~="br"]{grid-template-columns:20px minmax(0,1fr) 72px 104px !important;gap:10px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="br"] > :nth-child(3){display:none !important}
+[data-m~="br"] button{white-space:nowrap;padding:0 10px !important;font-size:12.5px !important}
+[data-m~="st"]{grid-template-columns:18px minmax(0,1fr) 74px 62px !important;gap:10px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="st"] > :nth-child(4){order:3}
+[data-m~="st"] > :nth-child(3){order:4}
+[data-m~="st"] > :nth-child(5),[data-m~="st"] > :nth-child(6),[data-m~="st"] > :nth-child(7),[data-m~="st"] > :nth-child(8){display:none !important}
+[data-m~="st"] > :nth-child(4) > span:last-child{display:none !important}
+[data-m~="st"] > :nth-child(2){overflow:hidden}
+[data-m~="st"] > :nth-child(2) > span:last-child > span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+[data-m~="ocr"],[data-m~="och"]{grid-template-columns:minmax(0,1fr) 84px 92px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13.5px !important}
+[data-m~="ocr"] > :nth-child(1),[data-m~="ocr"] > :nth-child(4),[data-m~="ocr"] > :nth-child(6),[data-m~="och"] > :nth-child(1),[data-m~="och"] > :nth-child(4),[data-m~="och"] > :nth-child(6){display:none !important}
+[data-m~="ocr"] > :nth-child(2){overflow:hidden}
+[data-m~="tkr"],[data-m~="tkh"]{grid-template-columns:minmax(0,1fr) 84px 104px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important;font-size:13.5px !important}
+[data-m~="tkr"] > :nth-child(3),[data-m~="tkr"] > :nth-child(4),[data-m~="tkr"] > :nth-child(6),[data-m~="tkr"] > :nth-child(7),[data-m~="tkh"] > :nth-child(3),[data-m~="tkh"] > :nth-child(4),[data-m~="tkh"] > :nth-child(6),[data-m~="tkh"] > :nth-child(7){display:none !important}
+[data-m~="wlr"]{grid-template-columns:minmax(0,1fr) 92px 62px !important;gap:8px !important;padding-left:14px !important;padding-right:14px !important}
+[data-m~="wlr"] > :nth-child(1){display:none !important}
+[data-m~="cd"]{flex:1 1 100%}
+[data-m~="cd"] > span{flex:1 1 0;min-width:0 !important;padding:10px 4px !important}
+}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+<style>@media (max-width: 760px){[data-acct]{padding:0 12px !important}}</style>
+<style>
+@media (max-width: 1080px){[data-m~="ag2"]{grid-template-columns:minmax(0,1fr) !important}}
+@media (max-width: 760px){[data-m~="ag3"]{grid-template-columns:minmax(0,1fr) !important}}
+</style>
+<style>
+.sx-tabs,.sx-more{display:none;font-family:'Geist',system-ui,sans-serif}
+@media (max-width: 760px){
+[data-m~="snav"]{display:none !important}
+[data-m~="root"]{padding-bottom:calc(92px + env(safe-area-inset-bottom)) !important}
+[style*="bottom: 24px; z-index: 100"]{bottom:calc(92px + env(safe-area-inset-bottom)) !important}
+.sx-tabs{display:flex;position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:60;height:68px;padding:0 4px;box-sizing:border-box;border-radius:22px;
+  background:rgba(255,255,255,0.92);border:1px solid #E7E7EA;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);justify-content:space-around;align-items:center;box-shadow:0 12px 34px -14px rgba(11,12,11,0.45)}
+.sx-tab{flex:1 1 0;min-width:0;min-height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:600;color:#50525A;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.sx-tab .ti{width:46px;height:30px;border-radius:11px;display:grid;place-items:center}
+.sx-tab.on{color:#6D28D9}
+.sx-tab.on .ti{background:rgba(124,58,237,0.1);box-shadow:inset 0 0 0 1px rgba(124,58,237,0.25)}
+.sx-more:target{display:block;position:fixed;inset:0;z-index:80}
+.sx-more .shade{position:absolute;inset:0;background:rgba(11,13,12,0.55)}
+.sx-more .sheet{position:absolute;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));max-height:78vh;overflow-y:auto;border-radius:26px;background:#FFFFFF;border:1px solid #E7E7EA;
+  box-shadow:0 -20px 60px -20px rgba(0,0,0,0.6);padding:14px 14px 16px;box-sizing:border-box}
+.sx-more .sh{display:flex;align-items:center;justify-content:space-between;padding:4px 4px 12px}
+.sx-more .sh b{font-size:17px;color:#0B0C0B}
+.sx-more .x{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#5E6068;background:#F5F5F6;text-decoration:none}
+.sx-more .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.sx-more .grid a{display:flex;flex-direction:column;gap:3px;padding:12px;border-radius:16px;background:#F8F8F9;border:1px solid #E7E7EA;text-decoration:none;min-height:44px}
+.sx-more .grid a b{font-size:14px;font-weight:600;color:#0B0C0B}
+.sx-more .grid a span{font-size:12px;color:#6B6D75}
+.sx-more .grid a[aria-current]{border-color:rgba(124,58,237,0.25);background:rgba(124,58,237,0.06)}
+}
+</style>
+</helmet>
+<div data-m="root" data-theme="light" style="min-height: 100vh; background: radial-gradient(1100px 520px at 80% -8%, rgba(112,217,154,0.20), transparent 62%), radial-gradient(900px 480px at -5% 0%, rgba(124,58,237,0.08), transparent 60%), #F6F6F7; color: #0B0C0B; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; display: flex; flex-wrap: wrap; align-items: flex-start">
+<aside aria-label="Sidebar" data-m="side" style="flex: 1 1 296px; max-width: 320px; box-sizing: border-box; padding: 16px 0 16px 16px; position: relative; z-index: 20">
+<div data-m="sidecard" style="border-radius: 24px; border: 1px solid #E7E7EA; background: #FFFFFF; padding: 16px 12px 14px; display: flex; flex-direction: column; gap: 2px; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 18px 50px -30px rgba(11,12,11,0.10)">
+<a href="Home.dc.html" aria-label="Streax home" data-m="slogo" style="display: flex; align-items: center; padding: 6px 8px 14px; border-bottom: 1px solid #ECECEF; margin-bottom: 6px"><span style="display: inline-flex; align-items: center; gap: 10px"><img src="assets/streax-logo.webp" alt="" aria-hidden="true" width="32" height="32" style="flex: 0 0 auto; display: block; width: 32px; height: 32px; border-radius: 10px; box-shadow: 0 6px 16px -8px rgba(109,40,217,0.6)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 27px; line-height: 1; letter-spacing: -0.01em; color: #0B0C0B">Streax</span></span></a>
+<div data-m="snav" style="display: flex; flex-direction: column; gap: 2px"><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #73757D">Main<span style="flex: 1 1 auto; height: 1px; background: #ECECEF"></span></span><a href="Home.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"></path></svg>Home</a><a href="Rankings.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"></path></svg>Rankings</a><a href="Markets.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9h-9z"></path><path d="M15 3.5A9 9 0 0 1 20.5 9H15z"></path></svg>Market breakdown</a><a href="Sports.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 3.5l2.6 4.2-2.6 2.8-2.6-2.8z"></path><path d="M3.8 10.5l4.6 0.3 1 3.7-3.2 2.6"></path><path d="M20.2 10.5l-4.6 0.3-1 3.7 3.2 2.6"></path></svg>Sports odds</a><a href="Casino.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"></rect><circle cx="9" cy="9" r="1.2"></circle><circle cx="15" cy="15" r="1.2"></circle><circle cx="15" cy="9" r="1.2"></circle><circle cx="9" cy="15" r="1.2"></circle></svg>Casino profile</a><a href="Onchain.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3.5l2.5-6 4 12 2.5-6H21"></path><circle cx="12" cy="12" r="10" opacity="0.35"></circle></svg>On-chain monitor</a><a href="Wallets.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"></path><rect x="4" y="8" width="16" height="11" rx="2.5"></rect><circle cx="16" cy="13.5" r="1.2"></circle></svg>Casino wallets</a><a href="Analytics.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h16M6 15l4-5 4 3 5-7"></path></svg>Analytics</a><a href="Streamers.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="3"></rect><path d="M16 10l5-3v10l-5-3"></path></svg>Streamers</a><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #73757D">Player tools<span style="flex: 1 1 auto; height: 1px; background: #ECECEF"></span></span><a href="Complaints.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path><path d="M12 8v3.5M12 13.8v.01"></path></svg>Complaints</a><a href="WalletCheck.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H17v3"></path><rect x="4" y="8" width="16" height="11" rx="2.5"></rect><path d="M12.5 13.5l1.8 1.8 3.2-3.6"></path></svg>My wallet check</a><a href="BonusCalc.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="3"></rect><path d="M8.5 7h7M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01M8.5 15h.01M12 15h.01M15.5 15h.01M8.5 18h.01M12 18h3.5"></path></svg>Bonus calculator</a><a href="Articles.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"></path><path d="M9 9h6M9 13h6M9 17h4"></path></svg>Articles</a><span data-m="slab" style="display: flex; align-items: center; gap: 10px; padding: 16px 12px 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #73757D">Community<span style="flex: 1 1 auto; height: 1px; background: #ECECEF"></span></span><a href="Community.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v10H9l-4 4z"></path></svg>Player reviews</a><a href="BetFeed.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"></path></svg>Whale feed</a><a href="Bonuses.dc.html" class="nav" style="display: flex; align-items: center; gap: 12px; min-height: 42px; padding: 0 12px; border-radius: 12px; font-size: 14.5px; font-weight: 500; color: #3C3E45"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"></rect><path d="M12 9v11M4 13h16M12 9c-2-4-6-4-6-1s6 1 6 1zm0 0c2-4 6-4 6-1s-6 1-6 1z"></path></svg>Leaderboard &amp; codes</a></div>
+<div class="sx-card" data-m="mhide" style="margin-top: 16px; border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 16px 40px -22px rgba(124,58,237,0.75)">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1.1; color: #FFFFFF">{{sideCta.title}}</span>
+<span style="font-size: 13px; line-height: 1.45; color: rgba(255,255,255,0.92)">{{sideCta.body}}</span>
+<a href="{{sideCta.href}}" class="wbtn" style="min-height: 42px; border-radius: 12px; border: 0; background: #FFFFFF; color: #4C1D95; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#4C1D95" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg>{{sideCta.btn}}</a>
+</div>
+<button type="button" onClick="{{openSupport}}" class="hv" data-m="mhide" style="min-height: 44px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5E6068" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v10H8l-4 4z"></path></svg>Support</button>
+<button type="button" onClick="{{openSources}}" class="ul" data-m="mhide" style="min-height: 36px; border: 0; background: transparent; color: #5E6068; font: inherit; font-size: 12.5px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; margin-top: 4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg>Data sources and methodology</button>
+</div>
+</aside>
+<main data-m="main" style="flex: 999 1 560px; min-width: 0; padding: 0 28px 0 24px; box-sizing: border-box">
+<div class="sx-banner" data-m="ban" style="position: relative; z-index: 30; margin: 16px 0 22px; border-radius: 26px; padding: 28px 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; box-shadow: 0 26px 60px -34px rgba(124,58,237,0.7)">
+<div data-m="tbt" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.88)">Streax</span>
+<h1 data-m="banh" style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 46px; line-height: 1.02; letter-spacing: -0.01em; color: #FFFFFF">My account</h1>
+<span style="font-size: 14.5px; color: rgba(255,255,255,0.92)">Your perks, alerts and rewards in one place.</span>
+</div>
+<div data-m="srchw" style="position: relative">
+<label for="gq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Search casinos</label>
+<span style="position: absolute; left: 13px; top: 14px; pointer-events: none; display: inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span>
+<input id="gq" data-m="srch" type="text" autocomplete="off" value="{{gq}}" onChange="{{onGq}}" onFocus="{{gqOn}}" onBlur="{{gqOff}}" placeholder="Search 43 casinos" style="width: 280px; height: 44px; box-sizing: border-box; padding: 0 14px 0 38px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.7); background: rgba(255,255,255,0.97); color: #0B0C0B; font: inherit; font-size: 14px; box-shadow: 0 8px 24px -16px rgba(11,12,11,0.5)">
+<sc-if value="{{gqOpen}}" hint-placeholder-val="{{ false }}">
+<div class="fu" data-m="drop" style="position: absolute; top: calc(100% + 8px); right: 0; width: 340px; z-index: 60; border-radius: 16px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 24px 60px -24px rgba(11,12,11,0.35); padding: 6px; display: flex; flex-direction: column">
+<sc-for list="{{gqResults}}" as="r" hint-placeholder-count="4">
+<a href="{{r.href}}" class="hv" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; font-size: 14px; color: #0B0C0B">
+<span style="position: relative; width: 28px; height: 28px; border-radius: 8px; background: {{r.tint}}; color: #4C1D95; font-size: 10.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{r.ini}}<sc-if value="{{r.logo}}" hint-placeholder-val="{{ false }}"><img src="{{r.logo}}" alt="" width="28" height="28" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(11,12,11,0.10); pointer-events: none"></span></span>
+<span style="flex: 1 1 auto; font-weight: 500">{{r.name}}</span>
+<span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #5E6068">#{{r.rank}} · {{r.dep}}</span>
+</a>
+</sc-for>
+<sc-if value="{{gqNone}}" hint-placeholder-val="{{ false }}"><span style="padding: 12px 10px; font-size: 13px; color: #5E6068">No casino matches “{{gq}}”</span></sc-if>
+</div>
+</sc-if>
+</div>
+<a href="night/Account.dc.html" class="hv" data-theme-toggle="1" aria-label="Switch to night mode" title="Switch to night mode" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #E2E2E6; background: #FFFFFF; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A2C31" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"></path></svg></a>
+<button type="button" aria-label="Notifications" onClick="{{bell}}" class="hv" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #E2E2E6; background: #FFFFFF; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A2C31" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg></button>
+<a href="{{acct.href}}" aria-label="{{acct.label}}" title="{{acct.label}}" data-acct="1" class="pb" style="position: relative; height: 44px; min-width: 44px; width: {{acct.w}}; box-sizing: border-box; padding: {{acct.pad}}; border-radius: {{acct.radius}}; background: linear-gradient(135deg, #7C3AED, #4C1D95); color: #FFFFFF; font-weight: 600; font-size: {{acct.fs}}; display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; flex: 0 0 auto">{{acct.text}}<sc-if value="{{acct.avatar}}" hint-placeholder-val="{{ false }}"><img src="{{acct.avatar}}" alt="" referrerpolicy="no-referrer" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if></a>
+</div>
+<sc-if value="{{hasNotice}}" hint-placeholder-val="{{ true }}">
+<div role="note" style="border-radius: 16px; border: 1px solid rgba(124,58,237,0.25); background: rgba(124,58,237,0.06); padding: 14px 16px; font-size: 14px; line-height: 1.55; color: #50525A">{{notice}}</div>
+</sc-if>
+<sc-if value="{{loading}}" hint-placeholder-val="{{ false }}"><div style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); margin-top: 16px; padding: 48px 20px; text-align: center; font-size: 14.5px; color: #5E6068">Loading your account...</div></sc-if>
+<sc-if value="{{ready}}" hint-placeholder-val="{{ true }}">
+<div data-m="ag2" style="margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 16px; align-items: stretch">
+<section aria-label="Your membership" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; gap: 18px">
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<span style="position: relative; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: #FFFFFF; font-size: 24px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; flex: 0 0 auto">{{u.initials}}<sc-if value="{{u.avatar}}" hint-placeholder-val="{{ false }}"><img src="{{u.avatar}}" alt="" referrerpolicy="no-referrer" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if></span>
+<div style="display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1 1 200px">
+<span style="font-size: 22px; font-weight: 600; letter-spacing: -0.02em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{u.name}}</span>
+<span style="font-size: 14px; color: #5E6068; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{u.email}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px">
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: {{lv.fg}}; background: {{lv.bg}}">{{lv.name}}</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: {{ver.fg}}; background: {{ver.bg}}">{{ver.label}}</span>
+<sc-if value="{{u.google}}" hint-placeholder-val="{{ false }}"><span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: #2A2C31; background: #F5F3FF">Google sign-in</span></sc-if>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 0">
+<span style="font-family: 'Geist Mono', monospace; font-size: 36px; font-weight: 500; letter-spacing: -0.02em">{{pointsLabel}}</span>
+<span style="font-size: 13px; color: #5E6068">points</span>
+</div>
+</div>
+<sc-if value="{{showVerify}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; border-radius: 14px; border: 1px solid rgba(180,83,9,0.3); background: rgba(180,83,9,0.08); padding: 12px 14px"><span style="flex: 1 1 240px; font-size: 13.5px; line-height: 1.5; color: #50525A">Confirm your email to get 50 points, email alerts and referral rewards. Check your inbox for our email.</span><button type="button" onClick="{{resend}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">Send it again</button></div></sc-if>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px"><span style="color: #50525A">{{prog.label}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 12.5px; color: #5E6068">{{prog.right}}</span></div>
+<div role="progressbar" aria-label="Progress to the next level" aria-valuenow="{{prog.now}}" aria-valuemin="0" aria-valuemax="100" style="height: 10px; border-radius: 999px; background: #ECECEF; overflow: hidden"><div style="height: 100%; width: {{prog.w}}; border-radius: 999px; background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%)"></div></div>
+</div>
+<div data-m="ag3" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{levels}}" as="l" hint-placeholder-count="3">
+<div style="border-radius: 14px; border: 1px solid {{l.bd}}; background: {{l.bg}}; padding: 12px; display: flex; flex-direction: column; gap: 7px; min-width: 0">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 6px"><span style="font-weight: 600; color: {{l.fg}}">{{l.name}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 11.5px; color: #6B6D75">{{l.min}}</span></div>
+<sc-for list="{{l.perks}}" as="x" hint-placeholder-count="3"><span style="font-size: 12.5px; line-height: 1.4; color: #50525A">{{x}}</span></sc-for>
+<span style="margin-top: auto; font-size: 12px; font-weight: 600; color: {{l.stateFg}}">{{l.state}}</span>
+</div>
+</sc-for>
+</div>
+</section>
+<section aria-label="Earn points" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Earn more points</h2><span style="font-size: 13.5px; line-height: 1.5; color: #5E6068">Points never expire. Silver unlocks at 500 and Gold at 1,500.</span></div>
+<sc-for list="{{ways}}" as="w" hint-placeholder-count="4">
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: #F8F8F9; border: 1px solid #ECECEF">
+<span style="width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid {{w.ring}}; background: {{w.dot}}; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; box-sizing: border-box"><sc-if value="{{w.done}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></sc-if></span>
+<span style="flex: 1 1 auto; font-size: 14px; color: {{w.fg}}">{{w.label}}</span>
+<span style="font-family: 'Geist Mono', monospace; font-size: 13px; color: {{w.ptsFg}}; white-space: nowrap">{{w.pts}}</span>
+</div>
+</sc-for>
+<div class="sx-card" style="margin-top: auto; border-radius: 16px; color: #FFFFFF; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 22px; line-height: 1.1">Invite friends, earn {{ref.each}} points each</span>
+<span style="font-size: 13px; line-height: 1.45; color: rgba(255,255,255,0.92)">Your friend gets {{ref.friendGets}} bonus points too.</span>
+<div style="display: flex; gap: 8px"><input type="text" readonly value="{{ref.url}}" aria-label="Your invite link" style="flex: 1 1 auto; min-width: 0; height: 42px; box-sizing: border-box; border-radius: 10px; border: 0; padding: 0 12px; font-family: 'Geist Mono', monospace; font-size: 12.5px; background: rgba(255,255,255,0.96); color: #0B0C0B"><button type="button" onClick="{{ref.copy}}" class="glass" style="height: 42px; padding: 0 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.55); background: rgba(255,255,255,0.16); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Copy</button></div>
+</div>
+</section>
+</div>
+
+<div data-m="ag2" style="margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start">
+<section aria-label="Watchlist" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; gap: 14px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px"><div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Watchlist</h2><span style="font-size: 13.5px; line-height: 1.5; color: #5E6068">Casinos you follow. Whale alerts come from the ones with on-chain tracking.</span></div><span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: #2A2C31; background: #F5F3FF; white-space: nowrap">{{wl.count}}</span></div>
+<div style="position: relative">
+<label for="wq" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap">Add a casino to your watchlist</label>
+<span style="position: absolute; left: 13px; top: 15px; pointer-events: none; display: inline-flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg></span>
+<input id="wq" type="text" autocomplete="off" value="{{wq}}" onChange="{{onWq}}" onFocus="{{wqOn}}" onBlur="{{wqOff}}" placeholder="Add a casino, for example Stake" style="width: 100%; height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px; padding-left: 38px">
+<sc-if value="{{wqOpen}}" hint-placeholder-val="{{ false }}">
+<div class="fu" style="position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30; border-radius: 14px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 24px 60px -24px rgba(11,12,11,0.35); padding: 6px; display: flex; flex-direction: column">
+<sc-for list="{{wqResults}}" as="r" hint-placeholder-count="4"><button type="button" onClick="{{r.add}}" class="hv" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 10px; border: 0; background: transparent; color: #0B0C0B; font: inherit; font-size: 14px; text-align: left; cursor: pointer"><span style="position: relative; width: 28px; height: 28px; border-radius: 8px; background: {{r.tint}}; color: #4C1D95; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{r.ini}}<sc-if value="{{r.logo}}" hint-placeholder-val="{{ false }}"><img src="{{r.logo}}" alt="" width="28" height="28" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(11,12,11,0.10); pointer-events: none"></span></span><span style="flex: 1 1 auto; font-weight: 500">{{r.name}}</span><span style="font-size: 12px; color: {{r.tagFg}}">{{r.tag}}</span></button></sc-for>
+<sc-if value="{{wqNone}}" hint-placeholder-val="{{ false }}"><span style="padding: 10px; font-size: 13px; color: #5E6068">No casino matches, or it is already on your list.</span></sc-if>
+</div>
+</sc-if>
+</div>
+<div style="display: flex; flex-direction: column">
+<sc-for list="{{wl.items}}" as="w" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #ECECEF">
+<span style="position: relative; width: 36px; height: 36px; border-radius: 10px; background: {{w.tint}}; color: #4C1D95; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{w.ini}}<sc-if value="{{w.logo}}" hint-placeholder-val="{{ false }}"><img src="{{w.logo}}" alt="" width="36" height="36" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(11,12,11,0.10); pointer-events: none"></span></span>
+<a href="{{w.href}}" class="ul" style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 14.5px">{{w.name}}</span><span style="font-size: 12.5px; color: {{w.tagFg}}">{{w.tag}}</span></a>
+<button type="button" onClick="{{w.remove}}" aria-label="{{w.removeAria}}" title="Remove" class="hv" style="width: 38px; height: 38px; border-radius: 10px; border: 1px solid #DBDBE0; background: transparent; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; flex: 0 0 auto"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B6D75" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{wl.empty}}" hint-placeholder-val="{{ false }}"><div style="padding: 18px; border-radius: 14px; border: 1px dashed #E2E2E6; text-align: center; font-size: 13.5px; line-height: 1.5; color: #5E6068">Add casinos to start getting whale alerts. Watching 3 earns you 50 points.</div></sc-if>
+</section>
+
+<section aria-label="Whale alerts" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Your whale alerts</h2><span style="font-size: 13.5px; line-height: 1.5; color: #5E6068">A ping when a casino on your watchlist moves big money in or out, and a warning if its hot wallet reserves drop sharply.</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 500; color: #50525A">Alert me from</span>
+<div role="radiogroup" aria-label="Smallest transfer to alert on" style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{al.options}}" as="o" hint-placeholder-count="6"><button type="button" role="radio" aria-checked="{{o.on}}" onClick="{{o.pick}}" title="{{o.title}}" class="hv" style="min-height: 38px; padding: 0 12px; border-radius: 10px; border: 1px solid {{o.bd}}; background: {{o.bg}}; color: {{o.fg}}; font: inherit; font-size: 13.5px; font-weight: {{o.fw}}; cursor: pointer; display: inline-flex; align-items: center; gap: 6px">{{o.label}}<sc-if value="{{o.locked}}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></sc-if></button></sc-for>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; border-radius: 14px; border: 1px solid #ECECEF">
+<div style="display: flex; align-items: center; gap: 12px; padding: 14px">
+<span style="width: 36px; height: 36px; border-radius: 10px; background: rgba(124,58,237,0.1); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="M4 7l8 6 8-6"></path></svg></span>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 600; font-size: 14.5px">Email</span><span style="font-size: 12.5px; color: #5E6068; overflow: hidden; text-overflow: ellipsis">{{al.emailSub}}</span></span>
+<button type="button" role="switch" aria-checked="{{al.email.on}}" aria-label="Email alerts" onClick="{{al.email.toggle}}" disabled="{{al.email.disabled}}" style="position: relative; width: 46px; height: 28px; flex: 0 0 auto; border-radius: 999px; border: 0; background: {{al.email.bg}}; cursor: pointer; padding: 0"><span style="position: absolute; top: 3px; left: {{al.email.x}}; width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: left .15s ease"></span></button>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px; border-top: 1px solid #ECECEF">
+<span style="width: 36px; height: 36px; border-radius: 10px; background: rgba(124,58,237,0.1); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11l6 2.5L11.5 20l3-4.5 4.5 3.5z"></path><path d="M9 13.5l12-9.5"></path></svg></span>
+<span style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-weight: 600; font-size: 14.5px">Telegram</span><span style="font-size: 12.5px; color: #5E6068">{{al.tgSub}}</span></span>
+<sc-if value="{{al.tgLinked}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{al.disconnect}}" class="ul" style="padding: 4px; border: 0; background: transparent; color: #5E6068; font: inherit; font-size: 13px; cursor: pointer">Disconnect</button><button type="button" role="switch" aria-checked="{{al.tg.on}}" aria-label="Telegram alerts" onClick="{{al.tg.toggle}}" disabled="{{al.tg.disabled}}" style="position: relative; width: 46px; height: 28px; flex: 0 0 auto; border-radius: 999px; border: 0; background: {{al.tg.bg}}; cursor: pointer; padding: 0"><span style="position: absolute; top: 3px; left: {{al.tg.x}}; width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.3); transition: left .15s ease"></span></button></sc-if>
+<sc-if value="{{al.tgCanConnect}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{al.connect}}" class="pb" style="min-height: 42px; padding: 0 18px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap">{{al.connectLabel}}</button></sc-if>
+</div>
+</div>
+<span style="font-size: 12.5px; line-height: 1.55; color: #6B6D75">{{al.note}}</span>
+</section>
+</div>
+
+<section aria-label="Member bonus codes" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; margin-top: 16px; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px"><div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Member bonus codes</h2><span style="font-size: 13.5px; line-height: 1.5; color: #5E6068">Offers for Streax members. Reveal a code, then use it at the casino.</span></div><span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: #2A2C31; background: #F5F3FF; white-space: nowrap">{{codesCount}}</span></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px">
+<sc-for list="{{codes}}" as="c" hint-placeholder-count="3">
+<div style="border-radius: 16px; border: 1px solid #E7E7EA; background: #F8F8F9; padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0">
+<div style="display: flex; align-items: center; gap: 10px"><span style="position: relative; width: 36px; height: 36px; border-radius: 10px; background: {{c.tint}}; color: #4C1D95; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; overflow: hidden">{{c.ini}}<sc-if value="{{c.logo}}" hint-placeholder-val="{{ false }}"><img src="{{c.logo}}" alt="" width="36" height="36" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover"></sc-if><span aria-hidden="true" style="position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(11,12,11,0.10); pointer-events: none"></span></span><span style="flex: 1 1 auto; min-width: 0; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{c.casinoName}}</span><span style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; color: {{c.lvFg}}; background: {{c.lvBg}}">{{c.level}}</span></div>
+<span style="font-size: 16px; font-weight: 600; line-height: 1.35">{{c.title}}</span>
+<span style="font-size: 12.5px; line-height: 1.5; color: #5E6068">{{c.terms}}</span>
+<div style="margin-top: auto; padding-top: 4px; display: flex; flex-direction: column; gap: 8px">
+<sc-if value="{{c.showReveal}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{c.reveal}}" class="pb" style="min-height: 42px; padding: 0 18px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap">Reveal code</button></sc-if>
+<sc-if value="{{c.showCode}}" hint-placeholder-val="{{ false }}"><div style="display: flex; gap: 8px"><span style="flex: 1 1 auto; min-height: 42px; box-sizing: border-box; border-radius: 10px; border: 1.5px dashed #6D28D9; background: rgba(124,58,237,0.06); display: inline-flex; align-items: center; justify-content: center; font-family: 'Geist Mono', monospace; font-size: 15px; font-weight: 600; letter-spacing: 0.06em; color: #5B21B6; padding: 0 10px; overflow: hidden">{{c.code}}</span><button type="button" onClick="{{c.copy}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">Copy</button></div>
+<sc-if value="{{c.hasUrl}}" hint-placeholder-val="{{ false }}"><a href="{{c.url}}" target="_blank" rel="sponsored noopener noreferrer" class="ul" style="font-size: 13.5px; font-weight: 600; color: #5B21B6">Go to {{c.casinoName}}</a></sc-if></sc-if>
+<sc-if value="{{c.locked}}" hint-placeholder-val="{{ false }}"><div style="min-height: 42px; box-sizing: border-box; border-radius: 10px; border: 1px solid #E2E2E6; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13.5px; color: #5E6068"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>Unlocks at {{c.level}}</div></sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{codesEmpty}}" hint-placeholder-val="{{ false }}"><div style="padding: 22px; border-radius: 14px; border: 1px dashed #E2E2E6; text-align: center; font-size: 13.5px; line-height: 1.5; color: #5E6068">No member codes right now. New offers land here first.</div></sc-if>
+<span style="font-size: 12.5px; line-height: 1.55; color: #6B6D75">18+. Offers come from the casinos and carry their own terms. Some links may earn Streax a commission. Gamble responsibly: BeGambleAware.org</span>
+</section>
+
+<div data-m="ag2" style="margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start">
+<section aria-label="Invite friends" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Invite friends</h2><span style="font-size: 13.5px; line-height: 1.5; color: #5E6068">Each friend who joins and confirms their email earns you {{ref.each}} points. They get {{ref.friendGets}} too.</span></div>
+<div style="display: flex; gap: 8px"><input type="text" readonly value="{{ref.url}}" aria-label="Your invite link" style="width: 100%; height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px; font-family: 'Geist Mono', monospace; font-size: 13px"><button type="button" onClick="{{ref.copy}}" class="pb" style="min-height: 42px; padding: 0 18px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap">Copy link</button></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a href="{{ref.x}}" target="_blank" rel="noopener noreferrer" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">Share on X</a>
+<a href="{{ref.tg}}" target="_blank" rel="noopener noreferrer" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">Telegram</a>
+<a href="{{ref.wa}}" target="_blank" rel="noopener noreferrer" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">WhatsApp</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<sc-for list="{{ref.stats}}" as="s" hint-placeholder-count="3"><div style="border-radius: 12px; background: #F8F8F9; border: 1px solid #ECECEF; padding: 12px; display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-family: 'Geist Mono', monospace; font-size: 22px; font-weight: 500">{{s.v}}</span><span style="font-size: 12px; color: #5E6068">{{s.label}}</span></div></sc-for>
+</div>
+<span style="font-size: 12.5px; line-height: 1.55; color: #6B6D75">Points arrive when your friend confirms their email. Up to 20 friends a day count.</span>
+</section>
+<section aria-label="Downloads" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Downloads</h2><span style="font-size: 13.5px; line-height: 1.5; color: #5E6068">CSV files you can open in Excel or Google Sheets.</span></div>
+<sc-for list="{{dl}}" as="d" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #ECECEF">
+<span style="width: 34px; height: 34px; border-radius: 10px; background: rgba(124,58,237,0.1); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg></span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 14px">{{d.title}}</span><span style="font-size: 12.5px; color: #5E6068">{{d.sub}}</span></span>
+<button type="button" onClick="{{d.go}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">CSV</button>
+</div>
+</sc-for>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-top: 4px">
+<label for="csv-casino" style="flex: 1 1 100%; font-size: 13px; font-weight: 500; color: #50525A">Daily flows for one casino, last 90 days</label>
+<select id="csv-casino" onChange="{{onCsvCasino}}" style="width: 100%; height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px; flex: 1 1 200px; width: auto; cursor: pointer"><sc-for list="{{csvOptions}}" as="o" hint-placeholder-count="5"><option value="{{o.v}}" selected="{{o.sel}}">{{o.label}}</option></sc-for></select>
+<button type="button" onClick="{{csvCasinoGo}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">CSV</button>
+</div>
+</section>
+</div>
+
+<div data-m="ag2" style="margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start">
+<section aria-label="Points history" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; gap: 8px">
+<h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Points history</h2>
+<sc-for list="{{history}}" as="h" hint-placeholder-count="4"><div style="display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid #ECECEF"><span style="flex: 1 1 auto; font-size: 14px">{{h.label}}</span><span style="font-size: 12.5px; color: #6B6D75">{{h.when}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 14px; color: #6D28D9; min-width: 52px; text-align: right">+{{h.delta}}</span></div></sc-for>
+<sc-if value="{{historyEmpty}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13.5px; color: #5E6068">No points yet.</span></sc-if>
+</section>
+<section aria-label="Account settings" style="border-radius: 20px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 22px; display: flex; flex-direction: column; min-width: 0; box-sizing: border-box; gap: 14px">
+<h2 style="margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em">Account settings</h2>
+<label for="ac-name" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #50525A">Name<input id="ac-name" type="text" autocomplete="name" value="{{set.name}}" onChange="{{set.onName}}" style="width: 100%; height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px"></label>
+<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: #50525A; cursor: pointer"><input type="checkbox" checked="{{set.marketing}}" onChange="{{set.toggleMarketing}}" style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #6D28D9; flex: 0 0 auto">Email me Streax news and the biggest casino moves</label>
+<button type="button" onClick="{{set.saveProfile}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; align-self: flex-start">Save profile</button>
+<div style="height: 1px; background: #ECECEF"></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 600; font-size: 15px">{{set.pwTitle}}</span><sc-if value="{{set.hasPwNote}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12.5px; color: #5E6068">{{set.pwNote}}</span></sc-if></div>
+<sc-if value="{{set.hasPw}}" hint-placeholder-val="{{ true }}"><label for="ac-cur" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #50525A">Current password<input id="ac-cur" type="password" autocomplete="current-password" value="{{set.cur}}" onChange="{{set.onCur}}" style="width: 100%; height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px"></label></sc-if>
+<label for="ac-new" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #50525A">New password<input id="ac-new" type="password" autocomplete="new-password" value="{{set.nw}}" onChange="{{set.onNew}}" placeholder="At least 8 characters" style="width: 100%; height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px"></label>
+<button type="button" onClick="{{set.savePw}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; align-self: flex-start">{{set.pwBtn}}</button>
+<div style="height: 1px; background: #ECECEF"></div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" onClick="{{set.logout}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">Log out</button><button type="button" onClick="{{set.logoutAll}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">Log out other devices</button></div>
+<sc-if value="{{set.delClosed}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{set.openDel}}" class="ul" style="align-self: flex-start; padding: 4px 0; border: 0; background: transparent; color: #DC2626; font: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer">Delete my account</button></sc-if>
+<sc-if value="{{set.delOpen}}" hint-placeholder-val="{{ false }}"><div style="border-radius: 14px; border: 1px solid rgba(194,65,12,0.3); background: rgba(194,65,12,0.08); padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13.5px; line-height: 1.5; color: #DC2626; font-weight: 600">This deletes your account, points, watchlist and revealed codes. It cannot be undone.</span>
+<label for="ac-deltext" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #50525A">Type DELETE to confirm<input id="ac-deltext" type="text" autocomplete="off" value="{{set.delText}}" onChange="{{set.onDelText}}" style="width: 100%; height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px"></label>
+<sc-if value="{{set.hasPw}}" hint-placeholder-val="{{ true }}"><label for="ac-delpw" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #50525A">Password<input id="ac-delpw" type="password" autocomplete="current-password" value="{{set.delPw}}" onChange="{{set.onDelPw}}" style="width: 100%; height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px"></label></sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 8px"><button type="button" onClick="{{set.doDelete}}" style="min-height: 42px; padding: 0 16px; border-radius: 12px; border: 0; background: #DC2626; color: #FFFFFF; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer">Delete account</button><button type="button" onClick="{{set.closeDel}}" class="hv" style="min-height: 42px; padding: 0 14px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box">Cancel</button></div>
+</div></sc-if>
+</section>
+</div>
+</sc-if>
+<footer style="margin-top: 48px; padding: 32px 0 28px; border-top: 1px solid #F5F3FF; display: flex; flex-direction: column; gap: 26px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 10px; max-width: 300px">
+<span style="display: inline-flex; align-items: center; gap: 10px"><img src="assets/streax-logo.webp" alt="" aria-hidden="true" width="26" height="26" style="flex: 0 0 auto; display: block; width: 26px; height: 26px; border-radius: 8px; box-shadow: 0 6px 16px -8px rgba(109,40,217,0.6)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 23px; line-height: 1; letter-spacing: -0.01em; color: #0B0C0B">Streax</span></span>
+<span style="font-size: 13.5px; line-height: 1.6; color: #5E6068">Casino data you can check. Every number on this platform names its source.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 48px; font-size: 13.5px">
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #0B0C0B">Platform</span><a href="Rankings.dc.html" class="ul" style="color: #5E6068">Rankings</a><a href="Casino.dc.html" class="ul" style="color: #5E6068">Casino profiles</a><a href="Onchain.dc.html" class="ul" style="color: #5E6068">On-chain monitor</a><a href="Wallets.dc.html" class="ul" style="color: #5E6068">Casino wallets</a><a href="Analytics.dc.html" class="ul" style="color: #5E6068">Analytics</a><a href="Streamers.dc.html" class="ul" style="color: #5E6068">Streamers</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #0B0C0B">Community</span><a href="Community.dc.html" class="ul" style="color: #5E6068">Reviews</a><a href="Complaints.dc.html" class="ul" style="color: #5E6068">Complaints</a><a href="WalletCheck.dc.html" class="ul" style="color: #5E6068">My wallet check</a><a href="BonusCalc.dc.html" class="ul" style="color: #5E6068">Bonus calculator</a><a href="Articles.dc.html" class="ul" style="color: #5E6068">Articles</a><a href="BetFeed.dc.html" class="ul" style="color: #5E6068">Whale feed</a><a href="Bonuses.dc.html" class="ul" style="color: #5E6068">Leaderboard and codes</a></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 600; color: #0B0C0B">Data</span><button type="button" onClick="{{openSources}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #5E6068; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Sources and methodology</button><button type="button" onClick="{{openAlerts}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #5E6068; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Daily alerts</button><button type="button" onClick="{{openSupport}}" class="ul" style="padding: 0; border: 0; background: transparent; color: #5E6068; font: inherit; font-size: 13.5px; text-align: left; cursor: pointer">Contact</button></div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 18px; border-top: 1px solid #F5F3FF; font-size: 12.5px; color: #6B6D75; text-align: center">
+<span>18+ · Gambling can be addictive. Play responsibly. Help: BeGambleAware.org · GamCare.org.uk · GamblingTherapy.org</span>
+<span>© 2026 Streax · Not financial advice · Third-party figures are shown as published and credited to their source</span>
+</div>
+</footer>
+</main>
+<sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
+<div style="position: fixed; left: 0; right: 0; bottom: 24px; z-index: 100; display: flex; justify-content: center; padding: 0 16px; pointer-events: none">
+<div role="status" class="fu" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid #DBDBE0; background: rgba(255,255,255,0.98); box-shadow: 0 20px 50px -20px rgba(11,12,11,0.16); font-size: 14px; color: #0B0C0B"><span style="width: 20px; height: 20px; border-radius: 50%; background: rgba(124,58,237,0.15); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{toast}}</div>
+</div>
+</sc-if>
+<sc-if value="{{modalOpen}}" hint-placeholder-val="{{ false }}">
+<div class="fi" onClick="{{closeModal}}" style="position: fixed; inset: 0; z-index: 90; background: rgba(46,51,48,0.32); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px">
+<div role="dialog" aria-modal="true" aria-label="{{modalTitle}}" class="fu" onClick="{{stop}}" style="width: 100%; max-width: {{modalW}}; max-height: calc(100vh - 48px); overflow-y: auto; box-sizing: border-box; border-radius: 18px; border: 1px solid transparent; background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%) padding-box, linear-gradient(160deg, rgba(124,58,237,0.5), rgba(124,58,237,0.06) 50%, rgba(124,58,237,0.2)) border-box; box-shadow: 0 40px 120px -30px rgba(139,92,246,0.35); padding: 24px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 4px"><h2 style="margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">{{modalTitle}}</h2><span style="font-size: 14px; color: #5E6068; line-height: 1.5">{{modalSub}}</span></div>
+<button type="button" aria-label="Close dialog" onClick="{{closeModal}}" class="hv" style="width: 40px; height: 40px; flex: 0 0 auto; border-radius: 10px; border: 1px solid #DBDBE0; background: transparent; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2A2C31" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+<sc-if value="{{isSources}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{sources}}" as="s" hint-placeholder-count="6">
+<div style="display: flex; gap: 14px; align-items: flex-start"><span style="width: 28px; height: 28px; border-radius: 8px; background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25); color: #5B21B6; font-family: 'Geist Mono', monospace; font-size: 12px; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto">{{s.n}}</span><div style="display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-weight: 600; font-size: 14.5px">{{s.name}}</span><span style="font-size: 13.5px; line-height: 1.55; color: #50525A">{{s.gives}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #6D28D9; word-break: break-all">{{s.url}} · {{s.when}}</span></div></div>
+</sc-for>
+<div style="border-radius: 12px; border: 1px solid #E2E2E6; background: #F8F8F9; padding: 14px; font-size: 13.5px; line-height: 1.6; color: #50525A"><span style="color: #0B0C0B; font-weight: 600">Streax Score.</span> Nine weighted categories: on-chain activity and reserves (from this data), payout speed and complaint record (from verified player reports) and five review categories (licence, fairness, responsible gambling, support, security). Categories without enough evidence are left out, never guessed, and the score is marked provisional until most of the weight is rated. The full method is in the Streax article How the Streax Score works.</div>
+</sc-if>
+<sc-if value="{{isForm}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{formDone}}" hint-placeholder-val="{{ false }}"><div class="fu" style="border-radius: 14px; border: 1px solid rgba(14,124,102,0.3); background: rgba(14,124,102,0.06); padding: 18px; display: flex; flex-direction: column; gap: 6px"><span style="font-weight: 600; color: #0B6B58">{{doneTitle}}</span><span style="font-size: 13.5px; color: #50525A; line-height: 1.55">{{doneBody}}</span></div></sc-if>
+<sc-if value="{{formOpen}}" hint-placeholder-val="{{ true }}">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #50525A">Email<input type="email" value="{{email}}" onChange="{{onEmail}}" placeholder="you@company.com" style="height: 46px; box-sizing: border-box; padding: 0 14px; border-radius: 10px; border: 1px solid {{emailBd}}; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px"></label>
+<sc-if value="{{isAlerts}}" hint-placeholder-val="{{ false }}"><div style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; color: #50525A">Send me</span><sc-for list="{{topics}}" as="t" hint-placeholder-count="3"><button type="button" role="checkbox" aria-checked="{{t.on}}" onClick="{{t.toggle}}" class="hv" style="display: flex; align-items: center; gap: 10px; min-height: 42px; padding: 0 12px; border-radius: 10px; border: 1px solid #E2E2E6; background: transparent; color: #0B0C0B; font: inherit; font-size: 14px; cursor: pointer; text-align: left"><span style="width: 18px; height: 18px; border-radius: 5px; border: 1px solid {{t.bd}}; background: {{t.bg}}; display: inline-flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; font-weight: 700">{{t.mark}}</span>{{t.label}}</button></sc-for></div></sc-if>
+<sc-if value="{{isSupport}}" hint-placeholder-val="{{ false }}"><label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: #50525A">Message<textarea value="{{msg}}" onChange="{{onMsg}}" rows="4" placeholder="How can we help?" style="box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 14.5px; resize: vertical"></textarea></label></sc-if>
+<sc-if value="{{hasFormErr}}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; color: #B45309">{{formErr}}</span></sc-if>
+<button type="button" onClick="{{submitForm}}" class="pb" style="min-height: 46px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: #FFFFFF; font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer">{{submitLabel}}</button>
+</sc-if>
+</sc-if>
+<sc-if value="{{isGate}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{gatePerks}}" as="g" hint-placeholder-count="4"><div style="display: flex; align-items: center; gap: 10px; font-size: 14px; color: #0B0C0B"><span style="width: 24px; height: 24px; border-radius: 8px; background: rgba(124,58,237,0.1); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{g}}</div></sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="{{gateSignup}}" class="pb" style="flex: 1 1 200px; min-height: 46px; box-sizing: border-box; border-radius: 12px; background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: #FFFFFF; font-size: 14.5px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">Create free account</a>
+<a href="{{gateLogin}}" class="hv" style="flex: 1 1 120px; min-height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #DBDBE0; color: #2A2C31; font-size: 14.5px; font-weight: 500; display: inline-flex; align-items: center; justify-content: center">Log in</a>
+</div>
+<span style="font-size: 12.5px; color: #6B6D75">Free, takes 30 seconds. 18+ only.</span>
+</sc-if>
+</div>
+</div>
+</sc-if>
+</div>
+<nav class="sx-tabs" aria-label="Main"><a class="sx-tab" href="Home.dc.html"><span class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg></span><span>Home</span></a><a class="sx-tab" href="Rankings.dc.html"><span class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></span><span>Casinos</span></a><a class="sx-tab" href="Streamers.dc.html"><span class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.6 5.6a9 9 0 0 0 0 12.8M18.4 5.6a9 9 0 0 1 0 12.8M8.5 8.5a4.9 4.9 0 0 0 0 7M15.5 8.5a4.9 4.9 0 0 1 0 7"/><circle cx="12" cy="12" r="1.6"/></svg></span><span>Streamers</span></a><a class="sx-tab" href="Onchain.dc.html"><span class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><span>On-chain</span></a><a class="sx-tab on" href="#sx-more"><span class="ti"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></svg></span><span>More</span></a></nav><div class="sx-more" id="sx-more" role="dialog" aria-label="More pages"><a class="shade" href="#sx-close" aria-label="Close"></a><div class="sheet"><div class="sh"><b>More on Streax</b><a class="x" href="#sx-close" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></a></div><div class="grid"><a href="Markets.dc.html"><b>Market breakdown</b><span>Deposits, fairness, ratings</span></a><a href="Sports.dc.html"><b>Sports odds</b><span>Best prices and slip check</span></a><a href="Casino.dc.html"><b>Casino profile</b><span>Score, payouts, reserves</span></a><a href="Wallets.dc.html"><b>Casino wallets</b><span>Every tracked hot wallet</span></a><a href="Analytics.dc.html"><b>Analytics</b><span>Market share and trends</span></a><a href="Complaints.dc.html"><b>Complaints</b><span>Public, with on-chain proof</span></a><a href="WalletCheck.dc.html"><b>My wallet check</b><span>Your casino history</span></a><a href="BonusCalc.dc.html"><b>Bonus calculator</b><span>What a bonus is worth</span></a><a href="Articles.dc.html"><b>Articles</b><span>Guides and research</span></a><a href="Community.dc.html"><b>Player reviews</b><span>From Streax members</span></a><a href="BetFeed.dc.html"><b>Whale feed</b><span>Big moves, live on-chain</span></a><a href="Bonuses.dc.html"><b>Leaderboard and codes</b><span>Member points, code drops</span></a><a href="Account.dc.html" aria-current="page"><b>My account</b><span>Watchlist, alerts, perks</span></a></div></div></div>
+</x-dc></template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3069}}'>
+class Component extends DCLogic {
+
+  showToast(msg) {
+    var self = this;
+    clearTimeout(this.toastTimer);
+    this.setState({ toast: msg });
+    this.toastTimer = setTimeout(function () { self.setState({ toast: '' }); }, 2600);
+  }
+  copy(text, msg) {
+    try { if (navigator.clipboard) navigator.clipboard.writeText(text).catch(function () {}); } catch (e) {}
+    this.showToast(msg);
+  }
+  money(v) {
+    if (v == null || isNaN(v)) return 'n/a';
+    var a = Math.abs(v), s = v < 0 ? '-' : '', o;
+    if (a >= 1e9) o = (a / 1e9).toFixed(2) + 'B';
+    else if (a >= 1e6) o = (a / 1e6).toFixed(2) + 'M';
+    else if (a >= 1e3) o = (a / 1e3).toFixed(2) + 'K';
+    else if (a >= 1) o = a.toFixed(2);
+    else if (a === 0) o = '0';
+    else o = a.toPrecision(3);
+    return s + '$' + o;
+  }
+  compact(v) {
+    if (v >= 1e6) return (v / 1e6).toFixed(2) + 'M';
+    if (v >= 1e3) return (v / 1e3).toFixed(1) + 'K';
+    return String(Math.round(v));
+  }
+  price(v) {
+    if (v >= 1000) return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (v >= 1) return '$' + v.toFixed(2);
+    return '$' + v.toPrecision(4);
+  }
+  pct(v) { return (v >= 0 ? '▲ ' : '▼ ') + Math.abs(v).toFixed(2) + '%'; }
+  pcol(v) { return v >= 0 ? '#6D28D9' : '#DC2626'; }
+  seg(opts, active, pick) {
+    return opts.map(function (o) {
+      var on = o.v === active;
+      return { label: o.label, v: o.v, on: on, bg: on ? '#FFFFFF' : 'transparent', shadow: on ? 'inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px #DBDBE0' : 'none', fg: on ? '#0B0C0B' : '#5E6068', pick: function () { pick(o.v); } };
+    });
+  }
+  tint(name) {
+    var t = ['linear-gradient(135deg, #EAF1FF, #D9E6FF)', 'linear-gradient(135deg, #E6F5FF, #D3EAFE)', 'linear-gradient(135deg, #EFECFF, #E0DBFF)', 'linear-gradient(135deg, #E8F4FA, #D7EAF5)', 'linear-gradient(135deg, #EEF2F9, #DFE6F2)'];
+    var h = 0; for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % 997;
+    return t[h % t.length];
+  }
+  ini(name) { var s = String(name).replace(/[^A-Za-z0-9]/g, ''); return (s.charAt(0) + (s.charAt(1) || '')).toUpperCase(); }
+  logoMap() { return this._lm || (this._lm = {"tok_shfl":"assets/logos/tok_shfl.png","tok_rlb":"assets/logos/tok_rlb.png","tok_fun":"assets/logos/tok_fun.png","tok_desu":"assets/logos/tok_desu.png","tok_bfg":"assets/logos/tok_bfg.png","tok_scs":"assets/logos/tok_scs.png","tok_winr":"assets/logos/tok_winr.png","chain_eth":"assets/logos/chain_eth.png","chain_sol":"assets/logos/chain_sol.png","chain_trx":"assets/logos/chain_trx.png","chain_bnb":"assets/logos/chain_bnb.png","chain_btc":"assets/logos/chain_btc.png","kick":"assets/logos/kick.png","cas_500.casino":"assets/logos/casinos/500.casino.png","cas_acebet":"assets/logos/casinos/acebet.png","cas_bc.game":"assets/logos/casinos/bc.game.png","cas_betfury.com":"assets/logos/casinos/betfury.com.png","cas_betstrike":"assets/logos/casinos/betstrike.png","cas_bluff":"assets/logos/casinos/bluff.png","cas_cloudbet.com":"assets/logos/casinos/cloudbet.com.png","cas_cybet":"assets/logos/casinos/cybet.png","cas_duel.com":"assets/logos/casinos/duel.com.png","cas_duelbits.com":"assets/logos/casinos/duelbits.com.png","cas_flush":"assets/logos/casinos/flush.png","cas_gamba.com":"assets/logos/casinos/gamba.com.png","cas_gamdom.com":"assets/logos/casinos/gamdom.com.png","cas_goated.com":"assets/logos/casinos/goated.com.png","cas_metawin.com":"assets/logos/casinos/metawin.com.png","cas_rainbet.com":"assets/logos/casinos/rainbet.com.png","cas_razed.com":"assets/logos/casinos/razed.com.png","cas_rollbit.com":"assets/logos/casinos/rollbit.com.png","cas_roobet.com":"assets/logos/casinos/roobet.com.png","cas_shuffle.com":"assets/logos/casinos/shuffle.com.png","cas_solcasino.io":"assets/logos/casinos/solcasino.io.png","cas_sportsbet.io":"assets/logos/casinos/sportsbet.io.png","cas_stake.com":"assets/logos/casinos/stake.com.png","cas_thrill.com":"assets/logos/casinos/thrill.com.png","cas_whale.io":"assets/logos/casinos/whale.io.png","cas_winna.com":"assets/logos/casinos/winna.com.png","cas_yeet.com":"assets/logos/casinos/yeet.com.png"}); }
+  tokLogo(sym) { return this.logoMap()['tok_' + String(sym || '').toLowerCase()] || ''; }
+  chainLogo(name) { var k = { Ethereum: 'eth', ETH: 'eth', Solana: 'sol', SOL: 'sol', Tron: 'trx', TRX: 'trx', 'BNB Chain': 'bnb', BNB: 'bnb', BTC: 'btc', Bitcoin: 'btc' }[name]; return k ? (this.logoMap()['chain_' + k] || '') : ''; }
+  kickLogo() { return this.logoMap().kick || ''; }
+  logo(domain, size) {
+    if (!domain) return '';
+    var own = this.D && this.D.casinoLogos && this.D.casinoLogos[domain];
+    if (own) return own;
+    var mine = this.logoMap()['cas_' + domain];
+    if (mine) return mine;
+    if (domain.indexOf('.') < 0) return '';
+    return true ? 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=' + Math.max(size || 64, 128) : '';
+  }
+  short(a) { return a.slice(0, 6) + '…' + a.slice(-4); }
+  headers(cols, key, dir, setSort) {
+    return cols.map(function (c) {
+      var on = c.k && c.k === key;
+      return { label: c.label, justify: c.right ? 'flex-end' : 'flex-start', sortable: !!c.k, plain: !c.k, color: on ? '#5B21B6' : '#5E6068', arrow: on ? (dir < 0 ? '↓' : '↑') : (c.k ? '↕' : ''), aria: c.k ? 'Sort by ' + c.label : '', sort: function () { setSort(c.k); } };
+    });
+  }
+  gauge(v) {
+    var len = 81.68, f = v == null ? 0 : v / 100;
+    return { dash: (len * f).toFixed(1) + ' ' + len, color: v == null ? '#C5C5CB' : v >= 75 ? '#6D28D9' : v >= 55 ? '#6D28D9' : v >= 40 ? '#B45309' : '#DC2626', label: v == null ? 'n/a' : String(v) };
+  }
+  shellVals() {
+    var self = this, st = this.state, D = this.D;
+    var q = (st.gq || '').trim().toLowerCase();
+    var res = q ? D.idx.filter(function (c) { return c[0].toLowerCase().indexOf(q) !== -1; }).slice(0, 6).map(function (c) {
+      return { name: c[0], href: 'Casino.dc.html?c=' + c[1], dep: c[2], rank: c[3], ini: self.ini(c[0]), tint: self.tint(c[0]), logo: self.logo(c[4] || c[1], 64) };
+    }) : [];
+    var m = st.modal, isForm = m === 'alerts' || m === 'support';
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(st.email || '');
+    var topicsAll = ['Big deposit moves', 'New casinos added', 'Casino token moves'];
+    var titles = { gate: 'Free with a Streax account', alerts: 'Daily alerts', support: 'Contact support', sources: 'Data sources and methodology' };
+    var subs = { gate: 'Create a free account to unlock ' + String(st.gateWhat || 'this').replace(/^[A-Z](?=[a-z])/, function (c) { return c.toLowerCase(); }) + '. You also get:', alerts: 'One short email a day with the biggest on-chain moves.', support: 'Tell us what you need and we will reply by email.', sources: 'Where every number on this platform comes from, and when it was captured.' };
+    return {
+      acct: self.acctVals(), sideCta: self.sideVals(), isGate: m === 'gate',
+      gatePerks: ['Your own whale alerts by email or Telegram', 'A watchlist of the casinos you follow', '7, 30 and 90-day history with CSV downloads', 'Member-only bonus codes and referral points'],
+      gateSignup: 'Signup.dc.html' + self.gateNext(), gateLogin: 'Login.dc.html' + self.gateNext(),
+      gq: st.gq || '', onGq: function (e) { self.setState({ gq: e.target.value }); },
+      gqOn: function () { clearTimeout(self.blurTimer); self.setState({ gqFocus: true }); },
+      gqOff: function () { self.blurTimer = setTimeout(function () { self.setState({ gqFocus: false }); }, 180); },
+      gqOpen: !!st.gqFocus && q.length > 0, gqResults: res, gqNone: q.length > 0 && res.length === 0,
+      bell: function () { if (!self.member()) { self.gate('Personal whale alerts'); return; } self.showToast('You are all caught up. Whale alerts for your watchlist arrive by email or Telegram.'); },
+      avatar: function () { self.showToast('Accounts arrive with the full launch'); },
+      openAlerts: function () { if (self.member()) { location.href = 'Account.dc.html'; return; } self.gate('Personal whale alerts'); },
+      openSupport: function () { self.setState({ modal: 'support', formDone: false, formErr: '' }); },
+      openSources: function () { self.setState({ modal: 'sources' }); },
+      modalOpen: !!m, isSources: m === 'sources', isForm: isForm, isAlerts: m === 'alerts', isSupport: m === 'support',
+      modalTitle: titles[m] || this.extraTitle || '', modalSub: subs[m] || this.extraSub || '', modalW: m === 'sources' ? '640px' : (this.extraW || '480px'),
+      closeModal: function () { self.setState({ modal: '' }); }, stop: function (e) { e.stopPropagation(); },
+      email: st.email || '', onEmail: function (e) { self.setState({ email: e.target.value, formErr: '' }); },
+      emailBd: st.formErr ? 'rgba(194,65,12,0.6)' : '#E2E2E6',
+      msg: st.msg || '', onMsg: function (e) { self.setState({ msg: e.target.value, formErr: '' }); },
+      topics: topicsAll.map(function (t) { var on = !(st.topicsOff || {})[t]; return { label: t, on: on, bd: on ? '#6D28D9' : '#C5C5CB', bg: on ? '#6D28D9' : 'transparent', mark: on ? '✓' : '', toggle: function () { var o = Object.assign({}, st.topicsOff || {}); o[t] = on; self.setState({ topicsOff: o }); } }; }),
+      hasFormErr: !!st.formErr, formErr: st.formErr || '', formDone: !!st.formDone, formOpen: !st.formDone,
+      submitLabel: m === 'support' ? 'Send message' : 'Turn on alerts',
+      doneTitle: m === 'support' ? 'Message received' : 'Alerts are on for ' + (st.email || ''),
+      doneBody: 'This is the local demo, so nothing is emailed yet. Connect an email service in the backend to send it for real.',
+      submitForm: function () {
+        if (!emailOk) { self.setState({ formErr: 'Enter a valid email address.' }); return; }
+        if (m === 'support' && !(st.msg || '').trim()) { self.setState({ formErr: 'Write a short message.' }); return; }
+        if (m === 'alerts' && topicsAll.every(function (t) { return (st.topicsOff || {})[t]; })) { self.setState({ formErr: 'Pick at least one alert.' }); return; }
+        self.setState({ formDone: true, formErr: '', msg: '' });
+      },
+      sources: [
+        { n: '1', name: 'Streax on-chain monitor', gives: 'Live deposits, withdrawals, depositing wallets, whale moves and balances for every casino with labeled wallets, read every 10 minutes. These replace the 99bitcoins figures for those casinos.', url: 'etherscan.io, trongrid.io, ethereum-rpc.publicnode.com', when: 'live, every 10 minutes' },
+        { n: '2', name: '99bitcoins casino on-chain pages', gives: '24h deposits, depositing wallets, payouts, hot wallets, chain and asset split for 43 casinos. Shown as published. Asset values on those pages match ETH and SOL prices from late August 2026.', url: '99bitcoins.com/coins/gambling', when: 'captured 11 Oct 2026, unchanged on recheck 12 Oct' },
+        { n: '3', name: 'Official casino websites', gives: 'Operator name, registration and licence, quoted from each site footer. Casinos whose footer could not be read show "Not verified".', url: 'stake.com, roobet.com, shuffle.com, rainbet.com, thrill.com, sportsbet.io, stake.us', when: '12 Oct 2026' },
+        { n: '4', name: 'DefiLlama coins API', gives: 'Casino token prices, 24h and 7d change and 30 daily closes.', url: 'coins.llama.fi', when: self.props && self.props.$local ? 'live on your local server' : '12 Oct 2026, 08:53 UTC' },
+        { n: '5', name: 'CoinGecko', gives: 'Circulating supply, used for market cap at the current price, and 24h volume.', url: 'coingecko.com/en/categories/gambling', when: '11 Oct 2026' },
+        { n: '6', name: 'Kick and Twitch APIs', gives: 'Followers, live status, viewers and stream titles for tracked casino streamers, plus anyone live in the Slots and casino categories.', url: 'docs.kick.com, dev.twitch.tv', when: self.props && self.props.$local ? 'live on your local server' : '12 Oct 2026, 09:05 UTC' },
+        { n: '7', name: 'Etherscan and Blockscout', gives: 'Public name tags and token holdings for the Stake.com and Rollbit wallets (Etherscan), and their ETH balances (Blockscout API, 12 Oct 2026 snapshot).', url: 'etherscan.io, eth.blockscout.com', when: '11 to 12 Oct 2026' },
+        { n: '8', name: 'Logos', gives: 'Token logos from Trust Wallet assets and web3icons, chain logos from cryptocurrency-icons, Kick logo from Simple Icons. Casino icons are each casino’s own website icon, loaded in your browser on the local site; the canvas shows initials until logo files are added.', url: 'github.com/trustwallet/assets, web3icons, cryptocurrency-icons, simpleicons.org, google.com/s2/favicons', when: '12 Oct 2026' }
+      ],
+      hasToast: !!st.toast, toast: st.toast || ''
+    };
+  }
+
+  // ---- Streax accounts ----
+  member() { return !!(this.props && this.props.$me); }
+  locked() {
+    var a = this.props && this.props.$auth;
+    if (this.props && this.props.$local && a && a.enabled === false) return false;
+    return !this.member();
+  }
+  gate(what) { this.setState({ modal: 'gate', gateWhat: what }); }
+  apiPost(path, body) {
+    return fetch(path, { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body || {}) }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok) { var e = new Error(j.error || ('Something went wrong (' + r.status + ')')); e.status = r.status; e.code = j.code; e.field = j.field; throw e; }
+        return j;
+      });
+    });
+  }
+  saveMe(me) {
+    if (this.props) this.props.$me = me;
+    try { if (me) sessionStorage.setItem('sx_me', JSON.stringify(me)); else sessionStorage.removeItem('sx_me'); } catch (e) {}
+  }
+  acctVals() {
+    var me = this.props && this.props.$me;
+    if (me) return { href: 'Account.dc.html', label: 'My account, ' + me.name, text: me.initials, pad: '0', radius: '50%', fs: '15px', w: '44px', avatar: me.avatar || '' };
+    return { href: 'Signup.dc.html', label: 'Create a free Streax account', text: 'Sign up', pad: '0 16px', radius: '14px', fs: '14px', w: 'auto', avatar: '' };
+  }
+  sideVals() {
+    if (this.member()) return { title: 'Your whale alerts', body: 'Watchlist, alert settings, member codes and your referral points.', btn: 'Open my account', href: 'Account.dc.html' };
+    return { title: 'Free member perks', body: 'Your own whale alerts, a casino watchlist, full history and member-only codes.', btn: 'Create free account', href: 'Signup.dc.html' };
+  }
+  gateNext() {
+    if (!(this.props && this.props.$local) || typeof location === 'undefined') return '';
+    return '?next=' + encodeURIComponent(location.pathname + location.search);
+  }
+  watchVals(slug, name) {
+    var self = this, me = this.props && this.props.$me;
+    var on = !!(me && me.watchlist && me.watchlist.indexOf(slug) !== -1);
+    return { on: on, label: on ? 'Watching' : 'Watch', fill: on ? 'currentColor' : 'none', aria: (on ? 'Stop watching ' : 'Add to watchlist: ') + name,
+      toggle: function () {
+        if (!me) { self.gate('A casino watchlist with your own whale alerts'); return; }
+        self.apiPost('/api/account/watch', { slug: slug, on: !on }).then(function (j) {
+          me.watchlist = (j.watchlist || []).map(function (w) { return w.slug; });
+          self.saveMe(me);
+          self.showToast(on ? name + ' removed from your watchlist' : name + ' is on your watchlist');
+        }).catch(function (e) { if (e.status === 401) { self.saveMe(null); self.gate('A casino watchlist with your own whale alerts'); } else self.showToast(e.message); });
+      } };
+  }
+  // ---- end accounts ----
+  scoreLib() {
+    if (!this._scoreLib) this._scoreLib = (function () {
+  var CATS = [
+    { id: 'activity', name: 'On-chain activity', w: 15, src: 'On-chain', what: 'Deposit volume and how many wallets deposit.' },
+    { id: 'reserves', name: 'Reserves', w: 15, src: 'On-chain', what: 'Hot wallet money compared with a day of deposits.' },
+    { id: 'payouts', name: 'Payout speed', w: 15, src: 'Players', what: 'Median time from withdrawal request to coins arriving, from verified player reports.' },
+    { id: 'complaints', name: 'Complaint record', w: 15, src: 'Players', what: 'Share of closed complaints the casino resolved.' },
+    { id: 'fairness', name: 'Fairness and RTP', w: 10, src: 'Review', what: 'Provably fair games, a verifier, client seeds and published RTP.' },
+    { id: 'licence', name: 'Licence and compliance', w: 10, src: 'Review', what: 'A licence we could check, KYC timing, geo-blocking and AML policy.' },
+    { id: 'rg', name: 'Responsible gambling', w: 8, src: 'Review', what: 'Self-exclusion, limits, cool-off and help links.' },
+    { id: 'support', name: 'Support', w: 7, src: 'Review', what: '24/7 live help and how fast a human answers.' },
+    { id: 'security', name: 'Account security', w: 5, src: 'Review', what: 'Two-factor login and withdrawal confirmation.' }
+  ];
+  var CHECKS = {
+    fairness: [['provablyFair', 'Provably fair house games'], ['verifier', 'Built-in result verifier'], ['clientSeed', 'Players can set their own client seed'], ['rtpPublished', 'RTP published for every game'], ['maxRtp', 'Commits to the highest RTP version of slots']],
+    compliance: [['kycBeforeDeposit', 'KYC asked before the first deposit, not after a win'], ['geoBlock', 'Blocks restricted countries'], ['restrictedList', 'Publishes its restricted countries'], ['amlPolicy', 'Publishes an AML policy']],
+    rg: [['selfExclusion', 'Self-exclusion from the account page'], ['limits', 'Deposit and loss limits'], ['coolOff', 'Cool-off periods'], ['rgLinks', 'Links to gambling help services'], ['realityCheck', 'Reality checks or session reminders']],
+    support: [['live24', '24/7 live chat with a person']],
+    security: [['twoFA', 'Two-factor login'], ['withdrawalConfirm', 'Withdrawals need a second confirmation'], ['loginAlerts', 'New login or device alerts']]
+  };
+  function clamp(v) { return Math.max(0, Math.min(10, v)); }
+  function lerp(x, pts) {
+    if (x <= pts[0][0]) return pts[0][1];
+    for (var i = 1; i < pts.length; i++) if (x <= pts[i][0]) { var a = pts[i - 1], b = pts[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); }
+    return pts[pts.length - 1][1];
+  }
+  function checks(obj, list) {
+    var yes = 0, known = 0;
+    list.forEach(function (c) { var v = obj && obj[c[0]]; if (v === 'yes') { yes++; known++; } else if (v === 'no') known++; });
+    return { yes: yes, known: known, total: list.length };
+  }
+  function grade(total) {
+    if (total == null) return { label: 'Not rated', tone: 'muted' };
+    if (total >= 85) return { label: 'Excellent', tone: 'good' };
+    if (total >= 70) return { label: 'Good', tone: 'good' };
+    if (total >= 55) return { label: 'Fair', tone: 'accent' };
+    if (total >= 40) return { label: 'Weak', tone: 'warn' };
+    return { label: 'Poor', tone: 'bad' };
+  }
+
+  // input: { onchain: {vol01, reach01, cover, drawdown7d}, review: {...}, complaints: {resolved, unresolved}, payouts: {median, count} }
+  function compute(input) {
+    input = input || {};
+    var oc = input.onchain || {}, rv = input.review || {}, cp = input.complaints || {}, po = input.payouts || {};
+    var out = {};
+    if (oc.vol01 != null && oc.reach01 != null) out.activity = { v: clamp(10 * (0.57 * oc.vol01 + 0.43 * oc.reach01)), note: oc.note || '' };
+    if (oc.cover != null && isFinite(oc.cover)) {
+      var r = lerp(oc.cover, [[0, 0], [0.25, 2], [1, 5], [2, 7], [5, 10]]);
+      if (oc.drawdown7d != null && oc.drawdown7d > 0.4) r -= Math.min(4, (oc.drawdown7d - 0.4) * 10);
+      out.reserves = { v: clamp(r), note: oc.cover.toFixed(1) + 'x a day of deposits' };
+    }
+    if (po.count >= 3 && po.median != null) out.payouts = { v: clamp(lerp(po.median, [[10, 10], [30, 9], [60, 8], [180, 6], [720, 4], [1440, 2], [2880, 0]])), note: 'Median ' + fmtMin(po.median) + ' over ' + po.count + ' reports' };
+    var closed = (cp.resolved || 0) + (cp.unresolved || 0);
+    if (closed >= 3) out.complaints = { v: clamp(10 * (cp.resolved || 0) / closed), note: (cp.resolved || 0) + ' of ' + closed + ' closed complaints resolved' };
+    var f = checks(rv.fairness, CHECKS.fairness);
+    if (f.known >= 3) out.fairness = { v: 10 * f.yes / f.known, note: f.yes + ' of ' + f.known + ' checks passed' };
+    var lic = rv.licence || {}, comp = checks(rv.compliance, CHECKS.compliance), lv = null;
+    if (lic.status === 'licensed') lv = lic.verified ? 10 : 7; else if (lic.status === 'unlicensed') lv = 0;
+    if (lv != null || comp.known >= 2) {
+      var parts = [], ws = [];
+      if (lv != null) { parts.push(lv); ws.push(0.6); }
+      if (comp.known >= 2) { parts.push(10 * comp.yes / comp.known); ws.push(0.4); }
+      var s = 0, t = 0;
+      parts.forEach(function (p, i) { s += p * ws[i]; t += ws[i]; });
+      out.licence = { v: s / t, note: lic.status === 'licensed' ? (lic.verified ? 'Licence checked with the regulator' : 'Licence claimed, not yet checked') : lic.status === 'unlicensed' ? 'No licence found' : comp.yes + ' of ' + comp.known + ' compliance checks passed' };
+    }
+    var g = checks(rv.rg, CHECKS.rg);
+    if (g.known >= 3) out.rg = { v: 10 * g.yes / g.known, note: g.yes + ' of ' + g.known + ' tools available' };
+    var sp = rv.support || {}, sparts = [];
+    if (sp.live24 === 'yes') sparts.push(10); else if (sp.live24 === 'no') sparts.push(3);
+    if (sp.responseMins != null && sp.responseMins !== '' && isFinite(sp.responseMins)) sparts.push(lerp(Number(sp.responseMins), [[2, 10], [5, 9], [15, 7], [60, 5], [240, 3], [1440, 0]]));
+    if (sparts.length) out.support = { v: sparts.reduce(function (a, b) { return a + b; }, 0) / sparts.length, note: sp.responseMins ? 'First reply in about ' + fmtMin(Number(sp.responseMins)) : (sp.live24 === 'yes' ? '24/7 live chat' : 'No 24/7 live chat') };
+    var sc = checks(rv.security, CHECKS.security);
+    if (sc.known >= 2) out.security = { v: 10 * sc.yes / sc.known, note: sc.yes + ' of ' + sc.known + ' protections' };
+
+    var sum = 0, wsum = 0;
+    var cats = CATS.map(function (c) {
+      var x = out[c.id];
+      if (x) { sum += x.v * c.w; wsum += c.w; }
+      return { id: c.id, name: c.name, w: c.w, src: c.src, what: c.what, rated: !!x, v: x ? Math.round(x.v * 10) / 10 : null, note: x ? x.note : '' };
+    });
+    var total = wsum ? Math.round(sum / wsum * 10) : null;
+    var coverage = wsum / 100;
+    var shown = wsum >= 25 ? total : null;
+    // Under half the weight rated, a high number would overstate what we know: label it as early, not "Excellent".
+    var g = shown != null && coverage < 0.5 ? { label: 'Early score', tone: 'muted' } : grade(shown);
+    return { total: shown, coverage: coverage, provisional: coverage < 0.8, rated: cats.filter(function (c) { return c.rated; }).length, cats: cats, grade: g };
+  }
+  function fmtMin(m) {
+    if (m < 1) return 'under a minute';
+    if (m < 90) return Math.round(m) + ' min';
+    if (m < 48 * 60) return (Math.round(m / 6) / 10) + ' h';
+    return Math.round(m / 1440) + ' days';
+  }
+  return { CATS: CATS, CHECKS: CHECKS, compute: compute, grade: grade, fmtMin: fmtMin };
+})();
+    return this._scoreLib;
+  }
+  // ---- Streax Score: on-chain inputs from this page, review and player data from the server when it runs there ----
+  score(c, D) {
+    if (!c || c.dep < 1000) return null;
+    var maxDep = D.casinos[0].dep, maxW = 0;
+    D.casinos.forEach(function (x) { if (x.wal > maxW) maxW = x.wal; });
+    var lg = function (v) { return Math.log(Math.max(v, 1)) / Math.LN10; };
+    var vol = Math.max(0, Math.min(1, (lg(c.dep) - 4) / (lg(maxDep) - 4)));
+    var reach = Math.max(0, Math.min(1, lg(c.wal) / lg(maxW)));
+    var liq = Math.max(0, Math.min(1, (c.hot / c.dep) / 5));
+    var T = (this.trustSum && this.trustSum[c.slug]) || {};
+    var r = this.scoreLib().compute({ onchain: { vol01: vol, reach01: reach, cover: c.hot / c.dep }, review: T.review, complaints: T.complaints, payouts: T.payouts });
+    return { total: r.total, vol: vol * 10, reach: reach * 10, liq: liq * 10, cover: c.hot / c.dep, streax: r };
+  }
+  trustInit() {
+    var self = this;
+    if (!(this.props && this.props.$local) || typeof fetch !== 'function' || !(this.D && this.D.casinos)) return;
+    fetch('/api/trust/summary', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      if (!j) return;
+      var m = {};
+      Object.keys(j.reviews || {}).forEach(function (k) { (m[k] = m[k] || {}).review = j.reviews[k]; });
+      Object.keys(j.complaints || {}).forEach(function (k) { (m[k] = m[k] || {}).complaints = j.complaints[k]; });
+      Object.keys(j.payouts || {}).forEach(function (k) { (m[k] = m[k] || {}).payouts = j.payouts[k]; });
+      self.trustSum = m;
+      self.setState({ trustTick: Date.now() });
+    }).catch(function () {});
+  }
+
+
+  query() {
+    var q = {};
+    try { location.search.slice(1).split('&').forEach(function (kv) { if (!kv) return; var i = kv.indexOf('='); try { q[decodeURIComponent(i < 0 ? kv : kv.slice(0, i))] = i < 0 ? '' : decodeURIComponent(kv.slice(i + 1).replace(/\+/g, ' ')); } catch (e) {} }); } catch (e) {}
+    return q;
+  }
+  live() { return !!(this.props && this.props.$local); }
+  nextUrl(fallback) {
+    var n = this.q.next || '';
+    return /^\/[A-Za-z0-9._~\/-]*(\?[A-Za-z0-9._~=&%-]*)?$/.test(n) && n.indexOf('//') !== 0 ? n : fallback;
+  }
+  field(id, fallback) { try { var el = document.getElementById(id); if (el && typeof el.value === 'string') return el.value; } catch (e) {} return fallback || ''; }
+  strength(pw) {
+    var s = 0;
+    if (pw.length >= 8) s++;
+    if (pw.length >= 12) s++;
+    if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++;
+    if (/\d/.test(pw)) s++;
+    if (/[^A-Za-z0-9]/.test(pw)) s++;
+    if (!pw) return { w: '0%', color: '#ECECEF', label: '8 characters or more' };
+    if (pw.length < 8) return { w: '20%', color: '#DC2626', label: 'Too short' };
+    if (s <= 2) return { w: '45%', color: '#B45309', label: 'Okay. Longer is stronger.' };
+    if (s <= 3) return { w: '72%', color: '#6D28D9', label: 'Good password' };
+    return { w: '100%', color: '#6D28D9', label: 'Strong password' };
+  }
+  errNotice(code) {
+    return {
+      google_off: 'Google sign-in is not switched on yet. Use your email and password.',
+      google_cancel: 'Google sign-in was cancelled.',
+      google_state: 'Google sign-in did not complete. Please try again.',
+      google_failed: 'Google sign-in did not complete. Please try again.',
+      google_confirm: 'Tick the 18+ box, then continue with Google to create your account.',
+      google_unverified: 'Your Google email is not verified. Sign up with email and a password instead.',
+      failed: 'Something went wrong. Please try again.',
+      busy: 'Too many tries. Wait a few minutes and try again.',
+      off: 'Accounts are off on this server for now.'
+    }[code] || '';
+  }
+  fieldVals(names, st) {
+    var bd = {}, inv = {};
+    names.forEach(function (n) { var bad = st.field === n; bd[n] = bad ? '#DC2626' : '#E2E2E6'; inv[n] = bad ? 'true' : 'false'; });
+    return { bd: bd, inv: inv };
+  }
+
+  constructor(props) {
+    super(props);
+    this.D = {"idx":[["Stake.com","stakecom","$31.77M",1,"stake.com"],["Duel","duel","$16.56M",2,"duel.com"],["Roobet","roobet","$14.18M",3,"roobet.com"],["Rainbet","rainbet","$7.95M",4,"rainbet.com"],["Shuffle","shuffle","$5.71M",5,"shuffle.com"],["Gamdom","gamdom","$5.58M",6,"gamdom.com"],["1win","1win","$1.77M",7,""],["Qzino","qzino","$1.42M",8,""],["Thrill","thrill","$1.13M",9,"thrill.com"],["Toshibet","toshibet","$1.10M",10,""],["StakeUS","stakeus","$1.07M",11,"stake.us"],["Degen","degen","$1.02M",12,""],["Yeet","yeet","$937.61K",13,"yeet.com"],["Duelbits","duelbits","$810.77K",14,"duelbits.com"],["Winna","winna","$808.12K",15,"winna.com"],["Sportsbet.io","sportsbetio","$740.94K",16,"sportsbet.io"],["BC.Game","bcgame","$647.07K",17,"bc.game"],["Razed","razed","$623.24K",18,"razed.com"],["MetaWin","metawin","$545.54K",19,"metawin.com"],["BetFury","betfury","$440.60K",20,"betfury.com"],["500 Casino","500-casino","$369.58K",21,"500.casino"],["Spartans","spartans","$236.08K",22,""],["Dicey","dicey","$235.80K",23,""],["Gamba","gamba","$212.11K",24,"gamba.com"],["Bitcasino","bitcasino","$184.57K",25,"bitcasino.io"],["Solcasino","solcasino","$146.60K",26,"solcasino.io"],["Whale.io","whaleio","$122.94K",27,"whale.io"],["GOATED","goated","$108.87K",28,"goated.com"],["CoinCasino","coincasino","$102.73K",29,"coincasino.com"],["Lucky.fun","luckyfun","$79.10K",30,""],["Shock","shock","$55.94K",31,""],["Flush","flush","$53.23K",32,""],["Rollbit","rollbit","$48.69K",33,"rollbit.com"],["Acebet","acebet","$37.55K",34,""],["Bluff","bluff","$27.92K",35,""],["Chips.gg","chipsgg","$13.10K",36,"chips.gg"],["Cybet","cybet","$7.19K",37,""],["Wager.com","wagercom","$4.67K",38,""],["JackpotBet","jackpotbet","$1.47K",39,""],["Betstrike","betstrike","$10.01",40,""],["BlockBet","blockbet","$0.3244",41,""],["Cloudbet","cloudbet","$0.0907",42,"cloudbet.com"],["Moon Roll","moon-roll","$0.0011",43,""]],"capturedMs":1791795228000,"creatorsMs":1791795900000};
+    this.q = this.query();
+    this.state = { gq: '', toast: '', modal: '', email: '', acct: null, loadErr: '', wq: '', wqFocus: false, nameDraft: null, mkDraft: null, pwCur: '', pwNew: '', delOpen: false, delText: '', delPw: '', csvCasino: '', tgWait: false };
+  }
+  componentDidMount() {
+    if (this.live()) this.load();
+    if (this.q.welcome) this.showToast('Welcome to Streax. Your sign-up points are in.');
+    else if (this.q.verify === 'ok') this.showToast('Email confirmed. 50 points added.');
+    else if (this.q.verify === 'expired') this.showToast('That link has expired. Send a new one from this page.');
+  }
+  componentWillUnmount() { clearInterval(this.tgPoll); clearTimeout(this.toastTimer); clearTimeout(this.blurTimer); }
+  load() {
+    var self = this;
+    return fetch('/api/account', { cache: 'no-store', credentials: 'same-origin' }).then(function (r) {
+      if (r.status === 401) { self.saveMe(null); location.href = 'Login.dc.html?next=' + encodeURIComponent('/Account.dc.html'); return null; }
+      return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'Could not load your account'); return j; });
+    }).then(function (j) { if (j) self.apply(j); }).catch(function (e) { self.setState({ loadErr: e.message }); });
+  }
+  apply(j) {
+    this.saveMe({ name: j.user.name, email: j.user.email, initials: j.user.initials, points: j.points, level: j.level.name, levelId: j.level.id, verified: j.user.verified,
+      avatar: j.user.avatar || '', watchlist: j.watchlist.map(function (w) { return w.slug; }) });
+    this.setState({ acct: j, loadErr: '' });
+  }
+  act(path, body, okMsg) {
+    var self = this;
+    if (!this.live()) { this.showToast('Preview: this works on your Streax server'); return Promise.resolve(null); }
+    return this.apiPost(path, body).then(function (j) { if (j && j.user && j.points != null) self.apply(j); if (okMsg) self.showToast(okMsg); return j; })
+      .catch(function (e) { if (e.status === 401) { location.href = 'Login.dc.html?next=' + encodeURIComponent('/Account.dc.html'); return null; } self.showToast(e.message); return null; });
+  }
+  sample() { return this._sample || (this._sample = {"sample": true, "user": {"name": "Sam Carter", "email": "sam@example.com", "initials": "SC", "verified": true, "google": true, "password": false, "avatar": "", "created": 1791043200000, "marketing": true}, "points": 400, "level": {"id": "member", "name": "Member", "min": 0, "watch": 10, "alertMin": 50000}, "next": {"id": "silver", "name": "Silver", "min": 500, "need": 100}, "levels": [{"id": "member", "name": "Member", "min": 0, "perks": ["Watchlist of 10 casinos", "Whale alerts from $50K", "Full 7, 30 and 90-day history", "CSV downloads", "Member bonus codes"], "reached": true}, {"id": "silver", "name": "Silver", "min": 500, "perks": ["Watchlist of 25 casinos", "Whale alerts from $25K", "Silver bonus codes"], "reached": false}, {"id": "gold", "name": "Gold", "min": 1500, "perks": ["Watchlist of 100 casinos", "Whale alerts from $10K", "Gold bonus codes"], "reached": false}], "history": [{"delta": 250, "label": "Friend joined", "ts": 1791907200000}, {"delta": 50, "label": "Watched 3 casinos", "ts": 1791302400000}, {"delta": 50, "label": "Confirmed email", "ts": 1791043200000}, {"delta": 100, "label": "Joined Streax", "ts": 1791043200000}], "ways": [{"label": "Confirm your email", "pts": 50, "done": true}, {"label": "Connect Telegram alerts", "pts": 50, "done": false}, {"label": "Watch 3 casinos", "pts": 50, "done": true}, {"label": "Each friend who joins", "pts": 250, "done": false, "repeat": true}], "referral": {"code": "K7QM4XPR", "url": "https://streax.onrender.com/r/K7QM4XPR", "each": 250, "friendGets": 100, "joined": 2, "credited": 1, "points": 250}, "watchlist": [{"slug": "stakecom", "name": "Stake.com", "domain": "stake.com", "tracked": true}, {"slug": "roobet", "name": "Roobet", "domain": "roobet.com", "tracked": true}, {"slug": "shuffle", "name": "Shuffle", "domain": "shuffle.com", "tracked": true}, {"slug": "thrill", "name": "Thrill", "domain": "thrill.com", "tracked": false}], "watchLimit": 10, "alerts": {"min": 50000, "email": true, "telegram": true, "options": [{"v": 10000, "label": "$10K+", "locked": true, "needs": "Gold"}, {"v": 25000, "label": "$25K+", "locked": true, "needs": "Silver"}, {"v": 50000, "label": "$50K+", "locked": false, "needs": "Member"}, {"v": 100000, "label": "$100K+", "locked": false, "needs": "Member"}, {"v": 250000, "label": "$250K+", "locked": false, "needs": "Member"}, {"v": 1000000, "label": "$1M+", "locked": false, "needs": "Member"}], "emailReady": true, "emailVerified": true, "tgReady": true, "tgLinked": false, "tgName": ""}, "codes": [{"id": 1, "casino": "", "casinoName": "Lumora", "domain": "", "title": "150% first deposit match up to $500", "terms": "Sample offer for the preview. Min deposit $20, 35x wagering.", "url": "", "level": "Member", "locked": false, "revealed": true, "code": "LUMI-STREAX"}, {"id": 2, "casino": "", "casinoName": "Vaultbet", "domain": "", "title": "50 free spins, no deposit needed", "terms": "Sample offer for the preview. Max cashout $100.", "url": "", "level": "Member", "locked": false, "revealed": false, "code": ""}, {"id": 3, "casino": "", "casinoName": "Orbitplay", "domain": "", "title": "10% weekly cashback on net losses", "terms": "Sample offer for the preview. Paid every Monday.", "url": "", "level": "Silver", "locked": true, "revealed": false, "code": ""}], "tracked": ["bcgame", "betfury", "bitcasino", "chipsgg", "cloudbet", "duel", "duelbits", "gamdom", "goated", "rainbet", "rollbit", "roobet", "shuffle", "spartans", "stakecom", "yeet"]}); }
+  domainOf(slug) { var d = ''; (this.D.idx || []).forEach(function (c) { if (c[1] === slug) d = c[4] || ''; }); return d; }
+  nameOf(slug) { var n = slug; (this.D.idx || []).forEach(function (c) { if (c[1] === slug) n = c[0]; }); return n; }
+  levelColors(id) { return id === 'gold' ? { fg: '#A16207', bg: 'rgba(161,98,7,0.1)' } : id === 'silver' ? { fg: '#53725F', bg: 'rgba(83,114,95,0.12)' } : { fg: '#5B21B6', bg: 'rgba(124,58,237,0.1)' }; }
+  sw(on, disabled, toggle) { return { on: on ? 'true' : 'false', disabled: !!disabled, bg: disabled ? '#ECECEF' : on ? '#6D28D9' : '#C5C5CB', x: on ? '21px' : '3px', toggle: function () { if (!disabled) toggle(); } }; }
+  renderVals() {
+    var self = this, st = this.state, live = this.live();
+    var v = this.shellVals();
+    var A = live ? st.acct : this.sample();
+    var notice = !live ? 'Preview with sample data. Members see their own account here when Streax runs on its server.' : st.loadErr;
+    var out = { hasNotice: !!notice, notice: notice || '', loading: live && !A && !st.loadErr, ready: !!A };
+    if (!A) return Object.assign(v, out);
+    var fmt = function (n) { return Number(n || 0).toLocaleString('en-US'); };
+    var u = A.user, lvc = this.levelColors(A.level.id), tracked = A.tracked || [];
+    var prog;
+    if (A.next) {
+      var span = A.next.min - A.level.min, pct = Math.max(3, Math.min(100, (A.points - A.level.min) / span * 100));
+      prog = { w: pct.toFixed(1) + '%', now: Math.round(pct), label: fmt(A.next.need) + ' points to ' + A.next.name, right: fmt(A.points) + ' / ' + fmt(A.next.min) };
+    } else prog = { w: '100%', now: 100, label: 'Top level reached. Thank you for being an early member.', right: fmt(A.points) };
+    var levels = A.levels.map(function (l) {
+      var c = self.levelColors(l.id), cur = l.id === A.level.id;
+      return { name: l.name, min: l.min ? fmt(l.min) + ' pts' : 'Free', perks: l.perks, fg: c.fg, bd: cur ? c.fg : '#ECECEF', bg: cur ? c.bg : 'transparent',
+        state: cur ? 'Your level' : l.reached ? 'Unlocked' : fmt(l.min - A.points) + ' points to go', stateFg: cur || l.reached ? c.fg : '#6B6D75' };
+    });
+    var ways = A.ways.map(function (w) {
+      return { label: w.label, pts: '+' + w.pts + (w.repeat ? ' each' : ''), done: !!w.done, ring: w.done ? '#6D28D9' : '#E2E2E6', dot: w.done ? '#6D28D9' : 'transparent',
+        fg: w.done ? '#6B6D75' : '#0B0C0B', ptsFg: w.done ? '#6B6D75' : '#6D28D9' };
+    });
+    var R = A.referral, shareText = 'I follow crypto casino money moves on Streax. Join free with my invite:';
+    var ref = { url: R.url, each: R.each, friendGets: R.friendGets, copy: function () { self.copy(R.url, 'Invite link copied'); },
+      x: 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareText) + '&url=' + encodeURIComponent(R.url),
+      tg: 'https://t.me/share/url?url=' + encodeURIComponent(R.url) + '&text=' + encodeURIComponent(shareText),
+      wa: 'https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + R.url),
+      stats: [{ v: fmt(R.joined), label: 'Friends joined' }, { v: fmt(R.credited), label: 'Confirmed' }, { v: fmt(R.points), label: 'Points earned' }] };
+    var watched = A.watchlist.map(function (w) { return w.slug; });
+    var wl = { count: A.watchlist.length + ' of ' + A.watchLimit, empty: A.watchlist.length === 0,
+      items: A.watchlist.map(function (w) {
+        var d = w.domain || self.domainOf(w.slug);
+        return { name: w.name, href: 'Casino.dc.html?c=' + w.slug, ini: self.ini(w.name), tint: self.tint(w.name), logo: self.logo(d || w.slug, 64),
+          tag: w.tracked ? 'Whale alerts on' : 'Watch only, no wallet tracking yet', tagFg: w.tracked ? '#6D28D9' : '#6B6D75', removeAria: 'Remove ' + w.name + ' from your watchlist',
+          remove: function () { self.act('/api/account/watch', { slug: w.slug, on: false }, w.name + ' removed from your watchlist'); } };
+      }) };
+    var q = (st.wq || '').trim().toLowerCase();
+    var res = q ? (this.D.idx || []).filter(function (c) { return c[0].toLowerCase().indexOf(q) !== -1 && watched.indexOf(c[1]) === -1; }).slice(0, 6).map(function (c) {
+      var t = tracked.indexOf(c[1]) !== -1;
+      return { name: c[0], ini: self.ini(c[0]), tint: self.tint(c[0]), logo: self.logo(c[4] || c[1], 64), tag: t ? 'Alerts available' : 'Watch only', tagFg: t ? '#6D28D9' : '#6B6D75',
+        add: function () { self.setState({ wq: '', wqFocus: false }); self.act('/api/account/watch', { slug: c[1], on: true }, c[0] + ' added to your watchlist'); } };
+    }) : [];
+    var AL = A.alerts;
+    var al = {
+      options: AL.options.map(function (o) {
+        var on = o.v === AL.min, plain = o.label.replace('+', '');
+        return { label: o.label, on: on ? 'true' : 'false', locked: !!o.locked, title: o.locked ? 'Unlocks at ' + o.needs : '',
+          bd: on ? '#6D28D9' : '#E2E2E6', bg: on ? 'rgba(124,58,237,0.1)' : 'transparent', fg: o.locked ? '#C5C5CB' : on ? '#5B21B6' : '#2A2C31', fw: on ? '600' : '500',
+          pick: function () { if (o.locked) { self.showToast('Alerts from ' + plain + ' unlock at ' + o.needs); return; } if (!on) self.act('/api/account/alerts', { min: o.v }, 'Alerts now start at ' + plain); } };
+      }),
+      email: this.sw(AL.email && AL.emailReady && AL.emailVerified, !AL.emailReady || !AL.emailVerified, function () { self.act('/api/account/alerts', { email: !AL.email }, AL.email ? 'Email alerts off' : 'Email alerts on'); }),
+      emailSub: !AL.emailReady ? 'Email alerts are not available yet' : !AL.emailVerified ? 'Confirm your email to turn these on' : 'One digest per check, sent to ' + u.email,
+      tgSub: !AL.tgReady ? 'Telegram alerts are not available yet' : AL.tgLinked ? 'Connected' + (AL.tgName ? ' as ' + AL.tgName : '') : st.tgWait ? 'Press Start in Telegram, then come back here' : 'Instant alerts in a private chat',
+      tgLinked: !!(AL.tgReady && AL.tgLinked), tgCanConnect: !!(AL.tgReady && !AL.tgLinked),
+      tg: this.sw(AL.telegram && AL.tgLinked, false, function () { self.act('/api/account/alerts', { telegram: !AL.telegram }, AL.telegram ? 'Telegram alerts paused' : 'Telegram alerts on'); }),
+      connectLabel: st.tgWait ? 'Open Telegram again' : 'Connect',
+      connect: function () {
+        if (!live) { self.showToast('Preview: Telegram connects on your Streax server'); return; }
+        var w = null;
+        try { w = window.open('', '_blank'); } catch (e) { w = null; }
+        self.apiPost('/api/account/telegram', {}).then(function (j) {
+          if (w) { try { w.opener = null; w.location.href = j.url; } catch (e) { location.href = j.url; } } else location.href = j.url;
+          self.setState({ tgWait: true });
+          clearInterval(self.tgPoll);
+          var n = 0;
+          self.tgPoll = setInterval(function () {
+            n++;
+            self.load().then(function () {
+              var a = self.state.acct;
+              if (a && a.alerts.tgLinked) { clearInterval(self.tgPoll); self.setState({ tgWait: false }); self.showToast('Telegram connected. 50 points added.'); }
+              else if (n > 45) clearInterval(self.tgPoll);
+            });
+          }, 4000);
+        }).catch(function (e) { if (w) { try { w.close(); } catch (x) {} } self.showToast(e.message); });
+      },
+      disconnect: function () { self.act('/api/account/telegram-off', {}, 'Telegram disconnected'); },
+      note: tracked.length ? 'Alerts cover the ' + tracked.length + ' casinos with on-chain wallet tracking today. More are added as wallets are found.' : 'Alerts start once the on-chain monitor tracks casino wallets.'
+    };
+    var lvId = { Member: 'member', Silver: 'silver', Gold: 'gold' };
+    var codes = A.codes.map(function (c) {
+      var lc = self.levelColors(lvId[c.level] || 'member'), d = c.domain || self.domainOf(c.casino || '');
+      return { casinoName: c.casinoName, ini: self.ini(c.casinoName), tint: self.tint(c.casinoName), logo: d ? self.logo(d, 64) : '', level: c.level, lvFg: lc.fg, lvBg: lc.bg,
+        title: c.title, terms: c.terms || '', locked: !!c.locked, showReveal: !c.locked && !c.revealed, showCode: !c.locked && !!c.revealed, code: c.code || '', hasUrl: !!c.url, url: c.url || '',
+        reveal: function () {
+          if (!live) { self.showToast('Preview: codes reveal on your Streax server'); return; }
+          self.apiPost('/api/account/reveal', { id: c.id }).then(function (j) { c.revealed = true; c.code = j.code; c.url = j.url || c.url; self.setState({ acct: st.acct }); }).catch(function (e) { self.showToast(e.message); });
+        },
+        copy: function () { self.copy(c.code, 'Code copied'); } };
+    });
+    var dlGo = function (url) { return function () { if (!live) { self.showToast('Preview: downloads work on your Streax server'); return; } location.href = url; }; };
+    var csvList = (tracked.length ? tracked.slice() : ['stakecom']).sort(function (a, b) { var wa = watched.indexOf(a) !== -1 ? 0 : 1, wb = watched.indexOf(b) !== -1 ? 0 : 1; return wa - wb || self.nameOf(a).localeCompare(self.nameOf(b)); });
+    var csvCasino = csvList.indexOf(st.csvCasino) !== -1 ? st.csvCasino : csvList[0];
+    var set = {
+      name: st.nameDraft != null ? st.nameDraft : u.name, onName: function (e) { self.setState({ nameDraft: e.target.value }); },
+      marketing: st.mkDraft != null ? st.mkDraft : !!u.marketing, toggleMarketing: function (e) { self.setState({ mkDraft: !!e.target.checked }); },
+      saveProfile: function () {
+        var name = self.field('ac-name', st.nameDraft != null ? st.nameDraft : u.name).trim();
+        self.act('/api/account/profile', { name: name, marketing: st.mkDraft != null ? st.mkDraft : !!u.marketing }, 'Profile saved').then(function (j) { if (j) self.setState({ nameDraft: null, mkDraft: null }); });
+      },
+      hasPw: !!u.password, pwTitle: u.password ? 'Change password' : 'Set a password', pwBtn: u.password ? 'Change password' : 'Set password',
+      hasPwNote: !u.password, pwNote: 'You sign in with Google. A password lets you log in with your email too.',
+      cur: st.pwCur, onCur: function (e) { self.setState({ pwCur: e.target.value }); }, nw: st.pwNew, onNew: function (e) { self.setState({ pwNew: e.target.value }); },
+      savePw: function () {
+        var cur = self.field('ac-cur', st.pwCur), nw = self.field('ac-new', st.pwNew);
+        if (nw.length < 8) { self.showToast('Use at least 8 characters for your new password'); return; }
+        self.act('/api/account/password', { current: cur, password: nw }, 'Password saved. Other devices were logged out.').then(function (j) { if (j) self.setState({ pwCur: '', pwNew: '' }); });
+      },
+      logout: function () {
+        if (!live) { self.showToast('Preview: log out works on your Streax server'); return; }
+        var done = function () { self.saveMe(null); location.href = 'Home.dc.html'; };
+        self.apiPost('/api/auth/logout', {}).then(done, done);
+      },
+      logoutAll: function () { self.act('/api/account/logout-all', {}, 'Other devices are logged out'); },
+      delOpen: !!st.delOpen, delClosed: !st.delOpen, openDel: function () { self.setState({ delOpen: true }); }, closeDel: function () { self.setState({ delOpen: false, delText: '', delPw: '' }); },
+      delText: st.delText, onDelText: function (e) { self.setState({ delText: e.target.value }); }, delPw: st.delPw, onDelPw: function (e) { self.setState({ delPw: e.target.value }); },
+      doDelete: function () {
+        if (!live) { self.showToast('Preview: this works on your Streax server'); return; }
+        self.apiPost('/api/account/delete', { confirm: self.field('ac-deltext', st.delText).trim(), password: self.field('ac-delpw', st.delPw) })
+          .then(function () { self.saveMe(null); location.href = 'Home.dc.html'; }).catch(function (e) { self.showToast(e.message); });
+      }
+    };
+    return Object.assign(v, out, {
+      u: u, lv: { name: A.level.id === 'member' ? 'Member' : A.level.name + ' member', fg: lvc.fg, bg: lvc.bg }, pointsLabel: fmt(A.points),
+      ver: u.verified ? { label: 'Email confirmed', fg: '#6D28D9', bg: 'rgba(14,124,102,0.08)' } : { label: 'Email not confirmed', fg: '#B45309', bg: 'rgba(180,83,9,0.08)' },
+      showVerify: !u.verified, resend: function () { self.act('/api/account/resend', {}, 'Confirmation email sent. Check your inbox.'); },
+      prog: prog, levels: levels, ways: ways, ref: ref, wl: wl,
+      wq: st.wq, onWq: function (e) { self.setState({ wq: e.target.value }); },
+      wqOn: function () { clearTimeout(self.blurTimer); self.setState({ wqFocus: true }); },
+      wqOff: function () { self.blurTimer = setTimeout(function () { self.setState({ wqFocus: false }); }, 200); },
+      wqOpen: !!st.wqFocus && q.length > 0, wqResults: res, wqNone: q.length > 0 && res.length === 0,
+      al: al, codes: codes, codesEmpty: codes.length === 0, codesCount: codes.length + (codes.length === 1 ? ' offer' : ' offers'),
+      dl: [
+        { title: 'Flow leaderboard, last 30 days', sub: 'Deposits, withdrawals, net flow and balance per casino', go: dlGo('/api/onchain/export/flows.csv?window=30d') },
+        { title: 'Flow leaderboard, last 7 days', sub: 'The same columns for the last week', go: dlGo('/api/onchain/export/flows.csv?window=7d') },
+        { title: 'Whale transfers, last 30 days', sub: 'Every move of $10K or more, with explorer links', go: dlGo('/api/onchain/export/whales.csv?days=30&min=10000') }
+      ],
+      csvOptions: csvList.map(function (s) { return { v: s, label: self.nameOf(s), sel: s === csvCasino }; }),
+      onCsvCasino: function (e) { self.setState({ csvCasino: e.target.value }); },
+      csvCasinoGo: dlGo('/api/onchain/export/casino/' + encodeURIComponent(csvCasino) + '.csv?days=90'),
+      history: A.history.map(function (h) { return { label: h.label, delta: fmt(h.delta), when: new Date(h.ts).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) }; }),
+      historyEmpty: A.history.length === 0,
+      set: set
+    });
+  }
+
+}
+</script>
+</body>
+</html>

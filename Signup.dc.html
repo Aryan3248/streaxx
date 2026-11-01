@@ -15,18 +15,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{margin:0;background:#F4F4F6}
+body{margin:0;background:#F6F6F7}
 a{color:inherit;text-decoration:none}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #6D28D9;outline-offset:2px}
-input::placeholder,textarea::placeholder{color:#7A7A8C}
+input::placeholder,textarea::placeholder{color:#73757D}
 .hv{transition:background-color .15s ease,border-color .15s ease,color .15s ease}
-.hv:hover{background-color:#F3EEFF !important}
+.hv:hover{background-color:#F5F3FF !important}
 .nav{transition:background-color .15s ease,color .15s ease}
-.nav:hover{background-color:#F3EEFF !important;color:#16141F !important}
+.nav:hover{background-color:#F5F3FF !important;color:#0B0C0B !important}
 .rh{transition:background-color .15s ease}
-.rh:hover{background-color:rgba(109,40,217,0.035) !important}
+.rh:hover{background-color:rgba(124,58,237,0.035) !important}
 .lift{transition:transform .18s ease,border-color .18s ease}
-.lift:hover{transform:translateY(-2px);border-color:#BFD0F5 !important}
+.lift:hover{transform:translateY(-2px);border-color:#A9D0B9 !important}
 .pb{transition:filter .15s ease,transform .15s ease}
 .pb:hover{filter:brightness(1.08)}
 .pb:active{transform:translateY(1px)}
@@ -40,8 +40,8 @@ input::placeholder,textarea::placeholder{color:#7A7A8C}
 .fu{animation:fadeUp .22s ease-out}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .fi{animation:fadeIn .18s ease-out}
-@keyframes nA{from{background-color:rgba(109,40,217,0.12)}to{background-color:rgba(109,40,217,0)}}
-@keyframes nB{from{background-color:rgba(109,40,217,0.12)}to{background-color:rgba(109,40,217,0)}}
+@keyframes nA{from{background-color:rgba(124,58,237,0.12)}to{background-color:rgba(124,58,237,0)}}
+@keyframes nB{from{background-color:rgba(124,58,237,0.12)}to{background-color:rgba(124,58,237,0)}}
 .nA{animation:nA 1.6s ease-out}
 .nB{animation:nB 1.6s ease-out}
 input[type=range]{accent-color:#6D28D9}
@@ -50,7 +50,7 @@ input[type=range]{accent-color:#6D28D9}
 .sx-card{background:#6D28D9 url(assets/streax-card.webp) center/cover no-repeat}
 .sx-wash{background:#FFFFFF url(assets/streax-wash.webp) center/cover no-repeat}
 .glass:hover{background-color:rgba(255,255,255,0.3) !important}
-.wbtn:hover{background-color:#F5F0FF !important}
+.wbtn:hover{background-color:#F5F3FF !important}
 @media (max-width: 1080px){
 [data-m~="side"]{flex-basis:100% !important;max-width:none !important;min-width:0;width:100%;box-sizing:border-box;padding:12px 16px 0 !important}
 [data-m~="main"]{min-width:0}
@@ -59,7 +59,7 @@ input[type=range]{accent-color:#6D28D9}
 [data-m~="snav"]{flex-direction:row !important;overflow-x:auto;gap:6px !important;scrollbar-width:none;padding:0 0 2px}
 [data-m~="snav"]::-webkit-scrollbar{display:none}
 [data-m~="snav"] > a{flex:0 0 auto;min-height:38px !important;padding:0 12px !important;gap:8px !important;font-size:13.5px !important;white-space:nowrap}
-[data-m~="snav"] > a:not([aria-current]){background-color:#F5F5F8}
+[data-m~="snav"] > a:not([aria-current]){background-color:#F5F5F6}
 [data-m~="slab"],[data-m~="mhide"]{display:none !important}
 [data-m~="main"]{padding:0 16px !important}
 [data-m~="srchw"]{flex:1 1 0;min-width:0}
@@ -187,10 +187,10 @@ div:has(> [data-m~="csel"]){flex:1 1 auto;min-width:0}
 }
 </style>
 </helmet>
-<div data-m="authroot" data-theme="light" style="min-height: 100vh; box-sizing: border-box; background: radial-gradient(1100px 520px at 80% -8%, rgba(110,149,255,0.20), transparent 62%), radial-gradient(900px 480px at -5% 0%, rgba(109,40,217,0.08), transparent 60%), #F4F4F6; color: #16141F; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; padding: 20px; display: flex; justify-content: center">
+<div data-m="authroot" data-theme="light" style="min-height: 100vh; box-sizing: border-box; background: radial-gradient(1100px 520px at 80% -8%, rgba(112,217,154,0.20), transparent 62%), radial-gradient(900px 480px at -5% 0%, rgba(124,58,237,0.08), transparent 60%), #F6F6F7; color: #0B0C0B; font-family: 'Geist', system-ui, sans-serif; font-size: 15px; line-height: 1.45; padding: 20px; display: flex; justify-content: center">
 <div data-m="auth" style="width: 100%; max-width: 1220px; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 20px; align-items: stretch">
-<aside data-m="authside" class="sx-hero" aria-label="Why join Streax" style="position: relative; overflow: hidden; border-radius: 28px; padding: 34px 36px; display: flex; flex-direction: column; gap: 26px; color: #FFFFFF; box-shadow: 0 30px 80px -40px rgba(109,40,217,0.8); min-height: calc(100vh - 40px); box-sizing: border-box">
-<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,26,100,0.5) 0%, rgba(14,26,100,0.24) 45%, rgba(14,26,100,0) 78%); pointer-events: none"></div>
+<aside data-m="authside" class="sx-hero" aria-label="Why join Streax" style="position: relative; overflow: hidden; border-radius: 28px; padding: 34px 36px; display: flex; flex-direction: column; gap: 26px; color: #FFFFFF; box-shadow: 0 30px 80px -40px rgba(124,58,237,0.8); min-height: calc(100vh - 40px); box-sizing: border-box">
+<div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(76,85,80,0.5) 0%, rgba(76,85,80,0.24) 45%, rgba(76,85,80,0) 78%); pointer-events: none"></div>
 <a href="Home.dc.html" aria-label="Streax home" style="position: relative; display: inline-flex; align-items: center; gap: 10px; color: #FFFFFF; align-self: flex-start"><img src="assets/streax-logo.webp" alt="" width="36" height="36" style="display: block; width: 36px; height: 36px; border-radius: 11px; box-shadow: 0 10px 24px -10px rgba(0,0,0,0.5)"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 30px; line-height: 1">Streax</span></a>
 <div style="position: relative; display: flex; flex-direction: column; gap: 14px; margin-top: auto">
 <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.86)">{{side.eyebrow}}</span>
@@ -212,40 +212,40 @@ div:has(> [data-m~="csel"]){flex:1 1 auto;min-width:0}
 </aside>
 <main data-m="authmain" style="display: flex; flex-direction: column; gap: 16px; min-width: 0">
 <div data-m="authtop" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
-<a href="Home.dc.html" class="ul" style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; font-size: 14px; color: #6B6B78"><span data-m="mhide" style="display: inline-flex; align-items: center; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Back to Streax</span><span data-m="authlogo" style="display: none; align-items: center; gap: 9px; color: #16141F"><img src="assets/streax-logo.webp" alt="" width="30" height="30" style="display: block; width: 30px; height: 30px; border-radius: 9px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; line-height: 1">Streax</span></span></a>
-<div style="display: flex; align-items: center; gap: 10px"><span data-m="mhide" style="font-size: 14px; color: #6B6B78">{{alt.text}}</span><a href="{{alt.href}}" class="hv" style="min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 14px; border: 1px solid #DCDCE4; background: #FFFFFF; color: #2E2D3A; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center">{{alt.btn}}</a><a href="night/Signup.dc.html" class="hv" data-theme-toggle="1" aria-label="Switch to night mode" title="Switch to night mode" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #E2E2E8; background: #FFFFFF; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E2D3A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"></path></svg></a></div>
+<a href="Home.dc.html" class="ul" style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; font-size: 14px; color: #5E6068"><span data-m="mhide" style="display: inline-flex; align-items: center; gap: 8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>Back to Streax</span><span data-m="authlogo" style="display: none; align-items: center; gap: 9px; color: #0B0C0B"><img src="assets/streax-logo.webp" alt="" width="30" height="30" style="display: block; width: 30px; height: 30px; border-radius: 9px"><span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; line-height: 1">Streax</span></span></a>
+<div style="display: flex; align-items: center; gap: 10px"><span data-m="mhide" style="font-size: 14px; color: #5E6068">{{alt.text}}</span><a href="{{alt.href}}" class="hv" style="min-height: 44px; box-sizing: border-box; padding: 0 16px; border-radius: 14px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #2A2C31; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center">{{alt.btn}}</a><a href="night/Signup.dc.html" class="hv" data-theme-toggle="1" aria-label="Switch to night mode" title="Switch to night mode" style="width: 44px; height: 44px; border-radius: 14px; border: 1px solid #E2E2E6; background: #FFFFFF; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; box-sizing: border-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A2C31" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"></path></svg></a></div>
 </div>
 <div data-m="authfill" style="flex: 1 1 auto; min-height: 640px; display: flex; align-items: center; justify-content: center">
-<section data-m="authcard" aria-labelledby="card-title" style="width: 100%; max-width: 470px; box-sizing: border-box; border-radius: 24px; border: 1px solid #E8E8EE; background: #FFFFFF; box-shadow: 0 1px 2px rgba(20,20,40,0.04), 0 14px 40px -28px rgba(20,20,40,0.10); padding: 34px; display: flex; flex-direction: column; gap: 18px">
-<div style="display: flex; flex-direction: column; gap: 6px"><h2 id="card-title" style="margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.02em">{{card.title}}</h2><span style="font-size: 14.5px; line-height: 1.5; color: #6B6B78">{{card.sub}}</span></div>
-<sc-if value="{{hasNotice}}" hint-placeholder-val="{{ false }}"><div role="note" style="border-radius: 12px; border: 1px solid rgba(109,40,217,0.25); background: rgba(109,40,217,0.06); color: #55556A; padding: 11px 13px; font-size: 13.5px; line-height: 1.5">{{notice}}</div></sc-if>
-<button type="button" onClick="{{google}}" class="hv" style="width: 100%; min-height: 50px; border-radius: 12px; border: 1px solid #DCDCE4; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"></path><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"></path><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"></path><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"></path></svg>{{googleLabel}}</button>
-<div style="display: flex; align-items: center; gap: 12px; font-size: 12.5px; color: #74748A"><span style="flex: 1 1 auto; height: 1px; background: #EDEDF2"></span>or with email<span style="flex: 1 1 auto; height: 1px; background: #EDEDF2"></span></div>
+<section data-m="authcard" aria-labelledby="card-title" style="width: 100%; max-width: 470px; box-sizing: border-box; border-radius: 24px; border: 1px solid #E7E7EA; background: #FFFFFF; box-shadow: 0 1px 2px rgba(11,12,11,0.04), 0 14px 40px -28px rgba(11,12,11,0.10); padding: 34px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px"><h2 id="card-title" style="margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.02em">{{card.title}}</h2><span style="font-size: 14.5px; line-height: 1.5; color: #5E6068">{{card.sub}}</span></div>
+<sc-if value="{{hasNotice}}" hint-placeholder-val="{{ false }}"><div role="note" style="border-radius: 12px; border: 1px solid rgba(124,58,237,0.25); background: rgba(124,58,237,0.06); color: #50525A; padding: 11px 13px; font-size: 13.5px; line-height: 1.5">{{notice}}</div></sc-if>
+<button type="button" onClick="{{google}}" class="hv" style="width: 100%; min-height: 50px; border-radius: 12px; border: 1px solid #DBDBE0; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 15px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"></path><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"></path><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"></path><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"></path></svg>{{googleLabel}}</button>
+<div style="display: flex; align-items: center; gap: 12px; font-size: 12.5px; color: #6B6D75"><span style="flex: 1 1 auto; height: 1px; background: #ECECEF"></span>or with email<span style="flex: 1 1 auto; height: 1px; background: #ECECEF"></span></div>
 <form action="javascript:void(0)" novalidate style="display: flex; flex-direction: column; gap: 14px; margin: 0">
-<label for="su-name" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #55556A">Name<input id="su-name" name="name" type="text" autocomplete="name" value="{{name}}" onChange="{{onName}}" placeholder="Your name" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E8; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px"></label>
-<label for="su-email" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #55556A">Email<input id="su-email" name="email" type="email" autocomplete="email" inputmode="email" value="{{email}}" onChange="{{onEmail}}" placeholder="you@example.com" aria-invalid="{{inv.email}}" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E8; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px; border-color: {{bd.email}}"></label>
+<label for="su-name" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #50525A">Name<input id="su-name" name="name" type="text" autocomplete="name" value="{{name}}" onChange="{{onName}}" placeholder="Your name" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 15px"></label>
+<label for="su-email" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #50525A">Email<input id="su-email" name="email" type="email" autocomplete="email" inputmode="email" value="{{email}}" onChange="{{onEmail}}" placeholder="you@example.com" aria-invalid="{{inv.email}}" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 15px; border-color: {{bd.email}}"></label>
 <div style="display: flex; flex-direction: column; gap: 6px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><label for="su-pw" style="font-size: 13px; font-weight: 500; color: #55556A">Password</label></div>
-<div style="position: relative"><input id="su-pw" name="password" type="{{pwType}}" autocomplete="new-password" value="{{password}}" onChange="{{onPw}}" placeholder="At least 8 characters" aria-invalid="{{inv.password}}" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E8; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px; padding-right: 74px; border-color: {{bd.password}}">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px"><label for="su-pw" style="font-size: 13px; font-weight: 500; color: #50525A">Password</label></div>
+<div style="position: relative"><input id="su-pw" name="password" type="{{pwType}}" autocomplete="new-password" value="{{password}}" onChange="{{onPw}}" placeholder="At least 8 characters" aria-invalid="{{inv.password}}" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 15px; padding-right: 74px; border-color: {{bd.password}}">
 <button type="button" onClick="{{togglePw}}" aria-pressed="{{pwPressed}}" aria-label="{{pwToggleAria}}" class="hv" style="position: absolute; right: 6px; top: 6px; height: 36px; padding: 0 10px; border-radius: 9px; border: 0; background: transparent; color: #5B21B6; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{pwToggleText}}</button></div>
-<div style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #74748A"><span style="flex: 0 0 96px; height: 4px; border-radius: 2px; background: #EDEDF2; overflow: hidden"><span style="display: block; height: 100%; width: {{strength.w}}; background: {{strength.color}}"></span></span>{{strength.label}}</div>
+<div style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #6B6D75"><span style="flex: 0 0 96px; height: 4px; border-radius: 2px; background: #ECECEF; overflow: hidden"><span style="display: block; height: 100%; width: {{strength.w}}; background: {{strength.color}}"></span></span>{{strength.label}}</div>
 </div>
-<label for="su-ref" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #55556A"><span>Invite code <span style="font-weight: 400; color: #74748A">(optional)</span></span><input id="su-ref" name="ref" type="text" autocomplete="off" value="{{ref}}" onChange="{{onRef}}" placeholder="From a friend's link" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E8; background: #FFFFFF; color: #16141F; font: inherit; font-size: 15px; font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; text-transform: uppercase"></label>
-<sc-if value="{{hasRefNote}}" hint-placeholder-val="{{ false }}"><span style="margin-top: -6px; font-size: 12.5px; color: #0E7C66">{{refNote}}</span></sc-if>
-<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.45; color: #55556A; cursor: pointer"><input type="checkbox" checked="{{adult}}" onChange="{{toggleAdult}}" aria-invalid="{{inv.adult}}" style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #6D28D9; flex: 0 0 auto; cursor: pointer"><span>I am 18 or older and online gambling is legal where I live.</span></label>
-<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.45; color: #55556A; cursor: pointer"><input type="checkbox" checked="{{marketing}}" onChange="{{toggleMarketing}}" style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #6D28D9; flex: 0 0 auto; cursor: pointer"><span>Email me Streax news and the biggest casino moves. Optional.</span></label>
-<sc-if value="{{hasErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="border-radius: 12px; border: 1px solid rgba(194,65,12,0.3); background: rgba(194,65,12,0.08); color: #C2410C; padding: 10px 12px; font-size: 13.5px; line-height: 1.5">{{err}}</div></sc-if>
-<button type="submit" onClick="{{submit}}" disabled="{{busy}}" class="pb" style="width: 100%; min-height: 50px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #8B5CF6 0%, #5B21B6 100%); color: #FFFFFF; font: inherit; font-size: 15.5px; font-weight: 600; cursor: pointer; box-shadow: 0 14px 30px -16px rgba(36,66,214,0.7)">{{submitLabel}}</button>
+<label for="su-ref" style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500; color: #50525A"><span>Invite code <span style="font-weight: 400; color: #6B6D75">(optional)</span></span><input id="su-ref" name="ref" type="text" autocomplete="off" value="{{ref}}" onChange="{{onRef}}" placeholder="From a friend's link" style="width: 100%; height: 48px; box-sizing: border-box; padding: 0 14px; border-radius: 12px; border: 1px solid #E2E2E6; background: #FFFFFF; color: #0B0C0B; font: inherit; font-size: 15px; font-family: 'Geist Mono', monospace; letter-spacing: 0.04em; text-transform: uppercase"></label>
+<sc-if value="{{hasRefNote}}" hint-placeholder-val="{{ false }}"><span style="margin-top: -6px; font-size: 12.5px; color: #6D28D9">{{refNote}}</span></sc-if>
+<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.45; color: #50525A; cursor: pointer"><input type="checkbox" checked="{{adult}}" onChange="{{toggleAdult}}" aria-invalid="{{inv.adult}}" style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #6D28D9; flex: 0 0 auto; cursor: pointer"><span>I am 18 or older and online gambling is legal where I live.</span></label>
+<label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.45; color: #50525A; cursor: pointer"><input type="checkbox" checked="{{marketing}}" onChange="{{toggleMarketing}}" style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #6D28D9; flex: 0 0 auto; cursor: pointer"><span>Email me Streax news and the biggest casino moves. Optional.</span></label>
+<sc-if value="{{hasErr}}" hint-placeholder-val="{{ false }}"><div role="alert" style="border-radius: 12px; border: 1px solid rgba(194,65,12,0.3); background: rgba(194,65,12,0.08); color: #DC2626; padding: 10px 12px; font-size: 13.5px; line-height: 1.5">{{err}}</div></sc-if>
+<button type="submit" onClick="{{submit}}" disabled="{{busy}}" class="pb" style="width: 100%; min-height: 50px; border-radius: 12px; border: 0; background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: #FFFFFF; font: inherit; font-size: 15.5px; font-weight: 600; cursor: pointer; box-shadow: 0 14px 30px -16px rgba(53,182,105,0.7)">{{submitLabel}}</button>
 </form>
-<p style="margin: 0; font-size: 12.5px; line-height: 1.55; color: #74748A">Free forever. We never sell your email. You can delete your account any time from your account page.</p>
+<p style="margin: 0; font-size: 12.5px; line-height: 1.55; color: #6B6D75">Free forever. We never sell your email. You can delete your account any time from your account page.</p>
 </section>
 </div>
-<p style="margin: 0 0 4px; text-align: center; font-size: 12.5px; line-height: 1.6; color: #74748A">18+ only. Gambling can be addictive. Free help: BeGambleAware.org · GamCare.org.uk</p>
+<p style="margin: 0 0 4px; text-align: center; font-size: 12.5px; line-height: 1.6; color: #6B6D75">18+ only. Gambling can be addictive. Free help: BeGambleAware.org · GamCare.org.uk</p>
 </main>
 </div>
 <sc-if value="{{hasToast}}" hint-placeholder-val="{{ false }}">
 <div style="position: fixed; left: 0; right: 0; bottom: 24px; z-index: 100; display: flex; justify-content: center; padding: 0 16px; pointer-events: none">
-<div role="status" class="fu" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid #DCDCE4; background: rgba(255,255,255,0.98); box-shadow: 0 20px 50px -20px rgba(20,20,40,0.16); font-size: 14px; color: #16141F"><span style="width: 20px; height: 20px; border-radius: 50%; background: rgba(109,40,217,0.15); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{toast}}</div>
+<div role="status" class="fu" style="display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px; border: 1px solid #DBDBE0; background: rgba(255,255,255,0.98); box-shadow: 0 20px 50px -20px rgba(11,12,11,0.16); font-size: 14px; color: #0B0C0B"><span style="width: 20px; height: 20px; border-radius: 50%; background: rgba(124,58,237,0.15); display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6D28D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg></span>{{toast}}</div>
 </div>
 </sc-if>
 </div>
@@ -285,11 +285,11 @@ class Component extends DCLogic {
     return '$' + v.toPrecision(4);
   }
   pct(v) { return (v >= 0 ? '▲ ' : '▼ ') + Math.abs(v).toFixed(2) + '%'; }
-  pcol(v) { return v >= 0 ? '#0E7C66' : '#C2410C'; }
+  pcol(v) { return v >= 0 ? '#6D28D9' : '#DC2626'; }
   seg(opts, active, pick) {
     return opts.map(function (o) {
       var on = o.v === active;
-      return { label: o.label, v: o.v, on: on, bg: on ? '#FFFFFF' : 'transparent', shadow: on ? 'inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px #DCDCE4' : 'none', fg: on ? '#16141F' : '#6B6B78', pick: function () { pick(o.v); } };
+      return { label: o.label, v: o.v, on: on, bg: on ? '#FFFFFF' : 'transparent', shadow: on ? 'inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px #DBDBE0' : 'none', fg: on ? '#0B0C0B' : '#5E6068', pick: function () { pick(o.v); } };
     });
   }
   tint(name) {
@@ -315,12 +315,12 @@ class Component extends DCLogic {
   headers(cols, key, dir, setSort) {
     return cols.map(function (c) {
       var on = c.k && c.k === key;
-      return { label: c.label, justify: c.right ? 'flex-end' : 'flex-start', sortable: !!c.k, plain: !c.k, color: on ? '#5B21B6' : '#6B6B78', arrow: on ? (dir < 0 ? '↓' : '↑') : (c.k ? '↕' : ''), aria: c.k ? 'Sort by ' + c.label : '', sort: function () { setSort(c.k); } };
+      return { label: c.label, justify: c.right ? 'flex-end' : 'flex-start', sortable: !!c.k, plain: !c.k, color: on ? '#5B21B6' : '#5E6068', arrow: on ? (dir < 0 ? '↓' : '↑') : (c.k ? '↕' : ''), aria: c.k ? 'Sort by ' + c.label : '', sort: function () { setSort(c.k); } };
     });
   }
   gauge(v) {
     var len = 81.68, f = v == null ? 0 : v / 100;
-    return { dash: (len * f).toFixed(1) + ' ' + len, color: v == null ? '#C6C6D2' : v >= 75 ? '#0E7C66' : v >= 55 ? '#6D28D9' : v >= 40 ? '#B45309' : '#C2410C', label: v == null ? 'n/a' : String(v) };
+    return { dash: (len * f).toFixed(1) + ' ' + len, color: v == null ? '#C5C5CB' : v >= 75 ? '#6D28D9' : v >= 55 ? '#6D28D9' : v >= 40 ? '#B45309' : '#DC2626', label: v == null ? 'n/a' : String(v) };
   }
   shellVals() {
     var self = this, st = this.state, D = this.D;
@@ -350,9 +350,9 @@ class Component extends DCLogic {
       modalTitle: titles[m] || this.extraTitle || '', modalSub: subs[m] || this.extraSub || '', modalW: m === 'sources' ? '640px' : (this.extraW || '480px'),
       closeModal: function () { self.setState({ modal: '' }); }, stop: function (e) { e.stopPropagation(); },
       email: st.email || '', onEmail: function (e) { self.setState({ email: e.target.value, formErr: '' }); },
-      emailBd: st.formErr ? 'rgba(194,65,12,0.6)' : '#E2E2E8',
+      emailBd: st.formErr ? 'rgba(194,65,12,0.6)' : '#E2E2E6',
       msg: st.msg || '', onMsg: function (e) { self.setState({ msg: e.target.value, formErr: '' }); },
-      topics: topicsAll.map(function (t) { var on = !(st.topicsOff || {})[t]; return { label: t, on: on, bd: on ? '#6D28D9' : '#C6C6D2', bg: on ? '#6D28D9' : 'transparent', mark: on ? '✓' : '', toggle: function () { var o = Object.assign({}, st.topicsOff || {}); o[t] = on; self.setState({ topicsOff: o }); } }; }),
+      topics: topicsAll.map(function (t) { var on = !(st.topicsOff || {})[t]; return { label: t, on: on, bd: on ? '#6D28D9' : '#C5C5CB', bg: on ? '#6D28D9' : 'transparent', mark: on ? '✓' : '', toggle: function () { var o = Object.assign({}, st.topicsOff || {}); o[t] = on; self.setState({ topicsOff: o }); } }; }),
       hasFormErr: !!st.formErr, formErr: st.formErr || '', formDone: !!st.formDone, formOpen: !st.formDone,
       submitLabel: m === 'support' ? 'Send message' : 'Turn on alerts',
       doneTitle: m === 'support' ? 'Message received' : 'Alerts are on for ' + (st.email || ''),
@@ -568,11 +568,11 @@ class Component extends DCLogic {
     if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) s++;
     if (/\d/.test(pw)) s++;
     if (/[^A-Za-z0-9]/.test(pw)) s++;
-    if (!pw) return { w: '0%', color: '#EDEDF2', label: '8 characters or more' };
-    if (pw.length < 8) return { w: '20%', color: '#C2410C', label: 'Too short' };
+    if (!pw) return { w: '0%', color: '#ECECEF', label: '8 characters or more' };
+    if (pw.length < 8) return { w: '20%', color: '#DC2626', label: 'Too short' };
     if (s <= 2) return { w: '45%', color: '#B45309', label: 'Okay. Longer is stronger.' };
-    if (s <= 3) return { w: '72%', color: '#0E7C66', label: 'Good password' };
-    return { w: '100%', color: '#0E7C66', label: 'Strong password' };
+    if (s <= 3) return { w: '72%', color: '#6D28D9', label: 'Good password' };
+    return { w: '100%', color: '#6D28D9', label: 'Strong password' };
   }
   errNotice(code) {
     return {
@@ -589,7 +589,7 @@ class Component extends DCLogic {
   }
   fieldVals(names, st) {
     var bd = {}, inv = {};
-    names.forEach(function (n) { var bad = st.field === n; bd[n] = bad ? '#C2410C' : '#E2E2E8'; inv[n] = bad ? 'true' : 'false'; });
+    names.forEach(function (n) { var bad = st.field === n; bd[n] = bad ? '#DC2626' : '#E2E2E6'; inv[n] = bad ? 'true' : 'false'; });
     return { bd: bd, inv: inv };
   }
 

@@ -8,10 +8,10 @@
   var NIGHT = /\/night\//.test(location.pathname);
   var LOCAL_LOGOS = ['500.casino', 'acebet', 'bc.game', 'betfury.com', 'betstrike', 'bluff', 'cloudbet.com', 'cybet', 'duel.com', 'duelbits.com', 'flush', 'gamba.com', 'gamdom.com', 'goated.com', 'metawin.com', 'rainbet.com', 'razed.com', 'rollbit.com', 'roobet.com', 'shuffle.com', 'solcasino.io', 'sportsbet.io', 'stake.com', 'thrill.com', 'whale.io', 'winna.com', 'yeet.com'];
   var CHAIN_LOGO = { Ethereum: 'chain_eth', Tron: 'chain_trx', Solana: 'chain_sol', 'BNB Chain': 'chain_bnb', Bitcoin: 'chain_btc' };
-  var PALETTE = ['#7C3AED', '#2563EB', '#0EA5E9', '#14B8A6', '#22C55E', '#EAB308', '#F97316', '#EC4899', '#6366F1', '#64748B', '#A855F7', '#06B6D4'];
+  var PALETTE = ['#8B5CF6', '#3B82F6', '#0EA5E9', '#14B8A6', '#A855F7', '#EAB308', '#F97316', '#EC4899', '#6366F1', '#64748B', '#2563EB', '#06B6D4'];
   var C = NIGHT
-    ? { ink: '#EDEDF3', muted: '#9A9AAE', faint: '#5E5E70', line: '#26262F', card: '#141419', soft: '#1A1A21', accent: '#8B5CF6', good: '#34D399', bad: '#F87171', grid: 'rgba(255,255,255,0.07)' }
-    : { ink: '#16141F', muted: '#6B6B78', faint: '#A3A3B2', line: '#E8E8EE', card: '#FFFFFF', soft: '#F6F6F9', accent: '#6D28D9', good: '#16A34A', bad: '#DC2626', grid: 'rgba(20,20,40,0.08)' };
+    ? { ink: '#F5F5F5', muted: '#959597', faint: '#6B6D72', line: '#1F2024', card: '#121317', soft: '#16171B', accent: '#8B5CF6', good: '#34D399', bad: '#F87171', grid: 'rgba(255,255,255,0.07)' }
+    : { ink: '#0A0B0E', muted: '#5E6068', faint: '#94969C', line: '#E7E7EA', card: '#FFFFFF', soft: '#F6F6F7', accent: '#6D28D9', good: '#16A34A', bad: '#DC2626', grid: 'rgba(10,11,14,0.08)' };
   var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------------------------------------------------------------- helpers
@@ -112,7 +112,7 @@
     '.ax-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}' +
     '.ax-fade{transition:filter .35s ease,opacity .35s ease}.ax-busy .ax-fade{filter:blur(5px);opacity:.45;pointer-events:none}' +
     '.ax-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}' +
-    '.ax-sk{display:inline-block;border-radius:8px;background:linear-gradient(90deg,' + C.soft + ' 25%,' + (NIGHT ? '#22222b' : '#ECECF2') + ' 50%,' + C.soft + ' 75%);background-size:200% 100%;animation:axSh 1.2s infinite linear}' +
+    '.ax-sk{display:inline-block;border-radius:8px;background:linear-gradient(90deg,' + C.soft + ' 25%,' + (NIGHT ? '#1B1C20' : '#ECECEF') + ' 50%,' + C.soft + ' 75%);background-size:200% 100%;animation:axSh 1.2s infinite linear}' +
     '@keyframes axSh{from{background-position:200% 0}to{background-position:-200% 0}}' +
     '.ax-empty{padding:34px 16px;text-align:center;color:' + C.muted + ';font-size:14px;line-height:1.6}' +
     '.ax-movers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}' +
@@ -217,6 +217,9 @@
       if (p >= 1) {
         ends.sort(function (a, b) { return a.y - b.y; });
         for (var k = 1; k < ends.length; k++) if (ends[k].y - ends[k - 1].y < 20) ends[k].y = ends[k - 1].y + 20;
+        // keep the stack inside the plot: push it back up from the bottom edge
+        var floor = padT + ih;
+        for (var q = ends.length - 1; q >= 0; q--) { var lim = q === ends.length - 1 ? floor : ends[q + 1].y - 20; if (ends[q].y > lim) ends[q].y = lim; }
       }
       ends.forEach(function (e) { e.L.head.style.left = (e.x / W * 100) + '%'; e.L.head.style.top = e.y + 'px'; });
     }
@@ -339,6 +342,14 @@
     });
   }
 
+  // drop leading days where nothing was recorded yet (keeps at least 7 days)
+  function trim(series, dates) {
+    var first = dates.length;
+    series.forEach(function (sr) { for (var k = 0; k < sr.values.length; k++) if (sr.values[k]) { first = Math.min(first, k); break; } });
+    var from = Math.max(0, Math.min(first, dates.length - 7));
+    if (!from) return { series: series, dates: dates };
+    return { dates: dates.slice(from), series: series.map(function (sr) { return Object.assign({}, sr, { values: sr.values.slice(from) }); }) };
+  }
   function modeVal(c, i) { return st.mode === 'dep' ? c.dep[i] : st.mode === 'wd' ? c.wd[i] : c.dep[i] - c.wd[i]; }
   function renderSeries(animate) {
     var D = st.data, el = els.series; el.innerHTML = '';
@@ -347,11 +358,14 @@
     var chart = h('div', { class: 'ax-fade' }); el.appendChild(chart);
     if (!hasData()) { chart.appendChild(st.loading ? h('div', { class: 'ax-sk', style: 'display:block;height:300px' }) : empty(noDataText())); }
     else {
-      var cs = D.casinos.slice().sort(function (a, b) { return (st.mode === 'wd' ? b.wdTotal - a.wdTotal : b.depTotal - a.depTotal); }).slice(0, 10);
-      var series = cs.map(function (c, i) { return { id: c.slug, name: c.name, logo: logoUrl(c.domain), color: PALETTE[i % PALETTE.length], values: D.dates.map(function (_, k) { return modeVal(c, k); }) }; });
-      var args = { series: series, dates: D.dates, fmt: function (v) { return money(v, 0); }, scale: st.mode === 'net' ? 'linear' : 'sqrt', animate: animate, label: title + ' per casino per day' };
+      var cs = D.casinos.filter(function (c) { return st.mode === 'wd' ? c.wdTotal > 0 : st.mode === 'dep' ? c.depTotal > 0 : c.depTotal + c.wdTotal > 0; })
+        .sort(function (a, b) { return (st.mode === 'wd' ? b.wdTotal - a.wdTotal : b.depTotal - a.depTotal); }).slice(0, 10);
+      var tr0 = trim(cs.map(function (c, i) { return { id: c.slug, name: c.name, logo: logoUrl(c.domain), color: PALETTE[i % PALETTE.length], values: D.dates.map(function (_, k) { return modeVal(c, k); }) }; }), D.dates);
+      var series = tr0.series;
+      var args = { series: series, dates: tr0.dates, fmt: function (v) { return money(v, 0); }, scale: st.mode === 'net' ? 'linear' : 'sqrt', animate: animate, label: title + ' per casino per day' };
       charts.series = { host: chart, args: args };
-      requestAnimationFrame(function () { lineChart(chart, args); });
+      if (!series.length) chart.appendChild(empty('Nothing recorded for this period yet. The monitor reads a few wallets every 10 minutes.'));
+      else requestAnimationFrame(function () { lineChart(chart, args); });
     }
     // controls + breakdown table
     var ctrl = h('div', { class: 'ax-head', style: 'margin-top:18px' }, [
@@ -367,7 +381,7 @@
       head = ['#', 'Casino', label, '% change', 'Transfers', 'Depositors', 'Avg deposit'];
       rows = D.casinos.map(function (c) {
         var v = st.mode === 'dep' ? c.depTotal : st.mode === 'wd' ? c.wdTotal : c.depTotal - c.wdTotal, prev = st.mode === 'dep' ? c.prevDep : st.mode === 'wd' ? c.prevWd : c.prevDep - c.prevWd;
-        return { name: c.name, logo: logoUrl(c.domain), v: v, chg: st.mode === 'net' ? null : pct(v, prev), a: count(st.mode === 'wd' ? c.txOutTotal : c.txInTotal), b: count(c.depositors), c: c.txInTotal ? money(c.depTotal / c.txInTotal) : 'n/a', href: 'Wallets.dc.html?c=' + c.slug };
+        return { name: c.name, logo: logoUrl(c.domain), v: v, none: !c.depTotal && !c.wdTotal && !c.txInTotal && !c.txOutTotal, chg: st.mode === 'net' ? null : pct(v, prev), a: count(st.mode === 'wd' ? c.txOutTotal : c.txInTotal), b: count(c.depositors), c: c.txInTotal ? money(c.depTotal / c.txInTotal) : 'n/a', href: 'Wallets.dc.html?c=' + c.slug };
       });
     } else {
       var list = st.group === 'chain' ? D.chains : D.tokens;
@@ -385,7 +399,7 @@
       var chg = r.chg == null ? h('span', { text: '–', style: 'color:' + C.faint }) : h('span', { class: 'ax-chg ' + (r.chg >= 0 ? 'ax-up' : 'ax-down'), text: (r.chg >= 0 ? '+' : '') + r.chg.toFixed(1) + '%' });
       var nameCell = h('span', { class: 'ax-name' }, [r.chain ? chainIcon(r.name) : avatar(r.name, r.logo, 26), r.href ? h('a', { href: r.href, text: r.name, style: 'color:inherit;text-decoration:none' }) : r.name]);
       tb.appendChild(h('tr', { class: 'ax-in', style: 'animation-delay:' + Math.min(i * 0.03, 0.3) + 's' }, [h('td', { class: 'n', text: String(i + 1) }), h('td', {}, [nameCell]),
-        h('td', { class: 'r', text: money(r.v), style: st.mode === 'net' ? 'color:' + (r.v >= 0 ? C.good : C.bad) + ';font-weight:600' : 'font-weight:600' }), h('td', { class: 'r' }, [chg]), h('td', { class: 'r', text: r.a }), h('td', { class: 'r', text: r.b }), h('td', { class: 'r', text: r.c })]));
+        r.none ? h('td', { class: 'r', text: 'Not read yet', style: 'color:' + C.faint + ';font-weight:500' }) : h('td', { class: 'r', text: money(r.v), style: st.mode === 'net' ? 'color:' + (r.v >= 0 ? C.good : C.bad) + ';font-weight:600' : 'font-weight:600' }), h('td', { class: 'r' }, [chg]), h('td', { class: 'r', text: r.none ? '' : r.a }), h('td', { class: 'r', text: r.none ? '' : r.b }), h('td', { class: 'r', text: r.none ? '' : r.c })]));
     });
     tblWrap.appendChild(h('table', { class: 'ax-tbl' }, [h('thead', {}, [h('tr', {}, head.map(function (x, i) { return h('th', { class: i > 1 ? 'r' : '', text: x }); }))]), tb]));
     if (rows.length > 10) tblWrap.appendChild(h('div', { style: 'text-align:center;margin-top:10px' }, [h('button', { type: 'button', class: 'ax-btn', text: st.showAll ? 'Show less' : 'Show all ' + rows.length, on: { click: function () { st.showAll = !st.showAll; renderSeries(false); } } })]));
@@ -477,8 +491,9 @@
       var cs = D.casinos.filter(function (c) { return c.bal.some(function (v) { return v != null; }); }).sort(function (a, b) { return b.balance - a.balance; }).slice(0, 8);
       if (!cs.length) chart.appendChild(empty('Balance history builds from the first daily reading.'));
       else {
-        var series = cs.map(function (c, i) { return { id: c.slug, name: c.name, logo: logoUrl(c.domain), color: PALETTE[i % PALETTE.length], values: c.bal }; });
-        var bargs = { series: series, dates: D.dates, fmt: function (v) { return money(v, 0); }, scale: 'sqrt', animate: animate, label: 'Wallet balance per casino' };
+        var trb = trim(cs.map(function (c, i) { return { id: c.slug, name: c.name, logo: logoUrl(c.domain), color: PALETTE[i % PALETTE.length], values: c.bal }; }), D.dates);
+        var series = trb.series;
+        var bargs = { series: series, dates: trb.dates, fmt: function (v) { return money(v, 0); }, scale: 'sqrt', animate: animate, label: 'Wallet balance per casino' };
         charts.balance = { host: chart, args: bargs };
         var obs = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { obs.disconnect(); lineChart(chart, bargs); } }, { threshold: 0.2 });
         obs.observe(chart);

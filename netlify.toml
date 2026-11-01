@@ -124,3 +124,604 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Short and lowercase page links (e.g. /home, /home.dc) go to the real page.
+[[redirects]]
+  from = "/account"
+  to = "/Account.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/account.dc"
+  to = "/Account.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/account.dc.html"
+  to = "/Account.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/analytics"
+  to = "/Analytics.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/analytics.dc"
+  to = "/Analytics.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/analytics.dc.html"
+  to = "/Analytics.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlecomplaints"
+  to = "/ArticleComplaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlecomplaints.dc"
+  to = "/ArticleComplaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlecomplaints.dc.html"
+  to = "/ArticleComplaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlescore"
+  to = "/ArticleScore.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlescore.dc"
+  to = "/ArticleScore.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlescore.dc.html"
+  to = "/ArticleScore.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlewagering"
+  to = "/ArticleWagering.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlewagering.dc"
+  to = "/ArticleWagering.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articlewagering.dc.html"
+  to = "/ArticleWagering.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articles"
+  to = "/Articles.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articles.dc"
+  to = "/Articles.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/articles.dc.html"
+  to = "/Articles.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/betfeed"
+  to = "/BetFeed.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/betfeed.dc"
+  to = "/BetFeed.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/betfeed.dc.html"
+  to = "/BetFeed.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/bonuscalc"
+  to = "/BonusCalc.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/bonuscalc.dc"
+  to = "/BonusCalc.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/bonuscalc.dc.html"
+  to = "/BonusCalc.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/bonuses"
+  to = "/Bonuses.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/bonuses.dc"
+  to = "/Bonuses.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/bonuses.dc.html"
+  to = "/Bonuses.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/casino"
+  to = "/Casino.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/casino.dc"
+  to = "/Casino.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/casino.dc.html"
+  to = "/Casino.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/community"
+  to = "/Community.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/community.dc"
+  to = "/Community.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/community.dc.html"
+  to = "/Community.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/complaints"
+  to = "/Complaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/complaints.dc"
+  to = "/Complaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/complaints.dc.html"
+  to = "/Complaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/home"
+  to = "/Home.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/home.dc"
+  to = "/Home.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/home.dc.html"
+  to = "/Home.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/login"
+  to = "/Login.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/login.dc"
+  to = "/Login.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/login.dc.html"
+  to = "/Login.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/onchain"
+  to = "/Onchain.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/onchain.dc"
+  to = "/Onchain.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/onchain.dc.html"
+  to = "/Onchain.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/rankings"
+  to = "/Rankings.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/rankings.dc"
+  to = "/Rankings.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/rankings.dc.html"
+  to = "/Rankings.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/signup"
+  to = "/Signup.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/signup.dc"
+  to = "/Signup.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/signup.dc.html"
+  to = "/Signup.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/streamers"
+  to = "/Streamers.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/streamers.dc"
+  to = "/Streamers.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/streamers.dc.html"
+  to = "/Streamers.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/walletcheck"
+  to = "/WalletCheck.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/walletcheck.dc"
+  to = "/WalletCheck.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/walletcheck.dc.html"
+  to = "/WalletCheck.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/wallets"
+  to = "/Wallets.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/wallets.dc"
+  to = "/Wallets.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/wallets.dc.html"
+  to = "/Wallets.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/account"
+  to = "/night/Account.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/account.dc"
+  to = "/night/Account.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/account.dc.html"
+  to = "/night/Account.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/analytics"
+  to = "/night/Analytics.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/analytics.dc"
+  to = "/night/Analytics.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/analytics.dc.html"
+  to = "/night/Analytics.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlecomplaints"
+  to = "/night/ArticleComplaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlecomplaints.dc"
+  to = "/night/ArticleComplaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlecomplaints.dc.html"
+  to = "/night/ArticleComplaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlescore"
+  to = "/night/ArticleScore.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlescore.dc"
+  to = "/night/ArticleScore.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlescore.dc.html"
+  to = "/night/ArticleScore.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlewagering"
+  to = "/night/ArticleWagering.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlewagering.dc"
+  to = "/night/ArticleWagering.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articlewagering.dc.html"
+  to = "/night/ArticleWagering.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articles"
+  to = "/night/Articles.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articles.dc"
+  to = "/night/Articles.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/articles.dc.html"
+  to = "/night/Articles.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/betfeed"
+  to = "/night/BetFeed.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/betfeed.dc"
+  to = "/night/BetFeed.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/betfeed.dc.html"
+  to = "/night/BetFeed.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/bonuscalc"
+  to = "/night/BonusCalc.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/bonuscalc.dc"
+  to = "/night/BonusCalc.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/bonuscalc.dc.html"
+  to = "/night/BonusCalc.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/bonuses"
+  to = "/night/Bonuses.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/bonuses.dc"
+  to = "/night/Bonuses.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/bonuses.dc.html"
+  to = "/night/Bonuses.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/casino"
+  to = "/night/Casino.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/casino.dc"
+  to = "/night/Casino.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/casino.dc.html"
+  to = "/night/Casino.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/community"
+  to = "/night/Community.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/community.dc"
+  to = "/night/Community.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/community.dc.html"
+  to = "/night/Community.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/complaints"
+  to = "/night/Complaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/complaints.dc"
+  to = "/night/Complaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/complaints.dc.html"
+  to = "/night/Complaints.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/home"
+  to = "/night/Home.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/home.dc"
+  to = "/night/Home.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/home.dc.html"
+  to = "/night/Home.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/login"
+  to = "/night/Login.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/login.dc"
+  to = "/night/Login.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/login.dc.html"
+  to = "/night/Login.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/onchain"
+  to = "/night/Onchain.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/onchain.dc"
+  to = "/night/Onchain.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/onchain.dc.html"
+  to = "/night/Onchain.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/rankings"
+  to = "/night/Rankings.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/rankings.dc"
+  to = "/night/Rankings.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/rankings.dc.html"
+  to = "/night/Rankings.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/signup"
+  to = "/night/Signup.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/signup.dc"
+  to = "/night/Signup.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/signup.dc.html"
+  to = "/night/Signup.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/streamers"
+  to = "/night/Streamers.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/streamers.dc"
+  to = "/night/Streamers.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/streamers.dc.html"
+  to = "/night/Streamers.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/walletcheck"
+  to = "/night/WalletCheck.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/walletcheck.dc"
+  to = "/night/WalletCheck.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/walletcheck.dc.html"
+  to = "/night/WalletCheck.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/wallets"
+  to = "/night/Wallets.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/wallets.dc"
+  to = "/night/Wallets.dc.html"
+  status = 301
+
+[[redirects]]
+  from = "/night/wallets.dc.html"
+  to = "/night/Wallets.dc.html"
+  status = 301

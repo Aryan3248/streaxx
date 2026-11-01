@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="assets/streax-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F4F4F6;--card:#FFFFFF;--line:#EDEDF2;--ink:#16141F;--sub:#6B6B78;--muted:#74748A;--accent:#6D28D9;--good:#0E7C66;--bad:#C2410C;--warn:#B45309}
+:root{--bg:#F6F6F7;--card:#FFFFFF;--line:#ECECEF;--ink:#0B0C0B;--sub:#5E6068;--muted:#6B6D75;--accent:#6D28D9;--good:#6D28D9;--bad:#DC2626;--warn:#B45309}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.5 Geist,system-ui,sans-serif}
 a{color:var(--accent)}
@@ -17,10 +17,10 @@ header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16p
 header h1{font-size:22px;margin:0;flex:1}
 .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:16px}
 .card h2{font-size:16px;margin:0 0 12px}
-input,select,textarea{font:inherit;color:var(--ink);border:1px solid #E2E2E8;border-radius:10px;padding:8px 10px;background:#fff;max-width:100%}
+input,select,textarea{font:inherit;color:var(--ink);border:1px solid #E2E2E6;border-radius:10px;padding:8px 10px;background:#fff;max-width:100%}
 textarea{width:100%;min-height:90px;font-family:"Geist Mono",monospace;font-size:13px}
 button{font:inherit;font-weight:600;border:0;border-radius:10px;padding:8px 14px;background:var(--accent);color:#fff;cursor:pointer}
-button.ghost{background:transparent;color:var(--ink);border:1px solid #E2E2E8}
+button.ghost{background:transparent;color:var(--ink);border:1px solid #E2E2E6}
 button:disabled{opacity:.5;cursor:default}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
@@ -30,7 +30,7 @@ table{width:100%;border-collapse:collapse;font-size:13.5px}
 th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 th{color:var(--muted);font-weight:500}
 .mono{font-family:"Geist Mono",monospace;font-size:12.5px;word-break:break-all}
-.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;background:#F3EEFF;color:#5B21B6}
+.pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;background:#F5F3FF;color:#5B21B6}
 .ok{color:var(--good)}.no{color:var(--bad)}
 .ev{border-left:3px solid var(--line);padding:4px 10px;margin:8px 0;white-space:pre-wrap}
 .msg{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;display:none;max-width:90vw}
@@ -54,6 +54,7 @@ th{color:var(--muted);font-weight:500}
     <section data-tab="Wallets" class="card"></section>
     <section data-tab="Codes and reviews" class="card"></section>
     <section data-tab="Member reviews" class="card"></section>
+    <section data-tab="Sites and providers" class="card"></section>
   </div>
   <p id="locked" class="card">Enter the <b>ADMIN_TOKEN</b> you set in the Netlify environment.</p>
 </div>
@@ -77,12 +78,12 @@ th{color:var(--muted);font-weight:500}
   var when = function (ms) { return ms ? new Date(ms).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : ''; };
   var CASINOS = [];
 
-  var tabs = ['Status', 'Complaints', 'Payout reports', 'Wallets', 'Codes and reviews', 'Member reviews'], cur = 'Status';
+  var tabs = ['Status', 'Complaints', 'Payout reports', 'Wallets', 'Sites and providers', 'Codes and reviews', 'Member reviews'], cur = 'Status';
   function showTab(t) {
     cur = t;
     Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function (b) { b.className = b.textContent === t ? 'on' : ''; });
     Array.prototype.forEach.call(document.querySelectorAll('section[data-tab]'), function (s) { s.classList.toggle('hide', s.getAttribute('data-tab') !== t); });
-    ({ 'Status': loadStatus, 'Complaints': loadComplaints, 'Payout reports': loadPayouts, 'Wallets': loadWallets, 'Codes and reviews': loadContent, 'Member reviews': loadMemberReviews })[t]();
+    ({ 'Status': loadStatus, 'Complaints': loadComplaints, 'Payout reports': loadPayouts, 'Wallets': loadWallets, 'Codes and reviews': loadContent, 'Member reviews': loadMemberReviews, 'Sites and providers': loadSites })[t]();
   }
   tabs.forEach(function (t) { $('#tabs').appendChild(h('button', { text: t, on: { click: function () { showTab(t); } } })); });
   var sec = function (t) { var s = $('section[data-tab="' + t + '"]'); s.innerHTML = ''; return s; };
@@ -94,7 +95,7 @@ th{color:var(--muted);font-weight:500}
       var lr = j.monitor.lastRun;
       s.appendChild(h('h2', { text: 'Server status' }));
       var t = h('table');
-      [['Etherscan key (deposits and withdrawals)', j.ready.etherscan], ['Email (Resend)', j.ready.email], ['Telegram bot', j.ready.telegram], ['Google sign-in', j.ready.google]].forEach(function (r) {
+      [['Etherscan key (deposits and withdrawals)', j.ready.etherscan], ['Email (Resend)', j.ready.email], ['Telegram bot', j.ready.telegram], ['Google sign-in', j.ready.google], ['Sports odds (The Odds API)', j.ready.odds]].forEach(function (r) {
         t.appendChild(h('tr', {}, [h('td', { text: r[0] }), h('td', { class: r[1] ? 'ok' : 'no', text: r[1] ? 'Ready' : 'Not set' })]));
       });
       t.appendChild(h('tr', {}, [h('td', { text: 'Last monitor run' }), h('td', { text: lr ? when(lr.at) + ', ' + lr.transfers + ' transfers, ' + lr.ms + ' ms' + (lr.errors.length ? ', ' + lr.errors.length + ' errors' : '') : 'Not run yet' })]));
@@ -213,6 +214,42 @@ th{color:var(--muted);font-weight:500}
         s.appendChild(h('div', { class: 'scroll' }, [t]));
         var n = j.registry.reduce(function (a, c) { return a + c.wallets.length; }, 0);
         s.appendChild(h('p', { style: 'color:var(--sub)', text: 'In total the monitor tracks ' + n + ' wallets of ' + j.registry.filter(function (c) { return c.wallets.length; }).length + ' casinos.' }));
+      }).catch(fail);
+    };
+    if (CASINOS.length) go(); else api('GET', '/api/admin/status').then(function (j) { CASINOS = j.casinos; go(); }).catch(fail);
+  }
+
+  // Unboxing sites (tracked like casinos once their wallets are added) and game providers.
+  function loadSites() {
+    var s = sec('Sites and providers');
+    var go = function () {
+      s.appendChild(h('h2', { text: 'Add an unboxing site or casino' }));
+      s.appendChild(h('p', { style: 'color:var(--sub)', text: 'Add the site here, then add its wallets in the Wallets tab. It appears in Market breakdown once the monitor reads it.' }));
+      var sn = h('input', { placeholder: 'Name, e.g. Packdraw' }), sd = h('input', { placeholder: 'Domain, e.g. packdraw.com' });
+      var sk = h('select', {}, [h('option', { value: 'unboxing', text: 'Unboxing site' }), h('option', { value: 'casino', text: 'Casino' })]);
+      s.appendChild(h('div', { class: 'row' }, [sn, sd, sk, h('button', { text: 'Add site', on: { click: function () {
+        api('POST', '/api/admin/sites', { name: sn.value, domain: sd.value, kind: sk.value }).then(function () { toast('Added. Now add its wallets in the Wallets tab.'); CASINOS = []; loadSites(); }).catch(function (e) { toast(e.message); });
+      } } })]));
+      s.appendChild(h('h2', { style: 'margin-top:24px', text: 'Add or update a game provider' }));
+      s.appendChild(h('p', { style: 'color:var(--sub)', text: 'List the casinos that offer this provider. Its reach is the tracked deposit volume of those casinos. RTP and source are optional; only enter figures the provider publishes.' }));
+      var pn = h('input', { placeholder: 'Provider, e.g. Pragmatic Play' }), pd = h('input', { placeholder: 'Domain, e.g. pragmaticplay.com' });
+      var pr = h('input', { placeholder: 'Published RTP, e.g. 96.5%' }), ps = h('input', { placeholder: 'Source link for the RTP' });
+      var boxes = h('div', { class: 'row', style: 'flex-wrap:wrap;gap:6px 14px;margin:8px 0' }, CASINOS.map(function (c) { return h('label', { style: 'display:flex;gap:6px;align-items:center;font-size:13px' }, [h('input', { type: 'checkbox', value: c.slug }), c.name]); }));
+      s.appendChild(h('div', { class: 'row' }, [pn, pd, pr, ps]));
+      s.appendChild(boxes);
+      s.appendChild(h('button', { text: 'Save provider', on: { click: function () {
+        var picked = [].slice.call(boxes.querySelectorAll('input:checked')).map(function (i) { return i.value; });
+        api('POST', '/api/admin/providers', { name: pn.value, domain: pd.value, rtp: pr.value, source: ps.value, casinos: picked }).then(function () { toast('Provider saved'); loadSites(); }).catch(function (e) { toast(e.message); });
+      } } }));
+      api('GET', '/api/admin/sites').then(function (j) {
+        s.appendChild(h('h2', { style: 'margin-top:24px', text: 'Sites added here (' + j.sites.length + ')' }));
+        var t = h('table', {}, [h('tr', {}, ['Name', 'Kind', 'Domain', 'Slug', ''].map(function (x) { return h('th', { text: x }); }))]);
+        j.sites.forEach(function (x) { t.appendChild(h('tr', {}, [h('td', { text: x.name }), h('td', { text: x.kind }), h('td', { text: x.domain }), h('td', { class: 'mono', text: x.slug }), h('td', {}, [h('button', { class: 'ghost', text: 'Remove', on: { click: function () { if (!confirm('Remove this site and its wallets?')) return; api('POST', '/api/admin/sites/remove', { slug: x.slug }).then(function () { toast('Removed'); CASINOS = []; loadSites(); }).catch(function (e) { toast(e.message); }); } } })])])); });
+        s.appendChild(h('div', { class: 'scroll' }, [t]));
+        s.appendChild(h('h2', { style: 'margin-top:24px', text: 'Providers (' + j.providers.length + ')' }));
+        var t2 = h('table', {}, [h('tr', {}, ['Provider', 'Casinos', 'RTP', ''].map(function (x) { return h('th', { text: x }); }))]);
+        j.providers.forEach(function (p) { t2.appendChild(h('tr', {}, [h('td', { text: p.name }), h('td', { text: p.casinos.length + ' casinos' }), h('td', { text: p.rtp || '' }), h('td', {}, [h('button', { class: 'ghost', text: 'Edit', on: { click: function () { pn.value = p.name; pd.value = p.domain; pr.value = p.rtp; ps.value = p.source; [].forEach.call(boxes.querySelectorAll('input'), function (i) { i.checked = p.casinos.indexOf(i.value) >= 0; }); pn.scrollIntoView({ behavior: 'smooth', block: 'center' }); } } }), ' ', h('button', { class: 'ghost', text: 'Remove', on: { click: function () { if (!confirm('Remove ' + p.name + '?')) return; api('POST', '/api/admin/providers/remove', { slug: p.slug }).then(function () { toast('Removed'); loadSites(); }).catch(function (e) { toast(e.message); }); } } })])])); });
+        s.appendChild(h('div', { class: 'scroll' }, [t2]));
       }).catch(fail);
     };
     if (CASINOS.length) go(); else api('GET', '/api/admin/status').then(function (j) { CASINOS = j.casinos; go(); }).catch(fail);

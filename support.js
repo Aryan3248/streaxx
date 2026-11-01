@@ -17,6 +17,16 @@
     link.rel = 'stylesheet'; link.href = base + 'assets/theme.css';
     (document.head || document.documentElement).appendChild(link);
     if (/\/night\//.test(location.pathname)) document.documentElement.classList.add('sx-night');
+    // first page of a visit: a short logo intro
+    try {
+      if (!sessionStorage.getItem('sx_intro') && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        sessionStorage.setItem('sx_intro', '1');
+        var intro = document.createElement('div'); intro.id = 'sx-intro'; intro.setAttribute('aria-hidden', 'true');
+        intro.innerHTML = '<img src="' + base + 'assets/streax-mark.png" alt="" width="64" height="64"><span>Streax</span>';
+        (document.body || document.documentElement).appendChild(intro);
+        setTimeout(function () { if (intro.parentNode) intro.parentNode.removeChild(intro); }, 1600);
+      }
+    } catch (e) {}
   })();
 
   var early = document.createElement('style');
@@ -165,6 +175,7 @@
     props.$me = null;
     if (props.$local) { try { var cachedMe = sessionStorage.getItem('sx_me'); if (cachedMe) props.$me = JSON.parse(cachedMe); } catch (e) { props.$me = null; } }
     var inst = new Comp(props);
+    window.__sxPage = inst;
 
     var root = document.createElement('div');
     root.id = 'dc-root';
@@ -183,7 +194,9 @@
       window.morphdom(root, next, {
         childrenOnly: true,
         // data-dc-keep marks a container another script draws into (charts); leave it alone.
-        onBeforeElUpdated: function (fromEl, toEl) { return !(fromEl.hasAttribute && fromEl.hasAttribute('data-dc-keep')) && !fromEl.isEqualNode(toEl); }
+        onBeforeElUpdated: function (fromEl, toEl) { return !(fromEl.hasAttribute && fromEl.hasAttribute('data-dc-keep')) && !fromEl.isEqualNode(toEl); },
+        // nodes the motion script adds (the Home ticker) stay put
+        onBeforeNodeDiscarded: function (node) { return !(node.classList && node.classList.contains('sx-keep')); }
       });
     }
     var pending = false;
@@ -235,6 +248,11 @@
 
     draw();
     if (inst.componentDidMount) inst.componentDidMount();
+    // motion layer (assets/motion.js next to this script)
+    (function () {
+      var me = document.querySelector('script[src*="support.js"]'), base = me ? me.src.replace(/support\.js(\?.*)?$/, '') : '';
+      var m = document.createElement('script'); m.src = base + 'assets/motion.js'; m.defer = true; document.body.appendChild(m);
+    })();
     if (inst.trustInit) inst.trustInit();
     if (props.$local && typeof fetch === 'function') {
       fetch('/api/auth/me', { cache: 'no-store', credentials: 'same-origin' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {

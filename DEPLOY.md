@@ -49,6 +49,8 @@ Set them under *Site configuration > Environment variables*, then redeploy.
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | "Continue with Google". In Google Cloud, add `https://YOUR-SITE/auth/google/callback` as an authorized redirect URI. |
 | `ETH_RPC_URL` | Optional. Ethereum RPC for balances. Default: `https://ethereum-rpc.publicnode.com`. |
 | `TRONGRID_API_KEY`, `ETHPLORER_API_KEY` | Optional. Higher rate limits for Tron and token holder counts. |
+| `ODDS_API_KEY` | Optional. Turns on Sports odds (comparison, sportsbook ranking, slip check). Free key at the-odds-api.com, 500 requests a month. Prediction markets work without it. |
+| `ODDS_CACHE_MIN` | Optional. Minutes between odds refreshes per league (default 180, which keeps a free key inside its monthly limit). |
 | `KICK_CLIENT_ID`, `KICK_CLIENT_SECRET` | Optional, recommended. Official Kick API for streamers (create an app at kick.com, Settings > Developer). Without them the site tries Kick's public website endpoint, which Kick may block. |
 | `TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET` | Optional. Adds Twitch streamers live in the Slots and casino categories (register an app at dev.twitch.tv/console). |
 | `ETHERSCAN_MIN_GAP_MS` | Optional. Gap between Etherscan calls. Default 350 ms fits the free plan (3 calls per second); lower it on a paid plan. |
@@ -100,3 +102,10 @@ Open `/onchain-admin.html` and enter your `ADMIN_TOKEN`. From there you can:
 Complaint deadlines settle on their own. A casino that does not reply in 7 days
 closes the complaint as unresolved. A "fixed" reply the player does not dispute in
 14 days closes it as resolved.
+
+
+## Market breakdown and Sports odds
+
+- **Market breakdown** (`Markets.dc.html`) ranks casinos and unboxing sites by on-chain deposits over 1D, 7D, 30D, 90D or 1Y, with Volume, Fairness and Ratings views. Casinos without tracked wallets are listed separately with their published snapshot, never as $0. 1Y fills in as the monitor builds history (daily totals are kept two years).
+- **Unboxing sites and providers**: in the admin page, open **Sites and providers**. Add an unboxing site (for example Packdraw), then add its wallets in the **Wallets** tab. Providers are listed with the casinos that carry them; their reach is those casinos' tracked deposit volume.
+- **Sports odds** (`Sports.dc.html`) needs `ODDS_API_KEY`. Books come from The Odds API's EU region, so the list is mainstream sportsbooks rather than crypto casinos.
