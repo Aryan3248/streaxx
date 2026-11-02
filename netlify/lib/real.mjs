@@ -63,7 +63,7 @@ async function kickOfficial(prev) {
   (ch.data || []).forEach((d) => {
     const base = prev.get('kick:' + d.slug) || SITE.creators.find((c) => c[1] === d.slug) || [d.slug, d.slug, 0, false, false, 0, '', '', []];
     const s = d.stream || {};
-    out.set('kick:' + d.slug, [base[0], d.slug, base[2], base[3], !!s.is_live, s.is_live ? s.viewer_count || 0 : 0, d.stream_title || base[6], s.is_live ? fmtDay(s.start_time) : base[7], d.category && d.category.name ? [d.category.name] : base[8], 'kick', 'https://kick.com/' + d.slug]);
+    out.set('kick:' + d.slug, [base[0], d.slug, base[2], base[3], !!s.is_live, s.is_live ? s.viewer_count || 0 : 0, d.stream_title || base[6], s.is_live ? fmtDay(s.start_time) : base[7], d.category && d.category.name ? [d.category.name] : base[8], 'kick', 'https://kick.com/' + d.slug, base[11] || '']);
   });
   // casino streamers who are live right now, tracked or not
   try {
@@ -75,7 +75,7 @@ async function kickOfficial(prev) {
         const key = 'kick:' + d.slug;
         if (out.has(key) || !d.slug) return;
         const base = prev.get(key);
-        out.set(key, [base ? base[0] : d.slug, d.slug, base ? base[2] : 0, base ? base[3] : false, true, d.viewer_count || 0, d.stream_title || '', fmtDay(d.started_at), [cat.name], 'kick', 'https://kick.com/' + d.slug]);
+        out.set(key, [base ? base[0] : d.slug, d.slug, base ? base[2] : 0, base ? base[3] : false, true, d.viewer_count || 0, d.stream_title || '', fmtDay(d.started_at), [cat.name], 'kick', 'https://kick.com/' + d.slug, d.profile_picture || (base && base[11]) || '']);
       });
     }
   } catch {}
@@ -90,9 +90,23 @@ async function kickUnofficial(prev) {
       const j = await getJson('https://kick.com/api/v2/channels/' + c[1], { timeout: 8000 });
       const ls = j.livestream;
       const cats = ls && ls.categories && ls.categories.length ? ls.categories.map((x) => x.name) : (j.recent_categories || []).map((x) => x.name).slice(0, 4);
-      out.set('kick:' + c[1], [c[0], c[1], j.followers_count != null ? j.followers_count : c[2], !!j.verified, !!(ls && ls.is_live), ls ? ls.viewer_count || 0 : 0, ls ? ls.session_title || '' : c[6], ls ? fmtDay(ls.created_at) : c[7], cats.length ? cats : c[8], 'kick', 'https://kick.com/' + c[1]]);
+      out.set('kick:' + c[1], [c[0], c[1], j.followers_count != null ? Number(j.followers_count) || 0 : Number(c[2]) || 0, !!j.verified, !!(ls && ls.is_live), ls ? Number(ls.viewer_count) || 0 : 0, ls ? ls.session_title || '' : c[6], ls ? fmtDay(ls.created_at) : c[7], cats.length ? cats : c[8], 'kick', 'https://kick.com/' + c[1], (j.user && j.user.profile_pic) || '']);
     } catch {}
   }));
+  // every live channel in Kick's Slots & Casino category (up to 12 pages by viewers)
+  for (let page = 1; page <= 12; page++) {
+    try {
+      const j = await getJson('https://kick.com/stream/livestreams/en?limit=24&subcategory=slots-casino&sort=desc&page=' + page, { timeout: 8000 });
+      const list = j.data || [];
+      list.forEach((d) => {
+        const ch = d.channel || {}, slug = ch.slug, key = 'kick:' + slug;
+        if (!slug || out.has(key)) return;
+        const base = prev.get(key);
+        out.set(key, [(ch.user && ch.user.username) || slug, slug, base ? Number(base[2]) || 0 : 0, base ? base[3] : false, true, Number(d.viewer_count) || 0, d.session_title || '', fmtDay(d.start_time), ['Slots & Casino'], 'kick', 'https://kick.com/' + slug, (ch.user && ch.user.profilepic) || (base && base[11]) || '']);
+      });
+      if (list.length < 24) break;
+    } catch { break; }
+  }
   return out;
 }
 
@@ -113,10 +127,10 @@ async function twitch(prev) {
   }));
   streams.forEach((s) => {
     const key = 'twitch:' + s.user_login, base = prev.get(key);
-    out.set(key, [s.user_name || s.user_login, s.user_login, s.followers != null ? s.followers : base ? base[2] : 0, false, true, s.viewer_count || 0, s.title || '', fmtDay(s.started_at), [s.game_name || 'Slots'], 'twitch', 'https://twitch.tv/' + s.user_login]);
+    out.set(key, [s.user_name || s.user_login, s.user_login, s.followers != null ? Number(s.followers) || 0 : base ? Number(base[2]) || 0 : 0, false, true, s.viewer_count || 0, s.title || '', fmtDay(s.started_at), [s.game_name || 'Slots'], 'twitch', 'https://twitch.tv/' + s.user_login]);
   });
   // tracked Twitch channels that went offline keep their last known row, marked offline
-  prev.forEach((c, key) => { if (key.startsWith('twitch:') && !out.has(key) && c[2] > 0) out.set(key, [c[0], c[1], c[2], c[3], false, 0, c[6], c[7], c[8], 'twitch', c[10]]); });
+  prev.forEach((c, key) => { if (key.startsWith('twitch:') && !out.has(key) && c[2] > 0) out.set(key, [c[0], c[1], c[2], c[3], false, 0, c[6], c[7], c[8], 'twitch', c[10], c[11] || '']); });
   return out;
 }
 
@@ -131,7 +145,8 @@ async function creators(previous) {
   if (process.env.TWITCH_CLIENT_ID && process.env.TWITCH_CLIENT_SECRET) {
     try { tw = await twitch(prev); } catch (e) { console.error('twitch api', e.message); }
   }
-  return [...kick.values(), ...tw.values()];
+  // follower and viewer counts sometimes arrive as text; keep them numbers
+  return [...kick.values(), ...tw.values()].map((c) => { c[2] = Number(c[2]) || 0; c[5] = Number(c[5]) || 0; return c; });
 }
 
 async function wallets() {
