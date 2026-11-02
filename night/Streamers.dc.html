@@ -273,7 +273,7 @@ div:has(> [data-m~="csel"]){flex:1 1 auto;min-width:0}
 <div data-m="st" class="rh" style="display: grid; grid-template-columns: {{tmpl}}; gap: 12px; align-items: center; padding: 12px 18px; border-bottom: 1px solid #16171B; font-size: 14px">
 <span style="font-family: 'Geist Mono', monospace; font-size: 13px; color: #7F8085">{{r.rank}}</span>
 <button type="button" onClick="{{r.open}}" style="display: flex; align-items: center; gap: 12px; min-width: 0; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer">
-<span style="width: 40px; height: 40px; border-radius: 50%; background: {{r.tint}}; border: 2px solid {{r.ring}}; color: #EDE9FE; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto">{{r.ini}}</span>
+<span style="width: 40px; height: 40px; border-radius: 50%; background: {{r.tint}}; border: 2px solid {{r.ring}}; color: #EDE9FE; font-size: 13px; font-weight: 600; position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto">{{r.ini}}<sc-if value="{{r.av}}" hint-placeholder-val="{{ false }}"><img src="{{r.av}}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%"></sc-if></span>
 <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span class="ul" style="display: flex; align-items: center; gap: 6px; font-weight: 600; color: #F5F3FF">{{r.name}}<svg width="13" height="13" viewBox="0 0 24 24" fill="#C4B5FD" aria-label="Verified on Kick"><path d="M12 2l2.4 2.1 3.2-.3.9 3.1 2.9 1.4-1 3 1 3-2.9 1.4-.9 3.1-3.2-.3L12 22l-2.4-2.1-3.2.3-.9-3.1-2.9-1.4 1-3-1-3 2.9-1.4.9-3.1 3.2.3z"></path><path d="M8.5 12.2l2.3 2.3 4.7-4.9" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span style="display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: #7F8085; min-width: 0"><sc-if value="{{r.kick}}" hint-placeholder-val="{{ false }}"><img src="{{r.kick}}" alt="" width="12" height="12" style="width: 12px; height: 12px; border-radius: 3px; flex: 0 0 auto"></sc-if><span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">kick.com/{{r.slug}}</span></span></span>
 </button>
 <span>
@@ -349,7 +349,7 @@ div:has(> [data-m~="csel"]){flex:1 1 auto;min-width:0}
 </sc-if>
 <sc-if value="{{isProfile}}" hint-placeholder-val="{{ false }}">
 <div style="display: flex; align-items: center; gap: 14px">
-<span style="width: 64px; height: 64px; border-radius: 50%; background: {{pf.tint}}; border: 3px solid {{pf.ring}}; color: #EDE9FE; font-size: 20px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center">{{pf.ini}}</span>
+<span style="width: 64px; height: 64px; border-radius: 50%; background: {{pf.tint}}; border: 3px solid {{pf.ring}}; color: #EDE9FE; font-size: 20px; font-weight: 600; position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center">{{pf.ini}}<sc-if value="{{pf.av}}" hint-placeholder-val="{{ false }}"><img src="{{pf.av}}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 50%"></sc-if></span>
 <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #959597">kick.com/{{pf.slug}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 22px">{{pf.followers}} <span style="font-family: 'Geist', sans-serif; font-size: 13px; color: #959597">followers</span></span></span>
 </div>
 <div data-m="g1" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
@@ -720,6 +720,7 @@ class Component extends DCLogic {
     var PF = function (c) { return c && c[9] === 'twitch' ? 'Twitch' : 'Kick'; }, URL_ = function (c) { return c[10] || 'https://kick.com/' + c[1]; };
     this.extraTitle = p ? p[0] : ''; this.extraSub = p ? (p[4] ? 'Live now on ' + PF(p) : 'Offline on ' + PF(p)) : ''; this.extraW = '520px';
     var v = this.shellVals();
+    D.creators.forEach(function (c) { c[2] = Number(c[2]) || 0; c[5] = Number(c[5]) || 0; });
     var live = D.creators.filter(function (c) { return c[4]; });
     var fSum = 0, vSum = 0, maxF = 0; D.creators.forEach(function (c) { fSum += c[2]; vSum += c[5]; if (c[2] > maxF) maxF = c[2]; });
     var q = (st.q || '').trim().toLowerCase();
@@ -727,7 +728,7 @@ class Component extends DCLogic {
     list.sort(function (a, b) { var x = st.sort === 'viewers' ? a[5] : a[2], y = st.sort === 'viewers' ? b[5] : b[2]; return st.dir * (x - y) || b[2] - a[2]; });
     var tmpl = '32px minmax(200px, 1.4fr) 76px 120px 96px minmax(140px, 1fr) 96px 170px';
     var rows = list.map(function (c, i) {
-      return { rank: i + 1, name: c[0], slug: c[9] === 'twitch' ? 'twitch.tv/' + c[1] : c[1], kick: c[9] === 'twitch' ? '' : self.kickLogo(), ini: self.ini(c[0]), tint: self.tint(c[0]), ring: c[4] ? '#FB7185' : '#2A2C31',
+      return { rank: i + 1, name: c[0], slug: c[9] === 'twitch' ? 'twitch.tv/' + c[1] : c[1], kick: c[9] === 'twitch' ? '' : self.kickLogo(), ini: self.ini(c[0]), av: c[11] || '', tint: self.tint(c[0]), ring: c[4] ? '#FB7185' : '#2A2C31',
         live: c[4], off: !c[4], followers: c[2].toLocaleString('en-US'), w: Math.max(1, c[2] / maxF * 100).toFixed(1) + '%',
         viewers: c[4] ? c[5].toLocaleString('en-US') : '–', vColor: c[4] ? '#F5F3FF' : '#6B6D72', cats: (c[8] || []).join(' · '),
         open: function () { self.setState({ prof: (c[9] || 'kick') + ':' + c[1], modal: 'profile' }); },
@@ -749,7 +750,7 @@ class Component extends DCLogic {
       rows: rows, empty: rows.length === 0, emptyText: q ? 'No streamer matches “' + st.q + '”' : 'No tracked streamer is live right now.',
       foot: 'Sources: Kick API and Twitch API (casino categories). Partner casinos and deal values are private, so they show Not tracked until you add a source.',
       isProfile: st.modal === 'profile' && !!p,
-      pf: p ? { slug: p[1], ini: this.ini(p[0]), tint: this.tint(p[0]), ring: p[4] ? '#FB7185' : '#2A2C31', followers: p[2].toLocaleString('en-US'), live: p[4], title: p[6] + (p[7] ? ' · live since ' + p[7] : ''),
+      pf: p ? { slug: p[1], ini: this.ini(p[0]), av: p[11] || '', tint: this.tint(p[0]), ring: p[4] ? '#FB7185' : '#2A2C31', followers: p[2].toLocaleString('en-US'), live: p[4], title: p[6] + (p[7] ? ' · live since ' + p[7] : ''),
         url: URL_(p), copy: function () { self.copy(URL_(p), URL_(p).replace('https://', '') + ' copied'); },
         rows: [{ label: 'Status', value: p[4] ? 'Live · ' + p[5].toLocaleString('en-US') + ' viewers' : 'Offline' }, { label: 'Verified', value: p[3] ? 'Yes' : 'No' }, { label: 'Platform', value: PF(p) }, { label: 'Recent categories', value: (p[8] || []).join(', ') }, { label: 'Captured', value: capture }] }
         : { slug: '', ini: '', tint: '', ring: '', followers: '', live: false, title: '', url: '', copy: function () {}, rows: [] }
