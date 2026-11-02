@@ -61,9 +61,9 @@ export const adminRoutes = {
     const slug = String(b.slug || ''), chain = String(b.chain || '');
     await customSites();
     if (!casinoBySlug(slug)) fail(400, 'Unknown casino slug');
-    if (!['ethereum', 'tron'].includes(chain)) fail(400, 'The monitor reads Ethereum and Tron wallets');
+    if (!['ethereum', 'tron', 'bsc'].includes(chain)) fail(400, 'The monitor reads Ethereum, BNB Chain and Tron wallets');
     const address = String(b.address || '').trim();
-    if (chain === 'ethereum' ? !/^0x[0-9a-fA-F]{40}$/.test(address) : !/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(address)) fail(400, 'That address is not valid for ' + CHAIN_NAMES[chain]);
+    if (chain !== 'tron' ? !/^0x[0-9a-fA-F]{40}$/.test(address) : !/^T[1-9A-HJ-NP-Za-km-z]{33}$/.test(address)) fail(400, 'That address is not valid for ' + CHAIN_NAMES[chain]);
     const role = ['hot', 'wallet', 'cold', 'funder'].includes(b.role) ? b.role : 'wallet';
     const w = { slug, chain, chainName: CHAIN_NAMES[chain], address, label: String(b.label || casinoBySlug(slug).name).slice(0, 80), role, source: String(b.source || 'Deposit trace').slice(0, 120), url: explorerAddr(chain, address) };
     await update(store('onchain'), 'extraWallets', (l) => { if (l.some((x) => x.chain === chain && norm(chain, x.address) === norm(chain, address))) fail(400, 'That wallet is already added'); l.push(w); return l; }, []);

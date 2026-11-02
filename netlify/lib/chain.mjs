@@ -216,3 +216,62 @@ export async function lookupTx(chain, hash) {
   }
   return null;
 }
+
+// ---------- BNB Chain through a public RPC (no paid key needed) ----------
+// Reads USDT and USDC Transfer logs to and from a wallet with eth_getLogs, in
+// windows of BSC_LOG_SPAN blocks (public nodes cap the range). Native BNB
+// transfers are not visible this way; balances still include BNB.
+const bscUrl = () => process.env.BSC_RPC_URL || 'https://bsc-rpc.publicnode.com';
+const TRANSFER_TOPIC = '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';
+const pad = (a) => '0x' + a.toLowerCase().replace('0x', '').padStart(64, '0');
+async function bscRpc(method, params) {
+  const j = await getJson(bscUrl(), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }), timeout: 20000 });
+  if (j.error) throw new Error('BSC RPC: ' + (j.error.message || 'error'));
+  return j.result;
+}
+export async function bscLatestBlock() { return parseInt(await bscRpc('eth_blockNumber', []), 16); }
+export async function bscTransfers(address, fromBlock, toBlock, maxWindows = 6) {
+  const span = Number(process.env.BSC_LOG_SPAN || 10000), addr = pad(address), items = [], seen = new Set();
+  const tokens = Object.keys(TOKENS.bsc);
+  let b = fromBlock, windows = 0;
+  while (b <= toBlock && windows < maxWindows) {
+    const end = Math.min(toBlock, b + span - 1);
+    for (const dir of ['in', 'out']) {
+      const topics = dir === 'in' ? [TRANSFER_TOPIC, null, addr] : [TRANSFER_TOPIC, addr];
+      const logs = await bscRpc('eth_getLogs', [{ fromBlock: '0x' + b.toString(16), toBlock: '0x' + end.toString(16), address: tokens, topics }]);
+      (logs || []).forEach((l) => {
+        const key = l.transactionHash + ':t:' + parseInt(l.logIndex, 16);
+        if (seen.has(key)) return; seen.add(key);
+        const tk = TOKENS.bsc[String(l.address).toLowerCase()];
+        if (!tk) return;
+        items.push({ key, hash: l.transactionHash, block: parseInt(l.blockNumber, 16), from: '0x' + l.topics[1].slice(26), to: '0x' + l.topics[2].slice(26), asset: tk[0], amount: Number(BigInt(l.data)) / 10 ** tk[1] });
+      });
+    }
+    b = end + 1; windows++;
+  }
+  // timestamps: BNB Chain blocks are evenly spaced, so read the first and last
+  // block of the range and interpolate (accurate to a few seconds).
+  if (items.length) {
+    const lo = Math.min(...items.map((t) => t.block)), hi = Math.max(...items.map((t) => t.block));
+    const h1 = await bscRpc('eth_getBlockByNumber', ['0x' + lo.toString(16), false]);
+    const h2 = hi === lo ? h1 : await bscRpc('eth_getBlockByNumber', ['0x' + hi.toString(16), false]);
+    const t1 = parseInt(h1.timestamp, 16) * 1000, t2 = parseInt(h2.timestamp, 16) * 1000;
+    items.forEach((t) => { t.ts = hi === lo ? t1 : Math.round(t1 + (t.block - lo) / (hi - lo) * (t2 - t1)); });
+  }
+  items.sort((a, c) => a.block - c.block);
+  return { items, nextBlock: b, capped: b <= toBlock };
+}
+export async function bscBalances(addresses) {
+  const out = {};
+  for (const a of addresses) {
+    const list = [];
+    const bnb = await bscRpc('eth_getBalance', [a, 'latest']);
+    if (bnb) list.push({ asset: 'BNB', amount: Number(BigInt(bnb)) / 1e18 });
+    for (const [c, [sym, dec]] of Object.entries(TOKENS.bsc)) {
+      const v = await bscRpc('eth_call', [{ to: c, data: '0x70a08231' + a.toLowerCase().replace('0x', '').padStart(64, '0') }, 'latest']);
+      if (v && v !== '0x') { const n = Number(BigInt(v)) / 10 ** dec; if (n > 0) list.push({ asset: sym, amount: n }); }
+    }
+    out[a] = list.filter((x) => x.amount > 0);
+  }
+  return out;
+}

@@ -3,7 +3,7 @@
 // run() is called by the background function; the rest serve the API.
 import { store, update } from './store.mjs';
 import { getRegistry, walletIndex, norm, CHAIN_NAMES, explorerTx, casinoName, casinoBySlug, SITE } from './data.mjs';
-import { prices, etherscanKey, latestBlock, evmTransfers, tronTransfers, ethBalances, tronBalances, STABLE, TOKENS } from './chain.mjs';
+import { prices, etherscanKey, latestBlock, evmTransfers, tronTransfers, ethBalances, tronBalances, bscLatestBlock, bscTransfers, bscBalances, STABLE, TOKENS } from './chain.mjs';
 import { getJson } from './http.mjs';
 import { tgSend, sendMail, mailReady } from './notify.mjs';
 
@@ -36,7 +36,7 @@ export async function run(log = () => {}, opts = {}) {
   const fresh = [];
   const balancesDue = !state.balancesAt || t0 - state.balancesAt > 55 * 60000;
 
-  if (etherscanKey() && !(budget && balancesDue)) {
+  if (!(budget && balancesDue)) {
     const latest = {};
     const all = reg.flatMap((c) => c.wallets.map((w) => ({ c, w })));
     const start = budget ? (state.next || 0) % Math.max(1, all.length) : 0;
@@ -50,7 +50,13 @@ export async function run(log = () => {}, opts = {}) {
           const cur = state.cursors[k] || { ts: t0 - 48 * H };
           got = await tronTransfers(w.address, cur.ts);
           state.cursors[k] = { ts: got.lastTs };
-        } else if (w.chain === 'ethereum' || w.chain === 'polygon' || w.chain === 'bsc') {
+        } else if (w.chain === 'bsc') {
+          // free public node: the first read starts about 24h back
+          if (latest.bsc == null) latest.bsc = await bscLatestBlock();
+          const cur = state.cursors[k] && state.cursors[k].b != null ? state.cursors[k] : { b: Math.max(0, latest.bsc - 190000) };
+          got = await bscTransfers(w.address, cur.b, latest.bsc, budget ? 4 : 20);
+          state.cursors[k] = { b: got.nextBlock };
+        } else if ((w.chain === 'ethereum' || w.chain === 'polygon') && etherscanKey()) {
           if (latest[w.chain] == null) latest[w.chain] = await latestBlock(w.chain);
           const back = { ethereum: 14400, polygon: 86400, bsc: 57600 }[w.chain];
           const cur = state.cursors[k] || {};
@@ -153,9 +159,10 @@ async function addWhales(recs, now) {
 }
 
 async function readBalances(reg, px, now) {
-  const evm = [], tron = [];
-  reg.forEach((c) => c.wallets.forEach((w) => { if (w.chain === 'ethereum') evm.push(w.address); else if (w.chain === 'tron') tron.push(w.address); }));
+  const evm = [], tron = [], bsc = [];
+  reg.forEach((c) => c.wallets.forEach((w) => { if (w.chain === 'ethereum') evm.push(w.address); else if (w.chain === 'tron') tron.push(w.address); else if (w.chain === 'bsc') bsc.push(w.address); }));
   const raw = {};
+  if (bsc.length) { try { const r = await bscBalances(bsc); bsc.forEach((a) => { raw['bsc:' + a.toLowerCase()] = r[a]; }); } catch {} }
   if (evm.length) { const r = await ethBalances(evm); evm.forEach((a) => { raw['ethereum:' + a.toLowerCase()] = r[a]; }); }
   for (const a of tron) { try { raw['tron:' + a] = await tronBalances(a); } catch {} }
   const bal = {};
